@@ -7,7 +7,7 @@ public class RestBoardDTO {
 	private String locate_detail;
 	private String category;
 	private String open_hour;
-	private int rate;
+	private double rate;
 	private int recommend;
 	private String garage;
 	private String phone;
@@ -15,92 +15,93 @@ public class RestBoardDTO {
 	private String photo2;
 	private String photo3;
 	private String link;
-	public final int getSeq() {
+
+	public int getSeq() {
 		return seq;
 	}
-	public final void setSeq(int seq) {
+	public void setSeq(int seq) {
 		this.seq = seq;
 	}
-	public final String getTitle() {
+	public String getTitle() {
 		return title;
 	}
-	public final void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	public final String getLocate() {
+	public String getLocate() {
 		return locate;
 	}
-	public final void setLocate(String locate) {
+	public void setLocate(String locate) {
 		this.locate = locate;
 	}
-	public final String getLocate_detail() {
+	public String getLocate_detail() {
 		return locate_detail;
 	}
-	public final void setLocate_detail(String locate_detail) {
+	public void setLocate_detail(String locate_detail) {
 		this.locate_detail = locate_detail;
 	}
-	public final String getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public final void setCategory(String category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
-	public final String getOpen_hour() {
+	public String getOpen_hour() {
 		return open_hour;
 	}
-	public final void setOpen_hour(String open_hour) {
+	public void setOpen_hour(String open_hour) {
 		this.open_hour = open_hour;
 	}
-	public final int getRate() {
+	public double getRate() {
 		return rate;
 	}
-	public final void setRate(int rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
-	public final int getRecommend() {
+	public int getRecommend() {
 		return recommend;
 	}
-	public final void setRecommend(int recommend) {
+	public void setRecommend(int recommend) {
 		this.recommend = recommend;
 	}
-	public final String getGarage() {
+	public String getGarage() {
 		return garage;
 	}
-	public final void setGarage(String garage) {
+	public void setGarage(String garage) {
 		this.garage = garage;
 	}
-	public final String getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public final void setPhone(String phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public final String getPhoto1() {
+	public String getPhoto1() {
 		return photo1;
 	}
-	public final void setPhoto1(String photo1) {
+	public void setPhoto1(String photo1) {
 		this.photo1 = photo1;
 	}
-	public final String getPhoto2() {
+	public String getPhoto2() {
 		return photo2;
 	}
-	public final void setPhoto2(String photo2) {
+	public void setPhoto2(String photo2) {
 		this.photo2 = photo2;
 	}
-	public final String getPhoto3() {
+	public String getPhoto3() {
 		return photo3;
 	}
-	public final void setPhoto3(String photo3) {
+	public void setPhoto3(String photo3) {
 		this.photo3 = photo3;
 	}
-	public final String getLink() {
+	public String getLink() {
 		return link;
 	}
-	public final void setLink(String link) {
+	public void setLink(String link) {
 		this.link = link;
 	}
 	public RestBoardDTO(int seq, String title, String locate, String locate_detail, String category, String open_hour,
-			int rate, int recommend, String garage, String phone, String photo1, String photo2, String photo3,
+			double rate, int recommend, String garage, String phone, String photo1, String photo2, String photo3,
 			String link) {
 		this.seq = seq;
 		this.title = title;

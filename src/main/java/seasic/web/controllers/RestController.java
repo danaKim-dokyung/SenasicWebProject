@@ -28,7 +28,6 @@ public class RestController extends HttpServlet {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				RestBoardDTO result = dao.detailPage(seq);				
-				System.out.println(result.getTitle());
 				request.setAttribute("dto", result);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}

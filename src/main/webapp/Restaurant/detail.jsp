@@ -9,12 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-	rel="stylesheet">
-	<link  rel="stylesheet"  href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+<link  rel="stylesheet"  href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43b19f59c0f83232d0344714fa6823a9&libraries=services,clusterer,drawing"></script>
+	
 <style>
 .carousel-open:checked+.carousel-item {
 	position: static;
@@ -56,6 +55,10 @@ button:focus {
 	outline: 5px auto -webkit-focus-ring-color;
 }
 
+#like:hover{
+	fill:#DC2626;
+}
+
 </style>
 </head>
 <body>
@@ -70,13 +73,13 @@ button:focus {
 			<div class="carousel-inner relative overflow-hidden w-full">
 				<!-- 메뉴,매장 사진 DB통해 끌어오기, forEach문 활용, 최대 3장 -->
 				<!--Slide 1-->
+					<!-- img태그. -->
 				<input class="carousel-open" type="radio" id="carousel-1"
 					name="carousel" aria-hidden="true" hidden="" checked="checked">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
-					<div
-						class="block h-full w-full bg-indigo-500 text-white text-5xl text-center">Slide
-						1</div>
-					<!-- img태그. -->
+					<div class="block h-full w-fulltext-white text-5xl text-center">
+						<img src=${dto.photo1 } style="width:100%;hieght:100%;">
+					</div>
 				</div>
 				<label for="carousel-3"
 					class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -87,9 +90,9 @@ button:focus {
 				<input class="carousel-open" type="radio" id="carousel-2"
 					name="carousel" aria-hidden="true" hidden="">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
-					<div
-						class="block h-full w-full bg-orange-500 text-white text-5xl text-center">Slide
-						2</div>
+					<div class="block h-full w-full text-white text-5xl text-center">
+											<img src=${dto.photo2 }  style="width:100%;hieght:100%;">
+					</div>
 				</div>
 				<label for="carousel-1"
 					class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -100,9 +103,9 @@ button:focus {
 				<input class="carousel-open" type="radio" id="carousel-3"
 					name="carousel" aria-hidden="true" hidden="">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
-					<div
-						class="block h-full w-full bg-green-500 text-white text-5xl text-center">Slide
-						3</div>
+					<div class="block h-full w-full  text-white text-5xl text-center">
+						<img src=${dto.photo3 }  style="width:100%;hieght:100%;">
+					</div>
 				</div>
 				<label for="carousel-2"
 					class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -131,23 +134,33 @@ button:focus {
 		
 			<div class="box-border p-4 border-4  col-span-12 row-span-2 sm:col-span-1">
 			<!-- 지도 API -->
-				<div>지도</div>
+				<div class="flex justify-center">
+					<div id="map" class="items-center" style="width:300px;height:300px;"></div>
+				</div>
 				<!--  주소 DB -->
-				<div>
-					${dto.locate } <br>${dto.locate_detail }
+				<div class="text-center">
+					${dto.locate } ${dto.locate_detail }
 				</div>
 			</div>
 			<div class="box-border p-4 border-4 col-span-12 row-span-2 sm:col-span-1">
-				<div class="text-center font-bold">${dto.title }</div><!-- 가게명 -->
-				<div class="justify-end items-center text-right relative">
+				
+				<div class="justify-between items-center text-right relative flex">
+					<div class="text-center font-bold text-4xl">${dto.title }</div><!-- 가게명 -->
+				
 				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0">
-				 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" style="width:20px;height:20px"/>
-</svg>${dto.recommend }</div><!-- 추천수 -->
-				  </div>
+				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600" id="like">
+				<path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+				</svg>
+				
+				<div>
+				추천 : ${dto.recommend }<!-- 추천수 -->
+				</div>
+				</div>
+				</div>
+				
 				  	<!-- 별점 -->
 					<div class="col-span-1 row-span-3 text-right">
-					${dto.rate }(1명 평가)
+					${dto.rate }
 					<ul class="flex justify-end items-center">
 					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
 					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
@@ -237,10 +250,42 @@ button:focus {
 				</div>
 			</div>
 		</form>
-
-
-
 	</div>
+
+<script>
+let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 1 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+let map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+let geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('${dto.locate},${dto.locate_detail}', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});     
+	</script>
+
 
 </body>
 </html>
