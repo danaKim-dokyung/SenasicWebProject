@@ -11,7 +11,9 @@ public class RestBoardDTO {
 	private int recommend;
 	private String garage;
 	private String phone;
-	private String photo;
+	private String photo1;
+	private String photo2;
+	private String photo3;
 	private String link;
 	public final int getSeq() {
 		return seq;
@@ -73,11 +75,23 @@ public class RestBoardDTO {
 	public final void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public final String getPhoto() {
-		return photo;
+	public final String getPhoto1() {
+		return photo1;
 	}
-	public final void setPhoto(String photo) {
-		this.photo = photo;
+	public final void setPhoto1(String photo1) {
+		this.photo1 = photo1;
+	}
+	public final String getPhoto2() {
+		return photo2;
+	}
+	public final void setPhoto2(String photo2) {
+		this.photo2 = photo2;
+	}
+	public final String getPhoto3() {
+		return photo3;
+	}
+	public final void setPhoto3(String photo3) {
+		this.photo3 = photo3;
 	}
 	public final String getLink() {
 		return link;
@@ -86,7 +100,8 @@ public class RestBoardDTO {
 		this.link = link;
 	}
 	public RestBoardDTO(int seq, String title, String locate, String locate_detail, String category, String open_hour,
-			int rate, int recommend, String garage, String phone, String photo, String link) {
+			int rate, int recommend, String garage, String phone, String photo1, String photo2, String photo3,
+			String link) {
 		this.seq = seq;
 		this.title = title;
 		this.locate = locate;
@@ -97,7 +112,9 @@ public class RestBoardDTO {
 		this.recommend = recommend;
 		this.garage = garage;
 		this.phone = phone;
-		this.photo = photo;
+		this.photo1 = photo1;
+		this.photo2 = photo2;
+		this.photo3 = photo3;
 		this.link = link;
 	}
 	public RestBoardDTO() {

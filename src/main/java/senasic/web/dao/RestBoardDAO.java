@@ -1,5 +1,48 @@
 package senasic.web.dao;
 
-public class RestBoardDAO {
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import senasic.web.dto.RestBoardDTO;
+
+
+public class RestBoardDAO {
+	private static RestBoardDAO instance;
+	public static RestBoardDAO getInstance() {
+		if(instance == null) {
+			instance = new RestBoardDAO();
+		}
+		return instance;
+	}
+	private RestBoardDAO() {}
+	private Connection getConnection() throws Exception{
+		Context ctx = new InitialContext();
+		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
+		return ds.getConnection();
+	}
+	
+	public RestBoardDTO detailPage(int seq) throws Exception{
+		String sql = "select * from Rest_board where seq = ?";
+
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+			){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				RestBoardDTO result = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+								,rs.getInt(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+				return result;
+				
+			}
+			
+		}
+	}
+	
 }

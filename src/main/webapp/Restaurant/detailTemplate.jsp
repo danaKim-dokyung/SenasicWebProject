@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${dto.title }</title><!-- 제목 식당이름 끌어오기 -->
+<title>상호명</title><!-- 제목 식당이름 끌어오기 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -134,20 +134,17 @@ button:focus {
 				<div>지도</div>
 				<!--  주소 DB -->
 				<div>
-					${dto.locate } <br>${dto.locate_detail }
+					장소 <br>상세주소
 				</div>
 			</div>
 			<div class="box-border p-4 border-4 col-span-12 row-span-2 sm:col-span-1">
-				<div class="text-center font-bold">${dto.title }</div><!-- 가게명 -->
+				<div class="text-center font-bold">가게이름</div><!-- 가게명 -->
 				<div class="justify-end items-center text-right relative">
-				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0">
-				 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" style="width:20px;height:20px"/>
-</svg>${dto.recommend }</div><!-- 추천수 -->
+				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0"><img src="dummyImage/heart.png" class="absolute right-20" style="width:30px;height:30px;">222</div><!-- 추천수 -->
 				  </div>
 				  	<!-- 별점 -->
 					<div class="col-span-1 row-span-3 text-right">
-					${dto.rate }(1명 평가)
+					3.0(1명 평가)
 					<ul class="flex justify-end items-center">
 					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
 					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
@@ -162,13 +159,13 @@ button:focus {
 				</div>
 
 				<div>
-					<label>연락처 : </label>${dto.phone}
+					<label>연락처 : </label>02-123-4567, 010-1234-5555
 				</div>
 				<!-- 주차장 -->
-				<div><label>주차 대수 : </label> ${dto.garage }</div>
+				<div><label>주차 대수 : </label> 3대</div>
 				
 				<!-- 예약버튼 html 끌어오기 -->
-				<div><a href=${dto.link }>네이버 예약 바로가기(버튼 삽입 예정)</a></div>
+				<div>네이버 예약 바로가기(버튼 삽입 예정)</div>
 				
 				<div>
 					<div class="font-bold">메뉴 소개</div>
