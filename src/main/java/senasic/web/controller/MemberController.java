@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import senasic.web.DAO.MemberDAO;
 import senasic.web.DTO.MemberDTO;
+import utils.passwordUtils;
 
 
 @WebServlet("*.mem") 
@@ -40,10 +42,23 @@ public class MemberController extends HttpServlet {
                     e.printStackTrace();
                     response.sendRedirect("error.jsp");
                 }
-            }else if(cmd.equals("/signupProc.mem")) {
+            }else if(cmd.equals("/nicknameCheck.mem")){ // 닉네임 중복 체크 기능
+            	String nickname = request.getParameter("nn");
+                System.out.println(nickname);
+
+                try {
+                    boolean result = dao.isNicknameExist(nickname);
+                    response.getWriter().append(String.valueOf(result));
+                    
+
+                }catch(Exception e) {
+                    e.printStackTrace();
+                    response.sendRedirect("error.jsp");
+                }
+        }else if(cmd.equals("/signupProc.mem")) {
             	        		
         		String id= request.getParameter("id");
-        		String pw = request.getParameter("pw");
+        		String pw = passwordUtils.getSHA512(request.getParameter("pw"));
         		String nn = request.getParameter("nn");
         		String m = request.getParameter("m");
         		String p1 = request.getParameter("phone1");
@@ -57,7 +72,23 @@ public class MemberController extends HttpServlet {
         		System.out.println(id);
     			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender));
     			response.sendRedirect("/index.jsp");
-        	    }    		
+        	    }else if(cmd.equals("/member/login.mem")){
+        	    	String id = request.getParameter("id");
+        	    	String nn = request.getParameter("nn");
+        	    	String password = passwordUtils.getSHA512(request.getParameter("password"));
+        	    	boolean result = dao.isLoginAllowed(id, password);
+        	    	        	    	
+        	    	if(result) {
+        	    		System.out.println("s");
+        	    		HttpSession session = request.getSession();
+        	    		session.setAttribute("loginID", id);  
+        	    		// session.setAttribute("loginNN", nn); 강사님께 질문 2             	  
+        	    	}
+        	    	response.sendRedirect("/index.jsp");
+        	    }else if(cmd.equals("/logout.mem")){
+        	    	request.getSession().removeAttribute("loginID");
+        	    	response.sendRedirect("/index.jsp");
+        	    }
         }catch(Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");

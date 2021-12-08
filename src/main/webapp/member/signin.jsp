@@ -73,7 +73,7 @@
 <body class="bg-gray-300" style="font-family: Roboto;">
     <div class="h-screen flex justify-center items-center">
         <div class="bg-white rounded-lg w-2/5 px-16 py-16">
-            <form>
+            <form action="login.mem" method="post">
                 <div class="flex font-bold justify-center">
                     <img class="h-20 w-20"
                         src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="div">
                         <h5>Username</h5>
-                        <input type="text" class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
+                        <input type="text" name="id" class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
                             style="background:none;">
                     </div>
                 </div>
@@ -97,14 +97,14 @@
                     </div>
                     <div class="div">
                         <h5>Password</h5>
-                        <input type="password"
+                        <input name="password" type="password"
                             class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
                             style="background:none;">
                     </div>
                 </div>
                 <a href="#" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Forgot Password?</a>
-                <button type="submit"
-                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none">Button</button>
+                <input type="submit" id="login" 
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="·Î±×ÀÎ">
             </form>
         </div>
     </div>

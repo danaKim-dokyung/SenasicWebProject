@@ -36,7 +36,6 @@ header { /*navbar를 상단에 고정*/
 	text-align: center;
 }
 </style>
-
 </head>
 <body>
 
@@ -53,9 +52,34 @@ header { /*navbar를 상단에 고정*/
 			<nav
 				class="md:ml-auto flex flex-wrap items-center text-base justify-center">
 				<!-- top에 붙어있는 nav bar -->
-				<a class="mr-5 hover:text-gray-900">Fourth Link</a> <a
-					href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a> <a
-					href="signup.mem">회원가입</a>
+				
+				<c:choose>
+				<c:when test="${loginID != null}">
+				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
+				<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a> <!-- 강사님께 질문 3 -->
+				<a href="#.mem">마이페이지</a>
+				</c:when>
+				<c:otherwise>
+				<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a> 
+				<a href="signup.mem">회원가입</a>
+			
+			<!-- 
+			<script>
+                    $("#logout").on("click", function(){ 
+                        if(confirm("정말 로그아웃 하시겠습니까?")){
+                            location.href="/logout.mem";
+                        }
+                    })
+                </script>
+			 -->
+			
+				</c:otherwise>
+
+				</c:choose>
+
+				
+
+					
 			</nav>
 		</div>
 	</header>
@@ -149,15 +173,6 @@ header { /*navbar를 상단에 고정*/
 		<!-- 오른쪽 여백 -->
 
 	</div>
-
-	<form>
-		<input
-			class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ...">
-		<button
-			class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ...">
-			Sign up</button>
-	</form>
-
 
 </body>
 
@@ -286,5 +301,6 @@ header { /*navbar를 상단에 고정*/
 		</div>
 	</div>
 </footer>
+
 </body>
 </html>
