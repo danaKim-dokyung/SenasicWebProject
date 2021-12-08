@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +38,11 @@
     	text-align=center;
     }
   </style>
+<script>
+
+
+
+</script>    
 </head>
 
 <body>
@@ -56,26 +63,28 @@
            <div class="mb-3">
             <label for="id">아이디</label>
             <input type="text" class="form-control" id="id" name="id" placeholder="영문,숫자 6자리이상" pattern="^([a-z0-9]){6,20}$" required>
-            <div class="col text-right"><button type="button" class="btn btn-success">중복확인</button></div>
+            <div class="col text-right"><span id="checkResult"></span>
             <div class="invalid-feedback">
               아이디를 입력해주세요.
             </div>
+          </div>
           </div>
           
           <!-- 닉네임 입력 -->
            <div class="mb-3">
             <label for="nickname">닉네임</label>
             <input type="text" class="form-control" id="nickname" name="nn" placeholder=""pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$" required>
-            <div class="col text-right"><button type="button" class="btn btn-success">중복확인</button></div>
+            <div class="col text-right"><span id="checkResultN"></span>
             <div class="invalid-feedback">
               다른 닉네임을 입력해주세요.
             </div>
+          </div>
           </div>
           
           <!-- 비밀번호 입력 -->
           <div class="mb-3">
             <label for="password">비밀번호</label>
-            <input type="text" class="form-control" id="pw" name="pw" placeholder="숫자포함8자리이상입력"pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+            <input type="password" class="form-control" id="pw" name="pw" placeholder="숫자포함8자리이상입력"pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
             </div>
@@ -84,7 +93,7 @@
           <!-- 비밀번호 확인 -->
           <div class="mb-3">
             <label for="confirmpw">비밀번호 확인</label>
-            <input type="text" class="form-control" id="cpw" placeholder="" required><span id="checkpw"></span>
+            <input type="password" class="form-control" id="cpw" placeholder="" required><span id="checkpw"></span>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요. 
             </div>
@@ -161,8 +170,8 @@
             	<select class="form-control" name="phone1" required>
    			 	<option selected>선택</option>
    			 	<option>010</option>
-    			<option >02</option>
-    			<option>031</option>
+    			<option >02</option> <!-- 강사님께 질문 1번 : 031 -->
+    			<option >031</option>
 				</select>
               <div class="invalid-feedback">
                 번호를 선택해주세요
@@ -234,9 +243,29 @@
 			});
 		});
 	})
+    
+    //닉네임 중복확인
+    $(function(){
+		$("#nickname").on("input",function(){
+			$.ajax({
+				url:"/nicknameCheck.mem",
+				data:{nn:$("#nickname").val()}
+			}).done(function(resp){
+				if(resp == "true"){
+					$("#checkResultN").css("color","pink");
+					$("#checkResultN").text("이미 사용중인 닉네임 입니다.");
+				}else{
+					$("#checkResultN").css("color","dodgerblue");
+					$("#checkResultN").text("사용 가능한 닉네임 입니다.");
+				}
+			});
+		});
+	})
+    
+
+       
+    
 	//비밀번호확인
-	
-	
     $("#cpw").on("keyup",function(){
     	if($("#pw").val()==$("#cpw").val()){
     		$("#checkpw").css("color","green");

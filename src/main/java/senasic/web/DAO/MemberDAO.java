@@ -38,6 +38,18 @@ public class MemberDAO {
 	         }
 	      }
 	   }
+	   //닉네임 중복 확인
+	   public boolean isNicknameExist(String nn) throws Exception{
+	      String sql = "select * from member where nn=?";
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);){
+	         pstat.setString(1, nn);
+	         try(ResultSet rs = pstat.executeQuery()){
+	            return rs.next();
+	         }
+	      }
+	   }	   
+	   
 	   //정보 입력
 	   public int insert(MemberDTO dto)throws Exception {
 	      String sql = "insert into member values(?,?,?,?,?,?,?)";
