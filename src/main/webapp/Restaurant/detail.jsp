@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title><!-- 제목 식당이름 끌어오기 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -130,13 +130,15 @@ button:focus {
 		<div class="grid gap-2 grid-col-12 grid-row-2">
 		
 			<div class="box-border p-4 border-4  col-span-12 row-span-2 sm:col-span-1">
+			<!-- 지도 API -->
 				<div>지도</div>
+				<!--  주소 DB -->
 				<div>
 					서울시 강남구 <br>도산대로 0길 00
 				</div>
 			</div>
 			<div class="box-border p-4 border-4 col-span-12 row-span-2 sm:col-span-1">
-				<div class="text-center font-bold">가게이름</div>
+				<div class="text-center font-bold">가게이름</div><!-- 가게명 -->
 				<div class="justify-end items-center text-right relative">
 				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0"><img src="dummyImage/heart.png" class="absolute right-20" style="width:30px;height:30px;">222</div><!-- 추천수 -->
 				  </div>
@@ -159,13 +161,17 @@ button:focus {
 				<div>
 					<label>연락처 : </label>02-123-4567, 010-1234-5555
 				</div>
+				<!-- 주차장 -->
+				<div><label>주차 대수 : </label> 3대</div>
+				
+				<!-- 예약버튼 html 끌어오기 -->
 				<div>네이버 예약 바로가기(버튼 삽입 예정)</div>
+				
 				<div>
 					<div class="font-bold">메뉴 소개</div>
 					<!-- 메뉴 데이터 삽입 -->
 					<div>
-						알리오 올리오, 10,000\ <br>라구 파스타, 10,000\ <br>짬뽕, 12,000\ <br>디아볼로
-						피자, 15,000\ <br>메론 프로슈토, 19,000\
+						알리오 올리오, 10,000\ <br>라구 파스타, 10,000\ <br>짬뽕, 12,000\
 					</div>
 				</div>
 
@@ -184,12 +190,11 @@ button:focus {
 					<div>닉네임</div>
 				</div>
 				<div class="col-span-4 justify-right text-right">
-					<button
-						class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right">리뷰
-						추천하기</button>
-					<button
-						class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
-					<!-- 별점 -->
+				<!-- 추천전용 DB 별도 -->
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right">리뷰 추천하기</button>
+					<!-- 구현 방법 생각.. -->
+					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
+					<!-- 별점, 숫자 넣어서 구분하는 방법 찾기 -->
 					<div class="col-span-8 row-span-3">
 					<label>별점 </label>3.0
 					<ul class="flex justify-end items-center">
@@ -219,6 +224,7 @@ button:focus {
 						class="form-textarea mt-1 block w-full" rows="3"></textarea>
 				</div>
 				<div class="col-span-10 justify-left text-left">
+				<!-- 사진 1장만 -->
 				 <input type="file" class="w-full text-gray-700 px-3 py-2 border rounded">
 				</div>
 				<div class="col-span-2 text-right">
