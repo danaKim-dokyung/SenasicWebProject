@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import senasic.web.dto.MenuDTO;
 import senasic.web.dto.RestBoardDTO;
 
 
@@ -42,6 +43,20 @@ public class RestBoardDAO {
 				
 			}
 			
+		}
+	}
+	
+	public MenuDTO getMenu(String shop) throws Exception{
+		String sql = "select * from menu where shop = ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, shop);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				MenuDTO result = new MenuDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+				return result;
+			}
 		}
 	}
 	

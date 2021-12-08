@@ -19,6 +19,5 @@
 	<a href="/load.rest?seq=6" >6</a>
 	<a href="/load.rest?seq=7" >7</a>
 	<a href="/load.rest?seq=8" >8</a>
-
 </body>
 </html>

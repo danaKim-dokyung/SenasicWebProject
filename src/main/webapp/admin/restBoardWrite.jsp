@@ -166,16 +166,9 @@
     </select>
   </label>
   
-    <label class="block mt-4">
+<label class="block">
     <span class="text-gray-700">지역</span>
-    <select class="form-select mt-1 block w-full">
-      <option>서울 강남권</option>
-      <option>서울 강북권</option>
-      <option>서울 강서권</option>
-      <option>서울 강동권</option>
-      <option>경기 남부</option>
-      <option>경기 북부</option>
-    </select>
+    <input class="form-input mt-1 block w-full" placeholder="서울 강남구"/>
   </label>
  <label class="block">
     <span class="text-gray-700">상세 주소</span>
@@ -193,7 +186,7 @@
   
    <label class="block">
     <span class="text-gray-700">예약링크(네이버 외 서비스는 현재 지원하지 않습니다.)</span>
-    <input class="form-input mt-1 block w-full" placeholder="www.naver.com/abc의 형태"/>
+    <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태"/>
   </label>
 
  <label class="block">
@@ -225,7 +218,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            Select a photo</p>
+                            메인 사진 선택</p>
                     </div>
                     <input type="file" class="opacity-0" />
                 </label>
@@ -247,7 +240,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            Select a photo</p>
+                            추가 사진</p>
                     </div>
                     <input type="file" class="opacity-0" />
                 </label>
@@ -269,7 +262,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            Select a photo</p>
+                            추가 사진</p>
                     </div>
                     <input type="file" class="opacity-0" />
                 </label>

@@ -57,6 +57,7 @@ button:focus {
 
 #like:hover{
 	fill:#DC2626;
+	transition-duration: 0.3s;
 }
 
 </style>
@@ -130,26 +131,26 @@ button:focus {
 		</div>
 
 
-		<div class="grid gap-2 grid-col-12 grid-row-2">
+		<div class="grid gap-2 grid-col-12 md:grid-flow-col">
 		
-			<div class="box-border p-4 border-4  col-span-12 row-span-2 sm:col-span-1">
+			<div class="box-border p-4 border-4  col-span-12 md:col-span-3">
 			<!-- 지도 API -->
 				<div class="flex justify-center">
-					<div id="map" class="items-center" style="width:300px;height:300px;"></div>
+					<div id="map" class="items-center w-full h-48 md:h-96"></div>
 				</div>
 				<!--  주소 DB -->
 				<div class="text-center">
 					${dto.locate } ${dto.locate_detail }
 				</div>
 			</div>
-			<div class="box-border p-4 border-4 col-span-12 row-span-2 sm:col-span-1">
+			<div class="box-border p-4 border-4 col-span-12 md:col-span-9">
 				
 				<div class="justify-between items-center text-right relative flex">
 					<div class="text-center font-bold text-4xl">${dto.title }</div><!-- 가게명 -->
 				
 				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0">
-				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600" id="like">
-				<path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600">
+				<path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" id="like"/>
 				</svg>
 				
 				<div>
@@ -180,17 +181,19 @@ button:focus {
 				<!-- 주차장 -->
 				<div><label>주차 대수 : </label> ${dto.garage }</div>
 				
-				<!-- 예약버튼 html 끌어오기 -->
-				<div><a href=${dto.link }>네이버 예약 바로가기(버튼 삽입 예정)</a></div>
-				
-				<div>
 					<div class="font-bold">메뉴 소개</div>
 					<!-- 메뉴 데이터 삽입 -->
 					<div>
-						알리오 올리오, 10,000\ <br>라구 파스타, 10,000\ <br>짬뽕, 12,000\
+						${menu.menu1 } <br>${menu.menu2 } <br>${menu.menu3 }
 					</div>
+					
+									<!-- 예약버튼 html 끌어오기 -->
+				<div class="flex justify-end">
+					<button class="bg-transparent hover:bg-green-600 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-600 hover:border-transparent rounded"><a href=${dto.link }>네이버 예약</a></button></div>
+				<div>
+					
+					
 				</div>
-
 
 			</div>
 		</div>

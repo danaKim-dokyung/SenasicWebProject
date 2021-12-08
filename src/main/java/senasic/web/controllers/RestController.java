@@ -1,4 +1,4 @@
-package seasic.web.controllers;
+package senasic.web.controllers;
 
 import java.io.IOException;
 
@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import senasic.web.dao.RestBoardDAO;
+import senasic.web.dto.MenuDTO;
 import senasic.web.dto.RestBoardDTO;
 
 
@@ -28,7 +27,9 @@ public class RestController extends HttpServlet {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				RestBoardDTO result = dao.detailPage(seq);				
+				MenuDTO menu = dao.getMenu(result.getTitle());
 				request.setAttribute("dto", result);
+				request.setAttribute("menu", menu);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
