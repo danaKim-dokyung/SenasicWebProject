@@ -180,6 +180,11 @@
   </label>
   
    <label class="block">
+    <span class="text-gray-700">영업시간</span>
+    <input class="form-input mt-1 block w-full" placeholder="평일 10:00~22:00 주말 11:00~22:00, 매주 수요일 휴무" name="hour"/>
+  </label>
+  
+   <label class="block">
     <span class="text-gray-700">주차여부</span>
     <input class="form-input mt-1 block w-full" placeholder="X, 3대, 15대" name="garage"/>
   </label>
@@ -284,29 +289,25 @@
 	</div>
 	
 <script>
-img1.onchange = evt => {
-	alert("hi");
-	  let file = img1.files;
-	  if (file) {
-	    ph1.html("<img src = URL.createObjectURL("+file+")");
-	  }
-	}
-$("#img2").on("change",function(){
-	alert("hi");
-
-	let file = $("#img2").files;
-	  if (file) {
-	    $("#ph2").html("<img src = URL.createObjectURL()");
+$("#img1").on("change",function(){
+	let file = this.files[0];
+	if (file) {
+	    $("#ph1").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
-$("#img3").onchange = evt => {
-	alert("hi");
 
-	let file = $("#img3").files;
-	  if (file) {
-	    $("#ph3").text("<img src = URL.createObjectURL("+file+")");
+$("#img2").on("change",function(){
+	let file = this.files[0];
+	if (file) {
+	    $("#ph2").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
-	}
+	})
+$("#img3").on("change",function(){
+	let file = this.files[0];
+	if (file) {
+	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	  }
+	})
 
 
 

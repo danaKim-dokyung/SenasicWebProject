@@ -31,6 +31,8 @@ public class RestController extends HttpServlet {
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
+			}else if(cmd.equals("reply.rest")) {
+				
 			}
 		}catch(Exception e) {
 			e.getStackTrace();
