@@ -1,4 +1,4 @@
-package senasic.web.controller;
+package senasic.web.controllers;
 
 import java.io.IOException;
 
