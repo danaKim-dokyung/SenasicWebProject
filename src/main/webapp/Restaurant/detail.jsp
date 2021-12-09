@@ -235,27 +235,49 @@ button:focus {
 				<div class="col-span-11">글</div>
 			</div>
 		</div>
-		<form>
+		<form action="/reply.rest" method="post">
 			<div class="grid grid-col-12 gap-2 box-border p-4 h-max border-4 text-center">
-				<div class="bg-green-100 col-span-12">리뷰 등록</div>
-				<div class="col-span-12">
-					<textarea placeholder="리뷰 작성"
-						class="form-textarea mt-1 block w-full" rows="3"></textarea>
+				<div class="bg-green-100 col-span-12">리뷰 등록</div>				
+					<div class="justify-between flex col-span-2 w-44 ml-12">
+				                <label class="flex flex-col w-full px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
+				                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+				                            fill="currentColor">
+				                            <path fill-rule="evenodd"  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+				                                clip-rule="evenodd" />
+				                        </svg>
+				                    </div>
+				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
+				                </label>                    
 				</div>
-				<div class="col-span-10 justify-left text-left">
-				<!-- 사진 1장만 -->
-				 <input type="file" class="w-full text-gray-700 px-3 py-2 border rounded">
+				<div class="flex mt-1 w-full col-span-10">
+				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5"></textarea>
 				</div>
-				<div class="col-span-2 text-right">
-					<button
-						class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right">댓글
-						등록</button>
+				
+
+				<div class="col-span-12 justify-between flex w-full h-20">
+					     <label class="block mt-4">
+					    <span class="text-gray-700">평점</span>
+					    <select class="form-select mt-1 block w-full" name="rating">
+					      <option>1.0</option>
+					      <option>1.5</option>
+					      <option>2.0</option>
+					      <option>2.5</option>
+					      <option>3.0</option>
+					      <option>3.5</option>
+					      <option>4.0</option>
+					      <option>4.5</option>
+					      <option>5.0</option>
+					    </select>
+					  </label>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2">댓글 등록</button>
 				</div>
 			</div>
 		</form>
 	</div>
 
 <script>
+//지도 API
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -287,6 +309,14 @@ geocoder.addressSearch('${dto.locate},${dto.locate_detail}', function(result, st
     map.setCenter(coords);
 } 
 });     
+
+//이미지 파일 미리보기
+$("#img").on("change",function(){
+	let file = this.files[0];
+	if (file) {
+	    $("#ph").html("<img class='w-full h-20' src = "+URL.createObjectURL(file)+">");
+	  }
+	})
 	</script>
 
 
