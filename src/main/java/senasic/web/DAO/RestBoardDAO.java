@@ -1,4 +1,4 @@
-package senasic.web.dao;
+package senasic.web.DAO;
 
 
 import java.sql.Connection;
@@ -9,8 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import senasic.web.dto.MenuDTO;
-import senasic.web.dto.RestBoardDTO;
+import senasic.web.DTO.MenuDTO;
+import senasic.web.DTO.RestBoardDTO;
 
 
 public class RestBoardDAO {

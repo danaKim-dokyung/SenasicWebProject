@@ -1,4 +1,4 @@
-package senasic.web.dto;
+package senasic.web.DTO;
 
 public class RestBoardDTO {
 	private int seq;
