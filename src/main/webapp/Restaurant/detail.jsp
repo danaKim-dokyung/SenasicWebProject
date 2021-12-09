@@ -235,7 +235,8 @@ button:focus {
 				<div class="col-span-11">글</div>
 			</div>
 		</div>
-		<form action="/reply.rest" method="post">
+		<form action="/reply.rest" method="post" enctype="multipart/form-data">
+			<input type="hidden" value=${dto.seq } id="seq" name="seq">		
 			<div class="grid grid-col-12 gap-2 box-border p-4 h-max border-4 text-center">
 				<div class="bg-green-100 col-span-12">리뷰 등록</div>				
 					<div class="justify-between flex col-span-2 w-44 ml-12">
@@ -251,7 +252,7 @@ button:focus {
 				                </label>                    
 				</div>
 				<div class="flex mt-1 w-full col-span-10">
-				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5"></textarea>
+				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5" name="contents"></textarea>
 				</div>
 				
 
@@ -259,18 +260,18 @@ button:focus {
 					     <label class="block mt-4">
 					    <span class="text-gray-700">평점</span>
 					    <select class="form-select mt-1 block w-full" name="rating">
-					      <option>1.0</option>
-					      <option>1.5</option>
-					      <option>2.0</option>
-					      <option>2.5</option>
-					      <option>3.0</option>
-					      <option>3.5</option>
-					      <option>4.0</option>
-					      <option>4.5</option>
-					      <option>5.0</option>
+					      <option value=1.0>1.0</option>
+					      <option value=1.5>1.5</option>
+					      <option value=2.0>2.0</option>
+					      <option value=2.5>2.5</option>
+					      <option value=3.0>3.0</option>
+					      <option value=3.5>3.5</option>
+					      <option value=4.0>4.0</option>
+					      <option value=4.5>4.5</option>
+					      <option value=5.0>5.0</option>
 					    </select>
 					  </label>
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2">댓글 등록</button>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2" type="submit">댓글 등록</button>
 				</div>
 			</div>
 		</form>

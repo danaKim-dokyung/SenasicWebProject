@@ -147,7 +147,7 @@
 				</a>
 			</div>
 		</div>
-<form action="restWrite.admin" method="post" enctype="multipart/form-data" name="">
+<form action="/upload.admin" method="post" enctype="multipart/form-data" name="">
 <div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
 	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
   <label class="block">
@@ -190,7 +190,7 @@
   </label>
   
    <label class="block">
-    <span class="text-gray-700">예약링크(네이버 외 서비스는 현재 지원하지 않습니다.)</span>
+    <span class="text-gray-700">예약링크</span>
     <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태" name="link"/>
   </label>
 
@@ -198,20 +198,20 @@
     <span class="text-gray-700">대표메뉴 1</span>
     <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu1"/>
     <span class="text-gray-700">대표메뉴 1 가격</span>
-    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price1"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
   </label>
   
  <label class="block">
     <span class="text-gray-700">대표메뉴 2</span>
     <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu2"/>
     <span class="text-gray-700">대표메뉴 2 가격</span>
-    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price2"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
   </label>  
  <label class="block">
     <span class="text-gray-700">대표메뉴 3</span>
     <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu3"/>
     <span class="text-gray-700">대표메뉴 3 가격</span>
-    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price3"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price3"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
   </label>
 <div class="flex justify-center mt-8">
     <div class="rounded-lg shadow-xl bg-gray-50">
@@ -229,7 +229,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             메인 사진 선택</p>
                     </div>
-                    <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo1" />
+                    <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
                 </label>
             </div>
         </div>
@@ -251,7 +251,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             추가 사진</p>
                     </div>
-                    <input accept="image/*" id="img2" type="file" class="opacity-0" name="photo2" />
+                    <input accept="image/*" id="img2" type="file" class="opacity-0" name="photo[1]"/>
                 </label>
             </div>
         </div>
@@ -269,7 +269,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             추가 사진</p>
                     </div>
-                    <input accept="image/*" id="img3" type="file" class="opacity-0" name="photo3"/>
+                    <input accept="image/*" id="img3" type="file" class="opacity-0" name="photo[2]"/>
                 </label>
             </div>
         </div>
@@ -308,6 +308,7 @@ $("#img3").on("change",function(){
 	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
+
 
 
 

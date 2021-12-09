@@ -60,4 +60,18 @@ public class RestBoardDAO {
 		}
 	}
 	
+	public int insertReview(int seq,String writer,String contents, String photo, double rate) throws Exception{
+		String sql = "insert into rest_reply values(reply_seq.nextval,?,?,?,?,?,default)";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			pstat.setString(2, writer);
+			pstat.setString(3,contents);
+			pstat.setString(4, photo);
+			pstat.setDouble(5, rate);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
 }
