@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import senasic.web.dao.RestBoardDAO;
-import senasic.web.dto.MenuDTO;
-import senasic.web.dto.RestBoardDTO;
+import senasic.web.DAO.RestBoardDAO;
+import senasic.web.DTO.MenuDTO;
+import senasic.web.DTO.RestBoardDTO;
 
 
 @WebServlet("*.rest")

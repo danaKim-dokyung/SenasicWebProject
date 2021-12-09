@@ -152,12 +152,12 @@
 	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
   <label class="block">
     <span class="text-gray-700">상호 명</span>
-    <input class="form-input mt-1 block w-full"/>
+    <input class="form-input mt-1 block w-full" name="title"/>
   </label>
   
       <label class="block mt-4">
     <span class="text-gray-700">카테고리</span>
-    <select class="form-select mt-1 block w-full">
+    <select class="form-select mt-1 block w-full" name="category">
       <option>카페</option>
       <option>양식</option>
       <option>일식</option>
@@ -168,48 +168,52 @@
   
 <label class="block">
     <span class="text-gray-700">지역</span>
-    <input class="form-input mt-1 block w-full" placeholder="서울 강남구"/>
+    <input class="form-input mt-1 block w-full" placeholder="서울 강남구" name="location"/>
   </label>
  <label class="block">
     <span class="text-gray-700">상세 주소</span>
-    <input class="form-input mt-1 block w-full"/>
+    <input class="form-input mt-1 block w-full" name="location_detail"/>
   </label>
  <label class="block">
     <span class="text-gray-700">연락처</span>
-    <input class="form-input mt-1 block w-full" placeholder="070-0000-0000, 010-0000-0000"/>
+    <input class="form-input mt-1 block w-full" placeholder="070-0000-0000, 010-0000-0000" name="phone"/>
   </label>
   
    <label class="block">
     <span class="text-gray-700">주차여부</span>
-    <input class="form-input mt-1 block w-full" placeholder="X, 3대, 15대"/>
+    <input class="form-input mt-1 block w-full" placeholder="X, 3대, 15대" name="garage"/>
   </label>
   
    <label class="block">
     <span class="text-gray-700">예약링크(네이버 외 서비스는 현재 지원하지 않습니다.)</span>
-    <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태"/>
+    <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태" name="link"/>
   </label>
 
  <label class="block">
     <span class="text-gray-700">대표메뉴 1</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노, 4100\"/>
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu1"/>
+    <span class="text-gray-700">대표메뉴 1 가격</span>
+    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price1"/>
   </label>
   
  <label class="block">
     <span class="text-gray-700">대표메뉴 2</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노, 4100\"/>
-  </label>
-  
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu2"/>
+    <span class="text-gray-700">대표메뉴 2 가격</span>
+    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price2"/>
+  </label>  
  <label class="block">
     <span class="text-gray-700">대표메뉴 3</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노, 4100\"/>
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu3"/>
+    <span class="text-gray-700">대표메뉴 3 가격</span>
+    <input class="form-input mt-1 block w-full" placeholder="4100\" name="price3"/>
   </label>
-
 <div class="flex justify-center mt-8">
     <div class="rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                    <div class="flex flex-col items-center justify-center pt-7">
+                    <div class="flex flex-col items-center justify-center pt-7" id="ph1">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -220,7 +224,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             메인 사진 선택</p>
                     </div>
-                    <input type="file" class="opacity-0" />
+                    <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo1" />
                 </label>
             </div>
         </div>
@@ -231,7 +235,7 @@
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                    <div class="flex flex-col items-center justify-center pt-7">
+                    <div class="flex flex-col items-center justify-center pt-7" id="ph2">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -242,7 +246,7 @@
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             추가 사진</p>
                     </div>
-                    <input type="file" class="opacity-0" />
+                    <input accept="image/*" id="img2" type="file" class="opacity-0" name="photo2" />
                 </label>
             </div>
         </div>
@@ -253,18 +257,14 @@
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                    <div class="flex flex-col items-center justify-center pt-7">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                clip-rule="evenodd" />
+                    <div class="flex flex-col items-center justify-center pt-7" id="ph3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                         </svg>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             추가 사진</p>
                     </div>
-                    <input type="file" class="opacity-0" />
+                    <input accept="image/*" id="img3" type="file" class="opacity-0" name="photo3"/>
                 </label>
             </div>
         </div>
@@ -283,6 +283,33 @@
 		
 	</div>
 	
+<script>
+img1.onchange = evt => {
+	alert("hi");
+	  let file = img1.files;
+	  if (file) {
+	    ph1.html("<img src = URL.createObjectURL("+file+")");
+	  }
+	}
+$("#img2").on("change",function(){
+	alert("hi");
 
+	let file = $("#img2").files;
+	  if (file) {
+	    $("#ph2").html("<img src = URL.createObjectURL()");
+	  }
+	})
+$("#img3").onchange = evt => {
+	alert("hi");
+
+	let file = $("#img3").files;
+	  if (file) {
+	    $("#ph3").text("<img src = URL.createObjectURL("+file+")");
+	  }
+	}
+
+
+
+</script>
 </body>
 </html>
