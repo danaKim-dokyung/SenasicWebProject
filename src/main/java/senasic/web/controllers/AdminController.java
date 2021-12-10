@@ -24,8 +24,8 @@ public class AdminController extends HttpServlet {
 		AdminDAO dao = AdminDAO.getInstance();
 		try {
 			if(cmd.equals("upload.admin")) {
-				int maxSize = 1024*1024*10; //10mb
-				String savePath = request.getServletContext().getRealPath("RestImg");
+				int maxSize = 1024*1024*10; //10m
+				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
 				System.out.println(savePath);
@@ -57,8 +57,8 @@ public class AdminController extends HttpServlet {
 				int p2 = Integer.parseInt(multi.getParameter("price2"));
 				String m3 = multi.getParameter("menu3");
 				int p3 = Integer.parseInt(multi.getParameter("price3"));
-				
-				int result = dao.writeRest(title, loc, loc_detail, ctg, hour, garage, phone, sysName1, sysName2, sysName3, link);
+				String root = "\\Restaurant\\RestImg\\";
+				int result = dao.writeRest(title, loc, loc_detail, ctg, hour, garage, phone, root+sysName1, root+sysName2, root+sysName3, link);
 				int menu = dao.insertMenu(title, m1, p1, m2, p2, m3, p3);
 				
 				response.sendRedirect("/admin/restBoardWrite.jsp");

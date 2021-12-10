@@ -163,61 +163,30 @@ button:focus {
 					<div class="col-span-1 row-span-3 text-right">
 					${dto.rate }
 					<ul class="flex justify-end items-center">
-					<li>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-						    <defs>
-						        <linearGradient id="half_grad">
-						            <stop offset="50%" stop-color="yellow"/>
-						            <stop offset="50%" stop-color="white" stop-opacity="1" />
-						        </linearGradient>
-						    </defs>
-					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
-							</svg>
-						</li>
-					  <li>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-						    <defs>
-						        <linearGradient id="half_grad">
-						            <stop offset="50%" stop-color="yellow"/>
-						            <stop offset="50%" stop-color="white" stop-opacity="1" />
-						        </linearGradient>
-						    </defs>
-					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
-							</svg>
-						</li>
-					  <li>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-						    <defs>
-						        <linearGradient id="half_grad">
-						            <stop offset="50%" stop-color="yellow"/>
-						            <stop offset="50%" stop-color="white" stop-opacity="1" />
-						        </linearGradient>
-						    </defs>
-					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
-							</svg>
-						</li>
-					  <li>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-						    <defs>
-						        <linearGradient id="half_grad">
-						            <stop offset="50%" stop-color="yellow"/>
-						            <stop offset="50%" stop-color="white" stop-opacity="1" />
-						        </linearGradient>
-						    </defs>
-					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
-							</svg>
-						</li>
-					  <li>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-						    <defs>
-						        <linearGradient id="half_grad">
-						            <stop offset="50%" stop-color="yellow"/>
-						            <stop offset="50%" stop-color="white" stop-opacity="1" />
-						        </linearGradient>
-						    </defs>
-					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
-							</svg>
-						</li>
+					<c:set var="rt" value="${dto.rate }"/>
+					<c:forEach var='cnt' begin='1' end='5'>	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="half_grad${cnt }">
+							        	<c:choose>
+								        	<c:when test= "${cnt<=rt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cnt>rt and cnt-1<rt }">
+								        		<stop offset="${100-(cnt-rt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cnt-rt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad${cnt })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
 					</ul>
 					</div>
 				<br>
@@ -369,6 +338,9 @@ $("#img").on("change",function(){
 	  }
 	})
 	
+$("#like").on("click",function(){
+	alert("hello");
+})
 	</script>
 
 
