@@ -163,11 +163,30 @@ button:focus {
 					<div class="col-span-1 row-span-3 text-right">
 					${dto.rate }
 					<ul class="flex justify-end items-center">
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
+					<c:set var="rt" value="${dto.rate }"/>
+					<c:forEach var='cnt' begin='1' end='5'>	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="half_grad${cnt }">
+							        	<c:choose>
+								        	<c:when test= "${cnt<=rt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cnt>rt and cnt-1<rt }">
+								        		<stop offset="${100-(cnt-rt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cnt-rt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad${cnt })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
 					</ul>
 					</div>
 				<br>
@@ -210,7 +229,7 @@ button:focus {
 				</div>
 				<div class="col-span-4 justify-right text-right">
 				<!-- 추천전용 DB 별도 -->
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right">리뷰 추천하기</button>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right" id="rvrcmd">리뷰 추천하기</button>
 					<!-- 구현 방법 생각.. -->
 					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
 					<!-- 별점, 숫자 넣어서 구분하는 방법 찾기 -->
@@ -235,7 +254,8 @@ button:focus {
 				<div class="col-span-11">글</div>
 			</div>
 		</div>
-		<form action="/reply.rest" method="post">
+		<form action="/reply.rest" method="post" enctype="multipart/form-data">
+			<input type="hidden" value=${dto.seq } id="seq" name="seq">		
 			<div class="grid grid-col-12 gap-2 box-border p-4 h-max border-4 text-center">
 				<div class="bg-green-100 col-span-12">리뷰 등록</div>				
 					<div class="justify-between flex col-span-2 w-44 ml-12">
@@ -251,7 +271,7 @@ button:focus {
 				                </label>                    
 				</div>
 				<div class="flex mt-1 w-full col-span-10">
-				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5"></textarea>
+				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5" name="contents"></textarea>
 				</div>
 				
 
@@ -259,18 +279,18 @@ button:focus {
 					     <label class="block mt-4">
 					    <span class="text-gray-700">평점</span>
 					    <select class="form-select mt-1 block w-full" name="rating">
-					      <option>1.0</option>
-					      <option>1.5</option>
-					      <option>2.0</option>
-					      <option>2.5</option>
-					      <option>3.0</option>
-					      <option>3.5</option>
-					      <option>4.0</option>
-					      <option>4.5</option>
-					      <option>5.0</option>
+					      <option value=1.0>1.0</option>
+					      <option value=1.5>1.5</option>
+					      <option value=2.0>2.0</option>
+					      <option value=2.5>2.5</option>
+					      <option value=3.0>3.0</option>
+					      <option value=3.5>3.5</option>
+					      <option value=4.0>4.0</option>
+					      <option value=4.5>4.5</option>
+					      <option value=5.0>5.0</option>
 					    </select>
 					  </label>
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2">댓글 등록</button>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2" type="submit" id="inputReply">댓글 등록</button>
 				</div>
 			</div>
 		</form>
@@ -317,6 +337,26 @@ $("#img").on("change",function(){
 	    $("#ph").html("<img class='w-full h-20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
+	
+$("#like").on("click",function(){
+	alert("hello");
+})
+
+$("#inputReply").on("click",function(){
+	if(${loginID==null}){
+		alert("회원전용 기능입니다.")
+		return false;
+	}
+})
+//like 버튼눌렀을떄
+   $("#like").on("click",function(){
+      if(${loginID !=null}){
+         location.href="/like.rest";
+      }else{
+         alert("로그인 후 이용해 주세요");
+      }
+      
+   })
 	</script>
 
 

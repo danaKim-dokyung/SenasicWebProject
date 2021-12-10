@@ -22,16 +22,25 @@ public class AdminDAO {
 		return ds.getConnection();
 	}
 	
-	public int writeRest(String title,String loc, String loc_detail, String Ctg, String hour, String garage, String phone, String ph1, String ph2, String ph3,String link) throws Exception{
-		String sql = "insert into board_rest values(board_Rest_seq,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public int writeRest(String title,String loc, String loc_detail, String ctg, String hour, String garage, String phone, String ph1, String ph2, String ph3,String link) throws Exception{
+		String sql = "insert into rest_board values(rest_board_seq.nextval,?,?,?,?,?,default,default,?,?,?,?,?,?)";
 		//시퀀스명 확인
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 			){
 			pstat.setString(1, title);
-			//oracle 복구후 넣기
+			pstat.setString(2, loc);
+			pstat.setString(3, loc_detail);
+			pstat.setString(4, ctg);
+			pstat.setString(5, hour);
+			
+			pstat.setString(6, garage);
+			pstat.setString(7, phone);
+			pstat.setString(8, ph1);
+			pstat.setString(9, ph2);
+			pstat.setString(10, ph3);
+			pstat.setString(11, link);			
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -49,7 +58,6 @@ public class AdminDAO {
 			pstat.setString(6, m3);
 			pstat.setInt(7, p3);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
