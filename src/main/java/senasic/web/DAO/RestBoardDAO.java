@@ -54,7 +54,7 @@ public class RestBoardDAO {
 			pstat.setString(1, shop);
 			try(ResultSet rs = pstat.executeQuery();){
 				rs.next();
-				MenuDTO result = new MenuDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+				MenuDTO result = new MenuDTO(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getInt(7));
 				return result;
 			}
 		}

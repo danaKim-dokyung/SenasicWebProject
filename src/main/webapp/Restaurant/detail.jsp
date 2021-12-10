@@ -163,11 +163,61 @@ button:focus {
 					<div class="col-span-1 row-span-3 text-right">
 					${dto.rate }
 					<ul class="flex justify-end items-center">
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
+					<li>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+						    <defs>
+						        <linearGradient id="half_grad">
+						            <stop offset="50%" stop-color="yellow"/>
+						            <stop offset="50%" stop-color="white" stop-opacity="1" />
+						        </linearGradient>
+						    </defs>
+					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
+							</svg>
+						</li>
+					  <li>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+						    <defs>
+						        <linearGradient id="half_grad">
+						            <stop offset="50%" stop-color="yellow"/>
+						            <stop offset="50%" stop-color="white" stop-opacity="1" />
+						        </linearGradient>
+						    </defs>
+					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
+							</svg>
+						</li>
+					  <li>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+						    <defs>
+						        <linearGradient id="half_grad">
+						            <stop offset="50%" stop-color="yellow"/>
+						            <stop offset="50%" stop-color="white" stop-opacity="1" />
+						        </linearGradient>
+						    </defs>
+					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
+							</svg>
+						</li>
+					  <li>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+						    <defs>
+						        <linearGradient id="half_grad">
+						            <stop offset="50%" stop-color="yellow"/>
+						            <stop offset="50%" stop-color="white" stop-opacity="1" />
+						        </linearGradient>
+						    </defs>
+					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
+							</svg>
+						</li>
+					  <li>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+						    <defs>
+						        <linearGradient id="half_grad">
+						            <stop offset="50%" stop-color="yellow"/>
+						            <stop offset="50%" stop-color="white" stop-opacity="1" />
+						        </linearGradient>
+						    </defs>
+					  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#half_grad)" stroke-width="1" stroke="yellow"/>
+							</svg>
+						</li>
 					</ul>
 					</div>
 				<br>
@@ -210,7 +260,7 @@ button:focus {
 				</div>
 				<div class="col-span-4 justify-right text-right">
 				<!-- 추천전용 DB 별도 -->
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right">리뷰 추천하기</button>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right" id="rvrcmd">리뷰 추천하기</button>
 					<!-- 구현 방법 생각.. -->
 					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
 					<!-- 별점, 숫자 넣어서 구분하는 방법 찾기 -->
@@ -318,6 +368,7 @@ $("#img").on("change",function(){
 	    $("#ph").html("<img class='w-full h-20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
+	
 	</script>
 
 

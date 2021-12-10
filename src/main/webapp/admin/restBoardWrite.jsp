@@ -81,15 +81,15 @@
 <body>
 <body style="font-family: Roboto">
 	<div id="app" class="relative h-screen">
-		<div class="sidebar w-1/5 fixed h-screen bg-gray-800 z-10">
-			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-gray-700">
+		<div class="sidebar w-1/7 fixed h-screen bg-green-600 z-10">
+			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
 				<div class="menu-text text-gray-100 ml-4">admin 계정명</div>
 			</div>
 			
 			<div class="mx-4 px-3">
-				<a href="#" class="flex  w-full flex hover:bg-gray-700 rounded py-3"> <i
+				<a href="#" class="flex  w-full flex hover:bg-green-700 rounded py-3"> <i
 					class="material-icons fill-current text-gray-100">analytics</i>
 					<div class="relative menu-text text-gray-100 ml-4">통계보기</div>
 				</a>
@@ -97,7 +97,7 @@
 			
 			<div class="mx-4 px-3">
 				<a href="#" class="flex "> 
-					<div class="flex  w-full flex hover:bg-gray-700 rounded py-3">
+					<div class="flex  w-full flex hover:bg-green-700 rounded py-3">
 					<i class="material-icons fill-current text-gray-100">perm_identity</i>
 					<div class="relative menu-text text-gray-100 ml-4">회원관리</div>
 					</div>
@@ -110,35 +110,35 @@
 				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
 					@click="show=!show">
 					<div
-						class="w-full flex justify-between px-3 hover:bg-gray-700 rounded py-3" :class="{'bg-gray-700':show}">
+						class="w-full flex justify-between px-3 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
 						<div class="flex">
 							<i class="material-icons fill-current text-gray-100">article</i>
 							<div class="relative menu-text text-gray-100 ml-4">게시글 관리</div>
 						</div>
 						<span class="transition ease-in duration-150 text-gray-100 material-icons transform" :class="{'rotate-180':show}"> arrow_drop_down </span>
 					</div>
-					<div x-show="show" class="transition ease-in duration-700 mt-3 bg-gray-800">
-						<div class="w-full flex px-3 hover:bg-gray-700 rounded py-3 mb-3">
+					<div x-show="show" class="transition ease-in duration-700 mt-3 bg-green-800">
+						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								식당게시판 글쓰기
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-gray-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								식당게시판 글관리
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-gray-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								맛집매거진 글쓰기
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-gray-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								맛집매거진 글관리
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-gray-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								애견게시판 글관리
 							</div>
