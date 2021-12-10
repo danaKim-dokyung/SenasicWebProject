@@ -25,6 +25,7 @@ public class AdminController extends HttpServlet {
 		try {
 			if(cmd.equals("upload.admin")) {
 				int maxSize = 1024*1024*10; //10m
+				//savepath 경로 변경
 				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}

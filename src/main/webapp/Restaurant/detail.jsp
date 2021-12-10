@@ -290,7 +290,7 @@ button:focus {
 					      <option value=5.0>5.0</option>
 					    </select>
 					  </label>
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2" type="submit">댓글 등록</button>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2" type="submit" id="inputReply">댓글 등록</button>
 				</div>
 			</div>
 		</form>
@@ -341,6 +341,22 @@ $("#img").on("change",function(){
 $("#like").on("click",function(){
 	alert("hello");
 })
+
+$("#inputReply").on("click",function(){
+	if(${loginID==null}){
+		alert("회원전용 기능입니다.")
+		return false;
+	}
+})
+//like 버튼눌렀을떄
+   $("#like").on("click",function(){
+      if(${loginID !=null}){
+         location.href="/like.rest";
+      }else{
+         alert("로그인 후 이용해 주세요");
+      }
+      
+   })
 	</script>
 
 
