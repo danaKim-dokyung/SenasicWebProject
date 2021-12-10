@@ -8,5 +8,7 @@
 </head>
 <body>
 
+<h1>Magazing List</h1>
+
 </body>
 </html>
