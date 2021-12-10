@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RestBoardDTO;
+import senasic.web.DTO.RestReplyDTO;
 import statics.Statics;
 
 
@@ -41,7 +42,7 @@ public class RestBoardDAO {
 			try(ResultSet rs = pstat.executeQuery();){
 				rs.next();
 				RestBoardDTO result = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
-								,rs.getDouble(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+								,Math.round(rs.getDouble(7)*100)/100.0,rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
 				return result;
 				
 			}
@@ -64,7 +65,7 @@ public class RestBoardDAO {
 	}
 	
 	public int insertReview(int seq,String writer,String contents, String photo, double rate) throws Exception{
-		String sql = "insert into rest_reply values(reply_seq.nextval,?,?,?,?,?,default)";
+		String sql = "insert into rest_reply values(reply_seq.nextval,?,(select nn from member where id=?),?,?,?,default,default)";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
@@ -241,7 +242,38 @@ public class RestBoardDAO {
 	         }
 	         
 	      }
+	   }
+	   
+	   
+	   
+	    public List<RestReplyDTO> listReply(int seq) throws Exception{
+	    	String sql = "select * from rest_reply where par_seq = ? order by write_time desc";
+	    	try(Connection con = this.getConnection();
+	    		PreparedStatement pstat = con.prepareStatement(sql);
+	    			){
+	    		pstat.setInt(1, seq);
+	    		try(ResultSet rs = pstat.executeQuery()){
+	    			List<RestReplyDTO> list = new ArrayList();
+	    			while(rs.next()) {
+	    				RestReplyDTO dto = new RestReplyDTO(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getTimestamp(8));
+	    				list.add(dto);
+	    			}
+	    			return list;
+	    		}
+	    	}
+	    }
 	      
+	    public int updateRate(int seq) throws Exception{
+	    	String sql = "update rest_board set rate = (select avg(rate) from rest_reply where par_seq = ?) where seq = ?";
+	    	try(Connection con = this.getConnection();
+	    		PreparedStatement pstat = con.prepareStatement(sql);
+	    			){
+	    		pstat.setInt(1, seq);
+	    		pstat.setInt(2, seq);
+	    		int result = pstat.executeUpdate();
+	    		return result;
+	    	}
+	    }
 	      
-	 }
+	 
 }

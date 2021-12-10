@@ -25,12 +25,12 @@ public class RecDAO {
    }
    //게시글 클릭시에 게시글 seq,id저장
      public int recinsert(RcmdDTO dto)throws Exception {
-         String sql = "insert into member values(?,?)";
+         String sql = "insert into rest_rcmd values(?,?)";
          try(Connection con = this.getConnection();
                PreparedStatement pstat = con.prepareStatement(sql);){
 
-            pstat.setString(1,dto.getId());
-            pstat.setInt(2,dto.getRest_seq());
+            pstat.setInt(1,dto.getRest_seq());
+            pstat.setString(2,dto.getId());
            
             int result = pstat.executeUpdate();
             return result;

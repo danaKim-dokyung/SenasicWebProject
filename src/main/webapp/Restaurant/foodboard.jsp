@@ -272,7 +272,7 @@
    <c:forEach var="dto" items="${list }">
       
       <div class="xl:w-1/4 md:w-1/2 lg:w-1/4 p-4" >
-      <a href="/detail.rest?seq=${dto.seq } " >
+      <a href="/load.rest?seq=${dto.seq } " >
         <div class="bg-gray-100 p-6 rounded-lg">
           <img class="h-40 rounded w-full object-cover object-center mb-6" src="${dto.photo1 }" alt="content">
           <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>

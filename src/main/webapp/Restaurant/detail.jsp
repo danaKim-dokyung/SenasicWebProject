@@ -203,7 +203,7 @@ button:focus {
 					<div class="font-bold">메뉴 소개</div>
 					<!-- 메뉴 데이터 삽입 -->
 					<div>
-						${menu.menu1 } <br>${menu.menu2 } <br>${menu.menu3 }
+						${menu.menu1 } ${menu.price1 }\<br>${menu.menu2 } ${menu.price2 }\<br>${menu.menu3 } ${menu.price3 }\
 					</div>
 					
 									<!-- 예약버튼 html 끌어오기 -->
@@ -217,44 +217,8 @@ button:focus {
 			</div>
 		</div>
 
-		<div class="box-border  h-max p-4 border-4">
-			<div class="grid grid-col-12 gap-2">
-				<div class="col-span-8">
-					<div class="w-2/12 sm:w-2/12 px-3">
-						<img src="https://mdbootstrap.com/img/new/avatars/15.jpg"
-							alt="..."
-							class="rounded-full max-w-full h-auto align-middle border-none" />
-					</div>
-					<div>닉네임</div>
-				</div>
-				<div class="col-span-4 justify-right text-right">
-				<!-- 추천전용 DB 별도 -->
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right" id="rvrcmd">리뷰 추천하기</button>
-					<!-- 구현 방법 생각.. -->
-					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
-					<!-- 별점, 숫자 넣어서 구분하는 방법 찾기 -->
-					<div class="col-span-8 row-span-3">
-					<label>별점 </label>3.0
-					<ul class="flex justify-end items-center">
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="fas fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					  <li><i class="far fa-star fa-sm text-yellow-500 mr-1"></i></li>
-					</ul>
-					</div>
-
-				</div>
-				<div class="col-span-12">
-				  <label>추천 </label> 122</div><!-- 추천수 -->
-				<div class="col-span-1">
-					<img src="dummyImage/pizza.jpg"
-						style="height: 180px; width: 180px;">
-				</div>
-				<div class="col-span-11">글</div>
-			</div>
-		</div>
-		<form action="/reply.rest" method="post" enctype="multipart/form-data">
+<!-- 리뷰 작성 -->		
+				<form action="/reply.rest" method="post" enctype="multipart/form-data">
 			<input type="hidden" value=${dto.seq } id="seq" name="seq">		
 			<div class="grid grid-col-12 gap-2 box-border p-4 h-max border-4 text-center">
 				<div class="bg-green-100 col-span-12">리뷰 등록</div>				
@@ -294,6 +258,78 @@ button:focus {
 				</div>
 			</div>
 		</form>
+		
+		
+<!-- 리뷰 보기 -->
+<c:set var="rvStar" value="1" />
+<c:forEach var="reply" items="${reply }">
+		<div class="box-border  h-max p-4 border-4 flex grid grid-col-12 gird-rows-7 gap-2 flex">
+			<div class="rows-span-3 col-span-12 flex justify-between">
+				<div class="col-start-1 col-end-2 row-span-3 flex">
+					<div class="px-3 row-span-2 col-span-1">
+					<!-- 프로필사진 자리 -->
+						<img src="https://mdbootstrap.com/img/new/avatars/15.jpg"
+							class="rounded-full max-w-20 h-20 item-left border-none" />
+					
+					
+					</div>
+					
+					
+					
+					
+					<div class="row-span-1 col-span-1">${reply.writer }</div>
+				</div>
+					<div class="col-start-7 col-end-12 justify-right text-right row-span-3">
+				<!-- 추천전용 DB 별도 -->
+				<div class=col-span-9>
+					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right" id="rvrcmd">리뷰 추천하기</button>
+					<!-- 구현 방법 생각.. -->
+					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
+				</div>
+					<div class="col-span-9 row-span-1 flex justify-end">
+					<label>별점 </label>${reply.rate }
+					<ul class="justify-end items-center flex">
+					<c:set var="rprt" value="${reply.rate }"/>
+					<c:forEach var='cn' begin='1' end='5'>
+				        <c:set var="rvStar" value="${rvStar+1}" />    	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="grad${rvStar }">
+							        	<c:choose>
+								        	<c:when test= "${cn<=rprt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cn>rprt and cn-1<rprt }">
+								        		<stop offset="${100-(cn-rprt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cn-rprt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#grad${rvStar })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
+					</ul>
+					</div>
+					<div class="col-span-9 row-span-1">
+				  <label>추천 </label> ${reply.recommand }<br>
+				 <label>작성시간</label>${reply.time }
+				 </div>
+				 </div>
+				</div>
+				
+				<div class="col-span-1 row-span-4">
+					<img src="${reply.photo }"
+						style="height: 180px; width: 180px;">
+				</div>
+				<div class="col-span-11 flex row-span-4">${reply.contents }</div>
+			</div>
+</c:forEach>
 	</div>
 
 <script>
@@ -337,10 +373,6 @@ $("#img").on("change",function(){
 	    $("#ph").html("<img class='w-full h-20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
-	
-$("#like").on("click",function(){
-	alert("hello");
-})
 
 $("#inputReply").on("click",function(){
 	if(${loginID==null}){
@@ -351,13 +383,15 @@ $("#inputReply").on("click",function(){
 //like 버튼눌렀을떄
    $("#like").on("click",function(){
       if(${loginID !=null}){
-         location.href="/like.rest";
+         location.href="/like.rest?seq=${dto.seq}";
       }else{
          alert("로그인 후 이용해 주세요");
-      }
-      
+      }      
    })
-	</script>
+   
+ 
+   
+</script>
 
 
 </body>
