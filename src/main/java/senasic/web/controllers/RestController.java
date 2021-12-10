@@ -18,6 +18,7 @@ import senasic.web.DAO.RestBoardDAO;
 import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RcmdDTO;
 import senasic.web.DTO.RestBoardDTO;
+import senasic.web.DTO.RestReplyDTO;
 import statics.Statics;
 
 
@@ -35,10 +36,13 @@ public class RestController extends HttpServlet {
 		try {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
-				RestBoardDTO result = dao.detailPage(seq);				
+				RestBoardDTO result = dao.detailPage(seq);		
+				List<RestReplyDTO> reply = dao.listReply(seq);
 				MenuDTO menu = dao.getMenu(result.getTitle());
+				
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
+				request.setAttribute("reply", reply);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}else if(cmd.equals("reply.rest")) {
 				//파일 먼저 다운
@@ -63,12 +67,15 @@ public class RestController extends HttpServlet {
 				double rate = Double.parseDouble(multi.getParameter("rating"));
 				String imgPath = "\\Restaurant\\ReplyImg\\";
 				int result = dao.insertReview(seq, id, contents, imgPath+sysName, rate);
-				System.out.println(result);
+				int update = dao.updateRate(seq);
 				response.sendRedirect("/load.rest?seq="+seq);
-			}else if(cmd.equals("/like.rest")) {
+			}else if(cmd.equals("like.rest")) {
 	            int recseq =  Integer.parseInt(request.getParameter("seq"));
-	            String recid = request.getParameter("id");
+	            String recid = request.getSession().getAttribute("loginID").toString();
+	            System.out.println(recseq);
+	            System.out.println(recid);
 	            rdao.recinsert(new RcmdDTO(recseq,recid));
+	            
 	         }else if(cmd.equals("fboard.rest")) {
 	             
 	             List<RestBoardDTO> carousel = dao.Carousel();
