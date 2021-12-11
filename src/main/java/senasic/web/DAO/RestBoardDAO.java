@@ -91,8 +91,8 @@ public class RestBoardDAO {
 	   
 	   public int getPageTotalCount() throws Exception{
 	      
-	      int restTotalCount = this.getRestCount(); // 현재 총 게시글 몇개있는지
-	      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
+	      int restTotalCount = this.getRestCount(); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+	      int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
 	      
 	      if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
 	         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE;
@@ -102,11 +102,11 @@ public class RestBoardDAO {
 	      return pageTotalCount;
 	   }
 	   
-	   public String getPageNavi(int currentPage) throws Exception{
+	   public List getPageNavi(int currentPage) throws Exception{
 	   
-	      int restTotalCount = this.getRestCount(); // 현재 총 몇개의 게시글 있는지
+	      int restTotalCount = this.getRestCount(); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
 	      
-	      int pageTotalCount =0; // 페이지 총 갯수
+	      int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
 	      if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
 	         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE ;
 	      }else {
@@ -119,8 +119,8 @@ public class RestBoardDAO {
 	         endNavi = pageTotalCount;
 	      }
 	      
-	      boolean needPrev = true; // needPrev => 왼쪽 화살표
-	      boolean needNext = true; // needNext => 오른쪽 화살표
+	      boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
+	      boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
 	      
 	      if(startNavi == 1) {
 	         needPrev = false;
@@ -130,12 +130,12 @@ public class RestBoardDAO {
 	         needNext = false;
 	      }
 	      
-	      String pageNavi = "";
-	      if(needPrev) {pageNavi += "<a href='fboard.rest?cpage="+(startNavi-1)+"'> < </a> ";}
+	      List<Integer> pageNavi = new ArrayList<>();
+	      if(needPrev) {pageNavi.add(startNavi-1) ;}
 	      for(int i = startNavi; i<=endNavi; i++) {
-	         pageNavi += "<a href='/fboard.rest?cpage="+i+"'>" + i + "</a> ";
+	         pageNavi.add(i);
 	      }
-	      if(needNext) { pageNavi += "<a href='fboard.rest?capge="+(endNavi+1)+"'> > </a>";}
+	      if(needNext) { pageNavi.add(endNavi+1);}
 	      return pageNavi;
 	   }
 	   
@@ -178,13 +178,13 @@ public class RestBoardDAO {
 	      String sql = "select * from (select Rest_board.* , row_number() over(order by seq desc) rn from Rest_board)where rn between ? and ?";
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
-	         pstat.setInt(1, start);
-	         pstat.setInt(2, end);
+		         pstat.setInt(1, start);
+		         pstat.setInt(2, end);
 	         try(ResultSet rs = pstat.executeQuery()){
 	            List<RestBoardDTO> list = new ArrayList<>();
 	            while(rs.next()) {
 	               RestBoardDTO dto = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
-	                            ,rs.getDouble(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+	                            ,Math.round(rs.getDouble(7)*100)/100.0,rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
 	               list.add(dto);
 	            }
 	            return list;
@@ -234,7 +234,7 @@ public class RestBoardDAO {
 	            for(int i=0; i<3; i++) {
 	               if(rs.next()) {
 	                  RestBoardDTO dto = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
-	                               ,rs.getDouble(7),rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+	                               ,Math.round(rs.getDouble(7)*100)/100.0,rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
 	                  carousel.add(dto);
 	               }
 	            }
@@ -279,7 +279,7 @@ public class RestBoardDAO {
 	    }
 	      
 		public int getRestReviewCount() throws Exception{
-		      String sql = "select count(*) from rest_reply where par_seq=16";
+		      String sql = "select count(*) from rest_reply where par_seq=16"; // 16 수정 ( ? )
 		      try(Connection con = this.getConnection();
 		            PreparedStatement pstat = con.prepareStatement(sql);
 		            ResultSet rs = pstat.executeQuery();){
@@ -290,8 +290,8 @@ public class RestBoardDAO {
 		
 		   public int getReviewPageTotalCount() throws Exception{
 			      
-			      int restTotalCount = this.getRestReviewCount(); // 현재 총 게시글 몇개있는지
-			      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
+			      int restTotalCount = this.getRestReviewCount(); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+			      int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
 			      
 			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
 			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE;
@@ -303,9 +303,9 @@ public class RestBoardDAO {
 			   
 			   public List getReviewPageNavi(int currentPage) throws Exception{
 			   
-			      int restTotalCount = this.getRestReviewCount(); // 현재 총 몇개의 게시글 있는지
+			      int restTotalCount = this.getRestReviewCount(); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
 			      
-			      int pageTotalCount =0; // 페이지 총 갯수
+			      int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
 			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
 			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE ;
 			      }else {
@@ -318,8 +318,8 @@ public class RestBoardDAO {
 			         endNavi = pageTotalCount;
 			      }
 			      
-			      boolean needPrev = true; // needPrev => 왼쪽 화살표
-			      boolean needNext = true; // needNext => 오른쪽 화살표
+			      boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
+			      boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
 			      
 			      if(startNavi == 1) {
 			         needPrev = false;
