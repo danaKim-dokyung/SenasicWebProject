@@ -37,9 +37,21 @@ public class RestController extends HttpServlet {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				RestBoardDTO result = dao.detailPage(seq);		
-				List<RestReplyDTO> reply = dao.listReply(seq);
 				MenuDTO menu = dao.getMenu(result.getTitle());
-				
+				int currentPage=1;
+				if(request.getParameter("rvpg")!=null) {currentPage = Integer.parseInt(request.getParameter("rvpg"));}
+	            int pageTotalCount = dao.getReviewPageTotalCount();
+	            if(currentPage <1) {currentPage = 1;}
+	             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+	             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+
+	             List<RestReplyDTO> reply = dao.listReply(seq,start,end);
+	             List<Integer> navi = dao.getReviewPageNavi(currentPage);
+	             request.setAttribute("startR", start-1);
+	             request.setAttribute("endR", end+1);
+	             request.setAttribute("navi", navi);
+	             request.setAttribute("rvPg", currentPage);
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
 				request.setAttribute("reply", reply);
