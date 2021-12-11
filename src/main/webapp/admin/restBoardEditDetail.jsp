@@ -310,9 +310,7 @@ $("#img3").on("change",function(){
 	})
 	
 
-if($("option").val() == ${dto.category}){
-	$(this).attr("selected");
-}
+	
 $("#rbEdit").on("click",function(){
 	location.href="/rbEdit.admin";
 })
