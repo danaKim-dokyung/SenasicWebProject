@@ -246,12 +246,15 @@ public class RestBoardDAO {
 	   
 	   
 	   
-	    public List<RestReplyDTO> listReply(int seq) throws Exception{
-	    	String sql = "select * from rest_reply where par_seq = ? order by write_time desc";
+	    public List<RestReplyDTO> listReply(int seq,int start, int end) throws Exception{
+	    	String sql = "select * from (select Rest_reply.* , row_number() over(order by write_time desc) rn from Rest_reply where par_seq = ?)where rn between ? and ?";
+	    	
 	    	try(Connection con = this.getConnection();
 	    		PreparedStatement pstat = con.prepareStatement(sql);
 	    			){
 	    		pstat.setInt(1, seq);
+	    		pstat.setInt(2, start);
+	    		pstat.setInt(3, end);
 	    		try(ResultSet rs = pstat.executeQuery()){
 	    			List<RestReplyDTO> list = new ArrayList();
 	    			while(rs.next()) {
@@ -275,5 +278,63 @@ public class RestBoardDAO {
 	    	}
 	    }
 	      
-	 
+		public int getRestReviewCount() throws Exception{
+		      String sql = "select count(*) from rest_reply where par_seq=16";
+		      try(Connection con = this.getConnection();
+		            PreparedStatement pstat = con.prepareStatement(sql);
+		            ResultSet rs = pstat.executeQuery();){
+		         rs.next();
+		         return rs.getInt(1);
+		      }
+		   }
+		
+		   public int getReviewPageTotalCount() throws Exception{
+			      
+			      int restTotalCount = this.getRestReviewCount(); // 현재 총 게시글 몇개있는지
+			      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
+			      
+			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
+			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE;
+			      }else {
+			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE + 1; //
+			      }
+			      return pageTotalCount;
+			   }
+			   
+			   public List getReviewPageNavi(int currentPage) throws Exception{
+			   
+			      int restTotalCount = this.getRestReviewCount(); // 현재 총 몇개의 게시글 있는지
+			      
+			      int pageTotalCount =0; // 페이지 총 갯수
+			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
+			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE ;
+			      }else {
+			         pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE +1 ;
+			      }
+			      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+			      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+			      
+			      if(endNavi > pageTotalCount) {
+			         endNavi = pageTotalCount;
+			      }
+			      
+			      boolean needPrev = true; // needPrev => 왼쪽 화살표
+			      boolean needNext = true; // needNext => 오른쪽 화살표
+			      
+			      if(startNavi == 1) {
+			         needPrev = false;
+			      }
+			      
+			      if(endNavi == pageTotalCount) {
+			         needNext = false;
+			      }
+			      
+			      List<Integer> pageNavi = new ArrayList<>();
+			      if(needPrev) {pageNavi.add(startNavi-1) ;}
+			      for(int i = startNavi; i<=endNavi; i++) {
+			         pageNavi.add(i);
+			      }
+			      if(needNext) { pageNavi.add(endNavi+1);}
+			      return pageNavi;
+			   }
 }
