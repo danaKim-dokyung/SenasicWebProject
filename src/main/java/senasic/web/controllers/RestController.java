@@ -57,10 +57,10 @@ public class RestController extends HttpServlet {
 				request.setAttribute("reply", reply);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}else if(cmd.equals("reply.rest")) {
-				//파일 먼저 다운
+				//�뙆�씪 癒쇱� �떎�슫
 				int maxSize = 1024*1024*10; //10mb
-				//oracle 주소에 넣을 방법 찾기
-				//주소 변경
+				//oracle 二쇱냼�뿉 �꽔�쓣 諛⑸쾿 李얘린
+				//二쇱냼 蹂�寃�
 				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/ReplyImg";
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}				
@@ -71,7 +71,7 @@ public class RestController extends HttpServlet {
 				
 				System.out.println(oriName);
 				String sysName = multi.getFilesystemName("photo");
-				//String id = "임시";
+				//String id = "�엫�떆";
 	    		String id = request.getSession().getAttribute("loginID").toString();
 
 				int seq = Integer.parseInt(multi.getParameter("seq"));
@@ -92,6 +92,10 @@ public class RestController extends HttpServlet {
 	             
 	             List<RestBoardDTO> carousel = dao.Carousel();
 	             
+	             RestBoardDTO ct= carousel.get(0);
+				 RestBoardDTO ct1= carousel.get(1);
+				 RestBoardDTO ct2= carousel.get(2);
+	             
 	             int currentPage = Integer.parseInt(request.getParameter("cpage"));
 	             int pageTotalCount = dao.getPageTotalCount();
 	             
@@ -101,11 +105,18 @@ public class RestController extends HttpServlet {
 	             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
 	             List<RestBoardDTO> list = dao.selectByList(start, end);
-	             String navi = dao.getPageNavi(currentPage);
+	             List<Integer> navi = dao.getPageNavi(currentPage);
+	            
 	             System.out.println(carousel.size());
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
 	             request.setAttribute("carousel", carousel);
+	             request.setAttribute("ct", ct);
+				 request.setAttribute("ct1", ct1);
+				 request.setAttribute("ct2", ct2);
+				 request.setAttribute("startB", start-1);
+	             request.setAttribute("endB", end+1);
+	             request.setAttribute("fbPg", currentPage); // 이름 고쳐주기
 	             request.getRequestDispatcher("/Restaurant/foodboard.jsp").forward(request, response);
 	             
 	             
@@ -114,6 +125,44 @@ public class RestController extends HttpServlet {
 	             RestBoardDTO dto = dao.selectBySeq(seq);
 	             request.setAttribute("dto", dto);
 	             request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
+	          
+	          }else if(cmd.equals("board1.rest")) {
+	        	  
+	        	  List<RestBoardDTO> carousel = dao.Carousel();
+		          RestBoardDTO ct= carousel.get(0); 
+	        	  int seq = Integer.parseInt(request.getParameter("seq"));
+	        	  RestBoardDTO dto = dao.selectBySeq(seq);
+	        	  
+	        	  request.setAttribute("dto", dto);
+	        	  request.setAttribute("ct", ct);
+	        	  response.sendRedirect("/load.rest?seq="+seq);
+//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+
+	        	  
+	          }else if(cmd.equals("borad2.rest")) {
+	        	  
+	        	  List<RestBoardDTO> carousel = dao.Carousel();
+	        	  RestBoardDTO ct1= carousel.get(1);
+	        	  int seq = Integer.parseInt(request.getParameter("seq"));
+	        	  RestBoardDTO dto = dao.selectBySeq(seq);
+	        	  
+	        	  request.setAttribute("dto", dto);
+	        	  request.setAttribute("ct1", ct1);
+	        	  response.sendRedirect("/Restaurant/detail.jsp");
+//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp?seq="+seq).forward(request,response);
+	        	  
+	          }else if(cmd.equals("board3.rest")) {
+	        	  
+	        	  List<RestBoardDTO> carousel = dao.Carousel();
+	        	  RestBoardDTO ct2= carousel.get(2);
+	        	  int seq = Integer.parseInt(request.getParameter("seq"));
+	        	  RestBoardDTO dto = dao.selectBySeq(seq);
+	        	  
+	        	  request.setAttribute("dto", dto);
+	        	  request.setAttribute("ct2", ct2);
+	        	  response.sendRedirect("/Restaurant/detail.jsp");
+//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+	        	  
 	          }
 
 		}catch(Exception e) {
