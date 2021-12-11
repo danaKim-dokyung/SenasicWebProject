@@ -97,7 +97,7 @@
 			
 			<div class="mx-4 px-3">
 				<a href="#" class="flex "> 
-					<div class="flex  w-full flex hover:bg-green-700 rounded py-3">
+					<div class="flex  w-full flex hover:bg-green-700 rounded py-3" id="member">
 					<i class="material-icons fill-current text-gray-100">perm_identity</i>
 					<div class="relative menu-text text-gray-100 ml-4">회원관리</div>
 					</div>
@@ -110,35 +110,35 @@
 				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
 					@click="show=!show">
 					<div
-						class="w-full flex justify-between px-3 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
+						class="w-full flex justify-between px-3 bg-green-700 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
 						<div class="flex">
 							<i class="material-icons fill-current text-gray-100">article</i>
 							<div class="relative menu-text text-gray-100 ml-4">게시글 관리</div>
 						</div>
 						<span class="transition ease-in duration-150 text-gray-100 material-icons transform" :class="{'rotate-180':show}"> arrow_drop_down </span>
 					</div>
-					<div x-show="show" class="transition ease-in duration-700 mt-3 bg-green-800">
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
+					<div x-show="show" class="transition ease-in mt-3">
+						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
+							<div class="relative text-xs font-light menu-text text-gray-100 ml-4" id="rbWrite">
 								식당게시판 글쓰기
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3" id="rbEdit">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								식당게시판 글관리
+								식당게시판 글 관리
 							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
+						</div>						
+						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								맛집매거진 글쓰기
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								맛집매거진 글관리
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
+						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								애견게시판 글관리
 							</div>
@@ -147,7 +147,7 @@
 				</a>
 			</div>
 		</div>
-<form action="/upload.admin" method="post" enctype="multipart/form-data" name="">
+<form action="/rbUpload.admin" method="post" enctype="multipart/form-data" name="">
 <div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
 	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
   <label class="block">
@@ -308,9 +308,16 @@ $("#img3").on("change",function(){
 	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
+$("#rbEdit").on("click",function(){
+	location.href="/rbEdit.admin";
+})
+$("#rbWrite").on("click",function(){
+	location.href="/"
+})
 
-
-
+$("#member").on("click",function(){
+	location.href="/member.admin";
+})
 
 </script>
 </body>

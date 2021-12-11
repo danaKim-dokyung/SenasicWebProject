@@ -2,6 +2,7 @@ package senasic.web.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,10 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import senasic.web.DAO.AdminDAO;
+import senasic.web.DAO.RestBoardDAO;
+import senasic.web.DTO.MemberDTO;
+import senasic.web.DTO.RestBoardDTO;
+import statics.Statics;
 
 
 @WebServlet("*.admin")
@@ -22,8 +27,9 @@ public class AdminController extends HttpServlet {
 		String ctx = request.getContextPath();
 		String cmd = uri.substring(ctx.length()+1);
 		AdminDAO dao = AdminDAO.getInstance();
+		RestBoardDAO rbdao = RestBoardDAO.getInstance();
 		try {
-			if(cmd.equals("upload.admin")) {
+			if(cmd.equals("rbUpload.admin")) {
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
 				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
@@ -63,6 +69,51 @@ public class AdminController extends HttpServlet {
 				int menu = dao.insertMenu(title, m1, p1, m2, p2, m3, p3);
 				
 				response.sendRedirect("/admin/restBoardWrite.jsp");
+			}else if(cmd.equals("rbEdit.admin")){
+				int currentPage=1;
+				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
+	            int pageTotalCount = rbdao.getPageTotalCount();
+	            if(currentPage <1) {currentPage = 1;}
+	            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+	            int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+	            int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+	            List<RestBoardDTO> list = rbdao.selectByList(start, end);
+
+//	             List<Integer> navi = rbdao.getPageNavi(currentPage);
+	             request.setAttribute("startR", start-1);
+	             request.setAttribute("endR", end+1);
+//	             request.setAttribute("navi", navi);
+	             request.setAttribute("cpage", currentPage);
+				request.setAttribute("list", list);
+	             request.getRequestDispatcher("/admin/restBoardEdit.jsp").forward(request, response);
+			}else if(cmd.equals("rbWrite.admin")) {
+				//수정에정
+				if(request.getSession().getAttribute("loginID")!=null) {
+					String id = request.getSession().getAttribute("loginID").toString();					
+				}
+				request.getRequestDispatcher("/admin/restBoardWrite.jsp").forward(request, response);
+			}else if(cmd.equals("member.admin")) {
+				int currentPage=1;
+				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
+	            int pageTotalCount = rbdao.getPageTotalCount();
+	            if(currentPage <1) {currentPage = 1;}
+	            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+	            int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+	            int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+				List<MemberDTO> list = dao.listMember(start, end);
+				List<Integer> navi = dao.getMemberNavi(currentPage);
+	             request.setAttribute("start", start-1);
+	             request.setAttribute("end", end+1);
+	             request.setAttribute("navi", navi);
+	             request.setAttribute("cpage", currentPage);
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/admin/member.jsp").forward(request, response);
+			}else if(cmd.equals("mEdit.admin")) {
+				int num = Integer.parseInt(request.getParameter("num"));
+				MemberDTO dto = dao.getMember(num);
+				request.setAttribute("dto", dto);
+				request.getRequestDispatcher("/admin/memberEdit.jsp").forward(request, response);
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

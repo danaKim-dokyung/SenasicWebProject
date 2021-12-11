@@ -2,10 +2,17 @@ package senasic.web.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import senasic.web.DTO.MemberDTO;
+import senasic.web.DTO.RestReplyDTO;
+import statics.Statics;
 
 public class AdminDAO {
 	private static AdminDAO instance;
@@ -61,4 +68,96 @@ public class AdminDAO {
 			return result;
 		}
 	}
+	
+	//멤버 영역
+	public int getMemberCount() throws Exception{
+	      String sql = "select count(*) from member";
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ResultSet rs = pstat.executeQuery();){
+	         rs.next();
+	         return rs.getInt(1);
+	      }
+	   }
+	
+	   public int getMemberTotalCount() throws Exception{
+		      
+		      int restTotalCount = this.getMemberCount(); // 현재 총 게시글 몇개있는지
+		      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
+		      
+		      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
+		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
+		      }else {
+		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1; //
+		      }
+		      return pageTotalCount;
+		   }
+		   
+		   public List getMemberNavi(int currentPage) throws Exception{
+		   
+		      int restTotalCount = this.getMemberCount(); // 현재 총 몇개의 게시글 있는지
+		      
+		      int pageTotalCount =0; // 페이지 총 갯수
+		      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
+		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
+		      }else {
+		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
+		      }
+		      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+		      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+		      
+		      if(endNavi > pageTotalCount) {
+		         endNavi = pageTotalCount;
+		      }
+		      
+		      boolean needPrev = true; // needPrev => 왼쪽 화살표
+		      boolean needNext = true; // needNext => 오른쪽 화살표
+		      
+		      if(startNavi == 1) {
+		         needPrev = false;
+		      }
+		      
+		      if(endNavi == pageTotalCount) {
+		         needNext = false;
+		      }
+		      
+		      List<Integer> pageNavi = new ArrayList<>();
+		      if(needPrev) {pageNavi.add(startNavi-1) ;}
+		      for(int i = startNavi; i<=endNavi; i++) {
+		         pageNavi.add(i);
+		      }
+		      if(needNext) { pageNavi.add(endNavi+1);}
+		      return pageNavi;
+		   }
+		    public List<MemberDTO> listMember(int start, int end) throws Exception{
+		    	String sql = "select * from (select member.* , row_number() over(order by seq desc) rn from member)where rn between ? and ?";
+		    	
+		    	try(Connection con = this.getConnection();
+		    		PreparedStatement pstat = con.prepareStatement(sql);
+		    			){
+		    		pstat.setInt(1, start);
+		    		pstat.setInt(2, end);
+		    		try(ResultSet rs = pstat.executeQuery()){
+		    			List<MemberDTO> list = new ArrayList();
+		    			while(rs.next()) {
+		    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8));
+		    				list.add(dto);
+		    			}
+		    			return list;
+		    		}
+		    	}
+		    }
+		    public MemberDTO getMember(int num) throws Exception{
+		    	String sql = "select * from member where seq = ?";
+		    	try(Connection con = this.getConnection();
+		    		PreparedStatement pstat = con.prepareStatement(sql);
+		    			){
+		    		pstat.setInt(1, num);
+		    		try(ResultSet rs = pstat.executeQuery();){
+		    			rs.next();
+	    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8));
+	    				return dto;
+		    		}
+		    	}
+		    }
 }
