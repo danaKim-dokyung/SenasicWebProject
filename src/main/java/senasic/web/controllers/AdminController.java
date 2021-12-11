@@ -29,7 +29,7 @@ public class AdminController extends HttpServlet {
 		AdminDAO dao = AdminDAO.getInstance();
 		RestBoardDAO rbdao = RestBoardDAO.getInstance();
 		try {
-			if(cmd.equals("rbUpload.admin")) {
+			if(cmd.equals("rbUpload.admin")) { //식당게시판 글 업로드
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
 				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
@@ -69,7 +69,7 @@ public class AdminController extends HttpServlet {
 				int menu = dao.insertMenu(title, m1, p1, m2, p2, m3, p3);
 				
 				response.sendRedirect("/admin/restBoardWrite.jsp");
-			}else if(cmd.equals("rbEdit.admin")){
+			}else if(cmd.equals("rbEdit.admin")){ //식당게시판 글목록
 				int currentPage=1;
 				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
 	            int pageTotalCount = rbdao.getPageTotalCount();
@@ -79,19 +79,25 @@ public class AdminController extends HttpServlet {
 	            int end = currentPage * Statics.REST_COUNT_PER_PAGE;
 	            List<RestBoardDTO> list = rbdao.selectByList(start, end);
 
-//	             List<Integer> navi = rbdao.getPageNavi(currentPage);
-	             request.setAttribute("startR", start-1);
-	             request.setAttribute("endR", end+1);
-//	             request.setAttribute("navi", navi);
+	             List<Integer> navi = dao.getPageNavi(currentPage);
+	             request.setAttribute("start", start-1);
+	             request.setAttribute("end", end+1);
+	             request.setAttribute("navi", navi);
 	             request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
 	             request.getRequestDispatcher("/admin/restBoardEdit.jsp").forward(request, response);
-			}else if(cmd.equals("rbWrite.admin")) {
+			}else if(cmd.equals("rbWrite.admin")) { //식당게시판 글쓰기 접근,전체 접근권한 예정
 				//수정에정
 				if(request.getSession().getAttribute("loginID")!=null) {
 					String id = request.getSession().getAttribute("loginID").toString();					
 				}
 				request.getRequestDispatcher("/admin/restBoardWrite.jsp").forward(request, response);
+			}else if(cmd.equals("rbDetail.admin")){ //식당게시판 상세정보 수정
+				int num = Integer.parseInt(request.getParameter("num"));
+				RestBoardDTO dto = dao.getRestBoardInfo(num);
+				request.setAttribute("dto", dto);
+				request.getRequestDispatcher("/admin/restBoardEditDetail.jsp").forward(request, response);
+				
 			}else if(cmd.equals("member.admin")) {
 				int currentPage=1;
 				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}

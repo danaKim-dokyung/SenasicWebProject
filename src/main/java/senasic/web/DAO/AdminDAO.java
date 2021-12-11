@@ -11,7 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import senasic.web.DTO.MemberDTO;
-import senasic.web.DTO.RestReplyDTO;
+import senasic.web.DTO.RestBoardDTO;
 import statics.Statics;
 
 public class AdminDAO {
@@ -29,6 +29,7 @@ public class AdminDAO {
 		return ds.getConnection();
 	}
 	
+	//식당게시판 글 삽입
 	public int writeRest(String title,String loc, String loc_detail, String ctg, String hour, String garage, String phone, String ph1, String ph2, String ph3,String link) throws Exception{
 		String sql = "insert into rest_board values(rest_board_seq.nextval,?,?,?,?,?,default,default,?,?,?,?,?,?)";
 		//시퀀스명 확인
@@ -69,6 +70,88 @@ public class AdminDAO {
 		}
 	}
 	
+	
+	//식당게시판 수정
+	public int getRestCount() throws Exception{
+	      String sql = "select count(*) from Rest_board";
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ResultSet rs = pstat.executeQuery();){
+	         
+	         rs.next();
+	         return rs.getInt(1);
+	      }
+	   }
+	   
+	   public int getPageTotalCount() throws Exception{
+	      
+	      int restTotalCount = this.getRestCount(); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+	      int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
+	      
+	      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
+	         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
+	      }else {
+	         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1; //
+	      }
+	      return pageTotalCount;
+	   }
+	   
+	   public List getPageNavi(int currentPage) throws Exception{
+	   
+	      int restTotalCount = this.getRestCount(); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
+	      
+	      int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
+	      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
+	         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
+	      }else {
+	         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
+	      }
+	      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+	      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+	      
+	      if(endNavi > pageTotalCount) {
+	         endNavi = pageTotalCount;
+	      }
+	      
+	      boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
+	      boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
+	      
+	      if(startNavi == 1) {
+	         needPrev = false;
+	      }
+	      
+	      if(endNavi == pageTotalCount) {
+	         needNext = false;
+	      }
+	      
+	      List<Integer> pageNavi = new ArrayList<>();
+	      if(needPrev) {pageNavi.add(startNavi-1) ;}
+	      for(int i = startNavi; i<=endNavi; i++) {
+	         pageNavi.add(i);
+	      }
+	      if(needNext) { pageNavi.add(endNavi+1);}
+	      return pageNavi;
+	   }
+	
+	   
+	   public RestBoardDTO getRestBoardInfo(int num) throws Exception{
+		   String sql = "select * from rest_board where seq = ?";
+		   try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				   ){
+			   pstat.setInt(1, num);
+			   try(ResultSet rs = pstat.executeQuery();){
+				   rs.next();
+					RestBoardDTO result = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+									,Math.round(rs.getDouble(7)*100)/100.0,rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+					return result;
+			   }
+		   }
+	   }
+	   
+	   
+	   
+	   
 	//멤버 영역
 	public int getMemberCount() throws Exception{
 	      String sql = "select count(*) from member";
@@ -129,6 +212,10 @@ public class AdminDAO {
 		      if(needNext) { pageNavi.add(endNavi+1);}
 		      return pageNavi;
 		   }
+		   
+		   
+		   
+		   
 		    public List<MemberDTO> listMember(int start, int end) throws Exception{
 		    	String sql = "select * from (select member.* , row_number() over(order by seq desc) rn from member)where rn between ? and ?";
 		    	
