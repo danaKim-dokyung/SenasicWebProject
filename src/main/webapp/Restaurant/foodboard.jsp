@@ -97,6 +97,7 @@
     
         <div class="carousel-inner relative overflow-hidden w-full">
           <!--Slide 1-->
+          <!-- >>이동버튼 -->
           <input
             class="carousel-open"
             type="radio"
@@ -121,9 +122,10 @@
                 <div class="container px-5 py-24 mx-auto">
                   <div class="lg:w-4/5 mx-auto flex flex-wrap"><!-- 이 아래부터 캐러셀 예정 -->
                     
-                    <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded" src="${ct.photo1 }"  >
+                   <img alt="ecommerce" class="pt1 lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded z-10" src="${ct.photo1 }">
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
+                    
                       <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 ${ct.category }</h2>
                       <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름 ${ct.title }</h1>
                       <div class="flex mb-4">
@@ -168,7 +170,7 @@
         
                       <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900"></span>
-                        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" id="board1">예약하기</button>
+                        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" >예약하기</button>
                         
                         <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                         
@@ -265,7 +267,7 @@
                 <div class="container px-5 py-24 mx-auto">
                   <div class="lg:w-4/5 mx-auto flex flex-wrap"><!-- 이 아래부터 캐러셀 예정 -->
                     
-                    <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded" src="${ct1.photo1 }" id="board2">
+                   <img alt="ecommerce" class="pt2 lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded z-10" src="${ct1.photo1 }" >
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
                       <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 ${ct1.category }</h2>
@@ -402,7 +404,7 @@
                 <div class="container px-5 py-24 mx-auto">
                   <div class="lg:w-4/5 mx-auto flex flex-wrap"><!-- 이 아래부터 캐러셀 예정 -->
                     
-                    <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="${ct2.photo1 }" id="board3">
+                    <img alt="ecommerce"class="pt3 lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded z-10" src="${ct2.photo1 }" >
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
                       <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 3 ${ct2.category }</h2>
@@ -693,14 +695,16 @@
 </div>
 <button id ="board4">test</button>
 <script>
-	$("#board1").on("click",function(){
-		alert("board1");
+	$(".pt1").on("click",function(){
+		location.href="load.rest?seq=${ct.seq }";
+	//	location.href="board1.rest?seq=${ct.seq }";
+		//alert("보드1");
 	});
-	$("#board2").on("click",function(){
-		alert("board2");
+	$(".pt2").on("click",function(){
+		location.href="load.rest?seq=${ct1.seq }";
 	});
-	$("#board3").on("click",function(){
-		alert("board3");
+	$(".pt3").on("click",function(){
+		location.href="load.rest?seq=${ct2.seq }";
 	});
 </script>
 
