@@ -61,8 +61,10 @@ button:focus {
 }
 
 </style>
-</head>
-<body>
+
+<script>
+	document.
+</script>
 </head>
 
 <body class="bg-white font-sans leading-normal tracking-normal">
@@ -149,12 +151,12 @@ button:focus {
 					<div class="text-center font-bold text-4xl">${dto.title }</div><!-- 가게명 -->
 				
 				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0">
-				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600">
+				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600" id="heart">
 				<path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" id="like"/>
 				</svg>
 				
 				<div>
-				추천 : ${dto.recommend }<!-- 추천수 -->
+				<label>추천수 </label><span id="recommandN">${dto.recommend }</span><!-- 추천수 -->
 				</div>
 				</div>
 				</div>
@@ -438,7 +440,18 @@ $("#inputReply").on("click",function(){
 //like 버튼눌렀을떄
    $("#like").on("click",function(){
       if(${loginID !=null}){
-         location.href="/like.rest?seq=${dto.seq}";
+    	  $.ajax({
+    		url:"/like.rest?seq=${dto.seq}",
+    		dataType:"json"
+    	  }).done(function(resp){
+    		  console.log(resp);
+    		  $("#recommandN").text(resp[0]);
+    		  if(resp[1]==1){
+    			  $("#heart").attr("fill","#dc2626");
+    		  }else if(resp[1]==0){
+    			  $("#heart").attr("fill","white");
+    		  }
+    	  });
       }else{
          alert("로그인 후 이용해 주세요");
       }      

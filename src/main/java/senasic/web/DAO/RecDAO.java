@@ -2,6 +2,7 @@ package senasic.web.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -44,8 +45,48 @@ public class RecDAO {
          pstat.setInt(2, seq);
          
          int result = pstat.executeUpdate();
-         con.commit();
          return result;
       }
+     }
+     
+     public int recCheck(int seq, String id) throws Exception{
+    	 String sql = "select count(*) from rest_rcmd where rest_seq = ? and id = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 pstat.setString(2, id);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
+     }
+     
+     public int recDelete(int seq, String id) throws Exception{
+    	 String sql = "delete from rest_rcmd where rest_seq = ? and id = ?";
+    	try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			){
+    		pstat.setInt(1, seq);
+    		pstat.setString(2, id);
+    		int result = pstat.executeUpdate();
+    		return result;
+    	}
+     }
+     
+     public int getRecNum(int seq) throws Exception{
+    	 String sql = "select recommand from rest_board where seq = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
      }
 }
