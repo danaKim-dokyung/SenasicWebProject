@@ -226,9 +226,20 @@
         }, false);
       });
     }, false);
-    //아이디 중복확인
+   
+
+    
     $(function(){
 		$("#id").on("input",function(){
+			  let id = document.getElementById("id").value;
+		        let idregex = /^([a-z0-9]){6,20}$/;
+		        let result = idregex.test(id);
+		        if(!result){
+		        	$("#checkResult").css("color","pink");
+					$("#checkResult").text("잘못된 ID 입니다.");
+		        	
+		        	return false;
+		        }
 			$.ajax({
 				url:"/idCheck.mem",
 				data:{id:$("#id").val()}
@@ -247,6 +258,15 @@
     //닉네임 중복확인
     $(function(){
 		$("#nickname").on("input",function(){
+			 let nickname = document.getElementById("nickname").value;
+		        let nickregex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$/;
+		        let result = nickregex.test(nickname);
+		        if(!result){
+		        	$("#checkResultN").css("color","red");
+					$("#checkResultN").text("잘못된 닉네임 입니다.");
+		        	
+		        	return false;
+		        }
 			$.ajax({
 				url:"/nicknameCheck.mem",
 				data:{nn:$("#nickname").val()}

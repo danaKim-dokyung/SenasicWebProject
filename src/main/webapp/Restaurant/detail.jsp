@@ -61,10 +61,16 @@ button:focus {
 }
 
 </style>
-
 <script>
-	document.
+	$(document).ready(function(){
+		  if(${user}==0){
+			  $("#heart").attr("fill","#dc2626");
+		  }else if(${user}==1){
+			  $("#heart").attr("fill","white");
+		  }
+	})
 </script>
+
 </head>
 
 <body class="bg-white font-sans leading-normal tracking-normal">
@@ -320,7 +326,7 @@ button:focus {
 					</div>
 					<div class="col-span-9 row-span-1">
 				  <label>추천 </label> ${reply.recommand }<br>
-				 <label>작성시간</label>${reply.time }
+				 ${reply.time }
 				 </div>
 				 </div>
 				</div>
