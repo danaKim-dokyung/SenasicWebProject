@@ -84,7 +84,7 @@ public class RestController extends HttpServlet {
 				multi.getParameter(savePath);
 				String oriName = multi.getOriginalFileName("photo");
 				
-				System.out.println(oriName);
+				//System.out.println(oriName);
 				String sysName = multi.getFilesystemName("photo");
 				//String id = "�엫�떆";
 	    		String id = request.getSession().getAttribute("loginID").toString();
@@ -99,6 +99,7 @@ public class RestController extends HttpServlet {
 			}else if(cmd.equals("like.rest")) {
 	            int recseq =  Integer.parseInt(request.getParameter("seq"));
 	            String recid = request.getSession().getAttribute("loginID").toString();
+
 	            int result = rdao.recCheck(recseq, recid); //추천 여부 확인, 1 추천 0 기록없음
 	            int user = 0;
 	            if(result == 1) {
@@ -116,6 +117,9 @@ public class RestController extends HttpServlet {
 	            arr[1] = user;
 	            String answer = g.toJson(arr);
 	            response.getWriter().append(answer);
+	          
+	            rdao.recinsert(new RcmdDTO(recseq,recid));
+
 	            
 	         }else if(cmd.equals("fboard.rest")) {
 	             
@@ -136,7 +140,7 @@ public class RestController extends HttpServlet {
 	             List<RestBoardDTO> list = dao.selectByList(start, end);
 	             List<Integer> navi = dao.getPageNavi(currentPage);
 	            
-	             System.out.println(carousel.size());
+	            
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
 	             request.setAttribute("carousel", carousel);
@@ -160,13 +164,14 @@ public class RestController extends HttpServlet {
 	        	  List<RestBoardDTO> carousel = dao.Carousel();
 		          RestBoardDTO ct= carousel.get(0); 
 	        	  int seq = Integer.parseInt(request.getParameter("seq"));
+	        	  System.out.println(seq);
 	        	  RestBoardDTO dto = dao.selectBySeq(seq);
 	        	  
 	        	  request.setAttribute("dto", dto);
 	        	  request.setAttribute("ct", ct);
 	        	  response.sendRedirect("/load.rest?seq="+seq);
-//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
-
+	        	  //request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+	        	  
 	        	  
 	          }else if(cmd.equals("borad2.rest")) {
 	        	  
@@ -177,9 +182,9 @@ public class RestController extends HttpServlet {
 	        	  
 	        	  request.setAttribute("dto", dto);
 	        	  request.setAttribute("ct1", ct1);
-	        	  response.sendRedirect("/Restaurant/detail.jsp");
-//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp?seq="+seq).forward(request,response);
-	        	  
+	        	  //response.sendRedirect("http://localhost:8080/load.rest?seq="+seq);
+	        	  request.getRequestDispatcher("/Restaurant/detail.jsp?seq="+seq).forward(request,response);
+	        	  System.out.println(seq+"2");
 	          }else if(cmd.equals("board3.rest")) {
 	        	  
 	        	  List<RestBoardDTO> carousel = dao.Carousel();
@@ -189,8 +194,9 @@ public class RestController extends HttpServlet {
 	        	  
 	        	  request.setAttribute("dto", dto);
 	        	  request.setAttribute("ct2", ct2);
-	        	  response.sendRedirect("/Restaurant/detail.jsp");
-//	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+	        	 // response.sendRedirect("/Restaurant/detail.jsp");
+	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+	        	  System.out.println(seq+"3");
 	        	  
 	          }
 
