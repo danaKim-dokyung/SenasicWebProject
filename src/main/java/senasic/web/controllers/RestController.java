@@ -133,10 +133,9 @@ public class RestController extends HttpServlet {
 	        	  System.out.println(seq);
 	        	  RestBoardDTO dto = dao.selectBySeq(seq);
 	        	  
-	        	  request.setAttribute("dto", dto);
-	        	  request.setAttribute("ct", ct);
+	        	 
 	        	  response.sendRedirect("/load.rest?seq="+seq);
-	        	  //request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
+	        	 
 	        	  
 	        	  
 	          }else if(cmd.equals("borad2.rest")) {
