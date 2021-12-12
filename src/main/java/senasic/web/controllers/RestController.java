@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
@@ -39,7 +40,14 @@ public class RestController extends HttpServlet {
 		try {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
-				String id = request.getSession().getAttribute("loginID").toString();
+				HttpSession session = request.getSession(false);
+				String id = "1";
+				if(session==null) {
+					id = session.getAttribute("loginID").toString();					
+				}else {
+					id = "123";
+				}
+				System.out.println(id);
 				RestBoardDTO result = dao.detailPage(seq);		
 				MenuDTO menu = dao.getMenu(result.getTitle());
 				int currentPage=1;
@@ -53,14 +61,16 @@ public class RestController extends HttpServlet {
 	             List<RestReplyDTO> reply = dao.listReply(seq,start,end);
 	             List<Integer> navi = dao.getReviewPageNavi(currentPage,seq);
 	             
-		            int RecCheck = rdao.recCheck(seq, id); //추천 여부 확인, 1 추천 0 기록없음
+		            int recCheck = rdao.recCheck(seq, id); //추천 여부 확인, 1 추천 0 기록없음
 		            int user = 0;
-		            if(RecCheck == 1) {
+		            System.out.println(recCheck+"rec");
+		            if(recCheck == 1) {
 		            	user = 0;
-		            }else if(RecCheck==0) {
+		            }else if(recCheck==0) {
 			            user = 1;
 		            }
 	             
+	             System.out.println(user);
 	             
 	             request.setAttribute("startR", start-1);
 	             request.setAttribute("endR", end+1);
@@ -69,7 +79,7 @@ public class RestController extends HttpServlet {
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
 				request.setAttribute("reply", reply);
-				request.setAttribute("RecCheck", RecCheck);
+				request.setAttribute("user", user);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}else if(cmd.equals("reply.rest")) {
 				//�뙆�씪 癒쇱� �떎�슫
@@ -117,9 +127,6 @@ public class RestController extends HttpServlet {
 	            arr[1] = user;
 	            String answer = g.toJson(arr);
 	            response.getWriter().append(answer);
-	          
-	            rdao.recinsert(new RcmdDTO(recseq,recid));
-
 	            
 	         }else if(cmd.equals("fboard.rest")) {
 	             

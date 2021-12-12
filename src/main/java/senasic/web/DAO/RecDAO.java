@@ -50,7 +50,7 @@ public class RecDAO {
      }
      
      public int recCheck(int seq, String id) throws Exception{
-    	 String sql = "select count(*) from rest_rcmd where rest_seq = ? and id = ?";
+    	 String sql = "select count(rest_seq) from rest_rcmd where rest_seq = ? and id = ?";
     	 try(Connection con = this.getConnection();
     		PreparedStatement pstat = con.prepareStatement(sql);
     			 ){

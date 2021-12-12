@@ -584,7 +584,6 @@
       <a href="/load.rest?seq=${dto.seq } " >
         <div class="bg-gray-100 p-6 rounded-lg">
           <img class="h-40 rounded w-full object-cover object-center mb-6" src="${dto.photo1 }" alt="content">
-          <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
           <h2 class="text-lg text-gray-900 font-medium title-font mb-4">${dto.title }
                <!--  별점 -->
                <div class="col-span-1 row-span-3 text-right">
@@ -619,7 +618,7 @@
                   </div>
                  <!-- 별점 끝 -->
           </h2>
-          <p>위치-세부분류</p>
+          <p>${dto.locate }</p>
           <p class="leading-relaxed text-base">${dto.locate_detail } <br> ${dto.category } <br> ${dto.open_hour }</p>
         </div>
         
@@ -693,7 +692,6 @@
     </div>
   </div>
 </div>
-<button id ="board4">test</button>
 <script>
 	$(".pt1").on("click",function(){
 		location.href="load.rest?seq=${ct.seq }";
