@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import senasic.web.DTO.MemberDTO;
+import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RestBoardDTO;
 import statics.Statics;
 
@@ -149,8 +150,84 @@ public class AdminDAO {
 		   }
 	   }
 	   
+	   public MenuDTO getMenuInfo(String title) throws Exception{
+		   String sql = "select * from menu where shop= ?";
+		   try(Connection con = this.getConnection();
+				 PreparedStatement pstat = con.prepareStatement(sql);
+				   ){
+			   pstat.setString(1, title);
+			   try(ResultSet rs = pstat.executeQuery();){
+				   rs.next();
+				   MenuDTO dto = new MenuDTO(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getInt(7));
+				   return dto;
+			   }
+			   
+		   }
+	   } 
 	   
-	   
+		public int updateRest(String title,String loc, String loc_detail, String ctg, String hour, String garage, String phone, String ph1, String ph2, String ph3,String link, int seq) throws Exception{
+			String sql = "update rest_board set title = ?, locate = ?, locate_detail = ?, category = ?, open_hour =?, garage = ?, phone = ?, photo1 = ?, photo2 = ?, photo3 = ?, link = ? where seq = ?";
+			//시퀀스명 확인
+			try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, title);
+				pstat.setString(2, loc);
+				pstat.setString(3, loc_detail);
+				pstat.setString(4, ctg);
+				pstat.setString(5, hour);
+				
+				pstat.setString(6, garage);
+				pstat.setString(7, phone);
+				pstat.setString(8, ph1);
+				pstat.setString(9, ph2);
+				pstat.setString(10, ph3);
+				pstat.setString(11, link);
+				pstat.setInt(12, seq);
+				int result = pstat.executeUpdate();
+				return result;
+			}
+		}
+		
+		public int updateMenu(String title, String m1,int p1, String m2, int p2, String m3, int p3, String shop) throws Exception{
+			String sql = "update menu set menu1 = ?, price1 = ?, menu2 = ?, price2 = ?, menu3 = ?, price3 = ?, shop = ? where shop = ?";
+			try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, m1);
+				pstat.setInt(2, p1);
+				pstat.setString(3, m2);
+				pstat.setInt(4, p2);
+				pstat.setString(5, m3);
+				pstat.setInt(6, p3);
+				pstat.setString(7, title);
+				pstat.setString(8, shop);
+				int result = pstat.executeUpdate();
+				return result;
+			}
+		}
+		
+		public int deleteRest(int seq) throws Exception{
+			String sql = "delete from rest_board where seq = ?";
+			try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+					){
+				pstat.setInt(1, seq);
+				int result = pstat.executeUpdate();
+				return result;
+			}
+		}
+		
+		public int deleteMenu(String title) throws Exception{
+			String sql = "delete from menu where shop = ?";
+			try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, title);
+				int result = pstat.executeUpdate();
+				return result;
+			}
+		}
 	   
 	//멤버 영역
 	public int getMemberCount() throws Exception{

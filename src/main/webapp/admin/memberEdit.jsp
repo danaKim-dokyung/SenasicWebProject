@@ -76,7 +76,9 @@
 		transform: translate3d(-260px, 0, 0);
 	}
 }
-    .input-form {
+
+ .input-form {
+      max-width: 680px;
 
       margin-top: 80px;
       padding: 32px;
@@ -88,9 +90,6 @@
       -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-    }
-    #subtn{
-    	text-align=center;
     }
 </style>
 </head>
@@ -173,118 +172,93 @@
             <input type="image" class="form-control" id="img">
         </div> 
         <!-- 아이디 입력 -->
-           <div class="mb-3">
+           <div class="mb-3 mt-10 ">
             <label for="id">아이디</label>
-            <input type="text" class="form-control" id="id" name="id" placeholder="영문,숫자 6자리이상" pattern="^([a-z0-9]){6,20}$" required value="${dto.id }">
+            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="id" name="id" placeholder="영문,숫자 6자리이상" pattern="^([a-z0-9]){6,20}$" required value="${dto.id }">
             <div class="col text-right"><span id="checkResult"></span>
           </div>
           </div>
           
           <!-- 닉네임 입력 -->
-           <div class="mb-3">
+           <div class="mb-3 mt-10">
             <label for="nickname">닉네임</label>
-            <input type="text" class="form-control" id="nickname" name="nn" placeholder=""pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$" required value="${dto.nn }">
+            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="nickname" name="nn" placeholder=""pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$" required value="${dto.nn }">
             <div class="col text-right"><span id="checkResultN"></span>
           </div>
           </div>
           
           
           <!-- 이메일 입력 -->
-          <div class="mb-3">
+          <div class="mb-3 mt-10">
             <label for="email">이메일</label>
-            <input type="email" class="form-control" id="email" name="m" placeholder="you@example.com"  required value="${dto.m }">
-            <div class="invalid-feedback">
-              이메일을 입력해주세요.
-            </div>
+            <input type="email" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="email" name="m" placeholder="you@example.com"  required value="${dto.m }">
+
           </div>
           
 			<!-- 생년월일 -->
-          <div class="row">
+          <div class="row flex mt-10">
+          <label for="ph">생년월일</label>
            <div class="col-md-4 mb-2">
-            	<select class="form-control"  required>
-   			 	<option selected>년도</option>
+            	<select class="ml-10 form-control" id="year" required>
    			 	<option>1997</option>
     			<option>1998</option>
     			<option>1999</option>
 				</select>
-              <div class="invalid-feedback">
-                년도를 선택해주세요
-              </div>
+
             </div>
             <div class="col-md-4 mb-2">
-            
-     
-             
-              <input type="text" class="form-control" id="month"  placeholder="월" value="" pattern="^(0[1-9]|1[012])$" required>
-              <div class="invalid-feedback">
-                월을 입력해주세요.
-              </div>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="month"  placeholder="월" value="" pattern="^(0[1-9]|1[012])$" required>
             </div>
             <div class="col-md-4 mb-2">
-              
-              <input type="text" class="form-control" id="day"  placeholder="일" value=""pattern="^(0[1-9]|[12][0-9]|3[0-1])$" required>
-              <div class="invalid-feedback">
-                일을 입력해주세요.
-              </div>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="day"  placeholder="일" value=""pattern="^(0[1-9]|[12][0-9]|3[0-1])$" required>
             </div>
           </div>
           
           
           <!-- 나이 -->
-            <div class="mb-3">
-            <label for="age">나이</label>
-            <input type="text" class="form-control" id="age" name="age" placeholder="나이를 입력하세요"  required value="${dto.age }">
-            <div class="invalid-feedback">
-              나이를 입력해주세요.
-            </div>
+            <div class="mb-3 mt-10">
+            <label for="age">나 &#160; 이</label>
+            <input type="text" class="ml-10 form-control w-3/5  bg-gray-100 rounded-lg focus:outline-none border-2" id="age" name="age" placeholder="나이를 입력하세요"  required value="${dto.age }">
+ 
           </div>
              
 			<!-- 성별 선택 -->
-          <div class="mb-3">
-           <label class="block text-gray-600 font-light mb-2">성별을 선택하세요</label>
+          <div class="mb-3 mt-10">
+          
 			<div class="flex">
+   			<label for="gender">성 &#160; 별</label>
    			 	<div class="flex items-center mb-2 mr-4">
-        			<input type="radio" id="radio-example-1" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
+        			<input type="radio" id="radio-example-1" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10">
        		 		<label for="radio-example-1" class="text-gray-600">남성</label>
     			</div>
     			<div class="flex items-center mb-2">
-       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
+       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10">
        			 	 <label for="radio-example-2" class="text-gray-600">여성</label>
     			</div>
 			</div>
           </div>
 			
 			<!-- 전화번호 -->
-          <div class="row">
-           	<div class="col-md-4 mb-2">
-            	<select class="form-control" name="phone1" required>
-   			 	<option selected>선택</option>
+          <div class="row flex mt-10">
+           	<div class="col-md-4 mb-2 ">
+           	<label for="phone">연락처</label>
+            	<select class="ml-10 form-control" name="phone1" id="phone1" required>
+   			 	<option>선택</option>
    			 	<option>010</option>
     			<option >02</option> <!-- 강사님께 질문 1번 : 031 -->
     			<option >031</option>
 				</select>
-              <div class="invalid-feedback">
-                번호를 선택해주세요
-              </div>
             </div>
             <div class="col-md-4 mb-2">
-             
-              <input type="text" class="form-control" id="num2" placeholder="1234" value="" name="phone2"  pattern="^\d{4}$" required>
-              <div class="invalid-feedback">
-                숫자를 입력해주세요.
-              </div>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="" name="phone2"  pattern="^\d{4}$" required>
             </div>
             <div class="col-md-4 mb-2">
-              
-              <input type="text" class="form-control" id="num3" placeholder="5678" value="" name="phone3"  pattern="^\d{4}$" required>
-              <div class="invalid-feedback">
-                숫자를 입력해주세요.
-              </div>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="" name="phone3"  pattern="^\d{4}$" required>
             </div>
           </div>
 			
         
-          <hr class="mb-4">
+          <hr class="mb-4 mt-20">
           <div class="mb-4"></div>
           <div class="col text-center">
            <button class="btn btn-primary btn-lg btn-block" id="subtn" type="submit">정보 수정</button>

@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import senasic.web.DAO.AdminDAO;
 import senasic.web.DAO.RestBoardDAO;
 import senasic.web.DTO.MemberDTO;
+import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RestBoardDTO;
 import statics.Statics;
 
@@ -75,8 +76,8 @@ public class AdminController extends HttpServlet {
 	            int pageTotalCount = rbdao.getPageTotalCount();
 	            if(currentPage <1) {currentPage = 1;}
 	            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-	            int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
-	            int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+	            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
+	            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
 	            List<RestBoardDTO> list = rbdao.selectByList(start, end);
 
 	             List<Integer> navi = dao.getPageNavi(currentPage);
@@ -92,12 +93,66 @@ public class AdminController extends HttpServlet {
 					String id = request.getSession().getAttribute("loginID").toString();					
 				}
 				request.getRequestDispatcher("/admin/restBoardWrite.jsp").forward(request, response);
-			}else if(cmd.equals("rbDetail.admin")){ //식당게시판 상세정보 수정
+			}else if(cmd.equals("rbDetail.admin")){ //식당게시판 상세정보 수정접근
 				int num = Integer.parseInt(request.getParameter("num"));
 				RestBoardDTO dto = dao.getRestBoardInfo(num);
+				MenuDTO Mdto = dao.getMenuInfo(dto.getTitle());
 				request.setAttribute("dto", dto);
+				request.setAttribute("Mdto", Mdto);
 				request.getRequestDispatcher("/admin/restBoardEditDetail.jsp").forward(request, response);
 				
+			}else if(cmd.equals("rbModify.admin")) { //식당게시판 정보 수정
+				
+				int maxSize = 1024*1024*10; //10m
+				//savepath 경로 변경
+				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
+				File filePath = new File(savePath);
+				if(!filePath.exists()) {filePath.mkdir();}
+				System.out.println(savePath);
+				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
+				RestBoardDTO real = dao.getRestBoardInfo(Integer.parseInt(multi.getParameter("seq")));
+				
+				multi.getParameter(savePath);
+				String root = "\\Restaurant\\RestImg\\";
+
+				String oriName1 = multi.getOriginalFileName("photo[0]");
+				String sysName1 = multi.getFilesystemName("photo[0]");
+				if(sysName1 ==null) {
+					sysName1=real.getPhoto1().substring(root.length());
+				}
+				String oriName2 = multi.getOriginalFileName("photo[1]");
+				String sysName2 = multi.getFilesystemName("photo[1]");
+				if(sysName2 == null) {
+					sysName2=real.getPhoto2().substring(root.length());
+				}
+				String oriName3 = multi.getOriginalFileName("photo[2]");
+				String sysName3 = multi.getFilesystemName("photo[2]");
+				if(sysName3 ==null) {
+					sysName3=real.getPhoto3().substring(root.length());
+				}
+				String title = multi.getParameter("title");
+				String ctg = multi.getParameter("category");
+				String loc = multi.getParameter("location");
+				String loc_detail = multi.getParameter("location_detail");
+				String phone = multi.getParameter("phone");
+				String hour = multi.getParameter("hour");
+				String garage = multi.getParameter("garage");
+				String link = multi.getParameter("link");
+				String m1 = multi.getParameter("menu1");
+				int p1 = Integer.parseInt(multi.getParameter("price1"));
+				String m2 = multi.getParameter("menu2");
+				int p2 = Integer.parseInt(multi.getParameter("price2"));
+				String m3 = multi.getParameter("menu3");
+				int p3 = Integer.parseInt(multi.getParameter("price3"));
+				int result = dao.updateRest(title, loc, loc_detail, ctg, hour, garage, phone, root+sysName1, root+sysName2, root+sysName3, link, real.getSeq());
+				int menu = dao.updateMenu(title, m1, p1, m2, p2, m3, p3, real.getTitle());
+				request.getRequestDispatcher("/rbDetail.admin?num="+real.getSeq()).forward(request, response);
+			}else if(cmd.equals("rbDelete.admin")){
+				int seq = Integer.parseInt(request.getParameter("num"));
+				RestBoardDTO real = dao.getRestBoardInfo(seq);
+				int result = dao.deleteRest(seq);
+				int menu = dao.deleteMenu(real.getTitle());
+				request.getRequestDispatcher("/rbEdit.admin").forward(request, response);
 			}else if(cmd.equals("member.admin")) {
 				int currentPage=1;
 				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
@@ -116,6 +171,7 @@ public class AdminController extends HttpServlet {
 				request.getRequestDispatcher("/admin/member.jsp").forward(request, response);
 			}else if(cmd.equals("mEdit.admin")) {
 				int num = Integer.parseInt(request.getParameter("num"));
+				
 				MemberDTO dto = dao.getMember(num);
 				request.setAttribute("dto", dto);
 				request.getRequestDispatcher("/admin/memberEdit.jsp").forward(request, response);

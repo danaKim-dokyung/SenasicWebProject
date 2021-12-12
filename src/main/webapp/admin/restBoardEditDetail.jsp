@@ -147,7 +147,7 @@
 				</a>
 			</div>
 		</div>
-<form action="/rbUpload.admin" method="post" enctype="multipart/form-data" name="">
+<form action="/rbModify.admin?seq=${dto.seq }" method="post" enctype="multipart/form-data" name="">
 <div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
 	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
   <label class="block">
@@ -158,11 +158,11 @@
       <label class="block mt-4">
     <span class="text-gray-700">카테고리</span>
     <select class="form-select mt-1 block w-full" name="category" id="category">
-      <option value="카페">카페</option>
-      <option value="양식">양식</option>
-      <option value="일식">일식</option>
-      <option value="한식">한식</option>
-      <option value="패스트푸드">패스트푸드</option>
+      <option value="카페" <c:if test="${dto.category eq '카페'}">selected</c:if>>카페</option>
+      <option value="양식" <c:if test="${dto.category eq '양식'}">selected</c:if>>양식</option>
+      <option value="일식" <c:if test="${dto.category eq '일식'}">selected</c:if>>일식</option>
+      <option value="한식" <c:if test="${dto.category eq '한식'}">selected</c:if>>한식</option>
+      <option value="패스트푸드" <c:if test="${dto.category eq '패스트푸드'}">selected</c:if>>패스트푸드</option>
     </select>
   </label>
   
@@ -191,27 +191,27 @@
   
    <label class="block">
     <span class="text-gray-700">예약링크</span>
-    <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태" name="link" "${dto.link }/>
+    <input class="form-input mt-1 block w-full" placeholder="https://www.naver.com/abc의 형태" name="link" value="${dto.link }"/>
   </label>
 
  <label class="block">
     <span class="text-gray-700">대표메뉴 1</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu1"/>
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu1" value="${Mdto.menu1 }"/>
     <span class="text-gray-700">대표메뉴 1 가격</span>
-    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${Mdto.price1 }"/>
   </label>
   
  <label class="block">
     <span class="text-gray-700">대표메뉴 2</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu2"/>
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu2" value="${Mdto.menu2 }"/>
     <span class="text-gray-700">대표메뉴 2 가격</span>
-    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${Mdto.price2 }"/>
   </label>  
  <label class="block">
     <span class="text-gray-700">대표메뉴 3</span>
-    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu3"/>
+    <input class="form-input mt-1 block w-full" placeholder="아메리카노" name="menu3" value="${Mdto.menu3 }"/>
     <span class="text-gray-700">대표메뉴 3 가격</span>
-    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price3"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+    <input class="price form-input mt-1 block w-full" placeholder="4100" name="price3"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${Mdto.price3 }"/>
   </label>
 <div class="flex justify-center mt-8">
     <div class="rounded-lg shadow-xl bg-gray-50">
@@ -219,15 +219,7 @@
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph1">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            메인 사진 선택</p>
+                        <img src=${dto.photo1 }" class="h-20 w-full ">
                     </div>
                     <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
                 </label>
@@ -241,15 +233,7 @@
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph2">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            추가 사진</p>
+                        <img src="${dto.photo2 }" class="h-20 w-full">
                     </div>
                     <input accept="image/*" id="img2" type="file" class="opacity-0" name="photo[1]"/>
                 </label>
@@ -263,11 +247,7 @@
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                        </svg>
-                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            추가 사진</p>
+                        <img src="${dto.photo3 }" class="h-20 w-full">
                     </div>
                     <input accept="image/*" id="img3" type="file" class="opacity-0" name="photo[2]"/>
                 </label>
@@ -276,7 +256,7 @@
     </div>
 </div>
  		<div class="flex p-2 space-x-4 grid justify-items-end">
-            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end">글쓰기</button>
+            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end" id="modify">수정</button>
         </div>
 </div>
 
@@ -320,6 +300,14 @@ $("#rbWrite").on("click",function(){
 
 $("#member").on("click",function(){
 	location.href="/member.admin";
+})
+
+$("#modify").on("click",function(){
+	if(confirm("수정하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
 })
 
 </script>

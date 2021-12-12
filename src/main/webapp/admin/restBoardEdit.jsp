@@ -225,9 +225,10 @@
 								</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">삭제</button>
-										${list.seq }
+									<a href="/rbDelete.admin?num=${list.seq }">
+									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" id="delBtn">삭제</button>
 									</p>
+									</a>
 								</td>
 							</tr>
 							</c:forEach>
@@ -309,6 +310,14 @@ $("#create").on('click',function(){
 })
 $("#member").on("click",function(){
 	location.href="/member.admin";
+})
+
+$("#delBtn").on("click",function(){
+	if(confirm("삭제 하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
 })
 
 </script>
