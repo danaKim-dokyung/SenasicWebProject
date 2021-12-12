@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -32,10 +33,13 @@ public class RestController extends HttpServlet {
 		String cmd = uri.substring(ctx.length()+1);
 		RestBoardDAO dao = RestBoardDAO.getInstance();
 		RecDAO rdao = RecDAO.getInstance();
+		Gson g = new Gson();
+
 		System.out.println(cmd);
 		try {
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				String id = request.getSession().getAttribute("loginID").toString();
 				RestBoardDTO result = dao.detailPage(seq);		
 				MenuDTO menu = dao.getMenu(result.getTitle());
 				int currentPage=1;
@@ -48,6 +52,16 @@ public class RestController extends HttpServlet {
 
 	             List<RestReplyDTO> reply = dao.listReply(seq,start,end);
 	             List<Integer> navi = dao.getReviewPageNavi(currentPage,seq);
+	             
+		            int RecCheck = rdao.recCheck(seq, id); //추천 여부 확인, 1 추천 0 기록없음
+		            int user = 0;
+		            if(RecCheck == 1) {
+		            	user = 0;
+		            }else if(RecCheck==0) {
+			            user = 1;
+		            }
+	             
+	             
 	             request.setAttribute("startR", start-1);
 	             request.setAttribute("endR", end+1);
 	             request.setAttribute("navi", navi);
@@ -55,6 +69,7 @@ public class RestController extends HttpServlet {
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
 				request.setAttribute("reply", reply);
+				request.setAttribute("RecCheck", RecCheck);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 			}else if(cmd.equals("reply.rest")) {
 				//�뙆�씪 癒쇱� �떎�슫
@@ -84,8 +99,27 @@ public class RestController extends HttpServlet {
 			}else if(cmd.equals("like.rest")) {
 	            int recseq =  Integer.parseInt(request.getParameter("seq"));
 	            String recid = request.getSession().getAttribute("loginID").toString();
+
+	            int result = rdao.recCheck(recseq, recid); //추천 여부 확인, 1 추천 0 기록없음
+	            int user = 0;
+	            if(result == 1) {
+	            	rdao.recDelete(recseq, recid);
+	            	user = 0;
+	            }else if(result==0) {
+		            rdao.recinsert(new RcmdDTO(recseq,recid));
+		            user = 1;
+	            }
+	            int a = rdao.recUpdate(recseq);
+	            int num = rdao.getRecNum(recseq);
+	            
+	            int[] arr = new int[2];
+	            arr[0] = num;
+	            arr[1] = user;
+	            String answer = g.toJson(arr);
+	            response.getWriter().append(answer);
 	          
 	            rdao.recinsert(new RcmdDTO(recseq,recid));
+
 	            
 	         }else if(cmd.equals("fboard.rest")) {
 	             
