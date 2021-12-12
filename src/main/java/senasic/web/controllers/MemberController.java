@@ -64,13 +64,14 @@ public class MemberController extends HttpServlet {
         		String p1 = request.getParameter("phone1");
         		String p2 = request.getParameter("phone2");
         		String p3 = request.getParameter("phone3");
-        		String age = request.getParameter("age");
+        		int age = Integer.parseInt(request.getParameter("age"));
         		String gender = request.getParameter("gender");
-
-        		int ph = Integer.parseInt(p1+p2+p3);
+        		
+        		
+        		String ph = (p1+p2+p3);
         		
         		System.out.println(id);
-    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender));
+    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0));
     			response.sendRedirect("/index.jsp");
         	    }else if(cmd.equals("/member/login.mem")){
         	    	String id = request.getParameter("id");

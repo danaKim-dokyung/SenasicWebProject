@@ -278,19 +278,24 @@ public class RestBoardDAO {
 	    	}
 	    }
 	      
-		public int getRestReviewCount() throws Exception{
-		      String sql = "select count(*) from rest_reply where par_seq=16"; // 16 수정 ( ? )
+		public int getRestReviewCount(int seq) throws Exception{
+		      String sql = "select count(*) from rest_reply where par_seq=?"; // 16 수정 ( ? )
 		      try(Connection con = this.getConnection();
 		            PreparedStatement pstat = con.prepareStatement(sql);
-		            ResultSet rs = pstat.executeQuery();){
-		         rs.next();
+		            ){
+		    		 pstat.setInt(1, seq);
+		    	try(ResultSet rs = pstat.executeQuery();){
+		    		
+		    	
+		    	  rs.next();
 		         return rs.getInt(1);
+		    	}
 		      }
 		   }
 		
-		   public int getReviewPageTotalCount() throws Exception{
+		   public int getReviewPageTotalCount(int seq) throws Exception{
 			      
-			      int restTotalCount = this.getRestReviewCount(); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+			      int restTotalCount = this.getRestReviewCount(seq); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
 			      int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
 			      
 			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
@@ -301,9 +306,9 @@ public class RestBoardDAO {
 			      return pageTotalCount;
 			   }
 			   
-			   public List getReviewPageNavi(int currentPage) throws Exception{
+			   public List getReviewPageNavi(int currentPage, int seq) throws Exception{
 			   
-			      int restTotalCount = this.getRestReviewCount(); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
+			      int restTotalCount = this.getRestReviewCount(seq); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
 			      
 			      int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
 			      if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
