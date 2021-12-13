@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My page</title>
+<title>My page3</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -79,28 +79,14 @@
 </style>
 </head>
 <body>
-
 <body style="font-family: Roboto">
-
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7 fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				
-				<c:choose>
-					<c:when test="${loginID != null }">
-						<div class="menu-text text-gray-100 ml-4">${loginID }</div>
-					</c:when>
-					<c:otherwise>
-						<div class="menu-text text-gray-100 ml-4">로그인이 필요합니다</div>
-					</c:otherwise>
-				</c:choose>
-				
+				<div class="menu-text text-gray-100 ml-4">로그인 한 계정명</div>
 			</div>
-			
-			
-			
 			
 			
 			<div class="flex mx-4 mb-3"> <!--  개인정보 관리 -->
@@ -243,24 +229,86 @@
 		</div><!-- 마무리 예상 div -->
 		
 		
+		
+		
 <form action="/upload.admin" method="post" enctype="multipart/form-data" name="">
-	<div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
-		<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 500px">
-	  
-			  <h2 style="text-algign">개인정보 확인</h2>
-			  <br>
-			  
-				 <label class="block">
-				    <span class="text-gray-700">비밀번호 입력</span>
-				    <input class="form-input mt-1 block w-full" name="location_detail">asdf = ${pw }</input>
-				  </label>
+<div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
+	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
 	
-		 		<div class="flex p-2 space-x-4 grid justify-items-end">
-		            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end">확인</button>
-		        </div>
 	
-		</div>
-	</div>
+	<h1>개인정보 수정</h1>
+	<br>
+	
+  <label class="block">
+    <span class="text-gray-700">변경할 비밀번호</span>
+    <input class="form-input mt-1 block w-full" name="title"/>
+  </label>
+  
+  <br>
+  
+   <label class="block">
+    <span class="text-gray-700">비밀번호 확인</span>
+    <input class="form-input mt-1 block w-full"  name="location"/>
+  </label>
+  
+  <br>
+  
+<label class="block">
+    <span class="text-gray-700">이메일</span>
+    <input class="form-input mt-1 block w-full"  name="location"/>
+  </label>
+  
+  <br>
+  
+ <label class="block">
+    <span class="text-gray-700">상세 주소</span>
+    <input class="form-input mt-1 block w-full" name="location_detail"/>
+  </label>
+  
+  <br>
+  
+  
+ <label class="block">
+    <span class="text-gray-700">연락처</span>
+    <input class="form-input mt-1 block w-full" placeholder="070-0000-0000, 010-0000-0000" name="phone"/>
+  </label>
+  
+  <br>
+  
+  
+   
+
+ 
+<div class="flex justify-center mt-8">
+    <div class="rounded-lg shadow-xl bg-gray-50">
+        <div class="m-4">
+            <div class="flex items-center justify-center w-full">
+                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                    <div class="flex flex-col items-center justify-center pt-7" id="ph1">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                            메인 사진 선택</p>
+                    </div>
+                    <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ 		<div class="flex p-2 space-x-4 grid justify-items-end">
+            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end">수정</button>
+        </div>
+</div>
+
+</div>
 </form>		
 	
 		
@@ -268,9 +316,14 @@
 		
 	</div>
 	
-
-	
 <script>
+$("#img1").on("change",function(){
+	let file = this.files[0];
+	if (file) {
+	    $("#ph1").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	  }
+	})
+
 
 
 

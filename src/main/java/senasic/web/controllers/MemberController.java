@@ -32,7 +32,7 @@ public class MemberController extends HttpServlet {
     		}else if(cmd.equals("/signup.mem")){ 
                 response.sendRedirect("/member/signup.jsp");
 
-            }else if(cmd.equals("/idCheck.mem")) { // 아이디 중복 체크 기능 
+            }else if(cmd.equals("/idCheck.mem")) { // �븘�씠�뵒 以묐났 泥댄겕 湲곕뒫 
                 String id = request.getParameter("id");
                 try {
                     boolean result = dao.isIdExist(id);
@@ -42,7 +42,7 @@ public class MemberController extends HttpServlet {
                     e.printStackTrace();
                     response.sendRedirect("error.jsp");
                 }
-            }else if(cmd.equals("/nicknameCheck.mem")){ // 닉네임 중복 체크 기능
+            }else if(cmd.equals("/nicknameCheck.mem")){ // �땳�꽕�엫 以묐났 泥댄겕 湲곕뒫
             	String nickname = request.getParameter("nn");
                 System.out.println(nickname);
 
@@ -82,13 +82,34 @@ public class MemberController extends HttpServlet {
         	    		System.out.println("s");
         	    		HttpSession session = request.getSession();
         	    		session.setAttribute("loginID", id);  
-        	    		// session.setAttribute("loginNN", nn); 강사님께 질문 2             	  
+        	    		// session.setAttribute("loginNN", nn); 媛뺤궗�떂猿� 吏덈Ц 2             	  
         	    	}
         	    	response.sendRedirect("/index.jsp");
         	    }else if(cmd.equals("/logout.mem")){
         	    	request.getSession().removeAttribute("loginID");
         	    	response.sendRedirect("/index.jsp");
+        	    }else if(cmd.equals("/mypage.mem")){
+        	    	
+        	    	
+//        	    	String id = request.getParameter("id");
+//        	    	String pw = request.getParameter("pw");
+//        	    	String nn = request.getParameter("nn");
+//        	    	String m = request.getParameter("m");
+        	    	String loginID = (String) request.getSession().getAttribute("loginID");
+            		String age = request.getParameter("age");
+            		String gender = request.getParameter("gender");
+        	    	
+            		String id = dao.selectById(loginID).getId();
+            		String pw = dao.selectById(loginID).getPw();
+            		
+            		System.out.println(dao.selectById(loginID).getId());
+            		
+        	    	response.sendRedirect("/mypage/mypage.jsp");
         	    }
+    		
+    		
+    		
+    		
         }catch(Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");

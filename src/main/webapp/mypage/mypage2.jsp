@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My page</title>
+<title>My page2</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -79,24 +79,13 @@
 </style>
 </head>
 <body>
-
 <body style="font-family: Roboto">
-
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7 fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				
-				<c:choose>
-					<c:when test="${loginID != null }">
-						<div class="menu-text text-gray-100 ml-4">${loginID }</div>
-					</c:when>
-					<c:otherwise>
-						<div class="menu-text text-gray-100 ml-4">로그인이 필요합니다</div>
-					</c:otherwise>
-				</c:choose>
-				
+				<div class="menu-text text-gray-100 ml-4">로그인 한 계정명</div>
 			</div>
 			
 			
@@ -247,18 +236,8 @@
 	<div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
 		<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 500px">
 	  
-			  <h2 style="text-algign">개인정보 확인</h2>
-			  <br>
+			  <h4 style="text-algign">로그인 한 계정명 님</h4>
 			  
-				 <label class="block">
-				    <span class="text-gray-700">비밀번호 입력</span>
-				    <input class="form-input mt-1 block w-full" name="location_detail">asdf = ${pw }</input>
-				  </label>
-	
-		 		<div class="flex p-2 space-x-4 grid justify-items-end">
-		            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end">확인</button>
-		        </div>
-	
 		</div>
 	</div>
 </form>		
@@ -267,8 +246,6 @@
 		
 		
 	</div>
-	
-
 	
 <script>
 

@@ -131,7 +131,7 @@ header { /*navbar를 상단에 고정*/
 				<c:when test="${loginID != null}">
 				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
 				<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a> <!-- 강사님께 질문 3 -->
-				<a href="#.mem">마이페이지</a>
+				<a href="mypage.mem">마이페이지</a>
 				</c:when>
 				<c:otherwise>
 				<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a> 
