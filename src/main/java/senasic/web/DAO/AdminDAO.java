@@ -340,4 +340,15 @@ public class AdminDAO {
 		    		return result;
 		    	}
 		    }
+		    
+		    public int deleteMember(int seq) throws Exception{
+		    	String sql = "delete from member where seq = ?";
+		    	try(Connection con = this.getConnection();
+		    		PreparedStatement pstat = con.prepareStatement(sql);
+		    			){
+		    		pstat.setInt(1, seq);
+		    		int result = pstat.executeUpdate();
+		    		return result;
+		    	}
+		    }
 }
