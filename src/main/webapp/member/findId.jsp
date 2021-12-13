@@ -60,7 +60,7 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">ID찾기</h4>
-        <form action="" method="post" enctype="multipart/form-data" class="validation-form" novalidate>
+        <form action="/resultId.mem" method="post"  class="validation-form" novalidate>
           
       
           
