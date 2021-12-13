@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식당 게시판 글쓰기</title>
+<title>${dto.id } 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -166,10 +166,19 @@
 	<div class="bg-white p-8 rounded-md w-full">
 		<div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <form action="/signupProc.mem" method="post" class="validation-form" novalidate>
-        <div class="mb-3">
+        <form action="/modifyM.admin" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
+        <div class="mb-3 flex">
             <label for="image">프로필사진</label>
-            <input type="image" class="form-control" id="img">
+            <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
+				                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+				                            fill="currentColor">
+				                            <path fill-rule="evenodd"  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+				                                clip-rule="evenodd" />
+				                        </svg>
+				                    </div>
+				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
+				                </label>          
         </div> 
         <!-- 아이디 입력 -->
            <div class="mb-3 mt-10 ">
@@ -195,26 +204,6 @@
 
           </div>
           
-			<!-- 생년월일 -->
-          <div class="row flex mt-10">
-          <label for="ph">생년월일</label>
-           <div class="col-md-4 mb-2">
-            	<select class="ml-10 form-control" id="year" required>
-   			 	<option>1997</option>
-    			<option>1998</option>
-    			<option>1999</option>
-				</select>
-
-            </div>
-            <div class="col-md-4 mb-2">
-              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="month"  placeholder="월" value="" pattern="^(0[1-9]|1[012])$" required>
-            </div>
-            <div class="col-md-4 mb-2">
-              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="day"  placeholder="일" value=""pattern="^(0[1-9]|[12][0-9]|3[0-1])$" required>
-            </div>
-          </div>
-          
-          
           <!-- 나이 -->
             <div class="mb-3 mt-10">
             <label for="age">나 &#160; 이</label>
@@ -228,11 +217,11 @@
 			<div class="flex">
    			<label for="gender">성 &#160; 별</label>
    			 	<div class="flex items-center mb-2 mr-4">
-        			<input type="radio" id="radio-example-1" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10">
+        			<input type="radio" id="radio-example-1" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10" value ='M' <c:if test="${dto.gender eq 'M'}">checked</c:if>>
        		 		<label for="radio-example-1" class="text-gray-600">남성</label>
     			</div>
     			<div class="flex items-center mb-2">
-       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10">
+       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10" value ='M' <c:if test="${dto.gender eq 'F'}">checked</c:if>>
        			 	 <label for="radio-example-2" class="text-gray-600">여성</label>
     			</div>
 			</div>
@@ -244,25 +233,29 @@
            	<label for="phone">연락처</label>
             	<select class="ml-10 form-control" name="phone1" id="phone1" required>
    			 	<option>선택</option>
-   			 	<option>010</option>
-    			<option >02</option> <!-- 강사님께 질문 1번 : 031 -->
-    			<option >031</option>
+   			 	<option value="010"<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
+    			<option value="02"<c:if test="${phoneFirst eq 02}"> selected</c:if>>02</option>
+    			<option value="031"<c:if test="${phoneFirst eq 031}"> selected</c:if>>031</option>
 				</select>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="" name="phone2"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="" name="phone3"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
             </div>
           </div>
 			
         
           <hr class="mb-4 mt-20">
           <div class="mb-4"></div>
-          <div class="col text-center">
-           <button class="btn btn-primary btn-lg btn-block" id="subtn" type="submit">정보 수정</button>
-           <button class="btn btn-primary btn-lg btn-block" id="subtn" type="submit">탈퇴</button>
+          <div class="col justify-between text-right">
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  type="submit">
+			  정보 수정
+			</button>
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+			  탈퇴
+			</button>
           </div>
          
         </form>

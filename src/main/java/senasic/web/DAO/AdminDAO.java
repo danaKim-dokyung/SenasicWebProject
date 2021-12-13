@@ -304,7 +304,7 @@ public class AdminDAO {
 		    		try(ResultSet rs = pstat.executeQuery()){
 		    			List<MemberDTO> list = new ArrayList();
 		    			while(rs.next()) {
-		    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8));
+		    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
 		    				list.add(dto);
 		    			}
 		    			return list;
@@ -319,9 +319,25 @@ public class AdminDAO {
 		    		pstat.setInt(1, num);
 		    		try(ResultSet rs = pstat.executeQuery();){
 		    			rs.next();
-	    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8));
+	    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
 	    				return dto;
 		    		}
+		    	}
+		    }
+		    
+		    public int modifyM(String id, String nickname, String email, int age, String gender, String phone) throws Exception{
+		    	String sql = "update member set nn=?,m=?,age=?,gender=?,ph=? where id = ?";
+		    	try(Connection con = this.getConnection();
+		    		PreparedStatement pstat = con.prepareStatement(sql);
+		    			){
+		    		pstat.setString(1, nickname);
+		    		pstat.setString(2, email);
+		    		pstat.setInt(3, age);
+		    		pstat.setString(4, gender);
+		    		pstat.setString(5, phone);
+		    		pstat.setString(6, id);
+		    		int result = pstat.executeUpdate();
+		    		return result;
 		    	}
 		    }
 }

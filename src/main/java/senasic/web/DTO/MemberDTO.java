@@ -9,11 +9,12 @@ public class MemberDTO {
 	    private String ph;
 	    private int age;
 	    private String gender;
+	    private String img;
 	    public MemberDTO() {
 	        super();
 	        // TODO Auto-generated constructor stub
 	    }
-	    public MemberDTO(String id, String pw, String nn, String m, String ph, int age, String gender, int seq) {
+	    public MemberDTO(String id, String pw, String nn, String m, String ph, int age, String gender, int seq,String img) {
 	        super();
 	        this.id = id;
 	        this.pw = pw;
@@ -23,6 +24,7 @@ public class MemberDTO {
 	        this.age = age;
 	        this.gender = gender;
 	        this.seq = seq;
+	        this.img = img;
 	    }
 	    public int getSeq() {
 			return seq;
@@ -72,5 +74,11 @@ public class MemberDTO {
 	    public void setGender(String gender) {
 	        this.gender = gender;
 	    }
+		public String getImg() {
+			return img;
+		}
+		public void setImg(String img) {
+			this.img = img;
+		}
 
 }
