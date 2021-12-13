@@ -84,12 +84,9 @@ public class MemberController extends HttpServlet {
         		String p2 = multi.getParameter("phone2");
         		String p3 = multi.getParameter("phone3");
         		int age = Integer.parseInt(multi.getParameter("age"));
-        		String gender = multi.getParameter("gender");
-        		
-        		
-
-        		
-        		
+        		String gender = multi.getParameter("gender");      		
+        		String img = multi.getFilesystemName("img");
+      	
         		String ph = (p1+p2+p3);
         		
         		System.out.println("수정 예정");
