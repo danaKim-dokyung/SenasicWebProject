@@ -102,12 +102,17 @@
                             style="background:none;">
                     </div>
                 </div>
-                <a href="#" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Forgot Password?</a>
+            
+      
+            
+       		<a href="findpw.mem" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Find id</a><tb>
+                <a href="findId.mem" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Find password&nbsp;&nbsp;&nbsp;</a>
+                
                 <input type="submit" id="login" 
-                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="·Î±×ÀÎ">
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="Login">
             </form>
-        </div>
-    </div>
+       	 	</div>
+    	</div>
     <script>
         const inputs = document.querySelectorAll("input");
 
