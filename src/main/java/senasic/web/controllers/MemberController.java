@@ -2,6 +2,7 @@ package senasic.web.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +63,7 @@ public class MemberController extends HttpServlet {
         }else if(cmd.equals("/signupProc.mem")) {
 
         	int maxSize = 1024*1024*10;
-        	String savePath = "C:\\Users\\BOSS\\Pictures";
+        	String savePath = "C:\\"; //경로 문제
 			File filePath = new File(savePath);
 			if(!filePath.exists()) {filePath.mkdir();}				
 			MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
@@ -116,11 +117,31 @@ public class MemberController extends HttpServlet {
         	    }else if(cmd.equals("/logout.mem")){
         	    	request.getSession().removeAttribute("loginID");
         	    	response.sendRedirect("/index.jsp");
+        	    }else if(cmd.equals("/findId.mem")) {
+        	    	response.sendRedirect("/member/findId.jsp");
+        	    }else if(cmd.equals("/findPw.mem")) {
+        	    	response.sendRedirect("/member/findPw.jsp");
+        	    }else if(cmd.equals("/resultId.mem")) {
+        	    	String m = request.getParameter("m");
+        	    	String phone1 = request.getParameter("phone1");
+        	    	String phone2 = request.getParameter("phone2");
+        	    	String phone3 = request.getParameter("phone3");
+        	    	String ph = phone1 + phone2 + phone3; 
+        	    	System.out.println(m);
+
+        	    	MemberDTO findId = dao.selectByMail(m, ph);
+        	    	request.setAttribute("id", findId.getId());
+        	    	
+        	    	if(findId != null) {
+            	    	request.getRequestDispatcher("/member/yourId.jsp").forward(request, response);
+        	    	}else {
+        	    		response.sendRedirect("/member/NoneId.jsp");
+        	    	}
         	    }
         }catch(Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                      
     }
 
 	

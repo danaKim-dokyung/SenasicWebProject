@@ -121,7 +121,25 @@ public class MemberDAO {
 
 	   }
 
+	   //아이디 찾기
+	   public MemberDTO selectByMail(String paramM, String paramPh) throws Exception{
+	      String sql = "select * from member where m  = ? and ph = ?";
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql)){
+	         pstat.setString(1, paramM);
+	         pstat.setString(2, paramPh);
+	         try(ResultSet rs = pstat.executeQuery()){
 
+	            MemberDTO dto = new MemberDTO();
+	            if(rs.next()) {
+	               dto.setId(rs.getString("id"));
+	               return dto;
+	            }
+	            return null;
+	         }
+	      }
+
+	   }
 	
 	
 	
