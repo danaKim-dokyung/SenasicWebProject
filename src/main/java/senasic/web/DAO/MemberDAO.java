@@ -52,7 +52,7 @@ public class MemberDAO {
 	   
 	   //정보 입력
 	   public int insert(MemberDTO dto)throws Exception {
-	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval)";
+	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
 
@@ -63,6 +63,7 @@ public class MemberDAO {
 	         pstat.setString(5,dto.getPh());
 	         pstat.setInt(6,dto.getAge());
 	         pstat.setString(7,dto.getGender());
+	         pstat.setString(8, dto.getImg());
 	         int result = pstat.executeUpdate();
 	         return result;
 	      }   

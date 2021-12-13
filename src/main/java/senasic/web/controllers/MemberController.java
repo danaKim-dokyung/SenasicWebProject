@@ -56,7 +56,7 @@ public class MemberController extends HttpServlet {
                     response.sendRedirect("error.jsp");
                 }
         }else if(cmd.equals("/signupProc.mem")) {
-            	        		
+            	        		//수정해주세요!!
         		String id= request.getParameter("id");
         		String pw = passwordUtils.getSHA512(request.getParameter("pw"));
         		String nn = request.getParameter("nn");
@@ -70,9 +70,11 @@ public class MemberController extends HttpServlet {
         		
         		String ph = (p1+p2+p3);
         		
-        		System.out.println(id);
-    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0));
+        		System.out.println("수정 예정");
+ //   			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0));
     			response.sendRedirect("/index.jsp");
+    			
+    			
         	    }else if(cmd.equals("/member/login.mem")){
         	    	String id = request.getParameter("id");
         	    	String nn = request.getParameter("nn");
