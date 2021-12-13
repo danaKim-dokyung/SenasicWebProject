@@ -11,7 +11,7 @@ import senasic.web.DTO.MemberDTO;
 
 public class MemberDAO {
 
-	// 싱글턴
+	// �떛湲��꽩
 	   private static MemberDAO instance = null;
 	   public static MemberDAO getInstance() {
 	      if(instance == null) {
@@ -27,7 +27,7 @@ public class MemberDAO {
 	      DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
 	      return ds.getConnection();
 	   }
-	   //아이디 중복 확인
+	   //�븘�씠�뵒 以묐났 �솗�씤
 	   public boolean isIdExist(String id) throws Exception{
 	      String sql = "select * from member where id=?";
 	      try(Connection con = this.getConnection();
@@ -38,7 +38,7 @@ public class MemberDAO {
 	         }
 	      }
 	   }
-	   //닉네임 중복 확인
+	   //�땳�꽕�엫 以묐났 �솗�씤
 	   public boolean isNicknameExist(String nn) throws Exception{
 	      String sql = "select * from member where nn=?";
 	      try(Connection con = this.getConnection();
@@ -50,9 +50,10 @@ public class MemberDAO {
 	      }
 	   }	   
 	   
-	   //정보 입력
+	   //�젙蹂� �엯�젰
 	   public int insert(MemberDTO dto)throws Exception {
 	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
+
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
 
@@ -68,7 +69,7 @@ public class MemberDAO {
 	         return result;
 	      }   
 	   }
-	   //로그인 시도 
+	   //濡쒓렇�씤 �떆�룄 
 	   public boolean isLoginAllowed(String id, String pw) throws Exception{
 	      String sql = "select * from member where id = ? and pw = ?";
 	      try(Connection con = this.getConnection();
@@ -80,7 +81,7 @@ public class MemberDAO {
 	         }
 	      }
 	   }
-	   //아이디로 정보 삭제
+	   //�븘�씠�뵒濡� �젙蹂� �궘�젣
 	   public int delete(String id) throws Exception{
 	      String sql = "delete from member where id = ?";
 	      try(Connection con = this.getConnection();
@@ -91,7 +92,7 @@ public class MemberDAO {
 	         return result;
 	      }
 	   }
-	   //아이디로 비번 찾기
+	   //�븘�씠�뵒濡� 鍮꾨쾲 李얘린
 	   public MemberDTO selectById(String paramId) throws Exception{
 	      String sql = "select * from member where id = ?";
 	      try(Connection con = this.getConnection();

@@ -1,5 +1,6 @@
 package senasic.web.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import senasic.web.DAO.MemberDAO;
 import senasic.web.DTO.MemberDTO;
@@ -32,7 +36,7 @@ public class MemberController extends HttpServlet {
     		}else if(cmd.equals("/signup.mem")){ 
                 response.sendRedirect("/member/signup.jsp");
 
-            }else if(cmd.equals("/idCheck.mem")) { // 아이디 중복 체크 기능 
+            }else if(cmd.equals("/idCheck.mem")) { // �븘�씠�뵒 以묐났 泥댄겕 湲곕뒫 
                 String id = request.getParameter("id");
                 try {
                     boolean result = dao.isIdExist(id);
@@ -42,7 +46,7 @@ public class MemberController extends HttpServlet {
                     e.printStackTrace();
                     response.sendRedirect("error.jsp");
                 }
-            }else if(cmd.equals("/nicknameCheck.mem")){ // 닉네임 중복 체크 기능
+            }else if(cmd.equals("/nicknameCheck.mem")){ // �땳�꽕�엫 以묐났 泥댄겕 湲곕뒫
             	String nickname = request.getParameter("nn");
                 System.out.println(nickname);
 
@@ -56,22 +60,34 @@ public class MemberController extends HttpServlet {
                     response.sendRedirect("error.jsp");
                 }
         }else if(cmd.equals("/signupProc.mem")) {
-            	        		//수정해주세요!!
-        		String id= request.getParameter("id");
-        		String pw = passwordUtils.getSHA512(request.getParameter("pw"));
-        		String nn = request.getParameter("nn");
-        		String m = request.getParameter("m");
-        		String p1 = request.getParameter("phone1");
-        		String p2 = request.getParameter("phone2");
-        		String p3 = request.getParameter("phone3");
+        	int maxSize = 1024*1024*10;
+        	String savePath = "C:\\Users\\BOSS\\Pictures";
+			File filePath = new File(savePath);
+			if(!filePath.exists()) {filePath.mkdir();}				
+			MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
+
+			multi.getParameter(savePath);
+            	        		
+				
+        		String id= multi.getParameter("id");
+        		String pw = passwordUtils.getSHA512(multi.getParameter("pw"));
+        		String nn = multi.getParameter("nn");
+        		String m = multi.getParameter("m");
+        		String p1 = multi.getParameter("phone1");
+        		String p2 = multi.getParameter("phone2");
+        		String p3 = multi.getParameter("phone3");
         		int age = Integer.parseInt(request.getParameter("age"));
-        		String gender = request.getParameter("gender");
+        		String gender = multi.getParameter("gender");
+          String img = "1";
+
+        		int ph = Integer.parseInt(p1+p2+p3);
+
         		
         		
         		String ph = (p1+p2+p3);
         		
         		System.out.println("수정 예정");
- //   			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0));
+    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0,img));
     			response.sendRedirect("/index.jsp");
     			
     			
@@ -85,7 +101,7 @@ public class MemberController extends HttpServlet {
         	    		System.out.println("s");
         	    		HttpSession session = request.getSession();
         	    		session.setAttribute("loginID", id);  
-        	    		// session.setAttribute("loginNN", nn); 강사님께 질문 2             	  
+        	    		// session.setAttribute("loginNN", nn); 媛뺤궗�떂猿� 吏덈Ц 2             	  
         	    	}
         	    	response.sendRedirect("/index.jsp");
         	    }else if(cmd.equals("/logout.mem")){
