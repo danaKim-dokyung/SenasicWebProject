@@ -39,19 +39,19 @@
 </head>
 
 <body>
-	<form id="frm" action="/input.pet">
+	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')" action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }">
 		<!-- 글쓰기 Header -->
 		<div class="container">
 			<div class="head"
 				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
-				<b># 반려견 게시판 글쓰기</b>
+				<b># 게시판 수정하기</b>
 			</div>
 
 			<!-- 제목 입력 -->
 			<div>
 				<input name="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
-					type="text" placeholder="제목을 입력해 주세요."
+					type="text" value="${list[0].title }"
 					class="
                     placeholder-gray-400
                     text-gray-600 
@@ -78,7 +78,7 @@
 
 				<!-- textarea 태그에 작성 -->
 				<div>
-					<textarea name="contents" id="summernote"></textarea>
+					<textarea name="contents" id="summernote">${list[0].contents }</textarea>
 				</div>
 
 				<!-- textarea에 summernote 적용 -->
@@ -96,17 +96,17 @@
 				<div style="text-align: right;">
 					<button type="button" id="list"
 						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
-						style="margin-right: 5px; height: 65%;">목록</button>
+						style="margin-right: 5px; height: 65%;">돌아가기</button>
 
 
-					<button id="input_board"
+					<button id="modify_board"
 						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
-						style="height: 65%;">등록</button>
+						style="height: 65%;">수정하기</button>
 				</div>
 			</div>
 		</div>
 	</form>
-	
+
 	<script>
 	<!-- '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
@@ -114,23 +114,26 @@
 		});
 		
 		
-		$("#input_board").on("click", function() {
-			if($("#category").val() == "카테고리"){
-				alert("카테고리를 입력해주세요.");
-			return false;
-			}
-		});
+		/* $("#modify_board").on("click", function() {
+				if (confirm("정말 수정하시겠습니까?")) {
+					location.href = "/modify_board.pet?seq=${list[0].seq }";
+				}
+			}); */
+		
+		
+		
+		$("#category").val("${list[0].category}");
 		
 	</script>
-	
+
 	<!-- 작성에 성공하였으면 알림띄우고 리스트로 돌아가기 -->
 	<c:if test="${result eq '1' }">
 		<script>
 			alert("작성에 성공하였습니다");
-			 location.href = "/list.pet?cpage=1"; 
+			location.href = "/list.pet?cpage=1";
 		</script>
 	</c:if>
-	
+
 </body>
 
 </html>
