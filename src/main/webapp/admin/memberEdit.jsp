@@ -166,7 +166,7 @@
 	<div class="bg-white p-8 rounded-md w-full">
 		<div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <form action="/modifyM.admin" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
+        <form action="/modifyM.admin?seq=${dto.seq }" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
         <div class="mb-3 flex">
             <label for="image">프로필사진</label>
             <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
@@ -183,7 +183,7 @@
         <!-- 아이디 입력 -->
            <div class="mb-3 mt-10 ">
             <label for="id">아이디</label>
-            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="id" name="id" placeholder="영문,숫자 6자리이상" pattern="^([a-z0-9]){6,20}$" required value="${dto.id }">
+            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="id" name="id" readonly pattern="^([a-z0-9]){6,20}$" required value="${dto.id }">
             <div class="col text-right"><span id="checkResult"></span>
           </div>
           </div>
@@ -221,7 +221,7 @@
        		 		<label for="radio-example-1" class="text-gray-600">남성</label>
     			</div>
     			<div class="flex items-center mb-2">
-       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10" value ='M' <c:if test="${dto.gender eq 'F'}">checked</c:if>>
+       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2  ml-10" value ='F' <c:if test="${dto.gender eq 'F'}">checked</c:if>>
        			 	 <label for="radio-example-2" class="text-gray-600">여성</label>
     			</div>
 			</div>
@@ -250,10 +250,10 @@
           <hr class="mb-4 mt-20">
           <div class="mb-4"></div>
           <div class="col justify-between text-right">
-			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  type="submit">
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  type="submit" id="editBtn">
 			  정보 수정
 			</button>
-			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="delBtn">
 			  탈퇴
 			</button>
           </div>
@@ -283,6 +283,22 @@ $("#member").on("click",function(){
 	location.href="/member.admin";
 })
 
+$("#editBtn").on("click",function(){
+	if(confirm("개인정보를 수정하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
+})
+
+$("#delBtn").on("click",function(){
+	if(confirm("계정을 삭제하시겠습니까? 복구할 수 없습니다.")){
+		location.href="/deleteM.admin?seq=${dto.seq}";
+		return false;
+	}else{
+		return false;
+	}
+})
 </script>
 </body>
 </html>

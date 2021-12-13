@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 수정</title>
+<title>식당 게시판 글 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -151,7 +151,7 @@
 	<div class="bg-white p-8 rounded-md w-full">
 	<div class=" flex items-center justify-between pb-6">
 		<div>
-			<h2 class="text-gray-600 font-semibold">회원 정보 수정</h2>
+			<h2 class="text-gray-600 font-semibold">식당 게시판 수정</h2>
 		</div>
 		<div class="flex items-center justify-between">
 			<div class="flex bg-gray-50 items-center p-2 rounded-md">
@@ -176,23 +176,23 @@
 							<tr>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									ID
+									상호명
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									닉네임
+									지역
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									이메일
+									평점
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									연락처
+									수정
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									계정 정보 수정
+									삭제
 								</th>
 							</tr>
 						</thead>
@@ -203,36 +203,38 @@
 									<div class="flex items-center">
 											<div class="ml-3">
 												<p class="text-gray-900 whitespace-no-wrap">
-													${list.id }
+													${list.title }
 												</p>
 											</div>
 										</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">${list.nn }</p>
+									<p class="text-gray-900 whitespace-no-wrap">${list.locate }</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-										${list.m }
+										${list.rate }
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-										${list.ph }
+									<a href="/rbDetail.admin?num=${list.seq }">
+									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">수정</button>
 									</p>
+									</a>
 								</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-									<a href="mEdit.admin?num=${list.seq }">
-									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">수정</button>
-									</a>
+									<a href="/rbDelete.admin?num=${list.seq }">
+									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" id="delBtn">삭제</button>
 									</p>
+									</a>
 								</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+	<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
   <div class="flex-1 flex justify-between sm:hidden">
     <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
       Previous
@@ -250,7 +252,7 @@
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
 					<c:when test="${start eq navi}">
-					<a href="/member.admin?cpage=${start }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<a href="/rbEdit.admin?cpage = ${start }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -264,8 +266,8 @@
 			        </a>
        		</c:when>
        		<c:when test="${navi eq end }">
-			     <a href="/load.rest?cpage=${end }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-			          <span class="sr-only">Next</span>
+			     <a href="/rbEdit.admin?cpage = ${end }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+			          <span class="sr-only">Next</span>http://localhost:8080/fboard.rest?cpage=2
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 			            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -273,7 +275,7 @@
 			        </a>
        		</c:when>
        		<c:otherwise>
-			        <a href="/load.rest?cpage=${navi }" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+			        <a href="/rbEdit.admin?cpage=${navi }" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
 			          ${navi}
 			        </a>
 			       		
@@ -290,7 +292,7 @@
 		</div>
 	</div>
 </div>
-	
+
 		
 		
 		
@@ -308,6 +310,14 @@ $("#create").on('click',function(){
 })
 $("#member").on("click",function(){
 	location.href="/member.admin";
+})
+
+$("#delBtn").on("click",function(){
+	if(confirm("삭제 하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
 })
 
 </script>

@@ -206,13 +206,15 @@ public class AdminController extends HttpServlet {
 				if(!filePath.exists()) {filePath.mkdir();}
 				System.out.println(savePath);
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
-//				RestBoardDTO real = dao.getRestBoardInfo(Integer.parseInt(multi.getParameter("seq"))); 멤버 수정후
-				String root = "\\Restaurant\\RestImg\\";
+		   		int seq = Integer.parseInt(multi.getParameter("seq"));
+				MemberDTO real = dao.getMember(seq); //멤버 수정후
+     
+				String root = ""; //루트 수정
 				String oriName1 = multi.getOriginalFileName("photo");
 				String sysName1 = multi.getFilesystemName("photo");
-//				if(sysName1 ==null) {
-//					sysName1=real.getPhoto1().substring(root.length());
-//				}
+				if(sysName1 ==null) {
+					//sysName1=real.getImg().substring(root.length());
+				}
 				multi.getParameter(savePath);
 				String id= multi.getParameter("id");
         		String nn = multi.getParameter("nn");
@@ -223,12 +225,15 @@ public class AdminController extends HttpServlet {
         		int age = Integer.parseInt(multi.getParameter("age"));
         		String gender = multi.getParameter("gender");
         		
-        		
         		String ph = (p1+p2+p3);
         		
     			dao.modifyM(id,nn,m,age,gender,ph);
-    			response.sendRedirect("/mEdit.admin");
+    			response.sendRedirect("/mEdit.admin?num="+seq);
         	   
+			}else if(cmd.equals("deleteM.admin")){
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				int result = dao.deleteMember(seq);
+				response.sendRedirect("/member.admin");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
