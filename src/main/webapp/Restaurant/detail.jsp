@@ -61,8 +61,16 @@ button:focus {
 }
 
 </style>
-</head>
-<body>
+<script>
+	$(document).ready(function(){
+		  if(${user}==0){
+			  $("#heart").attr("fill","#dc2626");
+		  }else if(${user}==1){
+			  $("#heart").attr("fill","white");
+		  }
+	})
+</script>
+
 </head>
 
 <body class="bg-white font-sans leading-normal tracking-normal">
@@ -79,7 +87,7 @@ button:focus {
 					name="carousel" aria-hidden="true" hidden="" checked="checked">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
 					<div class="block h-full w-fulltext-white text-5xl text-center">
-						<img src=${dto.photo1 } style="width:100%;hieght:100%;">
+						<img src=${dto.photo1 } style="width:100%;height:100%;">
 					</div>
 				</div>
 				<label for="carousel-3"
@@ -92,7 +100,7 @@ button:focus {
 					name="carousel" aria-hidden="true" hidden="">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
 					<div class="block h-full w-full text-white text-5xl text-center">
-											<img src=${dto.photo2 }  style="width:100%;hieght:100%;">
+											<img src=${dto.photo2 }  style="width:100%;height:100%;">
 					</div>
 				</div>
 				<label for="carousel-1"
@@ -105,7 +113,7 @@ button:focus {
 					name="carousel" aria-hidden="true" hidden="">
 				<div class="carousel-item absolute opacity-0" style="height: 40vh;">
 					<div class="block h-full w-full  text-white text-5xl text-center">
-						<img src=${dto.photo3 }  style="width:100%;hieght:100%;">
+						<img src=${dto.photo3 }  style="height: 100%;width:100%;">
 					</div>
 				</div>
 				<label for="carousel-2"
@@ -149,12 +157,12 @@ button:focus {
 					<div class="text-center font-bold text-4xl">${dto.title }</div><!-- 가게명 -->
 				
 				 <div class="text-gray-700 text-right px-4 py-2 m-2 absoulute right-0">
-				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600">
+				<svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="white" viewBox="0 0 24 24" class="stroke-current text-red-600" id="heart">
 				<path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" id="like"/>
 				</svg>
 				
 				<div>
-				추천 : ${dto.recommend }<!-- 추천수 -->
+				<label>추천수 </label><span id="recommandN">${dto.recommend }</span><!-- 추천수 -->
 				</div>
 				</div>
 				</div>
@@ -235,7 +243,7 @@ button:focus {
 				                </label>                    
 				</div>
 				<div class="flex mt-1 w-full col-span-10">
-				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5" name="contents"></textarea>
+				       <textarea placeholder="리뷰 작성" class="flex form-textarea block w-full resize-none mr-6" rows="5" name="contents" id="contents"></textarea>
 				</div>
 				
 
@@ -251,7 +259,7 @@ button:focus {
 					      <option value=3.5>3.5</option>
 					      <option value=4.0>4.0</option>
 					      <option value=4.5>4.5</option>
-					      <option value=5.0>5.0</option>
+					      <option value=5.0 selected>5.0</option>
 					    </select>
 					  </label>
 					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full mt-5 justify-end h-1/2" type="submit" id="inputReply">댓글 등록</button>
@@ -282,9 +290,20 @@ button:focus {
 					<div class="col-start-7 col-end-12 justify-right text-right row-span-3">
 				<!-- 추천전용 DB 별도 -->
 				<div class=col-span-9>
-					<button class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full justify-right" id="rvrcmd">리뷰 추천하기</button>
-					<!-- 구현 방법 생각.. -->
-					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right">신고하기</button>
+					<c:choose>
+					<c:when test="${reply.id eq loginID }">
+					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right reviewDel">
+					삭제
+					<input type="hidden" class="replySeq" value="${reply.seq }">
+					</button>
+					</c:when>
+					<c:otherwise>
+					<button class="bg-green-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full justify-right reviewR">
+					추천
+					<input type="hidden" class="replySeq" value="${reply.seq }">
+					</button>
+					</c:otherwise>
+					</c:choose>
 				</div>
 					<div class="col-span-9 row-span-1 flex justify-end">
 					<label>별점 </label>${reply.rate }
@@ -317,8 +336,8 @@ button:focus {
 					</ul>
 					</div>
 					<div class="col-span-9 row-span-1">
-				  <label>추천 </label> ${reply.recommand }<br>
-				 <label>작성시간</label>${reply.time }
+				 ${reply.getFormdDate() }	<br>
+				  <label>추천 </label> <span id="replyRcmd${reply.seq }">${reply.recommand }</span>
 				 </div>
 				 </div>
 				</div>
@@ -438,12 +457,61 @@ $("#inputReply").on("click",function(){
 //like 버튼눌렀을떄
    $("#like").on("click",function(){
       if(${loginID !=null}){
-         location.href="/like.rest?seq=${dto.seq}";
+    	  $.ajax({
+    		url:"/like.rest?seq=${dto.seq}",
+    		dataType:"json"
+    	  }).done(function(resp){
+    		  console.log(resp);
+    		  $("#recommandN").text(resp[0]);
+    		  if(resp[1]==1){
+    			  $("#heart").attr("fill","#dc2626");
+    		  }else if(resp[1]==0){
+    			  $("#heart").attr("fill","white");
+    		  }
+    	  });
       }else{
          alert("로그인 후 이용해 주세요");
       }      
    })
    
+   //리뷰삭제
+   $(".reviewDel").on("click",function(){
+	   let replySeq = $(this).find(".replySeq").val();
+		 if (confirm("삭제하시겠습니까?")) {
+	   			location.href="/reviewDel.rest?num="+replySeq+"&seq="+${dto.seq};
+			} 
+	})
+	
+	//리뷰추천
+	$(".reviewR").on("click",function(){
+		let replySeq = $(this).find(".replySeq").val();
+      if(${loginID !=null}){
+    	  $.ajax({
+    		url:"/reviewLike.rest?seq="+replySeq,
+    		dataType:"json"
+    	  }).done(function(resp){
+    		  console.log(resp);
+    		  $("#replyRcmd"+replySeq).text(resp[0]);
+    		  if(resp[1]==1){
+    			  alert("추천되었습니다.");
+    		  }else if(resp[1]==0){
+    			  alert("이미 추천한 리뷰입니다.");
+    		  }
+    	  });
+      }else{
+         alert("로그인 후 이용해 주세요");
+      }      
+   })
+	 
+   $("#inputReply").on("click",function(){
+	   let regex = /([\s\S]){5,2000}/;
+	   let contents = $("#contents").val();
+       let result = regex.test(contents);
+       if(!result){
+       	alert("리뷰를 5자 이상 입력해주세요.");
+       	return false;
+       }
+   })
  
    
 </script>

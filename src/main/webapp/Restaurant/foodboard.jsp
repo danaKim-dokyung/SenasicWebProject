@@ -74,7 +74,6 @@
 }
                 
               </style>
-
 </head>
 <body>
         
@@ -130,53 +129,46 @@
                       <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름 ${ct.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <span class="text-gray-600 ml-3">4 Reviews</span>
+                          <div class="col-span-1 row-span-3 text-right">
+					<ul class="flex justify-end items-center">
+					<c:set var="rt" value="${ct.rate }"/>
+					<c:forEach var='cnt' begin='1' end='5'>	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="ct_grad${cnt }">
+							        	<c:choose>
+								        	<c:when test= "${cnt<=rt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cnt>rt and cnt-1<rt }">
+								        		<stop offset="${100-(cnt-rt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cnt-rt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#ct_grad${cnt })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
+					</ul>
+					</div>
+                          <span class="text-gray-600 ml-3">${ct.rate }</span>
                         </span>
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                            </svg>
-                          </a>
+                          ${reviewN1 } Review
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct.locate } <br> 상세주소 : ${ct.locate_detail } <br> 영업시간 : ${ct.open_hour } <br> 주차여부 : ${ct.garage } <br> 추천 수 : ${ct.recommend } <br></p>
+                      <p class="leading-relaxed">지역 : ${ct.locate } <br> 상세주소 : ${ct.locate_detail } <br> 영업시간 : ${ct.open_hour } <br> 주차여부 : ${ct.garage } <br> 추천 수 : <span id=rcN>${ct.recommend }</span> <br></p>
                       
         
                       <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900"></span>
-                        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" >예약하기</button>
-                        
-                        <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                        
-                          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                          </svg>
+                        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" id=ctBtn >예약하기</button>
                         </button>
                       </div>
                     </div>
@@ -274,51 +266,48 @@
                       <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름 ${ct1.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <span class="text-gray-600 ml-3">4 Reviews</span>
+                          <div class="col-span-1 row-span-3 text-right">
+					<ul class="flex justify-end items-center">
+					<c:set var="rt" value="${ct1.rate }"/>
+					<c:forEach var='cnt' begin='1' end='5'>	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="ct1_grad${cnt }">
+							        	<c:choose>
+								        	<c:when test= "${cnt<=rt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cnt>rt and cnt-1<rt }">
+								        		<stop offset="${100-(cnt-rt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cnt-rt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#ct1_grad${cnt })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
+					</ul>
+					</div>
+                          <span class="text-gray-600 ml-3">${ct1.rate }</span>
                         </span>
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                           <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                            </svg>
+                            ${reviewN2 } Review
                           </a>
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct1.locate } <br> 상세주소 : ${ct1.locate_detail } <br> 영업시간 : ${ct1.open_hour } <br> 주차여부 : ${ct1.garage } <br> 추천 수 : ${ct1.recommend } <br></p>
+                      <p class="leading-relaxed">지역 : ${ct1.locate } <br> 상세주소 : ${ct1.locate_detail } <br> 영업시간 : ${ct1.open_hour } <br> 주차여부 : ${ct1.garage } <br> 추천 수 : <span id=rcN1>${ct1.recommend }</span> <br></p>
                       
         
                       <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900"></span>
-              <!--    <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">예약하기</button> -->       
-                        <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                          </svg>
+                  <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" id=ct1Btn>예약하기</button>     
                         </button>
                       </div>
                     </div>
@@ -411,51 +400,49 @@
                       <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름3 ${ct2.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                          </svg>
-                          <span class="text-gray-600 ml-3">4 Reviews</span>
+                          <div class="col-span-1 row-span-3 text-right">
+					<ul class="flex justify-end items-center">
+					<c:set var="rt" value="${ct2.rate }"/>
+					<c:forEach var='cnt' begin='1' end='5'>	
+						<li>
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							    <defs>
+							        <linearGradient id="ct2_grad${cnt }">
+							        	<c:choose>
+								        	<c:when test= "${cnt<=rt }">
+								        		<stop offset="100%" stop-color="orange"/>
+								        	</c:when>
+								        	<c:when test="${cnt>rt and cnt-1<rt }">
+								        		<stop offset="${100-(cnt-rt)*100 }%" stop-color="orange"/>
+								        		<stop offset="${(cnt-rt)*100 }%" stop-color="white"/>
+								        	</c:when>
+											<c:otherwise>
+									            <stop offset="100%" stop-color="white" stop-opacity="1" />							        	
+											</c:otherwise>										
+							        	</c:choose> 	
+							        </linearGradient>
+							    </defs>
+						  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="url(#ct2_grad${cnt })" stroke-width="1" stroke="orange"/>
+								</svg>
+							</li>
+					</c:forEach>
+					</ul>
+					</div>
+                          <span class="text-gray-600 ml-3">${ct2.rate }</span>
                         </span>
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                           <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                            </svg>
-                          </a>
-                          <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                            </svg>
+ 							${reviewN3 } Review
                           </a>
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct2.locate } <br> 상세주소 : ${ct2.locate_detail } <br> 영업시간 : ${ct2.open_hour } <br> 주차여부 : ${ct2.garage } <br> 추천 수 : ${ct2.recommend } <br></p>
+                      <p class="leading-relaxed">지역 : ${ct2.locate } <br> 상세주소 : ${ct2.locate_detail } <br> 영업시간 : ${ct2.open_hour } <br> 주차여부 : ${ct2.garage } <br> 추천 수 : <span id=rcN2>${ct2.recommend }</span> <br></p>
                       
         
                       <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900"></span>
-                     	<button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">예약하기</button>
-                        <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                          </svg>
+                     	<button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" id=ct2Btn>예약하기</button>
+
                         </button>
                       </div>
                     </div>
@@ -584,7 +571,6 @@
       <a href="/load.rest?seq=${dto.seq } " >
         <div class="bg-gray-100 p-6 rounded-lg">
           <img class="h-40 rounded w-full object-cover object-center mb-6" src="${dto.photo1 }" alt="content">
-          <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
           <h2 class="text-lg text-gray-900 font-medium title-font mb-4">${dto.title }
                <!--  별점 -->
                <div class="col-span-1 row-span-3 text-right">
@@ -619,7 +605,7 @@
                   </div>
                  <!-- 별점 끝 -->
           </h2>
-          <p>위치-세부분류</p>
+          <p>${dto.locate }</p>
           <p class="leading-relaxed text-base">${dto.locate_detail } <br> ${dto.category } <br> ${dto.open_hour }</p>
         </div>
         
@@ -693,12 +679,9 @@
     </div>
   </div>
 </div>
-<button id ="board4">test</button>
 <script>
 	$(".pt1").on("click",function(){
 		location.href="load.rest?seq=${ct.seq }";
-	//	location.href="board1.rest?seq=${ct.seq }";
-		//alert("보드1");
 	});
 	$(".pt2").on("click",function(){
 		location.href="load.rest?seq=${ct1.seq }";
@@ -706,6 +689,38 @@
 	$(".pt3").on("click",function(){
 		location.href="load.rest?seq=${ct2.seq }";
 	});
+	
+	$("#ctBtn").on("click",function(){
+		location.href="${ct.link }";
+	});
+	$("#ct1Btn").on("click",function(){
+		location.href="${ct1.link }";
+	});
+	$("#ct2Btn").on("click",function(){
+		location.href="${ct2.link }";
+	});
+	
+	//캐러셀 하트 버튼눌렀을떄
+	   $("#ctHeart").on("click",function(){
+	      if(${loginID !=null}){
+	    	  $.ajax({
+	    		url:"/like.rest?seq=${ct.seq}",
+	    		dataType:"json"
+	    	  }).done(function(resp){
+	    		  console.log(resp);
+	    		  $("#rcN").text(resp[0]);
+	    		  if(resp[1]==1){
+	    			  $("#ctHeart").attr("fill","#dc2626");
+	    		  }else if(resp[1]==0){
+	    			  $("#ctHeart").attr("fill","currentColor");
+	    		  }
+	    	  });
+	      }else{
+	         alert("로그인 후 이용해 주세요");
+	      }      
+	   })
+
+
 </script>
 
 

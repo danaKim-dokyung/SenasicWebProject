@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -32,22 +34,42 @@ public class RestController extends HttpServlet {
 		String cmd = uri.substring(ctx.length()+1);
 		RestBoardDAO dao = RestBoardDAO.getInstance();
 		RecDAO rdao = RecDAO.getInstance();
+		Gson g = new Gson();
+
 		System.out.println(cmd);
 		try {
+			//상세페이지
 			if(cmd.equals("load.rest")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				
+				String id = "1";
+				if(request.getSession().getAttribute("loginID")!=null) {
+					id = request.getSession().getAttribute("loginID").toString();					
+				}else {
+					id = "123";
+				}
 				RestBoardDTO result = dao.detailPage(seq);		
 				MenuDTO menu = dao.getMenu(result.getTitle());
 				int currentPage=1;
 				if(request.getParameter("rvpg")!=null) {currentPage = Integer.parseInt(request.getParameter("rvpg"));}
-	            int pageTotalCount = dao.getReviewPageTotalCount();
+	            int pageTotalCount = dao.getReviewPageTotalCount(seq);
 	            if(currentPage <1) {currentPage = 1;}
 	             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
 	             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
 
 	             List<RestReplyDTO> reply = dao.listReply(seq,start,end);
-	             List<Integer> navi = dao.getReviewPageNavi(currentPage);
+	             List<Integer> navi = dao.getReviewPageNavi(currentPage,seq);
+	             
+		            int recCheck = rdao.recCheck(seq, id); //추천 여부 확인, 1 추천 0 기록없음
+		            int user = 0;
+		            if(recCheck == 1) {
+		            	user = 0;
+		            }else if(recCheck==0) {
+			            user = 1;
+		            }
+	             
+	             
 	             request.setAttribute("startR", start-1);
 	             request.setAttribute("endR", end+1);
 	             request.setAttribute("navi", navi);
@@ -55,7 +77,10 @@ public class RestController extends HttpServlet {
 				request.setAttribute("dto", result);
 				request.setAttribute("menu", menu);
 				request.setAttribute("reply", reply);
+				request.setAttribute("user", user);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
+				
+				//댓글달기
 			}else if(cmd.equals("reply.rest")) {
 				//�뙆�씪 癒쇱� �떎�슫
 				int maxSize = 1024*1024*10; //10mb
@@ -81,12 +106,31 @@ public class RestController extends HttpServlet {
 				int result = dao.insertReview(seq, id, contents, imgPath+sysName, rate);
 				int update = dao.updateRate(seq);
 				response.sendRedirect("/load.rest?seq="+seq);
+				
+				//식당 추천
 			}else if(cmd.equals("like.rest")) {
 	            int recseq =  Integer.parseInt(request.getParameter("seq"));
 	            String recid = request.getSession().getAttribute("loginID").toString();
-	          
-	            rdao.recinsert(new RcmdDTO(recseq,recid));
+
+	            int result = rdao.recCheck(recseq, recid); //추천 여부 확인, 1 추천 0 기록없음
+	            int user = 0;
+	            if(result == 1) {
+	            	rdao.recDelete(recseq, recid);
+	            	user = 0;
+	            }else if(result==0) {
+		            rdao.recinsert(new RcmdDTO(recseq,recid));
+		            user = 1;
+	            }
+	            int a = rdao.recUpdate(recseq);
+	            int num = rdao.getRecNum(recseq);
 	            
+	            int[] arr = new int[2];
+	            arr[0] = num;
+	            arr[1] = user;
+	            String answer = g.toJson(arr);
+	            response.getWriter().append(answer);
+	            
+	            //메인 화면
 	         }else if(cmd.equals("fboard.rest")) {
 	             
 	             List<RestBoardDTO> carousel = dao.Carousel();
@@ -94,8 +138,12 @@ public class RestController extends HttpServlet {
 	             RestBoardDTO ct= carousel.get(0);
 				 RestBoardDTO ct1= carousel.get(1);
 				 RestBoardDTO ct2= carousel.get(2);
-	             
-	             int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				 //리뷰 수
+				 int reviewN1 = dao.reviewN(ct.getSeq());
+				 int reviewN2 = dao.reviewN(ct1.getSeq());
+				 int reviewN3 = dao.reviewN(ct2.getSeq());
+
+				 int currentPage = Integer.parseInt(request.getParameter("cpage"));
 	             int pageTotalCount = dao.getPageTotalCount();
 	             
 	             if(currentPage <1) {currentPage = 1;}
@@ -105,65 +153,51 @@ public class RestController extends HttpServlet {
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
 	             List<RestBoardDTO> list = dao.selectByList(start, end);
 	             List<Integer> navi = dao.getPageNavi(currentPage);
-	            
-	            
+			            
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
 	             request.setAttribute("carousel", carousel);
 	             request.setAttribute("ct", ct);
 				 request.setAttribute("ct1", ct1);
 				 request.setAttribute("ct2", ct2);
+				 //리뷰수
+				 request.setAttribute("reviewN1", reviewN1);
+				 request.setAttribute("reviewN2", reviewN2);
+				 request.setAttribute("reviewN3", reviewN3);
+				 
 				 request.setAttribute("startB", start-1);
 	             request.setAttribute("endB", end+1);
 	             request.setAttribute("fbPg", currentPage); // 이름 고쳐주기
 	             request.getRequestDispatcher("/Restaurant/foodboard.jsp").forward(request, response);
 	             
 	             
-	          }else if(cmd.equals("detail.rest")){
-	             int seq = Integer.parseInt(request.getParameter("seq"));
-	             RestBoardDTO dto = dao.selectBySeq(seq);
-	             request.setAttribute("dto", dto);
-	             request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
-	          
-	          }else if(cmd.equals("board1.rest")) {
-	        	  
-	        	  List<RestBoardDTO> carousel = dao.Carousel();
-		          RestBoardDTO ct= carousel.get(0); 
+	             //리뷰삭제
+	          }else if(cmd.equals("reviewDel.rest")) {
+	        	  int num = Integer.parseInt(request.getParameter("num"));
+	        	  System.out.println(num);
+	        	  int result = dao.delReview(num);
 	        	  int seq = Integer.parseInt(request.getParameter("seq"));
-	        	  System.out.println(seq);
-	        	  RestBoardDTO dto = dao.selectBySeq(seq);
-	        	  
-	        	 
 	        	  response.sendRedirect("/load.rest?seq="+seq);
-	        	 
-	        	  
-	        	  
-	          }else if(cmd.equals("borad2.rest")) {
-	        	  
-	        	  List<RestBoardDTO> carousel = dao.Carousel();
-	        	  RestBoardDTO ct1= carousel.get(1);
-	        	  int seq = Integer.parseInt(request.getParameter("seq"));
-	        	  RestBoardDTO dto = dao.selectBySeq(seq);
-	        	  
-	        	  request.setAttribute("dto", dto);
-	        	  request.setAttribute("ct1", ct1);
-	        	  //response.sendRedirect("http://localhost:8080/load.rest?seq="+seq);
-	        	  request.getRequestDispatcher("/Restaurant/detail.jsp?seq="+seq).forward(request,response);
-	        	  System.out.println(seq+"2");
-	          }else if(cmd.equals("board3.rest")) {
-	        	  
-	        	  List<RestBoardDTO> carousel = dao.Carousel();
-	        	  RestBoardDTO ct2= carousel.get(2);
-	        	  int seq = Integer.parseInt(request.getParameter("seq"));
-	        	  RestBoardDTO dto = dao.selectBySeq(seq);
-	        	  
-	        	  request.setAttribute("dto", dto);
-	        	  request.setAttribute("ct2", ct2);
-	        	 // response.sendRedirect("/Restaurant/detail.jsp");
-	        	  request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request,response);
-	        	  System.out.println(seq+"3");
-	        	  
+	          
+	          //리뷰 추천
+	          }else if(cmd.equals("reviewLike.rest")) {
+		            int recseq =  Integer.parseInt(request.getParameter("seq"));
+		            String recid = request.getSession().getAttribute("loginID").toString();
+		            int result = rdao.recReviewCheck(recseq, recid); //추천 여부 확인, 1 추천 0 기록없음
+		            int user = 0;
+		            if(result==0) {
+			            rdao.recReviewInsert(new RcmdDTO(recseq,recid));
+			            user = 1;
+		            }
+		            int a = rdao.recReviewUpdate(recseq);
+		            int num = rdao.getRecReviewNum(recseq);
+		            int[] arr = new int[2];
+		            arr[0] = num;
+		            arr[1] = user;
+		            String answer = g.toJson(arr);
+		            response.getWriter().append(answer);
 	          }
+		            
 
 		}catch(Exception e) {
 			e.getStackTrace();

@@ -2,6 +2,7 @@ package senasic.web.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -44,8 +45,101 @@ public class RecDAO {
          pstat.setInt(2, seq);
          
          int result = pstat.executeUpdate();
-         con.commit();
          return result;
       }
      }
+     
+     public int recCheck(int seq, String id) throws Exception{
+    	 String sql = "select count(rest_seq) from rest_rcmd where rest_seq = ? and id = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 pstat.setString(2, id);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
+     }
+     
+     public int recDelete(int seq, String id) throws Exception{
+    	 String sql = "delete from rest_rcmd where rest_seq = ? and id = ?";
+    	try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			){
+    		pstat.setInt(1, seq);
+    		pstat.setString(2, id);
+    		int result = pstat.executeUpdate();
+    		return result;
+    	}
+     }
+     
+     public int getRecNum(int seq) throws Exception{
+    	 String sql = "select recommand from rest_board where seq = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
+     }
+     
+     //리뷰 추천
+     public int recReviewInsert(RcmdDTO dto)throws Exception {
+         String sql = "insert into reply_rcmd values(?,?)";
+         try(Connection con = this.getConnection();
+               PreparedStatement pstat = con.prepareStatement(sql);){
+            pstat.setInt(1,dto.getRest_seq());
+            pstat.setString(2,dto.getId());
+            int result = pstat.executeUpdate();
+            return result;
+         }   
+      }
+     
+     public int recReviewUpdate(int seq) throws Exception{
+      String sql = "update rest_reply set recommand = (select count(re_seq) from reply_rcmd where re_seq=?) where seq=?";
+      try(Connection con = this.getConnection();
+            PreparedStatement pstat = con.prepareStatement(sql)){
+         pstat.setInt(1, seq);
+         pstat.setInt(2, seq);
+         
+         int result = pstat.executeUpdate();
+         return result;
+      }
+     }
+     
+     public int recReviewCheck(int seq, String id) throws Exception{
+    	 String sql = "select count(re_seq) from reply_rcmd where re_seq = ? and id = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 pstat.setString(2, id);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
+     }
+          
+     public int getRecReviewNum(int seq) throws Exception{
+    	 String sql = "select recommand from rest_reply where seq = ?";
+    	 try(Connection con = this.getConnection();
+    		PreparedStatement pstat = con.prepareStatement(sql);
+    			 ){
+    		 pstat.setInt(1, seq);
+    		 try(ResultSet rs = pstat.executeQuery();){
+    			 rs.next();
+    			 int result = rs.getInt(1);
+    			 return result;
+    		 }
+    	 }
+     } 
 }

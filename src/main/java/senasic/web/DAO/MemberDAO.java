@@ -52,7 +52,8 @@ public class MemberDAO {
 	   
 	   //�젙蹂� �엯�젰
 	   public int insert(MemberDTO dto)throws Exception {
-	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval)";
+	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
+
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
 
@@ -60,9 +61,10 @@ public class MemberDAO {
 	         pstat.setString(2,dto.getPw());
 	         pstat.setString(3,dto.getNn());
 	         pstat.setString(4,dto.getM());
-	         pstat.setInt(5,dto.getPh());
-	         pstat.setString(6,dto.getAge());
+	         pstat.setString(5,dto.getPh());
+	         pstat.setInt(6,dto.getAge());
 	         pstat.setString(7,dto.getGender());
+	         pstat.setString(8, dto.getImg());
 	         int result = pstat.executeUpdate();
 	         return result;
 	      }   
@@ -104,9 +106,10 @@ public class MemberDAO {
 	               dto.setPw(rs.getString("pw"));
 	               dto.setNn(rs.getString("nn"));
 	               dto.setM(rs.getString("m"));
-	               dto.setPh(rs.getInt("ph"));
-	               dto.setAge(rs.getString("age"));
+	               dto.setPh(rs.getString("ph"));
+	               dto.setAge(rs.getInt("age"));
 	               dto.setGender(rs.getString("gender"));
+	               dto.setSeq(rs.getInt("seq"));
 	               return dto;
 	            }
 	            return null;
