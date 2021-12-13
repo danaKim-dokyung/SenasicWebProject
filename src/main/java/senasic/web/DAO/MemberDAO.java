@@ -52,6 +52,9 @@ public class MemberDAO {
 	   
 	   //�젙蹂� �엯�젰
 	   public int insert(MemberDTO dto)throws Exception {
+
+	    
+
 	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
 
 	      try(Connection con = this.getConnection();

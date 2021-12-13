@@ -60,6 +60,7 @@ public class MemberController extends HttpServlet {
                     response.sendRedirect("error.jsp");
                 }
         }else if(cmd.equals("/signupProc.mem")) {
+
         	int maxSize = 1024*1024*10;
         	String savePath = "C:\\Users\\BOSS\\Pictures";
 			File filePath = new File(savePath);
@@ -67,7 +68,12 @@ public class MemberController extends HttpServlet {
 			MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
 
 			multi.getParameter(savePath);
-            	        		
+            	        	
+			//String root = "\Restaurant\RestImg\";
+
+	                String oriName1 = multi.getOriginalFileName("Pimage");
+	                String sysName1 = multi.getFilesystemName("Pimage");
+			
 				
         		String id= multi.getParameter("id");
         		String pw = passwordUtils.getSHA512(multi.getParameter("pw"));
@@ -76,18 +82,17 @@ public class MemberController extends HttpServlet {
         		String p1 = multi.getParameter("phone1");
         		String p2 = multi.getParameter("phone2");
         		String p3 = multi.getParameter("phone3");
-        		int age = Integer.parseInt(request.getParameter("age"));
+        		int age = Integer.parseInt(multi.getParameter("age"));
         		String gender = multi.getParameter("gender");
-          String img = "1";
-
-        		int ph = Integer.parseInt(p1+p2+p3);
+        		
+        		
 
         		
         		
         		String ph = (p1+p2+p3);
         		
         		System.out.println("수정 예정");
-    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0,img));
+    			dao.insert(new MemberDTO(id,pw,nn,m,ph,age,gender,0,sysName1));
     			response.sendRedirect("/index.jsp");
     			
     			
@@ -98,12 +103,16 @@ public class MemberController extends HttpServlet {
         	    	boolean result = dao.isLoginAllowed(id, password);
         	    	        	    	
         	    	if(result) {
-        	    		System.out.println("s");
+        	    		
         	    		HttpSession session = request.getSession();
         	    		session.setAttribute("loginID", id);  
+        	    		response.sendRedirect("/index.jsp");
         	    		// session.setAttribute("loginNN", nn); 媛뺤궗�떂猿� 吏덈Ц 2             	  
+        	    	}else {
+        	    		
+        	    		response.sendRedirect("/member/signin.jsp");
         	    	}
-        	    	response.sendRedirect("/index.jsp");
+        	    	
         	    }else if(cmd.equals("/logout.mem")){
         	    	request.getSession().removeAttribute("loginID");
         	    	response.sendRedirect("/index.jsp");
