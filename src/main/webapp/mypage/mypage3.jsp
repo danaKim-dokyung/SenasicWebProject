@@ -76,6 +76,21 @@
 		transform: translate3d(-260px, 0, 0);
 	}
 }
+.input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+
 </style>
 </head>
 <body>
@@ -85,7 +100,7 @@
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				<div class="menu-text text-gray-100 ml-4">로그인 한 계정명</div>
+				<div class="menu-text text-gray-100 ml-4">로그인 한 계정명${loginID }</div>
 			</div>
 			
 			
@@ -104,25 +119,7 @@
 						
 						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								비밀번호 변경
-							</div>
-						</div>
-						
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								이메일 변경
-							</div>
-						</div>
-						
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								주소 변경
-							</div>
-						</div>
-						
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								연락처 변경
+								개인정보 변경
 							</div>
 						</div>
 						
@@ -164,44 +161,6 @@
 			
 			
 			
-			
-			<div class="flex mx-4 mb-3"> <!--  사업자용  -->
-				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
-					@click="show=!show">
-					<div
-						class="w-full flex justify-between px-3 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
-						<div class="flex">
-							<i class="material-icons fill-current text-gray-100">perm_identity</i>
-							<div class="relative menu-text text-gray-100 ml-4">사업자용</div>
-						</div>
-						<span class="transition ease-in duration-150 text-gray-100 material-icons transform" :class="{'rotate-180':show}"> arrow_drop_down </span>
-					</div>
-					<div x-show="show" class="transition ease-in duration-700 mt-3 bg-green-800">
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								식당게시판 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								식당게시판 글관리
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글관리
-							</div>
-						</div>
-					</div>
-				</a>
-			</div> <!--  사업자용  -->
-			
-			
 			<div class="flex mx-4 mb-3"> <!--  사업자용  -->
 				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
 					@click="show=!show">
@@ -231,85 +190,104 @@
 		
 		
 		
-<form action="/upload.admin" method="post" enctype="multipart/form-data" name="">
-<div class="main-content w-full md:w-4/5 reltive float-right grid justifyitems-stretch">
-	<div class="p-4 shadow-md rounded-md text-left justify-self-center w-full" style="max-width: 800px">
-	
-	
-	<h1>개인정보 수정</h1>
-	<br>
-	
-  <label class="block">
-    <span class="text-gray-700">변경할 비밀번호</span>
-    <input class="form-input mt-1 block w-full" name="title"/>
-  </label>
-  
-  <br>
-  
-   <label class="block">
-    <span class="text-gray-700">비밀번호 확인</span>
-    <input class="form-input mt-1 block w-full"  name="location"/>
-  </label>
-  
-  <br>
-  
-<label class="block">
-    <span class="text-gray-700">이메일</span>
-    <input class="form-input mt-1 block w-full"  name="location"/>
-  </label>
-  
-  <br>
-  
- <label class="block">
-    <span class="text-gray-700">상세 주소</span>
-    <input class="form-input mt-1 block w-full" name="location_detail"/>
-  </label>
-  
-  <br>
-  
-  
- <label class="block">
-    <span class="text-gray-700">연락처</span>
-    <input class="form-input mt-1 block w-full" placeholder="070-0000-0000, 010-0000-0000" name="phone"/>
-  </label>
-  
-  <br>
-  
-  
-   
+<div class="main-content w-full md:w-4/5 reltive float-right grid justify items-stretch">
+	<div class="bg-white p-8 rounded-md w-full">
+		<div class="input-form-backgroud row">
+      <div class="input-form col-md-12 mx-auto">
+        <form action="/modifyM.admin?seq=${list.seq }" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
+        <div class="mb-3 flex">
+            <label for="image">프로필사진</label>
+            <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
+				                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+				                            fill="currentColor">
+				                            <path fill-rule="evenodd"  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+				                                clip-rule="evenodd" />
+				                        </svg>
+				                    </div>
+				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
+				                </label>          
+        </div> 
+        <!-- 아이디 입력 -->
+           <div class="mb-3 mt-10 ">
+            <label for="id">아이디</label>
+            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="id" name="id"  pattern="^([a-z0-9]){6,20}$" required value="${list.id }">
+            <div class="col text-right"><span id="checkResult"></span>
+          </div>
+          </div>
+          
+          <!-- 비밀번호 입력 -->
+           <div class="mb-3 mt-10 ">
+            <label for="password">비밀번호</label>
+            <input type="password" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="pw" name="pw"  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" placeholder="숫자포함 8자리 이상 입력" required >
+            <div class="col text-right">
+          </div>
+          </div>
+          
+          <!-- 비밀번호 확인 입력 -->
+           <div class="mb-3 mt-10 ">
+            <label for="confirmpw">비밀번호 확인</label>
+            <input type="password" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="cpw" name="cpw"  pattern="^([a-z0-9]){6,20}$" required ><span id="checkpw"></span>
+            <div class="col text-right">
+          </div>
+          </div>
+          
+          
+          
+          <!-- 닉네임 입력 -->
+           <div class="mb-3 mt-10">
+            <label for="nickname">닉네임</label>
+            <input type="text" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="nickname" name="nn" placeholder=""pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$" required value="${list.nn }">
+            <div class="col text-right"><span id="checkResultN"></span>
+          </div>
+          </div>
+          
+          
+          <!-- 이메일 입력 -->
+          <div class="mb-3 mt-10">
+            <label for="email">이메일</label>
+            <input type="email" class="ml-10 form-control w-3/5 bg-gray-100 rounded-lg focus:outline-none border-2" id="email" name="m" placeholder="you@example.com"  required value="${list.m }">
 
- 
-<div class="flex justify-center mt-8">
-    <div class="rounded-lg shadow-xl bg-gray-50">
-        <div class="m-4">
-            <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                    <div class="flex flex-col items-center justify-center pt-7" id="ph1">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                            메인 사진 선택</p>
-                    </div>
-                    <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
-                </label>
+          </div>
+          
+         
+			
+			<!-- 전화번호 -->
+          <div class="row flex mt-10">
+           	<div class="col-md-4 mb-2 ">
+           	<label for="phone">연락처</label>
+            	<select class="ml-10 form-control" name="phone1" id="phone1" required>
+   			 	<option>선택</option>
+   			 	<option value="010"<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
+    			<option value="02"<c:if test="${phoneFirst eq 02}"> selected</c:if>>02</option>
+    			<option value="031"<c:if test="${phoneFirst eq 031}"> selected</c:if>>031</option>
+				</select>
             </div>
-        </div>
-    </div>
+            <div class="col-md-4 mb-2">
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
+            </div>
+            <div class="col-md-4 mb-2">
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
+            </div>
+          </div>
+			
+        
+          <hr class="mb-4 mt-20">
+          <div class="mb-4"></div>
+          <div class="col justify-between text-right">
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  type="submit" id="editBtn">
+			  정보 수정
+			</button>
+			<button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="delBtn">
+			  탈퇴
+			</button>
+          </div>
+         
+        </form>
+      </div>
+	</div>
+	</div>
 </div>
-
-
- 		<div class="flex p-2 space-x-4 grid justify-items-end">
-            <button class="px-4 py-2 text-white bg-green-500 rounded shadow-xl item-end">수정</button>
-        </div>
-</div>
-
-</div>
-</form>		
 	
 		
 		
@@ -317,16 +295,57 @@
 	</div>
 	
 <script>
-$("#img1").on("change",function(){
-	let file = this.files[0];
-	if (file) {
-	    $("#ph1").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
-	  }
-	})
+
+
+//아이디 중복확인
+$(function(){
+	$("#id").on("input",function(){
+		  let id = document.getElementById("id").value;
+	        let idregex = /^([a-z0-9]){6,20}$/;
+	        let result = idregex.test(id);
+	        if(!result){
+	        	$("#checkResult").css("color","red");
+				$("#checkResult").text("잘못된 ID 입니다.");
+	        	
+	        	return false;
+	        }
+		$.ajax({
+			url:"/idCheck.mem",
+			data:{id:$("#id").val()}
+		}).done(function(resp){
+			if(resp == "true"){
+				$("#checkResult").css("color","pink");
+				$("#checkResult").text("이미 사용중인 ID 입니다.");
+			}else{
+				$("#checkResult").css("color","dodgerblue");
+				$("#checkResult").text("사용 가능한 ID 입니다.");
+			}
+		});
+	});
+})
 
 
 
+//비밀번호확인
+$("#cpw").on("keyup",function(){
+	if($("#pw").val()==$("#cpw").val()){
+		$("#checkpw").css("color","green");
+		$("#checkpw").text("비밀번호가 일치합니다");
+	}else{
+		$("#checkpw").css("color","pink");
+		$("#checkpw").text("비밀번호가 틀립니다.");
+	}
+})
 
+
+$("#delBtn").on("click",function(){
+	if(confirm("계정을 삭제하시겠습니까? 복구할 수 없습니다.")){
+		location.href="/deleteM.admin?seq=${dto.seq}";
+		return false;
+	}else{
+		return false;
+	}
+})
 
 
 </script>
