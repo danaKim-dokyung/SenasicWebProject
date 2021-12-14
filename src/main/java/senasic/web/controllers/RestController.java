@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import senasic.web.DAO.AdminDAO;
 import senasic.web.DAO.RecDAO;
 import senasic.web.DAO.RestBoardDAO;
 import senasic.web.DTO.MenuDTO;
@@ -68,10 +69,21 @@ public class RestController extends HttpServlet {
 		            }else if(recCheck==0) {
 			            user = 1;
 		            }
+		             int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>2) {
+			             Snum = navi.get(1);		            	 
+		             }
 	             
 	             
-	             request.setAttribute("startR", start-1);
-	             request.setAttribute("endR", end+1);
+	             request.setAttribute("Fnum", Fnum);
+	             request.setAttribute("Snum", Snum);
 	             request.setAttribute("navi", navi);
 	             request.setAttribute("rvPg", currentPage);
 				request.setAttribute("dto", result);
@@ -144,30 +156,78 @@ public class RestController extends HttpServlet {
 				 int reviewN3 = dao.reviewN(ct2.getSeq());
 
 				 int currentPage = Integer.parseInt(request.getParameter("cpage"));
-	             int pageTotalCount = dao.getPageTotalCount();
-	             
+
+				 
+	             String ctg = request.getParameter("category");
+	             //분류
+	             if(ctg!=null) {
+				 int pageTotalCount = dao.getPageTotalCount("category",ctg);
 	             if(currentPage <1) {currentPage = 1;}
 	             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-	             
+
 	             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
-	             List<RestBoardDTO> list = dao.selectByList(start, end);
-	             List<Integer> navi = dao.getPageNavi(currentPage);
-			            
+	             List<RestBoardDTO> list = dao.selectByCategory(ctg,start, end);
+
+	             List<Integer> navi = dao.getPageNavi(currentPage,"category",ctg);
+
+	             int Fnum = 0;
+	             int NavCheck = navi.size();
+	             if(NavCheck==12){
+	            	 Fnum = navi.get(10);
+	             }else if(NavCheck>9) {
+		             Fnum = navi.get(9);	            	 
+	             }
+	             int Snum = 0;
+	             if(NavCheck>2) {
+		             Snum = navi.get(1);		            	 
+	             }
+	             
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
+				 request.setAttribute("Fnum", Fnum);
+				 request.setAttribute("Snum", Snum);
+					System.out.println(ctg);
+	            	 request.setAttribute("category", ctg);			    
+	            	 request.setAttribute("type", "category");
+
+	             }else {
+		             int pageTotalCount = dao.getPageTotalCount();
+		             
+		             if(currentPage <1) {currentPage = 1;}
+		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+		             
+		             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+		             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+		             List<RestBoardDTO> list = dao.selectByList(start, end);
+		             List<Integer> navi = dao.getPageNavi(currentPage);
+		             int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>1) {
+			             Snum = navi.get(1);		            	 
+		             }
+
+				            
+		             request.setAttribute("list", list);
+		             request.setAttribute("navi", navi);
+					 request.setAttribute("Fnum", Fnum);
+					 request.setAttribute("Snum", Snum);
+	             }
+
 	             request.setAttribute("carousel", carousel);
 	             request.setAttribute("ct", ct);
 				 request.setAttribute("ct1", ct1);
 				 request.setAttribute("ct2", ct2);
-				 //리뷰수
 				 request.setAttribute("reviewN1", reviewN1);
 				 request.setAttribute("reviewN2", reviewN2);
 				 request.setAttribute("reviewN3", reviewN3);
-				 
-				 request.setAttribute("startB", start-1);
-	             request.setAttribute("endB", end+1);
-	             request.setAttribute("fbPg", currentPage); // 이름 고쳐주기
+	             request.setAttribute("fbPg", currentPage);
 	             request.getRequestDispatcher("/Restaurant/foodboard.jsp").forward(request, response);
 	             
 	             
@@ -196,8 +256,14 @@ public class RestController extends HttpServlet {
 		            arr[1] = user;
 		            String answer = g.toJson(arr);
 		            response.getWriter().append(answer);
+
+	          }else if(cmd.equals("test.rest")) {
+	        	  AdminDAO daoa = AdminDAO.getInstance();
+	        	  for(int i = 10; i<210; i++) {
+	  				int result = dao.insertReview(16, "limdohyuk", "복제"+i, "null", 5.0);
+	        	  }
+	        	  
 	          }
-		            
 
 		}catch(Exception e) {
 			e.getStackTrace();
