@@ -307,6 +307,7 @@ td>a:hover {
 				</c:forTokens>
 				</div>
 
+
 			<!-- 검색 기능 -->
 			<form method="get" action="/search.pet?cpage=${cpage }">
 				<div>
