@@ -131,12 +131,31 @@ public class MemberController extends HttpServlet {
 
         	    	MemberDTO findId = dao.selectByMail(m, ph);
         	    	request.setAttribute("id", findId.getId());
-        	    	
+
         	    	if(findId != null) {
             	    	request.getRequestDispatcher("/member/yourId.jsp").forward(request, response);
         	    	}else {
-        	    		response.sendRedirect("/member/NoneId.jsp");
+        	    		response.sendRedirect("/member/None.jsp");
         	    	}
+        	    }else if(cmd.equals("/resultPw.mem")){
+        	    	String id = request.getParameter("id");
+        	    	String m = request.getParameter("m");
+
+        	    	MemberDTO findPw = dao.selectByFindPw(id, m);
+        	    	request.setAttribute("pw", findPw.getPw());
+        	    	System.out.println(findPw.getPw());
+        	    	if(findPw != null) {
+            	    	request.getRequestDispatcher("/member/yourPw.jsp").forward(request, response);
+        	    	}else {
+        	    		response.sendRedirect("/member/None.jsp");
+        	    	}
+        	    }else if(cmd.equals("/changPw.mem")){
+        	    	String pw = passwordUtils.getSHA512(request.getParameter("pw"));
+        	    	String id = request.getParameter("id");
+        	    	
+        	    	dao.changePw(id, pw);
+        	    	response.sendRedirect("/member/signin.jsp");
+        	    	
         	    }
         }catch(Exception e) {
             e.printStackTrace();
