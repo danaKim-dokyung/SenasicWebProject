@@ -123,6 +123,380 @@ img {
 	color: #000;
 	/*Set to match the Tailwind colour you want the active one to be */
 }
+
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+.forSearch {
+  margin: 0;
+  padding: 30px;
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container1 {
+  position: relative;
+}
+
+.main {
+  position: relative;
+  border: 5px solid #064e3b;
+  height: 50px;
+  width: 800px;
+  border-radius: 50px;
+  padding-left: 31px;
+  padding-right: 11px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 20px;
+  color: #555;
+}
+.main:focus {
+  outline: none;
+}
+
+.searchicon {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  background: transparent;
+  border: 3px solid #064e3b;
+  left: 12px;
+  top: 14px;
+  border-radius: 100%;
+}
+.searchicon:after {
+  content: "";
+  position: absolute;
+  background: #5F8FA4;
+  height: 6px;
+  width: 3px;
+  bottom: -5px;
+  right: -3px;
+  transform: rotate(-45deg);
+}
+
+.microphone {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  background: #FF5252;
+  right: 12px;
+  top: 6px;
+  border-radius: 100%;
+  box-shadow: 0px 1px 2px 0px #555;
+}
+.microphone:after {
+  content: "";
+  position: absolute;
+  background: #c70000;
+  height: 12px;
+  width: 8px;
+  border-radius: 10px;
+  left: 8px;
+  top: 3px;
+}
+.microphone:before {
+  content: "";
+  position: absolute;
+  border-bottom: 2px solid #c70000;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  top: 6px;
+  left: 7px;
+}
+
+.mic-stand {
+  position: absolute;
+  height: 4px;
+  width: 2px;
+  background: #c70000;
+  bottom: 3px;
+  left: 11px;
+}
+
+.icon-holder {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+
+.icon {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  background: #064e3b;
+  border-radius: 100%;
+  box-shadow: 0px 1px 2px 0px #555;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.4s;
+}
+.icon:hover {
+  background: #70c5ed;
+  animation-play-state: paused;
+}
+
+#parking:after {
+  content: "P";
+  font-weight: bold;
+  position: absolute;
+  font-size: 13px;
+  color: #43b3e7;
+  background: white;
+  padding: 1px 3px 1px 4px;
+  border-radius: 100%;
+  left: 10px;
+  top: 9px;
+}
+
+#gas:after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 12px;
+  background: white;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  top: 9px;
+  left: 11px;
+}
+
+#gas:before {
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 8px;
+  background: #43b3e7;
+  left: 13px;
+  top: 11px;
+  z-index: 1;
+}
+
+.base {
+  position: absolute;
+  background: white;
+  width: 16px;
+  height: 4px;
+  top: 23px;
+  left: 9px;
+  border-radius: 2px;
+}
+.base:after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  border-left: 2px solid white;
+  bottom: 4px;
+  left: -1px;
+}
+
+#eat:after {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 4px;
+  background: white;
+  border-radius: 3px;
+  top: 15px;
+  left: 11px;
+}
+
+#eat:before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 8px;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  background: white;
+  top: 12px;
+  left: 9px;
+}
+
+.fork {
+  position: absolute;
+  height: 5px;
+  width: 2px;
+  background: white;
+  top: 7px;
+  left: 9px;
+}
+.fork:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 2px;
+  background: white;
+  top: 0px;
+  left: 3px;
+}
+.fork:before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 2px;
+  background: white;
+  top: 0px;
+  left: 6px;
+}
+
+.knife {
+  position: absolute;
+  height: 9px;
+  width: 4px;
+  background: white;
+  right: 11px;
+  bottom: 7px;
+  border-radius: 2px;
+}
+.knife:after {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 6px;
+  background: white;
+  bottom: 8px;
+  border-top-right-radius: 100%;
+}
+
+.cup {
+  position: absolute;
+  height: 14px;
+  width: 17px;
+  background: white;
+  top: 15px;
+  left: 8px;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+}
+.cup:after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 15px;
+  border-radius: 100%;
+  right: -4px;
+  border-right: 2px solid white;
+}
+
+#coffee:after {
+  content: "S";
+  position: absolute;
+  font-style: italic;
+  font-size: 5px;
+  transform: skewY(-40deg);
+  color: white;
+  top: 6px;
+  left: 12px;
+}
+
+#coffee:before {
+  content: "S";
+  position: absolute;
+  font-style: italic;
+  font-size: 5px;
+  transform: skewY(-40deg);
+  color: white;
+  top: 6px;
+  left: 18px;
+}
+
+.dots {
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background: white;
+  border-radius: 100%;
+  left: 15px;
+  top: 15px;
+}
+.dots:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background: white;
+  border-radius: 100%;
+  left: 9px;
+}
+.dots:before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background: white;
+  border-radius: 100%;
+  left: -9px;
+}
+
+input:focus ~ .icon-holder > .icon {
+  animation: ani 2.2s ease-out infinite;
+}
+@keyframes ani {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#gas {
+  animation-delay: 0.1s;
+}
+
+#eat {
+  animation-delay: 0.2s;
+}
+
+#coffee {
+  animation-delay: 0.3s;
+}
+
+#misc {
+  animation-delay: 0.4s;
+}
+
+.tooltip {
+  opacity: 0;
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  background: #555;
+  padding: 8px;
+  top: 15px;
+  border-radius: 15%;
+  top: 45px;
+}
+.tooltip:after {
+  content: "";
+  position: absolute;
+  background: #555;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  height: 18px;
+  width: 18px;
+  top: -10px;
+  left: 7px;
+}
+
+.icon:hover > .tooltip {
+  animation: ani 0.4s ease-out forwards;
+  animation-delay: 0.3s;
+}
 </style>
 
 </head>
@@ -169,6 +543,35 @@ img {
 		</ul>
 	</nav>
 <body>
+<div class="forSearch">
+<div class="container1">
+  <input class="main"  type="text"/><span class="searchicon"></span>
+
+  <div class="icon-holder">
+    <div class="icon" id="parking">
+      <div class="tooltip">Parking</div>
+      서울
+    </div>    
+    <div class="icon" id="gas">
+      <div class="base"></div>
+      <div class="tooltip">Gas</div>
+    </div>
+    <div class="icon" id="eat">
+      <div class="fork"></div>
+      <div class="knife"></div>
+      <div class="tooltip">Food</div>
+    </div>
+    <div class="icon" id="coffee">
+      <div class="cup"></div>
+      <div class="tooltip">Coffee</div>
+    </div>
+    <div class="icon" id="misc">
+      <div class="dots"></div>
+      <div class="tooltip">Misc</div>
+    </div>
+  </div>
+</div>
+</div>
 	<!------------- 캐러셀 시작 ---------------->
 	<div class="carousel relative container mx-auto"
 		style="max-width: 1600px;">
@@ -227,7 +630,7 @@ img {
 									focus:outline-none focus:ring
 									w-full
 									pl-10
-									" />
+									" id="searchBar"/>
 							</div>
 
 
