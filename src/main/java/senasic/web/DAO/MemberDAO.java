@@ -132,10 +132,11 @@ public class MemberDAO {
 
 	            MemberDTO dto = new MemberDTO();
 	            if(rs.next()) {
-	               dto.setId(rs.getString("id"));
-	               return dto;
+	                dto.setId(rs.getString("id"));
+	               
 	            }
-	            return null;
+	            System.out.println(dto.getId());
+	            return dto;
 	         }
 	      }
 
