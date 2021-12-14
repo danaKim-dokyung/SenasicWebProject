@@ -632,8 +632,6 @@ input:focus ~ .icon-holder > .icon {
 									pl-10
 									" id="searchBar"/>
 							</div>
-
-
 							</p>
 							<a
 								class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
