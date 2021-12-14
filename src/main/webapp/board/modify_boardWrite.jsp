@@ -39,7 +39,8 @@
 </head>
 
 <body>
-	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')" action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }">
+	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')"
+		action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }">
 		<!-- 글쓰기 Header -->
 		<div class="container">
 			<div class="head"
@@ -81,15 +82,6 @@
 					<textarea name="contents" id="summernote">${list[0].contents }</textarea>
 				</div>
 
-				<!-- textarea에 summernote 적용 -->
-				<script>
-					$('#summernote').summernote({
-						placeholder : 'input',
-						tabsize : 2,
-						height : 600
-					// 높이 지정
-					});
-				</script>
 
 				<!-- 목록, 등록 버튼 생성 -->
 
@@ -110,29 +102,56 @@
 	<script>
 	<!-- '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
-			location.href = "/list.pet?cpage=1";
+			history.go(-1);
 		});
-		
-		
-		/* $("#modify_board").on("click", function() {
-				if (confirm("정말 수정하시겠습니까?")) {
-					location.href = "/modify_board.pet?seq=${list[0].seq }";
-				}
-			}); */
-		
-		
-		
+
 		$("#category").val("${list[0].category}");
-		
 	</script>
 
-	<!-- 작성에 성공하였으면 알림띄우고 리스트로 돌아가기 -->
-	<c:if test="${result eq '1' }">
-		<script>
-			alert("작성에 성공하였습니다");
-			location.href = "/list.pet?cpage=1";
-		</script>
-	</c:if>
+	<!-- textarea에 summernote 적용 -->
+	<script>
+		$('#summernote').summernote({
+			placeholder : 'input',
+			tabsize : 2,
+			height : 600,
+			lang : "ko-KR",
+			minHeight : null,
+			maxHeight : null,
+			focus : true,
+			callbacks : {
+				onImageUpload : function(files) {
+					console.log(files[0]);
+					sendFile(files[0], this);
+				}
+			}
+		});
+	</script>
+
+	<!-- 이미지 업로드 -->
+	<script>
+		function sendFile(file, editor) {
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : "/imageUpload.pet",
+				cache : false,
+				contentType : false,
+				enctype : "multipart/form-data",
+				processData : false,
+				success : function(sysName) {
+					console.log(sysName + "b")
+
+					setTimeout(function() {
+						$(editor).summernote('insertImage',
+								'/board/img/' + sysName);
+					}, 3500);
+				}
+			});
+		}
+	</script>
+
 
 </body>
 

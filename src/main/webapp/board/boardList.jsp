@@ -65,7 +65,8 @@ td>a:hover {
                   transition-all
                   duration-150
                 "
-					type="button" onclick="openDropdown(event,'dropdown-example-1')">
+					type="button" id="category"
+					onclick="openDropdown(event,'dropdown-example-1')">
 					카테고리<i class="fas fa-angle-down ml-2"></i>
 				</button>
 				<div
@@ -174,9 +175,18 @@ td>a:hover {
 					<table class="w-full">
 						<thead>
 							<tr class="text-gray-800 border border-b-0 text-center">
-								<th colspan="6" class="px-4 py-3" style="width: 100%;">#
-									${list[0].category }게시판</th>
+								<th colspan="6" class="px-4 py-3" style="width: 100%;"># <c:choose>
+										<c:when test="${check_category == 1 }">
+									전체 게시판
+								</c:when>
+										<c:otherwise>
+									${list[0].category }게시판
+								</c:otherwise>
+									</c:choose></th>
 							</tr>
+
+
+
 
 							<!-- 게시판 상단 목차 -->
 							<tr class="text-gray-800 border border-b-0 text-center text-sm">
@@ -207,10 +217,11 @@ td>a:hover {
 									class="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0 text-sm">
 									<td class="px-4 py-4 text-center">${dto.seq }</td>
 									<td class="px-4 py-4"><a
-										href="/detail.pet?seq=${dto.seq }&cpage=${cpage }">${dto.title }
+										href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }">${dto.title }
 											<c:if test="${dto.comment_count ne 0 }">
-								&nbsp <i class="far fa-comment-dots"> </i> <span style="color: red;">[${dto.comment_count }]</span>
-							</c:if>
+								&nbsp <i class="far fa-comment-dots"> </i>
+												<span style="color: red;">[${dto.comment_count }]</span>
+											</c:if>
 									</a></td>
 									<td class="px-4 py-4 text-center">${dto.writer }</td>
 									<td class="px-4 py-4 text-center">${dto.detailDate }</td>
@@ -242,25 +253,11 @@ td>a:hover {
 			style="width: 70%; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
 
 			<!-- 게시판 페이징 -->
-			<!-- <div class="space-x-3"
-                style="height: 40px; text-align: center; line-height: 40px; border-bottom: 1px solid rgba(189, 187, 187, 0.288);">
-                <a href="">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="">4</a>
-                <a href="">5</a>
-                <a href="">></a>
-
-            </div> -->
-
-			<!-- 게시판 페이징 2 -->
-			<%-- <tr>
-				<td colspan="5" align="center">${navi }</td>
-			</tr> --%>
-
-			<div class="text-center">
-				<button style="text-align: center; margin-top: 10px;"
-					class="
+			
+			<%-- <c:forEach var="dto" items="${navi }" varStatus="status">
+				<div class="text-center">
+					<button style="text-align: center; margin-top: 10px;"
+						class="
                     text-green-500
                     bg-transparent
                     border border-green-500
@@ -279,14 +276,15 @@ td>a:hover {
                     transition-all
                     duration-150
                   "
-					type="button" style="">${navi }</button>
-			</div>
+						type="button">${navi.get(status.index) }</button>
+				</div>
+			</c:forEach> --%>
 
 
-			<!-- <div
-				style="margin-top: 15px; height: 40px; text-align: center; border-bottom: 1px solid rgba(189, 187, 187, 0.288);">
-				<button
-					class="
+					<div class="text-center">
+				<c:forTokens var="item" items="${navi }" delims=",">
+					<button style="text-align: center; margin-top: 10px;"
+						class="
                     text-green-500
                     bg-transparent
                     border border-green-500
@@ -297,7 +295,7 @@ td>a:hover {
                     text-xs
                     px-4
                     py-2
-                    rounded-l
+                    rounded
                     outline-none
                     focus:outline-none
                     mb-1
@@ -305,35 +303,13 @@ td>a:hover {
                     transition-all
                     duration-150
                   "
-					type="button">
-					<i class="fas fa-angle-left"></i>
-					<i class="fas fa-angle-right"></i>
-				</button>
-				<button
-					class="
-                    text-green-500
-                    bg-transparent
-                    border border-green-500
-                    hover:bg-green-500 hover:text-white
-                    active:bg-green-600
-                    font-bold
-                    uppercase
-                    text-xs
-                    px-4
-                    py-2
-                    outline-none
-                    focus:outline-none
-                    mb-1
-                    ease-linear
-                    transition-all
-                    duration-150
-                  "
-					type="button">1</button>
-				
-			</div> -->
+						type="button">${item }</button>
+				</c:forTokens>
+				</div>
+
 
 			<!-- 검색 기능 -->
-			<form method="get" action="/search.pet?${cpage }">
+			<form method="get" action="/search.pet?cpage=${cpage }">
 				<div>
 					<div class=""
 						style="text-align: center; height: 70px; margin-bottom: 100px;">
@@ -343,8 +319,6 @@ td>a:hover {
 							class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto">
 							<option>제목</option>
 							<option>작성자</option>
-							<option>L</option>
-							<option>XL</option>
 						</select> <input type="hidden" name="cpage" value="${cpage }">
 
 						<!-- 검색 하기 -->
@@ -374,6 +348,17 @@ td>a:hover {
 			</form>
 		</div>
 	</div>
+
+	<c:choose>
+		<c:when test="${check_category == 1 }">
+				카테고리
+		</c:when>
+		<c:otherwise>
+			<script>
+				$("#category").html("#" + "${list[0].category}");
+			</script>
+		</c:otherwise>
+	</c:choose>
 
 
 	<!-- Drop down -->
