@@ -12,10 +12,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-
+	<script
+		src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+		charset="utf-8"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
             />
@@ -552,13 +554,17 @@
         >
       </li>
            <!--  이부분에 페이지 • 처리 2,3개 -->
-            
           </ol>
         </div>
-        
       </div>
+      
+      
+      
+      
 	<div>
-					<button
+<div class="flex justify-end py-4">
+<div x-data="{ dropdownOpen: true }" class="relative">
+ 				<button
 					class="
                   bg-green-500
                   text-white
@@ -597,7 +603,7 @@
                   mt-1
                 "
 					style="min-width: 12rem" id="dropdown-example-1">
-					<a href="/category.pet?cpage=1&category=병원"
+					<a href="/fboard.rest?cpage=1&category=한식"
 						class="
                     text-sm
                     py-2
@@ -610,7 +616,7 @@
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 병원 </a> <a href="/category.pet?cpage=1&category=산책로"
+						# 한식 </a> <a href="/fboard.rest?cpage=1&category=양식"
 						class="
                     text-sm
                     py-2
@@ -623,7 +629,7 @@
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 산책로 </a> <a href="/category.pet?cpage=1&category=음식"
+						# 양식 </a> <a href="/fboard.rest?cpage=1&category=일식"
 						class="
                     text-sm
                     py-2
@@ -636,7 +642,7 @@
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 음식 </a> <a href="/category.pet?cpage=1&category=기타"
+						# 일식 </a> <a href="/fboard.rest?cpage=1&category=카페"
 						class="
                     text-sm
                     py-2
@@ -649,7 +655,21 @@
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 기타 </a>
+						# 카페 </a>
+						 <a href="/fboard.rest?cpage=1&category=패스트푸드"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						# 패스트푸드 </a>
 					<div
 						class="
                     h-0
@@ -657,7 +677,7 @@
                     border border-solid border-t-0 border-blueGray-800
                     opacity-25
                   "></div>
-					<a href="/list.pet?cpage=1"
+					<a href="/fboard.rest?cpage=1"
 						class="
                     text-sm
                     py-2
@@ -672,6 +692,8 @@
                   ">
 						전체 보기 </a>
 				</div>
+</div>
+</div>
 	</div>
     
 
@@ -759,7 +781,7 @@
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
 					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
-					<a href="/fboard.rest?cpage=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -773,7 +795,7 @@
 			        </a>
        		</c:when>
        		<c:when test="${navi!=1 and (navi%10) eq 1 and navi!=Snum}">
-			     <a href="/fboard.rest?cpage=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+			     <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Next</span>
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -782,7 +804,7 @@
 			        </a>
        		</c:when>
        		<c:otherwise>
-			        <a href="/fboard.rest?cpage=${navi }" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+			        <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
 			          ${navi}
 			        </a>
 			       		
@@ -814,21 +836,22 @@
 	$("#ct2Btn").on("click",function(){
 		location.href="${ct2.link }";
 	});
-	
-	//
-	function openDropdown(event, dropdownID) {
-		let element = event.target;
-		while (element.nodeName !== "BUTTON") {
-			element = element.parentNode;
-		}
-		var popper = Popper.createPopper(element, document
-				.getElementById(dropdownID), {
-			placement : "bottom-start",
-		});
-		document.getElementById(dropdownID).classList.toggle("hidden");
-		document.getElementById(dropdownID).classList.toggle("block");
-	}
 
+
+		function openDropdown(event, dropdownID) {
+			let element = event.target;
+			while (element.nodeName !== "BUTTON") {
+				element = element.parentNode;
+			}
+			var popper = Popper.createPopper(element, document
+					.getElementById(dropdownID), {
+				placement : "bottom-start",
+			});
+			document.getElementById(dropdownID).classList.toggle("hidden");
+			document.getElementById(dropdownID).classList.toggle("block");
+		}
+	</script>
+	
 </script>
     
     

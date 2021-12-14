@@ -156,37 +156,78 @@ public class RestController extends HttpServlet {
 				 int reviewN3 = dao.reviewN(ct2.getSeq());
 
 				 int currentPage = Integer.parseInt(request.getParameter("cpage"));
-	             int pageTotalCount = dao.getPageTotalCount();
-	             
+
+				 
+	             String ctg = request.getParameter("category");
+	             //분류
+	             if(ctg!=null) {
+				 int pageTotalCount = dao.getPageTotalCount("category",ctg);
 	             if(currentPage <1) {currentPage = 1;}
 	             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-	             
+
 	             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
-	             List<RestBoardDTO> list = dao.selectByList(start, end);
-	             List<Integer> navi = dao.getPageNavi(currentPage);
+	             List<RestBoardDTO> list = dao.selectByCategory(ctg,start, end);
+
+	             List<Integer> navi = dao.getPageNavi(currentPage,"category",ctg);
+
 	             int Fnum = 0;
-	             if(navi.size()==12){
+	             int NavCheck = navi.size();
+	             if(NavCheck==12){
 	            	 Fnum = navi.get(10);
-	             }else if(navi.size()>9) {
+	             }else if(NavCheck>9) {
 		             Fnum = navi.get(9);	            	 
 	             }
-	             int Snum = navi.get(1);
-			            
+	             int Snum = 0;
+	             if(NavCheck>2) {
+		             Snum = navi.get(1);		            	 
+	             }
+	             
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
+				 request.setAttribute("Fnum", Fnum);
+				 request.setAttribute("Snum", Snum);
+					System.out.println(ctg);
+	            	 request.setAttribute("category", ctg);			    
+	            	 request.setAttribute("type", "category");
+
+	             }else {
+		             int pageTotalCount = dao.getPageTotalCount();
+		             
+		             if(currentPage <1) {currentPage = 1;}
+		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+		             
+		             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+		             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+		             List<RestBoardDTO> list = dao.selectByList(start, end);
+		             List<Integer> navi = dao.getPageNavi(currentPage);
+		             int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>2) {
+			             Snum = navi.get(1);		            	 
+		             }
+
+				            
+		             request.setAttribute("list", list);
+		             request.setAttribute("navi", navi);
+					 request.setAttribute("Fnum", Fnum);
+					 request.setAttribute("Snum", Snum);
+	             }
+
 	             request.setAttribute("carousel", carousel);
 	             request.setAttribute("ct", ct);
 				 request.setAttribute("ct1", ct1);
 				 request.setAttribute("ct2", ct2);
-				 //리뷰수
 				 request.setAttribute("reviewN1", reviewN1);
 				 request.setAttribute("reviewN2", reviewN2);
 				 request.setAttribute("reviewN3", reviewN3);
-				 
-				 request.setAttribute("Fnum", Fnum);
-				 request.setAttribute("Snum", Snum);
-	             request.setAttribute("fbPg", currentPage); // 이름 고쳐주기
+	             request.setAttribute("fbPg", currentPage);
 	             request.getRequestDispatcher("/Restaurant/foodboard.jsp").forward(request, response);
 	             
 	             
@@ -215,8 +256,7 @@ public class RestController extends HttpServlet {
 		            arr[1] = user;
 		            String answer = g.toJson(arr);
 		            response.getWriter().append(answer);
-		            
-		            //지울거
+
 	          }else if(cmd.equals("test.rest")) {
 	        	  AdminDAO daoa = AdminDAO.getInstance();
 	        	  for(int i = 10; i<210; i++) {
