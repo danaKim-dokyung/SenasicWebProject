@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.naming.Context;
@@ -225,19 +226,23 @@ public class PetBoardDAO {
 			needNext = false;
 		}
 
-		String pageNavi = "";
+		String pageNavi_str = "";
 		if (needPrev) {
-			pageNavi += "<a href='/list.pet?cpage=" + (startNavi - 1) + "'><</a>";
+			pageNavi_str += "<a href='/list.pet?cpage=" + (startNavi - 1) + "'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a href='/list.pet?cpage=" + i + "'>" + i + "</a> ";
+			pageNavi_str += "<a href='/list.pet?cpage=" + i + "'>" + i + "</a>,";
 		}
 
 		if (needNext) {
-			pageNavi += "<a href='/list.pet?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi_str += "<a href='/list.pet?cpage=" + (endNavi + 1) + "'>></a>";
 		}
-		return pageNavi;
+		
+//		List<String> pageNavi = new ArrayList<String>(Arrays.asList(pageNavi_str.split(",")));
+		
+//		System.out.println(pageNavi.size());
+		return pageNavi_str;
 	}
 
 	// 페이징 카테고리별
@@ -315,20 +320,20 @@ public class PetBoardDAO {
 		if (endNavi == pageTotalCount) {
 			needNext = false;
 		}
-
 		String pageNavi = "";
 		if (needPrev) {
-			pageNavi += "<a href='/category.pet?cpage=" + (startNavi - 1) + "&category=" + category + "'><</a>";
+			pageNavi += "<a href='/category.pet?cpage=" + (startNavi - 1) + "&category=" + category + "'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a href='/category.pet?cpage=" + i + "&category=" + category + "'>" + i + "</a> ";
+			pageNavi += "<a href='/category.pet?cpage=" + i + "&category=" + category + "'>" + i + "</a>,";
 		}
 
 		if (needNext) {
 			pageNavi += "<a href='/category.pet?cpage=" + (endNavi + 1) + "&category=" + category + "'>></a>";
 		}
 		return pageNavi;
+		
 	}
 
 	public List<PetBoardDTO> information(int id) throws Exception {
@@ -471,7 +476,7 @@ public class PetBoardDAO {
 			currentPage = pageTotalCount;
 		}
 
-		// 시작 페이지 구하는 공식!!!!!!
+		// 시작 페이지 구하는 공식
 		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
 		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
 
@@ -494,12 +499,12 @@ public class PetBoardDAO {
 		String pageNavi = "";
 		if (needPrev) {
 			pageNavi += "<a href='/search.pet?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord="
-					+ searchWord + "'><</a>";
+					+ searchWord + "'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
 			pageNavi += "<a href='/search.pet?cpage=" + i + "&keyword=" + keyword + "&searchWord=" + searchWord + "'>"
-					+ i + "</a> ";
+					+ i + "</a>,";
 		}
 
 		if (needNext) {

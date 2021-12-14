@@ -11,9 +11,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <!-- Required form plugin -->
-<link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css"
+	rel="stylesheet" />
 <!-- Required font awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 
 <style>
 header { /*navbar를 상단에 고정*/
@@ -52,18 +55,18 @@ header { /*navbar를 상단에 고정*/
 			<nav
 				class="md:ml-auto flex flex-wrap items-center text-base justify-center">
 				<!-- top에 붙어있는 nav bar -->
-				
+
 				<c:choose>
-				<c:when test="${loginID != null}">
-				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-				<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a> <!-- 강사님께 질문 3 -->
-				<a href="#.mem">마이페이지</a>
-				</c:when>
-				<c:otherwise>
-				<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a> 
-				<a href="signup.mem">회원가입</a>
-			
-			<!-- 
+					<c:when test="${loginID != null}">
+					${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
+						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+						<!-- 강사님께 질문 3 -->
+						<a href="#.mem">마이페이지</a>
+					</c:when>
+					<c:otherwise>
+						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+						<a href="signup.mem">회원가입</a>
+						<!-- 
 			<script>
                     $("#logout").on("click", function(){ 
                         if(confirm("정말 로그아웃 하시겠습니까?")){
@@ -72,14 +75,12 @@ header { /*navbar를 상단에 고정*/
                     })
                 </script>
 			 -->
-			
-				</c:otherwise>
+
+					</c:otherwise>
 
 				</c:choose>
 
-				
 
-					
 			</nav>
 		</div>
 	</header>
@@ -88,30 +89,31 @@ header { /*navbar를 상단에 고정*/
 		세상에 나쁜 개는 없다
 	</div>
 	<nav>
-<div class="grid grid-cols-9 gap-4 ">
-		<div class="...">1</div>
-		<!-- 왼쪽 여백 -->
+		<div class="grid grid-cols-9 gap-4 ">
+			<div class="...">1</div>
+			<!-- 왼쪽 여백 -->
 
 
-		<div class="col-span-7">
-		<!-- 게시판 네비게이션 -->
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="">맛집 리스트</a></li>
-			<li class="nav-itme"><a href="">맛집 매거진</a></li>
-			<li class="nav-itme"><a href="">반려견 게시판</a></li>
-		</ul>
+			<div class="col-span-7">
+				<!-- 게시판 네비게이션 -->
+				<ul class="nav-container">
+					<li class="nav-itme"><a href="">맛집 리스트</a></li>
+					<li class="nav-itme"><a href="">맛집 매거진</a></li>
+					<li class="nav-itme"><a href="/list.pet?cpage=1">반려견 게시판</a></li>
+				</ul>
 
+
+			</div>
+
+
+
+			<div class="...">3</div>
+			<!-- 오른쪽 여백 -->
 
 		</div>
 
 
-		<div class="...">3</div>
-		<!-- 오른쪽 여백 -->
 
-	</div>
-
-	
-	
 
 	</nav>
 <body>
