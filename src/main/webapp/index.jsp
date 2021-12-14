@@ -545,7 +545,12 @@ input:focus ~ .icon-holder > .icon {
 <body>
 <div class="forSearch">
 <div class="container1">
-  <input class="main"  type="text"/><span class="searchicon"></span>
+<form action="/fboard.rest">
+ <input type="hidden" name="cpage" value="1">
+ <input type="hidden" name="category" value="all">
+ <input class="main"  type="text" name="target">
+</form>
+ <span class="searchicon"></span>
 
   <div class="icon-holder">
     <div class="icon" id="parking">
