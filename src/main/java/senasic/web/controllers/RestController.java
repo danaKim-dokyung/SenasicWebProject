@@ -141,10 +141,9 @@ public class RestController extends HttpServlet {
 	            arr[1] = user;
 	            String answer = g.toJson(arr);
 	            response.getWriter().append(answer);
-	            
 	            //메인 화면
 	         }else if(cmd.equals("fboard.rest")) {
-	             
+
 	             List<RestBoardDTO> carousel = dao.Carousel();
 	             
 	             RestBoardDTO ct= carousel.get(0);
@@ -159,8 +158,9 @@ public class RestController extends HttpServlet {
 
 				 
 	             String ctg = request.getParameter("category");
+
 	             //분류
-	             if(ctg!=null) {
+	             if(ctg.equals("category")){
 				 int pageTotalCount = dao.getPageTotalCount("category",ctg);
 	             if(currentPage <1) {currentPage = 1;}
 	             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
@@ -187,10 +187,41 @@ public class RestController extends HttpServlet {
 	             request.setAttribute("navi", navi);
 				 request.setAttribute("Fnum", Fnum);
 				 request.setAttribute("Snum", Snum);
-					System.out.println(ctg);
 	            	 request.setAttribute("category", ctg);			    
 	            	 request.setAttribute("type", "category");
 
+	             }else if(ctg.equals("all")) {
+	            	 String target = request.getParameter("target");
+	            	 System.out.println(target);
+					 int pageTotalCount = dao.getPageTotalCount(target);
+		             if(currentPage <1) {currentPage = 1;}
+		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+
+		             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+		             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+		             List<RestBoardDTO> list = dao.selectBySearch(target,start, end);
+
+		             List<Integer> navi = dao.getPageNaviSearch(currentPage,target);
+
+		             int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>2) {
+			             Snum = navi.get(1);		            	 
+		             }
+		             
+		             request.setAttribute("list", list);
+		             request.setAttribute("navi", navi);
+					 request.setAttribute("Fnum", Fnum);
+					 request.setAttribute("Snum", Snum);
+		            	 request.setAttribute("category", "all");		
+		            	 request.setAttribute("type", "category");
+		            	 request.setAttribute("target", target);
 	             }else {
 		             int pageTotalCount = dao.getPageTotalCount();
 		             
