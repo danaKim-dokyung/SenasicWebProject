@@ -11,7 +11,7 @@ import senasic.web.DTO.MemberDTO;
 
 public class MemberDAO {
 
-	// 싱글턴
+	// �떛湲��꽩
 	   private static MemberDAO instance = null;
 	   public static MemberDAO getInstance() {
 	      if(instance == null) {
@@ -27,7 +27,7 @@ public class MemberDAO {
 	      DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
 	      return ds.getConnection();
 	   }
-	   //아이디 중복 확인
+	   //�븘�씠�뵒 以묐났 �솗�씤
 	   public boolean isIdExist(String id) throws Exception{
 	      String sql = "select * from member where id=?";
 	      try(Connection con = this.getConnection();
@@ -38,7 +38,7 @@ public class MemberDAO {
 	         }
 	      }
 	   }
-	   //닉네임 중복 확인
+	   //�땳�꽕�엫 以묐났 �솗�씤
 	   public boolean isNicknameExist(String nn) throws Exception{
 	      String sql = "select * from member where nn=?";
 	      try(Connection con = this.getConnection();
@@ -50,9 +50,13 @@ public class MemberDAO {
 	      }
 	   }	   
 	   
-	   //정보 입력
+	   //�젙蹂� �엯�젰
 	   public int insert(MemberDTO dto)throws Exception {
-	      String sql = "insert into member values(?,?,?,?,?,?,?)";
+
+	    
+
+	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
+
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
 
@@ -60,14 +64,15 @@ public class MemberDAO {
 	         pstat.setString(2,dto.getPw());
 	         pstat.setString(3,dto.getNn());
 	         pstat.setString(4,dto.getM());
-	         pstat.setInt(5,dto.getPh());
-	         pstat.setString(6,dto.getAge());
+	         pstat.setString(5,dto.getPh());
+	         pstat.setInt(6,dto.getAge());
 	         pstat.setString(7,dto.getGender());
+	         pstat.setString(8, dto.getImg());
 	         int result = pstat.executeUpdate();
 	         return result;
 	      }   
 	   }
-	   //로그인 시도 
+	   //濡쒓렇�씤 �떆�룄 
 	   public boolean isLoginAllowed(String id, String pw) throws Exception{
 	      String sql = "select * from member where id = ? and pw = ?";
 	      try(Connection con = this.getConnection();
@@ -79,7 +84,7 @@ public class MemberDAO {
 	         }
 	      }
 	   }
-	   //아이디로 정보 삭제
+	   //�븘�씠�뵒濡� �젙蹂� �궘�젣
 	   public int delete(String id) throws Exception{
 	      String sql = "delete from member where id = ?";
 	      try(Connection con = this.getConnection();
@@ -90,7 +95,7 @@ public class MemberDAO {
 	         return result;
 	      }
 	   }
-	   //아이디로 비번 찾기
+	   //�븘�씠�뵒濡� 鍮꾨쾲 李얘린
 	   public MemberDTO selectById(String paramId) throws Exception{
 	      String sql = "select * from member where id = ?";
 	      try(Connection con = this.getConnection();
@@ -104,9 +109,10 @@ public class MemberDAO {
 	               dto.setPw(rs.getString("pw"));
 	               dto.setNn(rs.getString("nn"));
 	               dto.setM(rs.getString("m"));
-	               dto.setPh(rs.getInt("ph"));
-	               dto.setAge(rs.getString("age"));
+	               dto.setPh(rs.getString("ph"));
+	               dto.setAge(rs.getInt("age"));
 	               dto.setGender(rs.getString("gender"));
+	               dto.setSeq(rs.getInt("seq"));
 	               return dto;
 	            }
 	            return null;
@@ -115,8 +121,61 @@ public class MemberDAO {
 
 	   }
 
+	   //아이디 찾기
+	   public MemberDTO selectByMail(String paramM, String paramPh) throws Exception{
+	      String sql = "select * from member where m  = ? and ph = ?";
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql)){
+	         pstat.setString(1, paramM);
+	         pstat.setString(2, paramPh);
+	         try(ResultSet rs = pstat.executeQuery()){
 
-	
+	            MemberDTO dto = new MemberDTO();
+	            if(rs.next()) {
+	               dto.setId(rs.getString("id"));
+	               return dto;
+	            }
+	            return null;
+	         }
+	      }
+
+	   }
+	   
+	   //비밀번호 찾기
+	   public MemberDTO selectByFindPw(String paramid, String parammm) throws Exception{
+		      String sql = "select * from member where id  = ? and m = ?";
+		      try(Connection con = this.getConnection();
+		            PreparedStatement pstat = con.prepareStatement(sql)){
+		         pstat.setString(1, paramid);
+		         pstat.setString(2, parammm);
+		         try(ResultSet rs = pstat.executeQuery()){
+
+		            MemberDTO dto = new MemberDTO();
+		            if(rs.next()) {
+		               dto.setPw(rs.getString("pw"));
+		               return dto;
+		            }
+		            return null;
+		         }
+		      }
+
+		   }
+		   
+	public int changePw(String id, String pw) throws Exception{
+		String sql = "update member set pw = ? where id = ? ";
+
+
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);){
+
+	         pstat.setString(1,pw);
+	         pstat.setString(2,id);
+	         
+	         int result = pstat.executeUpdate();
+	         return result; 
+	      }
+		
+	}
 	
 	
 }

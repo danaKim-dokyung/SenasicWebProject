@@ -1,18 +1,20 @@
 package senasic.web.DTO;
 
 public class MemberDTO {
-	 private String id;
+	private int seq; 	
+	private String id;
 	    private String pw;
 	    private String nn;
 	    private String m;
-	    private int ph;
-	    private String age;
+	    private String ph;
+	    private int age;
 	    private String gender;
+	    private String img;
 	    public MemberDTO() {
 	        super();
 	        // TODO Auto-generated constructor stub
 	    }
-	    public MemberDTO(String id, String pw, String nn, String m, int ph, String age, String gender) {
+	    public MemberDTO(String id, String pw, String nn, String m, String ph, int age, String gender, int seq,String img) {
 	        super();
 	        this.id = id;
 	        this.pw = pw;
@@ -21,8 +23,16 @@ public class MemberDTO {
 	        this.ph = ph;
 	        this.age = age;
 	        this.gender = gender;
+	        this.seq = seq;
+	        this.img = img;
 	    }
-	    public String getId() {
+	    public int getSeq() {
+			return seq;
+		}
+		public void setSeq(int seq) {
+			this.seq = seq;
+		}
+		public String getId() {
 	        return id;
 	    }
 	    public void setId(String id) {
@@ -46,16 +56,16 @@ public class MemberDTO {
 	    public void setM(String m) {
 	        this.m = m;
 	    }
-	    public int getPh() {
+	    public String getPh() {
 	        return ph;
 	    }
-	    public void setPh(int ph) {
+	    public void setPh(String ph) {
 	        this.ph = ph;
 	    }
-	    public String getAge() {
+	    public int getAge() {
 	        return age;
 	    }
-	    public void setAge(String age) {
+	    public void setAge(int age) {
 	        this.age = age;
 	    }
 	    public String getGender() {
@@ -64,5 +74,11 @@ public class MemberDTO {
 	    public void setGender(String gender) {
 	        this.gender = gender;
 	    }
+		public String getImg() {
+			return img;
+		}
+		public void setImg(String img) {
+			this.img = img;
+		}
 
 }

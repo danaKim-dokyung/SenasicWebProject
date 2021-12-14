@@ -11,13 +11,6 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<a href="/load.rest?seq=1" >1</a>
-	<a href="/load.rest?seq=2" >2</a>
-	<a href="/load.rest?seq=3" >3</a>
-	<a href="/load.rest?seq=4" >4</a>
-	<a href="/load.rest?seq=5" >5</a>
-	<a href="/load.rest?seq=6" >6</a>
-	<a href="/load.rest?seq=7" >7</a>
-	<a href="/load.rest?seq=8" >8</a>
+	<a href="/test.rest">dummy make</a>
 </body>
 </html>
