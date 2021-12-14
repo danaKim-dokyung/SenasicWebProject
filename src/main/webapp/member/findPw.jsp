@@ -60,19 +60,27 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">PW찾기</h4>
-        <form action="" method="post" enctype="multipart/form-data" class="validation-form" novalidate>
+        <form action="/resultPw.mem" method="post"  class="validation-form" novalidate>
           
       
           
-          <!-- 이메일 입력 -->
+          <!-- 아아디 입력 -->
           <div class="mb-3">
-            <label for="id">아이디입력</label>
+            <label for="id">아이디 입력</label>
             <input type="text" class="form-control" id="id" name="id" placeholder="id를입력하세요"  required>
             <div class="invalid-feedback">
              아이디를 입력해주세요.
             </div>
           </div>
           
+           <!-- 이메일 입력 -->
+          <div class="mb-3">
+            <label for="id">e-mail 입력</label>
+            <input type="email" class="form-control" id="m" name="m" placeholder="e-mail을 입력하세요"  required>
+            <div class="invalid-feedback">
+             e-mail을 입력해주세요.
+            </div>
+          </div>
 		
 			
 		

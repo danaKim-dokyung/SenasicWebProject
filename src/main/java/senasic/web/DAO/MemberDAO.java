@@ -140,7 +140,42 @@ public class MemberDAO {
 	      }
 
 	   }
-	
+	   
+	   //비밀번호 찾기
+	   public MemberDTO selectByFindPw(String paramid, String parammm) throws Exception{
+		      String sql = "select * from member where id  = ? and m = ?";
+		      try(Connection con = this.getConnection();
+		            PreparedStatement pstat = con.prepareStatement(sql)){
+		         pstat.setString(1, paramid);
+		         pstat.setString(2, parammm);
+		         try(ResultSet rs = pstat.executeQuery()){
+
+		            MemberDTO dto = new MemberDTO();
+		            if(rs.next()) {
+		               dto.setPw(rs.getString("pw"));
+		               return dto;
+		            }
+		            return null;
+		         }
+		      }
+
+		   }
+		   
+	public int changePw(String id, String pw) throws Exception{
+		String sql = "update member set pw = ? where id = ? ";
+
+
+	      try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);){
+
+	         pstat.setString(1,pw);
+	         pstat.setString(2,id);
+	         
+	         int result = pstat.executeUpdate();
+	         return result; 
+	      }
+		
+	}
 	
 	
 }
