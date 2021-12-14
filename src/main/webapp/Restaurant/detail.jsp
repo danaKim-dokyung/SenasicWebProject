@@ -366,8 +366,8 @@ button:focus {
 
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
-					<c:when test="${startR eq navi}">
-					<a href="/load.rest?seq=${dto.seq }&rvpg=${startR }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
+					<a href="/load.rest?seq=${dto.seq }&rvpg=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -380,8 +380,8 @@ button:focus {
 			          ${navi }
 			        </a>
        		</c:when>
-       		<c:when test="${navi eq endR }">
-			     <a href="/load.rest?seq=${dto.seq }&rvpg=${endR }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+       		<c:when test="${navi!=1 and (navi%10) eq 1 and navi!=Snum}">
+			     <a href="/load.rest?seq=${dto.seq }&rvpg=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Next</span>
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import senasic.web.DAO.AdminDAO;
 import senasic.web.DAO.RecDAO;
 import senasic.web.DAO.RestBoardDAO;
 import senasic.web.DTO.MenuDTO;
@@ -68,10 +69,21 @@ public class RestController extends HttpServlet {
 		            }else if(recCheck==0) {
 			            user = 1;
 		            }
+		             int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>2) {
+			             Snum = navi.get(1);		            	 
+		             }
 	             
 	             
-	             request.setAttribute("startR", start-1);
-	             request.setAttribute("endR", end+1);
+	             request.setAttribute("Fnum", Fnum);
+	             request.setAttribute("Snum", Snum);
 	             request.setAttribute("navi", navi);
 	             request.setAttribute("rvPg", currentPage);
 				request.setAttribute("dto", result);
@@ -153,6 +165,13 @@ public class RestController extends HttpServlet {
 	             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
 	             List<RestBoardDTO> list = dao.selectByList(start, end);
 	             List<Integer> navi = dao.getPageNavi(currentPage);
+	             int Fnum = 0;
+	             if(navi.size()==12){
+	            	 Fnum = navi.get(10);
+	             }else if(navi.size()>9) {
+		             Fnum = navi.get(9);	            	 
+	             }
+	             int Snum = navi.get(1);
 			            
 	             request.setAttribute("list", list);
 	             request.setAttribute("navi", navi);
@@ -165,8 +184,8 @@ public class RestController extends HttpServlet {
 				 request.setAttribute("reviewN2", reviewN2);
 				 request.setAttribute("reviewN3", reviewN3);
 				 
-				 request.setAttribute("startB", start-1);
-	             request.setAttribute("endB", end+1);
+				 request.setAttribute("Fnum", Fnum);
+				 request.setAttribute("Snum", Snum);
 	             request.setAttribute("fbPg", currentPage); // 이름 고쳐주기
 	             request.getRequestDispatcher("/Restaurant/foodboard.jsp").forward(request, response);
 	             
@@ -196,8 +215,15 @@ public class RestController extends HttpServlet {
 		            arr[1] = user;
 		            String answer = g.toJson(arr);
 		            response.getWriter().append(answer);
-	          }
 		            
+		            //지울거
+	          }else if(cmd.equals("test.rest")) {
+	        	  AdminDAO daoa = AdminDAO.getInstance();
+	        	  for(int i = 10; i<210; i++) {
+	  				int result = dao.insertReview(16, "limdohyuk", "복제"+i, "null", 5.0);
+	        	  }
+	        	  
+	          }
 
 		}catch(Exception e) {
 			e.getStackTrace();

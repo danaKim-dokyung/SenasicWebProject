@@ -556,8 +556,123 @@
           </ol>
         </div>
         
-      </div> 현재 캐러셀
-	
+      </div>
+	<div>
+					<button
+					class="
+                  bg-green-500
+                  text-white
+                  active:bg-green-600
+                  font-bold
+                  uppercase
+                  text-xs
+                  px-4
+                  py-2.5
+                  rounded
+                  shadow
+                  hover:shadow-md 
+                  outline-none
+                  focus:outline-none
+                  mr-1
+                  mb-1
+                  ease-linear
+                  transition-all
+                  duration-150
+                "
+					type="button" onclick="openDropdown(event,'dropdown-example-1')">
+					카테고리<i class="fas fa-angle-down ml-2"></i>
+				</button>
+				<div
+					class="
+                  hidden
+                  bg-white
+                  text-base
+                  z-50
+                  float-left
+                  py-2
+                  list-none
+                  text-left
+                  rounded
+                  shadow-lg
+                  mt-1
+                "
+					style="min-width: 12rem" id="dropdown-example-1">
+					<a href="/category.pet?cpage=1&category=병원"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						# 병원 </a> <a href="/category.pet?cpage=1&category=산책로"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						# 산책로 </a> <a href="/category.pet?cpage=1&category=음식"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						# 음식 </a> <a href="/category.pet?cpage=1&category=기타"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						# 기타 </a>
+					<div
+						class="
+                    h-0
+                    my-2
+                    border border-solid border-t-0 border-blueGray-800
+                    opacity-25
+                  "></div>
+					<a href="/list.pet?cpage=1"
+						class="
+                    text-sm
+                    py-2
+                    px-4
+                    font-normal
+                    block
+                    w-full
+                    whitespace-nowrap
+                    bg-transparent
+                    text-gray-700
+                    hover:bg-gray-100
+                  ">
+						전체 보기 </a>
+				</div>
+	</div>
     
 
 
@@ -643,8 +758,8 @@
 
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
-					<c:when test="${startB eq navi}">
-					<a href="/fboard.rest?cpage = ${startB }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
+					<a href="/fboard.rest?cpage=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -657,8 +772,8 @@
 			          ${navi }
 			        </a>
        		</c:when>
-       		<c:when test="${navi eq endB }">
-			     <a href="/fboard.rest?cpage = ${endB }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+       		<c:when test="${navi!=1 and (navi%10) eq 1 and navi!=Snum}">
+			     <a href="/fboard.rest?cpage=${navi }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Next</span>
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -700,157 +815,21 @@
 		location.href="${ct2.link }";
 	});
 	
-	//캐러셀 하트 버튼눌렀을떄
-	   $("#ctHeart").on("click",function(){
-	      if(${loginID !=null}){
-	    	  $.ajax({
-	    		url:"/like.rest?seq=${ct.seq}",
-	    		dataType:"json"
-	    	  }).done(function(resp){
-	    		  console.log(resp);
-	    		  $("#rcN").text(resp[0]);
-	    		  if(resp[1]==1){
-	    			  $("#ctHeart").attr("fill","#dc2626");
-	    		  }else if(resp[1]==0){
-	    			  $("#ctHeart").attr("fill","currentColor");
-	    		  }
-	    	  });
-	      }else{
-	         alert("로그인 후 이용해 주세요");
-	      }      
-	   })
-
+	//
+	function openDropdown(event, dropdownID) {
+		let element = event.target;
+		while (element.nodeName !== "BUTTON") {
+			element = element.parentNode;
+		}
+		var popper = Popper.createPopper(element, document
+				.getElementById(dropdownID), {
+			placement : "bottom-start",
+		});
+		document.getElementById(dropdownID).classList.toggle("hidden");
+		document.getElementById(dropdownID).classList.toggle("block");
+	}
 
 </script>
-
-
-<!-- 
-<div class="flex items-center justify-center mb-4">
-    <button
-      class="
-        text-purple-500
-        bg-transparent
-        border-l border-t border-b border-purple-500
-        hover:bg-purple-500 hover:text-white
-        active:bg-purple-600
-        font-bold
-        uppercase
-        text-xs
-        px-4
-        py-2
-        rounded-l
-        outline-none
-        focus:outline-none
-        mb-1
-        ease-linear
-        transition-all
-        duration-150
-      "
-      type="button"
-    >
-      <i class="fas fa-angle-left"></i>
-    </button>
-    
-   
-	    <button
-	      class="
-	        text-purple-500
-	        bg-transparent
-	        border-l border-t border-b border-purple-500
-	        hover:bg-purple-500 hover:text-white
-	        active:bg-purple-600
-	        font-bold
-	        uppercase
-	        text-xs
-	        px-4
-	        py-2
-	        outline-none
-	        focus:outline-none
-	        mb-1
-	        ease-linear
-	        transition-all
-	        duration-150
-	      "
-	      type="button"
-	    >
-	      ${navi }
-	    </button>
-    
-    <button
-	      class="
-	        text-purple-500
-	        bg-transparent
-	        border-l border-t border-b border-purple-500
-	        hover:bg-purple-500 hover:text-white
-	        active:bg-purple-600
-	        font-bold
-	        uppercase
-	        text-xs
-	        px-4
-	        py-2
-	        outline-none
-	        focus:outline-none
-	        mb-1
-	        ease-linear
-	        transition-all
-	        duration-150
-	      "
-	      type="button"
-	    >
-	      2
-	    </button>
-	    
-	    <button
-	      class="
-	        text-purple-500
-	        bg-transparent
-	        border-l border-t border-b border-purple-500
-	        hover:bg-purple-500 hover:text-white
-	        active:bg-purple-600
-	        font-bold
-	        uppercase
-	        text-xs
-	        px-4
-	        py-2
-	        outline-none
-	        focus:outline-none
-	        mb-1
-	        ease-linear
-	        transition-all
-	        duration-150
-	      "
-	      type="button"
-	    >
-	     3
-	    </button>
-    
-    
-    <button
-      class="
-        text-purple-500
-        bg-transparent
-        border-t border-b border-r border-purple-500
-        hover:bg-purple-500 hover:text-white
-        active:bg-purple-600
-        font-bold
-        uppercase
-        text-xs
-        px-4
-        py-2
-        rounded-r
-        outline-none
-        focus:outline-none
-        mb-1
-        ease-linear
-        transition-all
-        duration-150
-      "
-      type="button"
-    >
-      <i class="fas fa-angle-right"></i>
-    </button>
-    </div>
-  -->    
     
     
 
