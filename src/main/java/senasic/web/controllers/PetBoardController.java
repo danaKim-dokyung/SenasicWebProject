@@ -1,5 +1,6 @@
 package senasic.web.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import senasic.web.DAO.PetBoardDAO;
 import senasic.web.DTO.PetBoardDTO;
@@ -41,7 +44,9 @@ public class PetBoardController extends HttpServlet {
 
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				int pageTotalCount;
-
+				
+				int check_category = 1;
+				
 				pageTotalCount = dao.getPageTotalCount();
 
 				if (currentPage < 1) {
@@ -56,6 +61,10 @@ public class PetBoardController extends HttpServlet {
 
 				list = dao.selectByBound(start, end);
 				String navi = dao.getPageNavi(currentPage);
+				
+//				System.out.println(navi);
+				
+				request.setAttribute("check_category", check_category);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", navi);
@@ -68,12 +77,13 @@ public class PetBoardController extends HttpServlet {
 
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");
-				int pageTotalCount;
+				
+				int check_category = 0;
 
 				System.out.println(currentPage);
 				System.out.println(category);
 
-				pageTotalCount = dao.getPageTotalCountByCategory(category);
+				int pageTotalCount = dao.getPageTotalCountByCategory(category);
 
 				if (currentPage < 1) {
 					currentPage = 1;
@@ -88,6 +98,7 @@ public class PetBoardController extends HttpServlet {
 				list = dao.selectByCategory(category, start, end);
 				String navi = dao.getPageNaviByCategory(currentPage, category);
 
+				request.setAttribute("check_category", check_category);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", navi);
@@ -114,13 +125,15 @@ public class PetBoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("board/boardWrite.jsp").forward(request, response);
 
+				
 				// 게시판 상세보기
 			} else if (cmd.equals("/detail.pet")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String longinID = (String) request.getSession().getAttribute("loginID");
-
-
+				
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
+				
 				int recCheck = dao.recCheck(seq, longinID); // 추천 여부
 				int user = 0;
 				if (recCheck == 1) {
@@ -135,6 +148,7 @@ public class PetBoardController extends HttpServlet {
 
 				int result = dao.addViewCount(seq);
 
+				request.setAttribute("check_category", check_category);
 				request.setAttribute("CountComment", CountComment);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("list", list);
@@ -149,11 +163,14 @@ public class PetBoardController extends HttpServlet {
 				String comment = request.getParameter("comment");
 				int board_seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
+				
+				System.out.println(check_category);
 
 				int reply = dao.insertReply(board_seq, writer, comment);
 				dao.updateComment(board_seq);
 
-				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage);
+				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_category=" + check_category);
 
 				// 댓글 삭제 기능
 			} else if (cmd.equals("/deleteComment.pet")) {
@@ -161,6 +178,7 @@ public class PetBoardController extends HttpServlet {
 				int board_seq = Integer.parseInt(request.getParameter("board_seq"));
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
 
 				System.out.println(seq);
 				System.out.println(cpage);
@@ -168,8 +186,9 @@ public class PetBoardController extends HttpServlet {
 				int deleteComment = dao.deleteComment(seq);
 				dao.updateComment(board_seq);
 
-				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage);
+				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_category=" + check_category);
 
+				
 				// 게시판 삭제기능
 			} else if (cmd.equals("/delete.pet")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
@@ -177,14 +196,17 @@ public class PetBoardController extends HttpServlet {
 				int result = dao.delete(seq);
 				response.sendRedirect("/list.pet?cpage=1");
 
+				
 				// 게시판 수정창으로 이동
 			} else if (cmd.equals("/modify.pet")) {
 
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
 
 				List<PetBoardDTO> list = dao.information(seq);
 
+				request.setAttribute("check_category", check_category);
 				request.setAttribute("list", list);
 				request.setAttribute("cpage", cpage);
 				request.getRequestDispatcher("board/modify_boardWrite.jsp").forward(request, response);
@@ -198,6 +220,7 @@ public class PetBoardController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String longinID = (String) request.getSession().getAttribute("loginID");
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
 				
 				System.out.println(category);
 				System.out.println(title);
@@ -223,6 +246,7 @@ public class PetBoardController extends HttpServlet {
 
 				dao.addViewCount(seq);
 
+				request.setAttribute("check_category", check_category);
 				request.setAttribute("CountComment", CountComment);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("list", list);
@@ -273,7 +297,6 @@ public class PetBoardController extends HttpServlet {
 
 				int rec_seq = Integer.parseInt(request.getParameter("seq"));
 				String rec_id = (String) request.getSession().getAttribute("loginID");
-
 				int result = dao.recCheck(rec_seq, rec_id);
 				int user = 0;
 				if (result == 1) {
@@ -294,6 +317,27 @@ public class PetBoardController extends HttpServlet {
 				String answer = g.toJson(arr);
 				response.getWriter().append(answer);
 
+			}else if (cmd.equals("/imageUpload.pet")) {
+				int maxSize = 1024 * 1024 * 10;
+//				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\board\\img";
+				File filePath = new File(savePath);
+
+				if (!filePath.exists()) {
+					filePath.mkdir();
+				}
+
+				System.out.println(savePath);
+				MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF8",
+						new DefaultFileRenamePolicy());
+
+				String sysName = multi.getFilesystemName("file");
+				String oriName = multi.getOriginalFileName("file");
+				
+				System.out.println(sysName);
+				System.out.println(oriName);
+				response.getWriter().append(sysName);
+				
 			}
 
 		} catch (Exception e) {

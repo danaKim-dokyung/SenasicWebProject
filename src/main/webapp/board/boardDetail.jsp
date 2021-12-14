@@ -40,8 +40,8 @@
 			class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 			style="float: right;">목록</button>
 	</div>
-
-	<form method="get" action="/comment.pet">
+	
+	<form method="post" action="/comment.pet?check_category=${check_category }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -114,7 +114,7 @@
 							<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }</td>
 							<c:if test="${replyList.writer eq loginID }">
 								<td><button type="button" class="delComment"
-										style="color: red; float:right; margin-right: 20px;">
+										style="color: red; float: right; margin-right: 20px;">
 										X<input class="replySeq" type="hidden"
 											value="${replyList.seq }">
 									</button></td>
@@ -171,11 +171,22 @@
 			obj.style.height = (12 + obj.scrollHeight) + "px";
 		};
 		
+		// 비회원시 댓글 쓰기 막기
+		$("#commentBtn").on("click",function() {
+			if(${loginID == null}){
+				alert("로그인 후 이용해주세요.");
+			return false;
+			}
+		})
+		
+		
+		
+		
 		// 댓글 삭제 기능
 		$(".delComment").on("click", function() {
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq ;
+				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq + "&check_category=${check_category }" ;
 			} 
 		})
 
@@ -185,12 +196,13 @@
 				.on(
 						"click",
 						function() {
-							location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }";
+							/* location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }"; */
+							history.go(-1);
 						})
 
+						
+						
 		// 추천 기능
-		
-		
 		$("#good").on("click", function() {
 			if(${loginID != null}){
 				$.ajax({
@@ -212,7 +224,8 @@
 		
 		// 게시글 수정하기
 		$("#modify").on("click", function() {
-				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }";
+				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }";
+				
 		}) 
 
 		
@@ -224,12 +237,13 @@
 		}) 
 
 		// 목록으로 돌아가기
-		$("#back")
-				.on(
-						"click",
-						function() {
-							location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }";
-						})
+	   $("#back").on("click",function() {
+			if(${check_category } == 1){
+				location.href = "/list.pet?cpage=1";
+			}else{
+				location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }";
+			}
+		})
 	</script>
 
 </body>
