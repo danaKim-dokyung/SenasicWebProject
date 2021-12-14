@@ -209,7 +209,7 @@ public class RestController extends HttpServlet {
 			             Fnum = navi.get(9);	            	 
 		             }
 		             int Snum = 0;
-		             if(NavCheck>2) {
+		             if(NavCheck>1) {
 			             Snum = navi.get(1);		            	 
 		             }
 
