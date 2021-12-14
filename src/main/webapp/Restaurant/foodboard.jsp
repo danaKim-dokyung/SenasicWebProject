@@ -778,7 +778,6 @@
       <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
         
         <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
 					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
