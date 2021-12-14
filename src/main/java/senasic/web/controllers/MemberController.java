@@ -124,14 +124,15 @@ public class MemberController extends HttpServlet {
         	    	String phone2 = request.getParameter("phone2");
         	    	String phone3 = request.getParameter("phone3");
         	    	String ph = phone1 + phone2 + phone3; 
-        	    	System.out.println(m);
+        	    	
 
         	    	MemberDTO findId = dao.selectByMail(m, ph);
         	    	request.setAttribute("id", findId.getId());
+        	    	System.out.println(findId.getId());
 
-        	    	if(findId != null) {
+        	    	if(findId.getId() != null) {
             	    	request.getRequestDispatcher("/member/yourId.jsp").forward(request, response);
-        	    	}else {
+        	    	}else if(findId.getId()==null){
         	    		response.sendRedirect("/member/None.jsp");
         	    	}
         	    }else if(cmd.equals("/resultPw.mem")){
@@ -141,8 +142,8 @@ public class MemberController extends HttpServlet {
         	    	MemberDTO findPw = dao.selectByFindPw(id, m);
         	    	request.setAttribute("pw", findPw.getPw());
         	    	System.out.println(findPw.getPw());
-        	    	if(findPw != null) {
-            	    	request.getRequestDispatcher("/member/yourPw.jsp").forward(request, response);
+        	    	if(findPw.getPw() != null) {
+            	    	request.getRequestDispatcher("/WEB-INF/yourPw.jsp").forward(request, response);
         	    	}else {
         	    		response.sendRedirect("/member/None.jsp");
         	    	}
@@ -150,8 +151,14 @@ public class MemberController extends HttpServlet {
         	    	String pw = passwordUtils.getSHA512(request.getParameter("pw"));
         	    	String id = request.getParameter("id");
         	    	
-        	    	dao.changePw(id, pw);
-        	    	response.sendRedirect("/member/signin.jsp");
+        	    	int result = dao.changePw(id, pw);
+        	    	System.out.println(result);
+        	    	if(result==1) {
+        	    		response.sendRedirect("/member/signin.jsp");
+        	    	}else {
+        	    		response.sendRedirect("/WEB-INF/yourPw.jsp");
+        	    	}
+        	    	
         	    	
         	    }
         }catch(Exception e) {

@@ -79,8 +79,8 @@ ${id} 아이디
 
           <div class="mb-4"></div>
           <div class="col text-center">
-           <div><a href="findPw.mem"><button class="btn btn-primary btn-lg btn-block" id="btn1" >비밀번호 찾기</button></a></div>
-           <div><a href="signin.mem"><button class="btn btn-primary btn-lg btn-block" id="btn2" >로그인</button></a></div>
+           <div><a href="/findPw.mem"><button class="btn btn-primary btn-lg btn-block" id="btn1" >비밀번호 찾기</button></a></div>
+           <div><a href="/signin.mem"><button class="btn btn-primary btn-lg btn-block" id="btn2" >로그인</button></a></div>
           </div>
          
       </div>
