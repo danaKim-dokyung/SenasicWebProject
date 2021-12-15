@@ -1,6 +1,7 @@
 package senasic.web.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class RestReplyDTO {
 	private int seq;
@@ -11,8 +12,15 @@ public class RestReplyDTO {
 	private double rate;
 	private int recommand;
 	private Timestamp time;
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public RestReplyDTO(int seq, int par_seq, String writer, String contents, String photo, double rate,
-			int recommand, Timestamp time) {
+			int recommand, Timestamp time, String id) {
 		this.seq = seq;
 		this.par_seq = par_seq;
 		this.writer = writer;
@@ -21,6 +29,7 @@ public class RestReplyDTO {
 		this.rate = rate;
 		this.recommand = recommand;
 		this.time = time;
+		this.id = id;
 	}
 	public Timestamp getTime() {
 		return time;
@@ -72,6 +81,9 @@ public class RestReplyDTO {
 	}
 	public RestReplyDTO() {
 	}
-	
+	public String getFormdDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+		return sdf.format(this.time.getTime());
+	}
 	
 }
