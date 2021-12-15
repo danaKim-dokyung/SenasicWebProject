@@ -23,7 +23,7 @@
 />
 <style>
 @media screen and (min-width:991px) {
-	.image-menu {
+	.image-menu { 
 		padding-left: .75rem;
 		padding-right: .75rem;
 	}
