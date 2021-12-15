@@ -555,19 +555,19 @@ input:focus ~ .icon-holder > .icon {
  <span class="searchicon"></span>
 
   <div class=" mt-2" id="">
-    <img src="searchImg.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg.PNG" class=" w-16 h-16">
     </div>    
     <div class=" md:ml-16 mt-2" id="gas">
-    <img src="searchImg2.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg2.PNG" class=" w-16 h-16">
     </div>
     <div class=" md:ml-16 mt-2">
-    <img src="searchImg3.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg3.PNG" class=" w-16 h-16">
     </div>
     <div class=" md:ml-16 mt-2" id="coffee">
-    <img src="searchImg4.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg4.PNG" class=" w-16 h-16">
     </div>
     <div class=" md:ml-16 mt-2" id="misc">
-    <img src="searchImg5.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg5.PNG" class=" w-16 h-16">
     </div>
     </div>
   </div>
