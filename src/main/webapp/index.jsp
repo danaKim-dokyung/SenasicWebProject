@@ -145,7 +145,7 @@ img {
   height: 50px;
   width: 800px;
   border-radius: 50px;
-  padding-left: 31px;
+  padding-left: 41px;
   padding-right: 11px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -154,6 +154,7 @@ img {
 }
 .main:focus {
   outline: none;
+  
 }
 
 .searchicon {
@@ -226,12 +227,12 @@ img {
 .icon {
   position: relative;
   height: 35px;
-  width: 35px;
+  width: 80px;
   background: #064e3b;
   border-radius: 100%;
   box-shadow: 0px 1px 2px 0px #555;
   cursor: pointer;
-  opacity: 0;
+  opacity: 100;
   transition: 0.4s;
 }
 .icon:hover {
@@ -550,29 +551,24 @@ input:focus ~ .icon-holder > .icon {
  <input type="hidden" name="category" value="all">
  <input class="main"  type="text" name="target">
 </form>
+<div class="flex justify-center">
  <span class="searchicon"></span>
 
-  <div class="icon-holder">
-    <div class="icon" id="parking">
-      <div class="tooltip">Parking</div>
-      서울
+  <div class=" mt-2" id="">
+    <img src="searchImg.PNG" class=" w-16 h-16">
     </div>    
-    <div class="icon" id="gas">
-      <div class="base"></div>
-      <div class="tooltip">Gas</div>
+    <div class=" md:ml-16 mt-2" id="gas">
+    <img src="searchImg2.PNG" class=" w-16 h-16">
     </div>
-    <div class="icon" id="eat">
-      <div class="fork"></div>
-      <div class="knife"></div>
-      <div class="tooltip">Food</div>
+    <div class=" md:ml-16 mt-2">
+    <img src="searchImg3.PNG" class=" w-16 h-16">
     </div>
-    <div class="icon" id="coffee">
-      <div class="cup"></div>
-      <div class="tooltip">Coffee</div>
+    <div class=" md:ml-16 mt-2" id="coffee">
+    <img src="searchImg4.PNG" class=" w-16 h-16">
     </div>
-    <div class="icon" id="misc">
-      <div class="dots"></div>
-      <div class="tooltip">Misc</div>
+    <div class=" md:ml-16 mt-2" id="misc">
+    <img src="searchImg5.PNG" class=" w-16 h-16">
+    </div>
     </div>
   </div>
 </div>
