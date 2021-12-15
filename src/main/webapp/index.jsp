@@ -552,23 +552,22 @@ input:focus ~ .icon-holder > .icon {
 </form>
  <span class="searchicon"></span>
 
-  <div class="icon-holder">
-    <div class="icon" id="parking">
-      <div class="tooltip">Parking</div>
-      서울
+
+  <div class=" mt-2" id="">
+    <img src="ctgImg/searchImg.PNG" class=" w-16 h-16">
     </div>    
-    <div class="icon" id="gas">
-      <div class="base"></div>
-      <div class="tooltip">Gas</div>
+    <div class=" md:ml-16 mt-2" id="gas">
+    <img src="ctgImg/searchImg2.PNG" class=" w-16 h-16">
     </div>
-    <div class="icon" id="eat">
-      <div class="fork"></div>
-      <div class="knife"></div>
-      <div class="tooltip">Food</div>
+    <div class=" md:ml-16 mt-2">
+    <img src="ctgImg/searchImg3.PNG" class=" w-16 h-16">
     </div>
-    <div class="icon" id="coffee">
-      <div class="cup"></div>
-      <div class="tooltip">Coffee</div>
+    <div class=" md:ml-16 mt-2" id="coffee">
+    <img src="ctgImg/searchImg4.PNG" class=" w-16 h-16">
+    </div>
+    <div class=" md:ml-16 mt-2" id="misc">
+    <img src="ctgImg/searchImg5.PNG" class=" w-16 h-16">
+
     </div>
     <div class="icon" id="misc">
       <div class="dots"></div>
