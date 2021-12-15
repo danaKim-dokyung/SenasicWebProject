@@ -560,7 +560,7 @@ input:focus ~ .icon-holder > .icon {
     <img src="ctgImg/searchImg2.PNG" class=" w-16 h-16">
     </div>
     <div class=" md:ml-16 mt-2">
-    <img src="ctgImg/searchImg3.PNG" class=" w-16 h-16">
+    <img src="ctgImg/searchImg3.PNG" class=" w-16 h-16"> 
     </div>
     <div class=" md:ml-16 mt-2" id="coffee">
     <img src="ctgImg/searchImg4.PNG" class=" w-16 h-16">
