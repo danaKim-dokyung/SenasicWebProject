@@ -244,7 +244,6 @@ public class RestController extends HttpServlet {
 			             Snum = navi.get(1);		            	 
 		             }
 
-				            
 		             request.setAttribute("list", list);
 		             request.setAttribute("navi", navi);
 					 request.setAttribute("Fnum", Fnum);
