@@ -83,23 +83,6 @@ public class AdminDAO {
 	         return rs.getInt(1);
 	      }
 	   }
-	
-	public int getRestCount(String target) throws Exception{
-	      String sql = "select count(*) from Rest_board where title like ? or locate like ? or locate_detail like ? or category = ?"; //수정
-	      try(Connection con = this.getConnection();
-	            PreparedStatement pstat = con.prepareStatement(sql);){
-	      pstat.setString(1, target);
-	      pstat.setString(2, target);
-	      pstat.setString(3, target);
-	      pstat.setString(4, target);
-
-	     try(ResultSet rs = pstat.executeQuery();){
-	         rs.next();
-	         return rs.getInt(1);
-	            }
-	      }
-	   }
-	
 	   
 	   public int getPageTotalCount() throws Exception{
 	      
@@ -113,18 +96,6 @@ public class AdminDAO {
 	      }
 	      return pageTotalCount;
 	   }
-		//검색
-		public int getPageTotalCount(String target) throws Exception{
-
-			int restTotalCount = this.getRestCount(target); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
-			int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
-		      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
-			         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
-			      }else {
-			         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1; //
-			      }
-			      return pageTotalCount;
-		}
 	   
 	   public List getPageNavi(int currentPage) throws Exception{
 	   
@@ -163,42 +134,6 @@ public class AdminDAO {
 	      return pageNavi;
 	   }
 	
-	   public List getPageNaviSearch(int currentPage, String target) throws Exception{
-
-			int restTotalCount = this.getRestCount(target); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
-
-			int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
-			if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
-				pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
-			}else {
-				pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
-			}
-			int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-			int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
-
-			if(endNavi > pageTotalCount) {
-				endNavi = pageTotalCount;
-			}
-
-			boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
-			boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
-
-			if(startNavi == 1) {
-				needPrev = false;
-			}
-
-			if(endNavi == pageTotalCount) {
-				needNext = false;
-			}
-
-			List<Integer> pageNavi = new ArrayList<>();
-			if(needPrev) {pageNavi.add(startNavi-1) ;}
-			for(int i = startNavi; i<=endNavi; i++) {
-				pageNavi.add(i);
-			}
-			if(needNext) { pageNavi.add(endNavi+1);}
-			return pageNavi;
-		}
 	   
 	   public RestBoardDTO getRestBoardInfo(int num) throws Exception{
 		   String sql = "select * from rest_board where seq = ?";
@@ -304,39 +239,10 @@ public class AdminDAO {
 	         return rs.getInt(1);
 	      }
 	   }
-
-	public int getMemberCount(String target) throws Exception{
-	      String sql = "select count(*) from member where id like ? or nn like ? or ph like ?";
-	      try(Connection con = this.getConnection();
-	            PreparedStatement pstat = con.prepareStatement(sql);){
-	         pstat.setString(1, "%"+target+"%");   
-	         pstat.setString(2, "%"+target+"%");   
-	         pstat.setString(3, "%"+target+"%");   
-	    	  
-	    	 try(ResultSet rs = pstat.executeQuery();){
-	         rs.next();
-	         return rs.getInt(1);
-	    	  
-	      }
-	      }
-	   }
 	
 	   public int getMemberTotalCount() throws Exception{
 		      
 		      int restTotalCount = this.getMemberCount(); // 현재 총 게시글 몇개있는지
-		      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
-		      
-		      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
-		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
-		      }else {
-		         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1; //
-		      }
-		      return pageTotalCount;
-		   }
-	   
-	   public int getMemberTotalCount(String target) throws Exception{
-		      
-		      int restTotalCount = this.getMemberCount(target); // 현재 총 게시글 몇개있는지
 		      int pageTotalCount = 0; // 총 몇개의 페이지 만들어질 것인지.
 		      
 		      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
@@ -385,44 +291,6 @@ public class AdminDAO {
 		   }
 		   
 		   
-		   public List getMemberNavi(int currentPage, String target) throws Exception{
-			   
-			      int restTotalCount = this.getMemberCount(target); // 현재 총 몇개의 게시글 있는지
-			      
-			      int pageTotalCount =0; // 페이지 총 갯수
-			      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
-			         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
-			      }else {
-			         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
-			      }
-			      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-			      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
-			      
-			      if(endNavi > pageTotalCount) {
-			         endNavi = pageTotalCount;
-			      }
-			      
-			      boolean needPrev = true; // needPrev => 왼쪽 화살표
-			      boolean needNext = true; // needNext => 오른쪽 화살표
-			      
-			      if(startNavi == 1) {
-			         needPrev = false;
-			      }
-			      
-			      if(endNavi == pageTotalCount) {
-			         needNext = false;
-			      }
-			      
-			      List<Integer> pageNavi = new ArrayList<>();
-			      if(needPrev) {pageNavi.add(startNavi-1) ;}
-			      for(int i = startNavi; i<=endNavi; i++) {
-			         pageNavi.add(i);
-			      }
-			      if(needNext) { pageNavi.add(endNavi+1);}
-			      return pageNavi;
-			   }
-		   
-		   
 		   
 		   
 		    public List<MemberDTO> listMember(int start, int end) throws Exception{
@@ -443,34 +311,6 @@ public class AdminDAO {
 		    		}
 		    	}
 		    }
-		    
-		    public List<MemberDTO> listSearchMember(int start, int end, String target) throws Exception{
-		    	String sql = "select * from (select member.* , row_number() over(order by seq desc) rn from member where id like ? or nn like ? or ph like ?)where rn between ? and ?";
-		    	
-		    	try(Connection con = this.getConnection();
-		    		PreparedStatement pstat = con.prepareStatement(sql);
-		    			){
-		    		pstat.setString(1, "%"+target+"%");
-		    		pstat.setString(2, "%"+target+"%");
-		    		pstat.setString(3, "%"+target+"%");
-		    		pstat.setInt(4, start);
-		    		pstat.setInt(5, end);
-		    		try(ResultSet rs = pstat.executeQuery()){
-		    			List<MemberDTO> list = new ArrayList();
-		    			while(rs.next()) {
-		    				MemberDTO dto = new MemberDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
-		    				list.add(dto);
-		    			}
-		    			return list;
-		    		}
-		    	}
-		    }
-		    
-		    
-		    
-		    
-		    
-		    
 		    public MemberDTO getMember(int num) throws Exception{
 		    	String sql = "select * from member where seq = ?";
 		    	try(Connection con = this.getConnection();

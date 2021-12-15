@@ -72,63 +72,19 @@ public class AdminController extends HttpServlet {
 			}else if(cmd.equals("rbEdit.admin")){ //식당게시판 글목록
 				int currentPage=1;
 				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
-	            String search = request.getParameter("search");
-
-	             if(search == null){
-		             int pageTotalCount = dao.getPageTotalCount();
-		             if(currentPage <1) {currentPage = 1;}
-		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-		             
-			            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
-			            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
-						List<RestBoardDTO> list = rbdao.selectByList(start, end);
-						List<Integer> navi = dao.getPageNavi(currentPage);
-					int Fnum = 0;
-		             int NavCheck = navi.size();
-		             if(NavCheck==12){
-		            	 Fnum = navi.get(10);
-		             }else if(NavCheck>9) {
-			             Fnum = navi.get(9);	            	 
-		             }
-		             int Snum = 0;
-		             if(NavCheck>1) {
-			             Snum = navi.get(1);		            	 
-		             }
-
-				            
-		             request.setAttribute("list", list);
-		             request.setAttribute("navi", navi);
-					 request.setAttribute("Fnum", Fnum);
-					 request.setAttribute("Snum", Snum);
-            }else  if(search!=null){
-			 int pageTotalCount = dao.getPageTotalCount(search);
-            if(currentPage <1) {currentPage = 1;}
-            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-
+	            int pageTotalCount = rbdao.getPageTotalCount();
+	            if(currentPage <1) {currentPage = 1;}
+	            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
 	            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
 	            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
-				List<RestBoardDTO> list = rbdao.selectBySearch(search,start, end);
-				List<Integer> navi = dao.getPageNaviSearch(currentPage, search);
+	            List<RestBoardDTO> list = rbdao.selectByList(start, end);
 
-            int Fnum = 0;
-            int NavCheck = navi.size();
-            if(NavCheck==12){
-           	 Fnum = navi.get(10);
-            }else if(NavCheck>9) {
-	             Fnum = navi.get(9);	            	 
-            }
-            int Snum = 0;
-            if(NavCheck>2) {
-	             Snum = navi.get(1);		            	 
-            }
-            
-            request.setAttribute("list", list);
-            request.setAttribute("navi", navi);
-			 request.setAttribute("Fnum", Fnum);
-			 request.setAttribute("Snum", Snum);
-           request.setAttribute("search", search);			    
-            }
+	             List<Integer> navi = dao.getPageNavi(currentPage);
+	             request.setAttribute("start", start-1);
+	             request.setAttribute("end", end+1);
+	             request.setAttribute("navi", navi);
 	             request.setAttribute("cpage", currentPage);
+				request.setAttribute("list", list);
 	             request.getRequestDispatcher("/admin/restBoardEdit.jsp").forward(request, response);
 	             
 			}else if(cmd.equals("rbWrite.admin")) { //식당게시판 글쓰기 접근,전체 접근권한 예정
@@ -203,65 +159,18 @@ public class AdminController extends HttpServlet {
 			}else if(cmd.equals("member.admin")) {
 				int currentPage=1;
 				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
-	            String search = request.getParameter("search");
-
-	             if(search == null){
-		             int pageTotalCount = dao.getMemberCount();
-		             
-		             if(currentPage <1) {currentPage = 1;}
-		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-		             
-			            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
-			            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
-						List<MemberDTO> list = dao.listMember(start, end);
-						List<Integer> navi = dao.getMemberNavi(currentPage);
-					int Fnum = 0;
-		             int NavCheck = navi.size();
-		             if(NavCheck==12){
-		            	 Fnum = navi.get(10);
-		             }else if(NavCheck>9) {
-			             Fnum = navi.get(9);	            	 
-		             }
-		             int Snum = 0;
-		             if(NavCheck>1) {
-			             Snum = navi.get(1);		            	 
-		             }
-
-				            
-		             request.setAttribute("list", list);
-		             request.setAttribute("navi", navi);
-					 request.setAttribute("Fnum", Fnum);
-					 request.setAttribute("Snum", Snum);
-
-             }else  if(search!=null){
-			 int pageTotalCount = dao.getMemberCount(search);
-             if(currentPage <1) {currentPage = 1;}
-             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
-
+	            int pageTotalCount = rbdao.getPageTotalCount();
+	            if(currentPage <1) {currentPage = 1;}
+	            if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
 	            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
 	            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
-				List<MemberDTO> list = dao.listSearchMember(start, end, search);
-				List<Integer> navi = dao.getMemberNavi(currentPage, search);
-
-             int Fnum = 0;
-             int NavCheck = navi.size();
-             if(NavCheck==12){
-            	 Fnum = navi.get(10);
-             }else if(NavCheck>9) {
-	             Fnum = navi.get(9);	            	 
-             }
-             int Snum = 0;
-             if(NavCheck>2) {
-	             Snum = navi.get(1);		            	 
-             }
-             
-             request.setAttribute("list", list);
-             request.setAttribute("navi", navi);
-			 request.setAttribute("Fnum", Fnum);
-			 request.setAttribute("Snum", Snum);
-            request.setAttribute("search", search);			    
-             }
+				List<MemberDTO> list = dao.listMember(start, end);
+				List<Integer> navi = dao.getMemberNavi(currentPage);
+	             request.setAttribute("start", start-1);
+	             request.setAttribute("end", end+1);
+	             request.setAttribute("navi", navi);
 	             request.setAttribute("cpage", currentPage);
+				request.setAttribute("list", list);
 				request.getRequestDispatcher("/admin/member.jsp").forward(request, response);
 				
 			}else if(cmd.equals("mEdit.admin")) {

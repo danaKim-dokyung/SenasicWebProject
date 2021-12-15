@@ -145,7 +145,7 @@ img {
   height: 50px;
   width: 800px;
   border-radius: 50px;
-  padding-left: 41px;
+  padding-left: 31px;
   padding-right: 11px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -154,7 +154,6 @@ img {
 }
 .main:focus {
   outline: none;
-  
 }
 
 .searchicon {
@@ -227,12 +226,12 @@ img {
 .icon {
   position: relative;
   height: 35px;
-  width: 80px;
+  width: 35px;
   background: #064e3b;
   border-radius: 100%;
   box-shadow: 0px 1px 2px 0px #555;
   cursor: pointer;
-  opacity: 100;
+  opacity: 0;
   transition: 0.4s;
 }
 .icon:hover {
@@ -551,8 +550,8 @@ input:focus ~ .icon-holder > .icon {
  <input type="hidden" name="category" value="all">
  <input class="main"  type="text" name="target">
 </form>
-<div class="flex justify-center">
  <span class="searchicon"></span>
+
 
   <div class=" mt-2" id="">
     <img src="ctgImg/searchImg.PNG" class=" w-16 h-16">
@@ -568,7 +567,11 @@ input:focus ~ .icon-holder > .icon {
     </div>
     <div class=" md:ml-16 mt-2" id="misc">
     <img src="ctgImg/searchImg5.PNG" class=" w-16 h-16">
+
     </div>
+    <div class="icon" id="misc">
+      <div class="dots"></div>
+      <div class="tooltip">Misc</div>
     </div>
   </div>
 </div>
