@@ -92,7 +92,7 @@ public class RestBoardDAO {
 	}
 	//검색
 	public int getRestCount(String target) throws Exception{
-		String sql ="select count(*) from Rest_board where title like ? or locate like ? or locate_detail like ? or category = ?";			
+		String sql ="select count(*) from Rest_board where title like ? or locate like ? or locate_detail like ? or category like ?";			
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 				){
