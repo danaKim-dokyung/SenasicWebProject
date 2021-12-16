@@ -219,6 +219,8 @@ public class RestController extends HttpServlet {
 
 	             }else if(ctg.equals("all")) {
 	            	 String target = request.getParameter("target");
+	            	 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+	                 target =target.replaceAll(match, "");
 	            	 System.out.println(target);
 					 int pageTotalCount = dao.getPageTotalCount(target);
 		             if(currentPage <1) {currentPage = 1;}

@@ -498,6 +498,12 @@ input:focus ~ .icon-holder > .icon {
   animation: ani 0.4s ease-out forwards;
   animation-delay: 0.3s;
 }
+#hashtag{
+	visibility:hidden;
+}
+.nametag{
+	
+}
 </style>
 
 </head>
@@ -549,27 +555,62 @@ input:focus ~ .icon-holder > .icon {
 <form action="/fboard.rest">
  <input type="hidden" name="cpage" value="1">
  <input type="hidden" name="category" value="all">
- <input class="main"  type="text" name="target">
+ <input class="main"  type="text" name="target" id="searching">
+ <a id="searchbytagName">
+ <button class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="shbtn">
+  검색
+</button>
+ </a>
 </form>
-<div class="flex justify-center">
- <span class="searchicon"></span>
 
-  <div class=" mt-2" id="">
-    <img src="ctgImg/searchImg.PNG" class=" w-16 h-16">
-    </div>    
-    <div class=" md:ml-16 mt-2" id="gas">
-    <img src="ctgImg/searchImg2.PNG" class=" w-16 h-16">
+<div class="flex justify-center" id="hashtag">
+ <span class="searchicon"></span>
+	
+	<p>
+	<table>
+	<tr>
+	 <td><span class=" mt-2" class="food" id="koreanfood">
+    <button>#한식</button>
+    </span>&nbsp;&nbsp;   
+    <td><span class=" mt-2" class="food" id="boonsik">
+    <button>#분식</button>
+    </span> &nbsp;&nbsp;
+   	<td><span class=" mt-2" class="food" id="japaneesefood">
+    <button>#일식</button>
+    </span> &nbsp;&nbsp;
+   	<td><span class=" mt-2" class="food" id="cafe">
+    <button>#카페</button>
+    </span> &nbsp;&nbsp;
+    <td><span class=" mt-2" class="food" id="fastfood">
+    <button>#패스트푸드</button>
+    </span> 
+    </tr>
+   
+  
+   <tr>
+      <td><span class=" mt-2"  id="gangnam">
+    <button>#강남구</button>
+    </span>&nbsp;&nbsp;   
+    <td><span class=" mt-2" id="sungbuk">
+    <button>#성북구</button>
+    </span> &nbsp;&nbsp;
+   <td><span class=" mt-2"  id="jongro">
+    <button>#종로구</button>
+    </span> &nbsp;&nbsp;
+   <td><span class=" mt-2"  id="mapo">
+    <button>#마포구</button>
+    </span> &nbsp;&nbsp;
+    <td><span class=" mt-2"  id="gangdong">
+    <button>#송파구</button>
+    </span> 
+    </tr>
+	</table>
+   
+   </p>
+  
+    
     </div>
-    <div class=" md:ml-16 mt-2">
-    <img src="ctgImg/searchImg3.PNG" class=" w-16 h-16">
-    </div>
-    <div class=" md:ml-16 mt-2" id="coffee">
-    <img src="ctgImg/searchImg4.PNG" class=" w-16 h-16">
-    </div>
-    <div class=" md:ml-16 mt-2" id="misc">
-    <img src="ctgImg/searchImg5.PNG" class=" w-16 h-16">
-    </div>
-    </div>
+    
   </div>
 </div>
 </div>
@@ -1030,6 +1071,67 @@ input:focus ~ .icon-holder > .icon {
 		</div>
 	</div>
 </footer>
+<script>
+// 클릭시 검색창에 #xx 보이게 하기
+	$("#koreanfood").on("click",function(){
+		
+		$("#searching").val("#한식");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=한식");
+		   
+	})
+	$("#japaneesefood").on("click",function(){
+		
+		$("#searching").val("#일식");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=일식");
+	})
+	$("#boonsik").on("click",function(){
+		
+		$("#searching").val("#분식");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=분식");
+	})
+	$("#cafe").on("click",function(){
+		
+		$("#searching").val("#카페");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=카페");
+	})
+	$("#fastfood").on("click",function(){
+		
+		$("#searching").val("#패스트푸드");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=패스트푸드");
+	})
+	
+	$("#gangnam").on("click",function(){
+		
+		$("#searching").val("#강남구");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=강남구");
+		   
+	})
+	$("#sungbuk").on("click",function(){
+		
+		$("#searching").val("#성북구");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=성북구");
+	})
+	$("#jongro").on("click",function(){
+		
+		$("#searching").val("#종로구");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=종로구");
+	})
+	$("#mapo").on("click",function(){
+		
+		$("#searching").val("#마포구");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=마포구");
+	})
+	$("#gangdong").on("click",function(){
+		
+		$("#searching").val("#송파구");
+		 document.getElementById("searchbytagName").setAttribute("href", "/fboard.rest?cpage=1&category=all&target=송파구");
+	})
+	//검색 태그 보이게 하기 
+	$("#searching").on("click",function(){
+		$("#hashtag").css("visibility","visible");
+		
+	})
+</script>
 
 </body>
 
