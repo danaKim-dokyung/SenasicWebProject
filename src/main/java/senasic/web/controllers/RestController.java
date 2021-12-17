@@ -221,7 +221,10 @@ public class RestController extends HttpServlet {
 	            	 String target = request.getParameter("target");
 	            	 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
 	                 target =target.replaceAll(match, "");
+	                 //띄어 쓰기 함수(split)
+	                 
 	            	 System.out.println(target);
+	            	 //여기부터
 					 int pageTotalCount = dao.getPageTotalCount(target);
 		             if(currentPage <1) {currentPage = 1;}
 		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
@@ -243,6 +246,7 @@ public class RestController extends HttpServlet {
 		             if(NavCheck>2) {
 			             Snum = navi.get(1);		            	 
 		             }
+		             //요기까지
 		             
 		             request.setAttribute("list", list);
 		             request.setAttribute("navi", navi);
