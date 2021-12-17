@@ -101,9 +101,10 @@ public class MemberController extends HttpServlet {
         	    	boolean result = dao.isLoginAllowed(id, password);
         	    	        	    	
         	    	if(result) {
-        	    		
+        	    		int seqID = dao.selectById(id).getSeq();
         	    		HttpSession session = request.getSession();
         	    		session.setAttribute("loginID", id);  
+        	    		session.setAttribute("seqID", seqID);
         	    		response.sendRedirect("/index.jsp");
         	    		// session.setAttribute("loginNN", nn); 媛뺤궗�떂猿� 吏덈Ц 2             	  
         	    	}else {
@@ -113,6 +114,7 @@ public class MemberController extends HttpServlet {
         	    	
         	    }else if(cmd.equals("/logout.mem")){
         	    	request.getSession().removeAttribute("loginID");
+        	    	request.getSession().removeAttribute("seqID");
         	    	response.sendRedirect("/index.jsp");
         	    }else if(cmd.equals("/findId.mem")) {
         	    	response.sendRedirect("/member/findId.jsp");

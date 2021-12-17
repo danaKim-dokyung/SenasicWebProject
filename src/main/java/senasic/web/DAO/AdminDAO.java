@@ -3,6 +3,9 @@ package senasic.web.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,9 @@ import javax.sql.DataSource;
 
 import senasic.web.DTO.MemberDTO;
 import senasic.web.DTO.MenuDTO;
+import senasic.web.DTO.PetBoardDTO;
 import senasic.web.DTO.RestBoardDTO;
+import senasic.web.DTO.dashboardDTO;
 import statics.Statics;
 
 public class AdminDAO {
@@ -88,10 +93,10 @@ public class AdminDAO {
 	      String sql = "select count(*) from Rest_board where title like ? or locate like ? or locate_detail like ? or category = ?"; //수정
 	      try(Connection con = this.getConnection();
 	            PreparedStatement pstat = con.prepareStatement(sql);){
-	      pstat.setString(1, target);
-	      pstat.setString(2, target);
-	      pstat.setString(3, target);
-	      pstat.setString(4, target);
+	      pstat.setString(1, "%"+target+"%");
+	      pstat.setString(2, "%"+target+"%");
+	      pstat.setString(3, "%"+target+"%");
+	      pstat.setString(4, "%"+target+"%");
 
 	     try(ResultSet rs = pstat.executeQuery();){
 	         
@@ -512,4 +517,233 @@ public class AdminDAO {
 		    		return result;
 		    	}
 		    }
+		    
+		    
+			// 페이징 전체보기.
+			private int getPetRecordCount() throws Exception {
+				String sql = "select count(*) from pet_board";
+				try (Connection con = this.getConnection();
+						PreparedStatement pstat = con.prepareStatement(sql);
+						ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					return rs.getInt(1);
+				}
+			}
+			
+			private int getPetRecordCount(String target) throws Exception {
+				String sql = "select count(*) from pet_board where id like ? or category like ? or writer like ? or title like ? or contents like ?";
+				try (Connection con = this.getConnection();
+						PreparedStatement pstat = con.prepareStatement(sql);
+						){
+					pstat.setString(1, "%"+target+"%");
+					pstat.setString(2, "%"+target+"%");
+					pstat.setString(3, "%"+target+"%");
+					pstat.setString(4, "%"+target+"%");
+					pstat.setString(5, "%"+target+"%");
+
+					try(ResultSet rs = pstat.executeQuery();) {
+						rs.next();
+						return rs.getInt(1);	
+				}
+				
+				}
+			}
+			
+			public int getPetPageTotalCount() throws Exception {
+				int recordTotalCount = this.getPetRecordCount();
+
+				// 총 페이지의 개수
+				int pageTotalCount = 0;
+
+				// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+				if (recordTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
+					pageTotalCount = recordTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
+					// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+				} else {
+					pageTotalCount = recordTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1;
+				}
+				return pageTotalCount;
+			}
+			
+			public int getPetPageTotalCount(String target) throws Exception {
+				int recordTotalCount = this.getPetRecordCount(target);
+
+				// 총 페이지의 개수
+				int pageTotalCount = 0;
+
+				// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+				if (recordTotalCount % Statics.ADMIN_COUNT_PER_PAGE == 0) {
+					pageTotalCount = recordTotalCount / Statics.ADMIN_COUNT_PER_PAGE;
+					// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+				} else {
+					pageTotalCount = recordTotalCount / Statics.ADMIN_COUNT_PER_PAGE + 1;
+				}
+				return pageTotalCount;
+			}
+			
+			
+			   public List getPetNavi(int currentPage) throws Exception{
+				   
+				      int restTotalCount = this.getPetRecordCount(); // 현재 총 몇개의 게시글 있는지
+				      int pageTotalCount =0; // 페이지 총 갯수
+				      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
+				         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
+				      }else {
+				         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
+				      }
+				      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+				      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+
+				      if(endNavi > pageTotalCount) {
+				         endNavi = pageTotalCount;
+				      }
+				      
+				      boolean needPrev = true; // needPrev => 왼쪽 화살표
+				      boolean needNext = true; // needNext => 오른쪽 화살표
+				      
+				      if(startNavi == 1) {
+				         needPrev = false;
+				      }
+				      
+				      if(endNavi == pageTotalCount) {
+				         needNext = false;
+				      }
+
+				      
+				      List<Integer> pageNavi = new ArrayList<>();
+				      if(needPrev) {pageNavi.add(startNavi-1) ;}
+				      for(int i = startNavi; i<=endNavi; i++) {
+				         pageNavi.add(i);
+				      }
+				      if(needNext) { pageNavi.add(endNavi+1);}
+				      return pageNavi;
+				   }
+			   public List getPetNavi(int currentPage, String target) throws Exception{
+				   
+				      int restTotalCount = this.getPetRecordCount(target); // 현재 총 몇개의 게시글 있는지
+				      int pageTotalCount =0; // 페이지 총 갯수
+				      if(restTotalCount % Statics.ADMIN_COUNT_PER_PAGE ==0) {
+				         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE ;
+				      }else {
+				         pageTotalCount = restTotalCount / Statics.ADMIN_COUNT_PER_PAGE +1 ;
+				      }
+				      int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+				      int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+
+				      if(endNavi > pageTotalCount) {
+				         endNavi = pageTotalCount;
+				      }
+				      
+				      boolean needPrev = true; // needPrev => 왼쪽 화살표
+				      boolean needNext = true; // needNext => 오른쪽 화살표
+				      
+				      if(startNavi == 1) {
+				         needPrev = false;
+				      }
+				      
+				      if(endNavi == pageTotalCount) {
+				         needNext = false;
+				      }
+
+				      
+				      List<Integer> pageNavi = new ArrayList<>();
+				      if(needPrev) {pageNavi.add(startNavi-1) ;}
+				      for(int i = startNavi; i<=endNavi; i++) {
+				         pageNavi.add(i);
+				      }
+				      if(needNext) { pageNavi.add(endNavi+1);}
+				      return pageNavi;
+				   }
+			   
+				public List<PetBoardDTO> selectByBound(int start, int end, String target) throws Exception {
+					String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board where id like ? or category like ? or writer like ? or title like ? or contents like ?) where rn between ? and ?";
+					try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+
+						pstat.setString(1, target);
+						pstat.setString(2, target);
+						pstat.setString(3, target);
+						pstat.setString(4, target);
+						pstat.setString(5, target);
+						pstat.setInt(6, start);
+						pstat.setInt(7, end);
+
+						try (ResultSet rs = pstat.executeQuery();) {
+							List<PetBoardDTO> list = new ArrayList();
+
+							while (rs.next()) {
+								String category = rs.getString("category");
+								int seq = rs.getInt("seq");
+								String writer = rs.getString("writer");
+								String title = rs.getString("title");
+								String contents = rs.getString("contents");
+								Timestamp write_date = rs.getTimestamp("write_date");
+								int view_count = rs.getInt("view_count");
+								int good_count = rs.getInt("good_count");
+								int comment_count = rs.getInt("comment_count");
+
+								PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+										good_count, comment_count);
+								list.add(dto);
+							}
+							return list;
+						}
+					}
+				}
+				
+				
+				//dashboard
+				public int checkDash() throws Exception{
+					String sql = "select count(*) from dashboard where timeline>?";
+					try(Connection con = this.getConnection();
+						PreparedStatement pstat = con.prepareStatement(sql);
+						){
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						pstat.setString(1, format.format(System.currentTimeMillis()));
+						try(ResultSet rs = pstat.executeQuery()){
+							rs.next();
+							int result = rs.getInt(1);
+							return result;
+						}
+					}
+				}
+				
+				public int insertDash() throws Exception{
+					String sql = "insert into dashboard values(default,(select count(*) from member), (select count(*) from pet_board),(select count(*) from rest_reply))";
+					try(Connection con = this.getConnection();
+						Statement stat = con.createStatement();
+							){
+						int result = stat.executeUpdate(sql);
+						return result;
+					}
+				}
+				
+				public int updateDash() throws Exception{
+					String sql = "update dashboard set user_c = (select count(*) from member), write_c = (select count(*) from pet_board), review_c = (select count(*) from rest_reply) where timeline > ?";
+					try(Connection con = this.getConnection();
+						PreparedStatement pstat = con.prepareStatement(sql);
+								){
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						pstat.setString(1, format.format(System.currentTimeMillis()));
+						int result = pstat.executeUpdate();
+						return result;						
+						}
+				}
+				
+				public List getDashboard(int start, int end) throws Exception{
+					String sql = "select * from (select dashboard.*,row_number() over(order by timeline desc) rn from dashboard) where rn between ? and ?";
+					try(Connection con = this.getConnection();
+						PreparedStatement pstat = con.prepareStatement(sql);
+							){
+						pstat.setInt(1, start);
+						pstat.setInt(2, end);
+						try(ResultSet rs = pstat.executeQuery();){
+							List<dashboardDTO> list = new ArrayList();
+
+							while(rs.next()) {
+								list.add(new dashboardDTO(rs.getDate(1),rs.getInt(2),rs.getInt(3),rs.getInt(4)));
+							}
+							return list;
+						}
+					}
+				}
 }

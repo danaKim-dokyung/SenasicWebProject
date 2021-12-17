@@ -9,18 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import senasic.web.DAO.AdminDAO;
+import senasic.web.DAO.PetBoardDAO;
 import senasic.web.DAO.RestBoardDAO;
 import senasic.web.DTO.MemberDTO;
 import senasic.web.DTO.MenuDTO;
+import senasic.web.DTO.PetBoardDTO;
 import senasic.web.DTO.RestBoardDTO;
+import senasic.web.DTO.dashboardDTO;
 import statics.Statics;
-import utils.passwordUtils;
 
 
 @WebServlet("*.admin")
@@ -31,6 +32,7 @@ public class AdminController extends HttpServlet {
 		String cmd = uri.substring(ctx.length()+1);
 		AdminDAO dao = AdminDAO.getInstance();
 		RestBoardDAO rbdao = RestBoardDAO.getInstance();
+		PetBoardDAO pdao = PetBoardDAO.getInstance();
 		try {
 			if(cmd.equals("rbUpload.admin")) { //식당게시판 글 업로드
 				int maxSize = 1024*1024*10; //10m
@@ -76,7 +78,6 @@ public class AdminController extends HttpServlet {
 
 	             if(search == null){
 		             int pageTotalCount = dao.getPageTotalCount();
-		             System.out.println(pageTotalCount);
 		             if(currentPage <1) {currentPage = 1;}
 		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
 		             
@@ -84,7 +85,6 @@ public class AdminController extends HttpServlet {
 			            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
 						List<RestBoardDTO> list = rbdao.selectByList(start, end);
 						List<Integer> navi = dao.getPageNavi(currentPage);
-						System.out.println(start+" "+end);
 					int Fnum = 0;
 		             int NavCheck = navi.size();
 		             if(NavCheck==12){
@@ -130,14 +130,15 @@ public class AdminController extends HttpServlet {
 			 request.setAttribute("Snum", Snum);
            request.setAttribute("search", search);			    
             }
+	             String seqID = request.getSession().getAttribute("seqID").toString();
+	             request.setAttribute("seqID", seqID);
 	             request.setAttribute("cpage", currentPage);
 	             request.getRequestDispatcher("/admin/restBoardEdit.jsp").forward(request, response);
 	             
 			}else if(cmd.equals("rbWrite.admin")) { //식당게시판 글쓰기 접근,전체 접근권한 예정
 				//수정에정
-				if(request.getSession().getAttribute("loginID")!=null) {
-					String id = request.getSession().getAttribute("loginID").toString();					
-				}
+	             String seqID = request.getSession().getAttribute("seqID").toString();
+	             request.setAttribute("seqID", seqID);
 				request.getRequestDispatcher("/admin/restBoardWrite.jsp").forward(request, response);
 				
 			}else if(cmd.equals("rbDetail.admin")){ //식당게시판 상세정보 수정접근
@@ -256,7 +257,8 @@ public class AdminController extends HttpServlet {
              if(NavCheck>2) {
 	             Snum = navi.get(1);		            	 
              }
-             
+             String seqID = request.getSession().getAttribute("seqID").toString();
+             request.setAttribute("seqID", seqID);
              request.setAttribute("list", list);
              request.setAttribute("navi", navi);
 			 request.setAttribute("Fnum", Fnum);
@@ -327,6 +329,90 @@ public class AdminController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int result = dao.deleteMember(seq);
 				response.sendRedirect("/member.admin");
+				
+				
+			}else if(cmd.equals("pet.admin")) {
+				int currentPage=1;
+				if(request.getParameter("cpage")!=null) {currentPage = Integer.parseInt(request.getParameter("cpage"));}
+	            String search = request.getParameter("search");
+
+	             if(search == null){
+		             int pageTotalCount = dao.getPetPageTotalCount();
+		             
+		             if(currentPage <1) {currentPage = 1;}
+		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+		             
+			            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
+			            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
+						List<PetBoardDTO> list = pdao.selectByBound(start, end);
+						List<Integer> navi = dao.getPetNavi(currentPage);
+					int Fnum = 0;
+		             int NavCheck = navi.size();
+		             if(NavCheck==12){
+		            	 Fnum = navi.get(10);
+		             }else if(NavCheck>9) {
+			             Fnum = navi.get(9);	            	 
+		             }
+		             int Snum = 0;
+		             if(NavCheck>1) {
+			             Snum = navi.get(1);		            	 
+		             }
+				            
+		             request.setAttribute("list", list);
+		             request.setAttribute("navi", navi);
+					 request.setAttribute("Fnum", Fnum);
+					 request.setAttribute("Snum", Snum);
+
+             }else  if(search!=null){
+	             int pageTotalCount = dao.getPetPageTotalCount(search);
+             if(currentPage <1) {currentPage = 1;}
+             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+
+	            int start = currentPage * Statics.ADMIN_COUNT_PER_PAGE - (Statics.ADMIN_COUNT_PER_PAGE-1);
+	            int end = currentPage * Statics.ADMIN_COUNT_PER_PAGE;
+				List<PetBoardDTO> list = dao.selectByBound(start, end, search);
+				List<Integer> navi = dao.getPetNavi(currentPage,search);
+
+             int Fnum = 0;
+             int NavCheck = navi.size();
+             if(NavCheck==12){
+            	 Fnum = navi.get(10);
+             }else if(NavCheck>9) {
+	             Fnum = navi.get(9);	            	 
+             }
+             int Snum = 0;
+             if(NavCheck>2) {
+	             Snum = navi.get(1);		            	 
+             }
+             
+             request.setAttribute("list", list);
+             request.setAttribute("navi", navi);
+			 request.setAttribute("Fnum", Fnum);
+			 request.setAttribute("Snum", Snum);
+            request.setAttribute("search", search);			    
+             }
+	             String seqID = request.getSession().getAttribute("seqID").toString();
+	             request.setAttribute("seqID", seqID);
+	             request.setAttribute("cpage", currentPage);
+				request.getRequestDispatcher("/admin/PetBoardEdit.jsp").forward(request, response);
+				
+			}else if(cmd.equals("delPet.admin")) {
+				int seq = Integer.parseInt(request.getParameter("seq"));
+
+				int result = pdao.delete(seq);
+				response.sendRedirect("/pet.admin?cpage=1");
+			}else if(cmd.equals("dash.admin")) {
+				int num = dao.checkDash();
+				if(num == 0) {
+					dao.insertDash();
+				}else {
+					dao.updateDash();
+				}
+				List<dashboardDTO> count = dao.getDashboard(1, 7);
+	             String seqID = request.getSession().getAttribute("seqID").toString();
+	             request.setAttribute("seqID", seqID);
+				request.setAttribute("count", count);
+				request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
