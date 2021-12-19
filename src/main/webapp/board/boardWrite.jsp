@@ -39,7 +39,7 @@
 </head>
 
 <body>
-	<form id="frm" action="/input.pet">
+	<form id="frm" action="/input.pet?check_num=${check_num }" method="post">
 		<!-- 글쓰기 Header -->
 		<div class="container">
 			<div class="head"
@@ -125,7 +125,11 @@
 	<c:if test="${result eq '1' }">
 		<script>
 			alert("작성에 성공하였습니다");
-			location.href = "/list.pet?cpage=1";
+			if(${check_num} == 2){
+				 location.href = "/list.pet?cpage=1&check_num=${check_num }";
+				}else if(${check_num} == 3){
+				 location.href = "/category.pet?cpage=1&category=${category }&check_num=${check_num }";
+				}
 		</script>
 	</c:if>
 	

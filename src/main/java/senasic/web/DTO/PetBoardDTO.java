@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class PetBoardDTO {
 	
+	private String id;
 	private String category;
 	private int seq;
 	private String writer;
@@ -16,10 +17,10 @@ public class PetBoardDTO {
 	private int comment_count;
 	
 	
-	
-	public PetBoardDTO(String category, int seq, String writer, String title, String contents, Timestamp write_date,
-			int view_count, int good_count, int comment_count) {
+	public PetBoardDTO(String id, String category, int seq, String writer, String title, String contents,
+			Timestamp write_date, int view_count, int good_count, int comment_count) {
 		super();
+		this.id = id;
 		this.category = category;
 		this.seq = seq;
 		this.writer = writer;
@@ -29,6 +30,16 @@ public class PetBoardDTO {
 		this.view_count = view_count;
 		this.good_count = good_count;
 		this.comment_count = comment_count;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 
@@ -121,6 +132,14 @@ public class PetBoardDTO {
 		this.comment_count = comment_count;
 	}
 
+
+	
+	
+
+
+	
+	
+	
 
 	
 	

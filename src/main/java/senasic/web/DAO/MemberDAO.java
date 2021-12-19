@@ -1,7 +1,10 @@
 package senasic.web.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -12,21 +15,25 @@ import senasic.web.DTO.MemberDTO;
 public class MemberDAO {
 
 	// �떛湲��꽩
-	   private static MemberDAO instance = null;
-	   public static MemberDAO getInstance() {
-	      if(instance == null) {
-	         instance = new MemberDAO();
-	      }
-	      return instance;
-	   }
-	   private MemberDAO() {}
-	   
 
-	   private Connection getConnection() throws Exception{
-	      Context ctx = new InitialContext();
-	      DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
-	      return ds.getConnection();
-	   }
+	private static MemberDAO instance = null;
+
+	public static MemberDAO getInstance() {
+		if (instance == null) {
+			instance = new MemberDAO();
+		}
+		return instance;
+	}
+
+	private MemberDAO() {
+	}
+
+	private Connection getConnection() throws Exception {
+		Context ctx = new InitialContext();
+		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
+		return ds.getConnection();
+	}
+  
 	   //�븘�씠�뵒 以묐났 �솗�씤
 	   public boolean isIdExist(String id) throws Exception{
 	      String sql = "select * from member where id=?";
@@ -163,20 +170,65 @@ public class MemberDAO {
 		   }
 		   
 	public int changePw(String id, String pw) throws Exception{
+
 		String sql = "update member set pw = ? where id = ? ";
 
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 
-	      try(Connection con = this.getConnection();
-	            PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, pw);
+			pstat.setString(2, id);
 
-	         pstat.setString(1,pw);
-	         pstat.setString(2,id);
-	         
-	         int result = pstat.executeUpdate();
-	         return result; 
-	      }
-		
+			int result = pstat.executeUpdate();
+			return result;
+		}
+
 	}
-	
-	
-}
+
+	// 회원 정보 불러오기
+	public List<MemberDTO> selectById_list(String paramId) throws Exception {
+		String sql = "select * from member where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
+			pstat.setString(1, paramId);
+			try (ResultSet rs = pstat.executeQuery()) {
+
+				List<MemberDTO> list = new ArrayList();
+				if (rs.next()) {
+
+					int seq = rs.getInt("seq");
+					String id = rs.getString("id");
+					String pw = rs.getString("pw");
+					String nn = rs.getString("nn");
+					String m = rs.getString("m");
+					String ph = rs.getString("ph");
+					int age = rs.getInt("age");
+					String gender = rs.getString("gender");
+					String photo = rs.getString("photo");
+
+					MemberDTO dto = new MemberDTO(id, pw, nn, m, ph, age, gender, seq, photo);
+
+					list.add(dto);
+
+				}
+				return list;
+			}
+		}
+	}
+		
+		//회원 정보 수정
+		public int modify(String pw, String nickname, String email, String phone, String id) throws Exception{
+	    	String sql = "update member set pw=?,nn=?,m=?,ph=? where id = ?";
+	    	try(Connection con = this.getConnection();
+		    		PreparedStatement pstat = con.prepareStatement(sql);
+	    			){
+	    		pstat.setString(1, pw);
+	    		pstat.setString(2, nickname);
+	    		pstat.setString(3, email);
+	    		pstat.setString(4, phone);
+	    		pstat.setString(5, id);
+	    		int result = pstat.executeUpdate();
+	    		return result;
+	    	}
+	    }
+	}
+
+

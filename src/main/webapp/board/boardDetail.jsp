@@ -40,8 +40,9 @@
 			class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 			style="float: right;">목록</button>
 	</div>
-	
-	<form method="post" action="/comment.pet?check_category=${check_category }">
+
+	<form method="post"
+		action="/comment.pet?check_category=${check_category }&check_num=${check_num }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -145,7 +146,7 @@
 						<input type="file" class="hidden">
 					</label>
 					<button id="commentBtn" class="summit float-right text-green-400"
-						type="submit">등록</button>
+						type="submit">등록${keyword } ${searchWord }</button>
 				</div>
 			</div>
 		</div>
@@ -153,7 +154,7 @@
 
 	<!-- 수정하기 삭제하기 기능.  -->
 	<div id="modi" style="margin: auto; width: 800px;">
-		<c:if test="${list[0].writer == loginID }">
+		<c:if test="${list[0].id == loginID }">
 			<button type="button" id="modify"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 				style="float: right; margin-left: 20px;">수정하기</button>
@@ -186,18 +187,27 @@
 		$(".delComment").on("click", function() {
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq + "&check_category=${check_category }" ;
+				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq + "&check_category=${check_category }&check_num=${check_num }" ;
 			} 
 		})
 
-
+		
 		// 목록으로 돌아가기
 		$("#back")
 				.on(
 						"click",
 						function() {
-							/* location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }"; */
-							history.go(-1);
+							if(${check_num} == 1){
+							 location.href = "/pet_board.my?cpage=${cpage }";
+							}else if(${check_num} == 2){
+							 location.href = "/list.pet?cpage=${cpage }&check_num=${check_num }";
+							}else if(${check_num} == 3){
+							 location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }&check_num=${check_num }";
+							}else if(${check_num} == 4){
+							 location.href = "/search.pet?cpage=${cpage }&check_num=${check_num }&check_category=1&keyword=${keyword }&searchWord=${searchWord}";
+							}				  
+							
+							/* history.back(); */
 						})
 
 						
@@ -224,26 +234,18 @@
 		
 		// 게시글 수정하기
 		$("#modify").on("click", function() {
-				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }";
+				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }";
 				
 		}) 
 
-		
 		 // 게시글 삭제하기
 		 $("#delete").on("click", function() {
 			 if (confirm("정말 삭제하시겠습니까? 하시겠습니까??")) {
-				location.href = "/delete.pet?seq=${list[0].seq }";
+				location.href = "/delete.pet?seq=${list[0].seq }&cpage=${cpage }&category=${list[0].category }&check_num=${check_num }";
+				 /* history.back(); */
 			}
 		}) 
 
-		// 목록으로 돌아가기
-	   $("#back").on("click",function() {
-			if(${check_category } == 1){
-				location.href = "/list.pet?cpage=1";
-			}else{
-				location.href = "/category.pet?cpage=${cpage }&category=${list[0].category }";
-			}
-		})
 	</script>
 
 </body>
