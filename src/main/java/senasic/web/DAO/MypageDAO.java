@@ -339,6 +339,7 @@ public class MypageDAO {
 
 	public List<RestBoardDTO> getRestInformation(int[] arr) throws Exception {
 		String sql = "select * from rest_board where seq in (?,?,?,?,?,?,?,?,?,?) order by rate desc";
+		
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			
 			for(int i = 0; i < arr.length; i ++) {

@@ -1,80 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>magazine detail</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+	rel="stylesheet">
 </head>
+
+<style>
+* {
+	box-sizing: border-box;
+}
+
+.more>a:hover {
+	color: rgb(26, 190, 48);
+	text-decoration: underline;
+}
+
+.shop>div {
+	float: left;
+}
+</style>
+	<!------------- ë§›ì§‘ ë§¤ê±°ì§„ ì£¼ì œ, ê¸€ ìƒì„± ë‚ ì§œ, ì¡°íšŒìˆ˜ -------------->
+    <header>
+
+        <div style="border: 1px solid black; width: 100%; height: 100px;"></div>
+
+        <div class="shadow-t-lg" style="text-align: center; border-bottom: 1px solid rgb(172, 168, 168);  background-color:rgba(211, 211, 211, 0.445); height: 180px;">
+
+            <div class="date">
+                <!-- ì‘ì„± ë‚ ì§œ ë° ì¡°íšŒìˆ˜-->
+                <div style="padding-top: 30px;">
+                    2021.12.17
+                </div>
+            </div>
+            
+
+            <!-- ë§¤ê±°ì§„ ì œëª© -->
+            <div style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;" id="big-title">
+                ìˆ˜í”„ ë§›ì§‘ ë² ìŠ¤íŠ¸ 10ê³³
+            </div>
+
+
+            <!-- ë§¤ê±°ì§„ ë¶€ì œëª© -->
+            <div id="small-title" style="color: grey; font-size: 18px;">
+                â€œëª¸ ë…¹ì¼ ë• ìŠ¤í”„ê°€ ì§„ë¦¬!â€
+            </div>
+        </div>
+    </header>
+
 <body>
 
+    <!------------- ë§›ì§‘ ë””í…Œì¼ ì‹œì‘ ë¶€ë¶„ -------------->
 
-<!------------- »ó´Ü¿¡ ºÙ¾î¼­ ¿òÁ÷ÀÌ´Â nav ºÎºĞ -------------->
-<nav>
+	<c:forEach var="dto" items="${list }" varStatus="status">
+		<div class="shop bg-white shadow-lg"
+			style="padding-top: 20px; padding-bottom: 20px; width: 850px; height: 250px; border-top: rgb(179, 176, 176); border-bottom: 1px solid rgb(179, 176, 176); margin: auto;">
+			<div style="width: 220px; height: 100%">
+				<img style="height: 100%;"
+					class="rounded-md w-full object-cover object-center mb-6"
+					src=${dto.photo1 } alt="content">
+			</div>
 
-</nav>
-
-<!------------- ¸ÀÁı ¸Å°ÅÁø ÁÖÁ¦, ±Û »ı¼º ³¯Â¥, Á¶È¸¼ö -------------->
-<header>
-
-<!-- ÀÛ¼º ³¯Â¥ -->
-<div></div>
-
-<!-- Á¶È¸¼ö -->
-<div></div>
-
-
-<!-- ¸Å°ÅÁø Á¦¸ñ -->
-<div></div>
-
-
-<!-- ¸Å°ÅÁø ºÎÁ¦¸ñ -->
-<div></div>
-
-</header>
-
-
-<!------------- ¸ÀÁı µğÅ×ÀÏ ½ÃÀÛ ºÎºĞ -------------->
-<body>
-
-
-<!-----ÀÌ¹ÌÁö ----->
-<!----- seq.»óÈ£¸í / Æò±Õ º°Á¡ / ÁÖ¼Ò / ´ëÇ¥ ´ñ±Û ----->
-<!----- °¡°Ô ´õº¸±â¶õ : °¡°Ô »ó¼¼º¸±â·Î ³Ñ¾î°¡±â ----->
-<!----- ±¸ºĞ ¼± ----->
-
-
-
-
-<!-----Áöµµ API ----->
-
-
-
-
-
-
-<!-----Áöµµ API ----->
-<div id="map" style="width:500px;height:400px;"></div>
-
-
-
-
-
-
-</body>
-
-
-
-
-
-
-<!------------- footer ½ÃÀÛ ºÎºĞ -------------->
-<footer>
-
-</footer>
-
-
-
+			<div style="height: 100%; width: 72%; padding-left: 30px;">
+				<div style="font-size: 25px; color: rgb(73, 73, 73);">
+					${status.count }. ${dto.title } &nbsp; <span class="text-green-500">${dto.rate }</span>
+				</div>
+				<div style="font-size: 16px; color: rgb(154, 156, 158);">${dto.locate }
+					${dto.locate_detail }</div>
+				<div style="height: 90px; padding-top : 15px">
+					ë§›ì´ê°€ ì•„ì£¼ì—†ìŠµë‹ˆë‹¤.
+				</div>
+				<div class="more" style="text-align: right; color: gray; ">
+					<a href="/load.rest?seq=${dto.seq }">${dto.title } ë”ë³´ê¸° ></a>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 
 
 
