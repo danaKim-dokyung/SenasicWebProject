@@ -78,10 +78,10 @@
 			<!-- 전화번호 -->
           <div class="row">
            	<div class="col-md-4 mb-2">
-            	<select class="form-control" name="phone1" required>
-   			 	<option selected>010</option>
+            	<span class="form-control" name="phone1" required>
+   			 	010
    			 	
-				</select>
+				</span>
               <div class="invalid-feedback">
                 번호를 선택해주세요
               </div>
