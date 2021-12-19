@@ -400,12 +400,6 @@ public class RestController extends HttpServlet {
 		            String answer = g.toJson(arr);
 		            response.getWriter().append(answer);
 
-	          }else if(cmd.equals("test.rest")) {
-	        	  AdminDAO daoa = AdminDAO.getInstance();
-	        	  for(int i = 10; i<210; i++) {
-	  				int result = dao.insertReview(16, "limdohyuk", "복제"+i, "null", 5.0);
-	        	  }
-	        	  
 	          }
 
 		}catch(Exception e) {
