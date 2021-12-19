@@ -1429,7 +1429,7 @@ $("#searching").on("click",function(){
 			   if(fastfood == (newtext)){
 				   
 			   }		//일식	한식
-			    else if(fastfood=="#한식"||fastfood=="#카페"||fastfood=="#분식"||fastfood=="#간식"){
+			    else if(fastfood=="#한식"||fastfood=="#카페"||fastfood=="#분식"||fastfood=="#일식"){
 			    	let first = elem.substring(elem.length-8,elem.length-4);
 			    	let seconed = elem.substring(elem.length-3,elem.length);
 			    	let result = first+" "+newtext;
