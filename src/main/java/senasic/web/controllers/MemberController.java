@@ -185,6 +185,7 @@ public class MemberController extends HttpServlet {
         		String p3 = request.getParameter("phone3");
         		String ph = (p1+p2+p3);
         		
+
         		System.out.println(pw);
         		System.out.println(nn);
         		System.out.println(m);
@@ -201,14 +202,18 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("mypage/mypage.jsp").forward(request, response);
 				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendRedirect("error.jsp");
-		}
-	}
+		
+        
+        	    	      	    	
+        	    
+        }catch(Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("error.jsp");
+        }                                                                                                                                                                                                                                                                                                                                                                      
+    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+ 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

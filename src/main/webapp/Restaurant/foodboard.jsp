@@ -692,6 +692,7 @@
                   ">
 						전체 보기 </a>
 				</div>
+				
 </div>
 </div>
 	</div>
@@ -777,11 +778,10 @@
       <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
         
         <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
 					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
-					<a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if><c:if test="${target ne null }">&target=${target }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -795,7 +795,7 @@
 			        </a>
        		</c:when>
        		<c:when test="${navi!=1 and (navi%10) eq 1 and navi!=Snum}">
-			     <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+			     <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if><c:if test="${target ne null }">&target=${target }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Next</span>
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -804,7 +804,7 @@
 			        </a>
        		</c:when>
        		<c:otherwise>
-			        <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if>" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+			        <a href="/fboard.rest?cpage=${navi }<c:if test="${category ne null }">&${type }=${category }</c:if><c:if test="${target ne null }">&target=${target }</c:if>" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
 			          ${navi}
 			        </a>
 			       		

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식당 게시판 글 수정</title>
+<title>애견 게시판 관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
   rel="stylesheet"
 />
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -56,9 +56,9 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
-		width: 260px;
+		width: 220px;
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -77,6 +77,18 @@
 	}
 }
 </style>
+<script>
+$(document).ready(function(){
+	if(${seqID == null}){
+		  alert("접근권한이 없습니다.");
+		  location.href = "/index.jsp";		
+	}else if(${seqID >0}){
+
+		  alert("접근권한이 없습니다.");
+		  location.href = "/index.jsp";
+	 }
+})
+</script>
 </head>
 <body>
 <body style="font-family: Roboto">
@@ -85,11 +97,11 @@
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				<div class="menu-text text-gray-100 ml-4">admin 계정명</div>
+				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
 			<div class="mx-4 px-3">
-				<a href="#" class="flex  w-full flex hover:bg-green-700 rounded py-3"> <i
+				<a href="#" class="flex  w-full flex hover:bg-green-700 rounded py-3" id="dash"> <i
 					class="material-icons fill-current text-gray-100">analytics</i>
 					<div class="relative menu-text text-gray-100 ml-4">통계보기</div>
 				</a>
@@ -107,7 +119,7 @@
 			
 			
 			<div class="flex mx-4 mb-3">
-				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
+				<a href="#" x-data="{show:true}" class="w-full flex flex-col"
 					@click="show=!show">
 					<div
 						class="w-full flex justify-between px-3 bg-green-700 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
@@ -129,17 +141,7 @@
 							</div>
 						</div>
 						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글관리
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
+							<div class="relative text-xs font-light menu-text text-gray-100 ml-4" id="pbEdit">
 								애견게시판 글관리
 							</div>
 						</div>
@@ -151,9 +153,10 @@
 	<div class="bg-white p-8 rounded-md w-full">
 	<div class=" flex items-center justify-between pb-6">
 		<div>
-			<h2 class="text-gray-600 font-semibold">식당 게시판 수정</h2>
+			<h2 class="text-gray-600 font-semibold">애견게시판 관리</h2>
 		</div>
-		<div class="flex items-center justify-between">
+		<form action="/pet.admin">
+		<div class="flex justify-end">
 			<div class="flex bg-gray-50 items-center p-2 rounded-md">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
 					fill="currentColor">
@@ -161,12 +164,14 @@
 						d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
 						clip-rule="evenodd" />
 				</svg>
-				<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
+				<input class="bg-gray-50 outline-none ml-1 block" type="text" name="search" id="search" placeholder="search...">
           </div>
-				<div class="lg:ml-40 ml-10 space-x-8"  id="create">
-					<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Create</button>
+				<div class="ml-15 space-x-8">
+					<button class="bg-indigo-600 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">검색</button>
 				</div>
 			</div>
+						</form>
+			
 		</div>
 		<div>
 			<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -176,19 +181,19 @@
 							<tr>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									상호명
+									제목
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									지역
+									닉네임
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									평점
+									카테고리
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									수정
+									댓글 수
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -198,52 +203,51 @@
 						</thead>
 						<tbody>
 						<c:forEach var="list" items="${list }">
+						
 							<tr>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<div class="flex items-center">
 											<div class="ml-3">
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">
 												<p class="text-gray-900 whitespace-no-wrap">
 													${list.title }
 												</p>
+												</a>
 											</div>
 										</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">${list.locate }</p>
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">
+									<p class="text-gray-900 whitespace-no-wrap">${list.writer }</p>
+									</a>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">									
 									<p class="text-gray-900 whitespace-no-wrap">
-										${list.rate }
+										${list.category }
 									</p>
+									</a>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">									
 									<p class="text-gray-900 whitespace-no-wrap">
-									<a href="/rbDetail.admin?num=${list.seq }">
-									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">수정</button>
+										${list.comment_count }
 									</p>
 									</a>
 								</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-									<a href="/rbDelete.admin?num=${list.seq }">
-									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" id="delBtn">삭제</button>
+									<button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow delBtn" id="${list.seq }">삭제</button>
 									</p>
-									</a>
 								</td>
-							</tr>
+							</tr>							
 							</c:forEach>
 						</tbody>
 					</table>
-	<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-  <div class="flex-1 flex justify-between sm:hidden">
-    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-      Previous
-    </a>
-    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-      Next
-    </a>
-  </div>
-  <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between md:justify-center">
+<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+
+  <div class="flex-1 flex items-center sm:justify-between md:justify-center">
     <div>
       <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
         
@@ -251,8 +255,8 @@
 
          <c:forEach var="navi" items="${navi }">
        		<c:choose>
-					<c:when test="${start eq navi}">
-					<a href="/rbEdit.admin?cpage = ${start }" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+					<c:when test="${(navi%10) eq 0 and navi != Fnum}">
+					<a href="/pet.admin?cpage=${navi }<c:if test="${search ne null }">&search=${search }</c:if> class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 			          <span class="sr-only">Previous</span>
 			          <!-- Heroicon name: solid/chevron-left -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -265,9 +269,9 @@
 			          ${navi }
 			        </a>
        		</c:when>
-       		<c:when test="${navi eq end }">
-			     <a href="/rbEdit.admin?cpage = ${end }" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-			          <span class="sr-only">Next</span>http://localhost:8080/fboard.rest?cpage=2
+       		<c:when test="${navi!=1 and (navi%10) eq 1 and navi!=Snum}">
+			     <a href="/pet.admin?cpage=${navi }<c:if test="${search ne null }">&search=${search }</c:if>" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+			          <span class="sr-only">Next</span>
 			          <!-- Heroicon name: solid/chevron-right -->
 			          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 			            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -275,7 +279,7 @@
 			        </a>
        		</c:when>
        		<c:otherwise>
-			        <a href="/rbEdit.admin?cpage=${navi }" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+			        <a href="/pet.admin?cpage=${navi }<c:if test="${search ne null }">&search=${search }</c:if>" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
 			          ${navi}
 			        </a>
 			       		
@@ -292,7 +296,7 @@
 		</div>
 	</div>
 </div>
-
+	
 		
 		
 		
@@ -305,20 +309,26 @@ $("#rbEdit").on("click",function(){
 $("#rbWrite").on("click",function(){
 	location.href="/rbWrite.admin";
 })
-$("#create").on('click',function(){
-	location.href="/rbWrite.admin";
-})
+
 $("#member").on("click",function(){
 	location.href="/member.admin";
 })
+$("#pbEdit").on("click",function(){
+	location.href="/pet.admin";
+})
 
-$("#delBtn").on("click",function(){
+$("#dash").on("click",function(){
+	location.href="/dash.admin";
+})
+
+
+$(".delBtn").on("click",function(){
 	if(confirm("삭제 하시겠습니까?")){
-		return true;
-	}else{
-		return false;
+		location.href="/delPet.admin?seq="+this.id;
 	}
 })
+
+document.querySelector('body').classList.toggle('sidebar-mini');
 
 </script>
 </body>

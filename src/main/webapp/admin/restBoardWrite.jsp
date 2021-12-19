@@ -22,7 +22,7 @@
   rel="stylesheet"
 />
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -56,9 +56,9 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
-		width: 260px;
+		width: 220px;
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -77,6 +77,18 @@
 	}
 }
 </style>
+<script>
+$(document).ready(function(){
+	if(${seqID == null}){
+		  alert("접근권한이 없습니다.");
+		  location.href = "/index.jsp";		
+	}else if(${seqID >0}){
+
+		  alert("접근권한이 없습니다.");
+		  location.href = "/index.jsp";
+	 }
+})
+</script>
 </head>
 <body>
 <body style="font-family: Roboto">
@@ -85,11 +97,11 @@
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				<div class="menu-text text-gray-100 ml-4">admin 계정명</div>
+				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
 			<div class="mx-4 px-3">
-				<a href="#" class="flex  w-full flex hover:bg-green-700 rounded py-3"> <i
+				<a href="#" class="flex  w-full flex hover:bg-green-700 rounded py-3" id="dash"> <i
 					class="material-icons fill-current text-gray-100">analytics</i>
 					<div class="relative menu-text text-gray-100 ml-4">통계보기</div>
 				</a>
@@ -107,7 +119,7 @@
 			
 			
 			<div class="flex mx-4 mb-3">
-				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
+				<a href="#" x-data="{show:true}" class="w-full flex flex-col"
 					@click="show=!show">
 					<div
 						class="w-full flex justify-between px-3 bg-green-700 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
@@ -129,17 +141,7 @@
 							</div>
 						</div>						
 						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글관리
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
+							<div class="relative text-xs font-light menu-text text-gray-100 ml-4" id="pbEdit">
 								애견게시판 글관리
 							</div>
 						</div>
@@ -308,17 +310,30 @@ $("#img3").on("change",function(){
 	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
+	
+	
 $("#rbEdit").on("click",function(){
 	location.href="/rbEdit.admin";
 })
 $("#rbWrite").on("click",function(){
-	location.href="/"
+	location.href="/rbWrite.admin";
 })
-
 $("#member").on("click",function(){
 	location.href="/member.admin";
 })
 
+$("#pbEdit").on("click",function(){
+	location.href="/pet.admin";
+})
+
+$("#dash").on("click",function(){
+	location.href="/dash.admin";
+})
+
+document.querySelector('body').classList.toggle('sidebar-mini');
+
+
 </script>
+
 </body>
 </html>
