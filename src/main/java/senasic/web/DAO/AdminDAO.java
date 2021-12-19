@@ -659,11 +659,11 @@ public class AdminDAO {
 					String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board where id like ? or category like ? or writer like ? or title like ? or contents like ?) where rn between ? and ?";
 					try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 
-						pstat.setString(1, target);
-						pstat.setString(2, target);
-						pstat.setString(3, target);
-						pstat.setString(4, target);
-						pstat.setString(5, target);
+						pstat.setString(1, "%"+target+"%");
+						pstat.setString(2, "%"+target+"%");
+						pstat.setString(3, "%"+target+"%");
+						pstat.setString(4, "%"+target+"%");
+						pstat.setString(5, "%"+target+"%");
 						pstat.setInt(6, start);
 						pstat.setInt(7, end);
 

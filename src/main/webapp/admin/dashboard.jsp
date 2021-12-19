@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
 
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -58,9 +58,9 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
-		width: 260px;
+		width: 220px;
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -114,7 +114,7 @@ $(document).ready(function(){
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				<div class="menu-text text-gray-100 ml-4">관리자</div>
+				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
 			<div class="mx-4 px-3" id="dash">
@@ -157,16 +157,7 @@ $(document).ready(function(){
 								식당게시판 글관리
 							</div>
 						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글관리
-							</div>
-						</div>
+
 						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4" id="pbEdit">
 								애견게시판 글관리
@@ -174,16 +165,18 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</a>
+				
 			</div>
 		</div>
+		
 <div class="main-content w-full md:w-4/5 reltive float-right grid justify items-stretch">
-	<div class="bg-white p-8 rounded-md w-full">
+	<div class="bg-white p-8 rounded-md md:w-full">
 		<div class=" flex items-center justify-center pb-6">
 	
 	
   
                     <!--/Metric Card-->
-                <div class="w-full p-3">
+                <div class="md:w-full p-3">
                                   <!--Metric Card-->
                     <div class="bg-white border rounded shadow p-2 justify-center">
                         <div class="flex flex-row items-center ml-10">
@@ -230,12 +223,12 @@ $(document).ready(function(){
                     
 		          <div class="w-full p-3">
                     <!--Graph Card-->
-                    <div class="bg-white border rounded shadow">
+                    <div class="bg-white border rounded shadow w-full md:w-4/5 lg:w-full">
                         <div class="border-b p-3">
                             <h5 class="font-bold uppercase text-gray-600">주간 증감 추이</h5>
                         </div>
                         <div class="p-5">
-                            <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined"></canvas>
+                            <canvas id="chartjs-0" class="chartjs"></canvas>
                         </div>
                     </div>
                     <!--/Graph Card-->
@@ -272,6 +265,9 @@ $("#pbEdit").on("click",function(){
 $("#dash").on("click",function(){
 	location.href="/dash.admin";
 })
+
+document.querySelector('body').classList.toggle('sidebar-mini');
+
 
 
 //차트                         

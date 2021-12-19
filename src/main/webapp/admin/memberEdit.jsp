@@ -22,7 +22,7 @@
   rel="stylesheet"
 />
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -56,9 +56,9 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
-		width: 260px;
+		width: 220px;
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -112,7 +112,7 @@ $(document).ready(function(){
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
 				<img class="menu-icon border-2 w-10 h-10 rounded-full"
 					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
-				<div class="menu-text text-gray-100 ml-4">관리자</div>
+				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
 			<div class="mx-4 px-3">
@@ -134,7 +134,7 @@ $(document).ready(function(){
 			
 			
 			<div class="flex mx-4 mb-3">
-				<a href="" x-data="{show:true}" class="w-full flex flex-col"
+				<a href="#" x-data="{show:true}" class="w-full flex flex-col"
 					@click="show=!show">
 					<div
 						class="w-full flex justify-between px-3 bg-green-700 hover:bg-green-700 rounded py-3" :class="{'bg-green-700':show}">
@@ -156,24 +156,19 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글쓰기
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
-							<div class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								맛집매거진 글관리
-							</div>
-						</div>
-						<div class="w-full flex px-3 hover:bg-green-800 rounded py-3 mb-3">
 							<div class="relative text-xs font-light menu-text text-gray-100 ml-4" id="pbEdit">
 								애견게시판 글관리
 							</div>
 						</div>
 					</div>
 				</a>
-			</div>
+
 		</div>
+		</div>
+
+
+                    
+                    
 <div class="main-content w-full md:w-4/5 reltive float-right grid justify items-stretch">
 	<div class="bg-white p-8 rounded-md w-full">
 		<div class="input-form-backgroud row">
@@ -320,6 +315,9 @@ $("#delBtn").on("click",function(){
 		return false;
 	}
 })
+
+document.querySelector('body').classList.toggle('sidebar-mini');
+
 </script>
 </body>
 </html>
