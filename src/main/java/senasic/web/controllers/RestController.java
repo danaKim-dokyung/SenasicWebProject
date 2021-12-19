@@ -219,42 +219,148 @@ public class RestController extends HttpServlet {
 
 	             }else if(ctg.equals("all")) {
 	            	 String target = request.getParameter("target");
-	            	 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
-	                 target =target.replaceAll(match, "");
-	                 //띄어 쓰기 함수(split)
-	                 
-	            	 System.out.println(target);
-	            	 //여기부터
-					 int pageTotalCount = dao.getPageTotalCount(target);
-		             if(currentPage <1) {currentPage = 1;}
-		             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+	            	 
+	            	
+	               //방법 1.target.substring(5,6).equals("#")
+	            	 //target.length()>6 그냥 입력했을떄 6글자 넘어갈수 있어서 
+	                 if(target.length()>6) { //#강남구 #분식
+	                	 if(target.substring(5,6).equals("#")) {
+	                		 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+			                 target =target.replaceAll(match, "");
+		                	    String  word =  target.split("\\s")[0];
+				                System.out.println(word);
+				                //음식 종류
+				                String  word1 =  target.split("\\s")[1];
+				                System.out.println(word1);
+				           	 int pageTotalCount = dao.getPageTotalCount1(word,word1);
+				             if(currentPage <1) {currentPage = 1;}
+				             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
 
-		             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
-		             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
-		             List<RestBoardDTO> list = dao.selectBySearch(target,start, end);
+				             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+				             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+				             
+				             List<RestBoardDTO> list1 = dao.selectBySearch1(word,word1,start, end);
 
-		             List<Integer> navi = dao.getPageNaviSearch(currentPage,target);
+				            
+				             List<Integer> navi1 = dao.getPageNaviSearch1(currentPage,word,word1);
 
-		             int Fnum = 0;
-		             int NavCheck = navi.size();
-		             if(NavCheck==12){
-		            	 Fnum = navi.get(10);
-		             }else if(NavCheck>9) {
-			             Fnum = navi.get(9);	            	 
-		             }
-		             int Snum = 0;
-		             if(NavCheck>2) {
-			             Snum = navi.get(1);		            	 
-		             }
-		             //요기까지
+				             int Fnum = 0;
+				             int NavCheck = navi1.size();
+				             if(NavCheck==12){
+				            	 Fnum = navi1.get(10);
+				             }else if(NavCheck>9) {
+					             Fnum = navi1.get(9);	            	 
+				             }
+				             int Snum = 0;
+				             if(NavCheck>2) {
+					             Snum = navi1.get(1);		            	 
+				             }
+				             //요기까지
+				             
+				            
+				             request.setAttribute("list", list1);
+				            
+				             request.setAttribute("navi", navi1);
+							 request.setAttribute("Fnum", Fnum);
+							 request.setAttribute("Snum", Snum);
+				            	 request.setAttribute("category", "all");		
+				            	 request.setAttribute("type", "category");
+				            	 String target1 = word+word1;
+				            	 request.setAttribute("target", target1);
+				            	 
+	                	 }else {
+	                		 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+			                 target =target.replaceAll(match, "");
+			                 System.out.println(target);
+			            	 int pageTotalCount = dao.getPageTotalCount(target);
+				             if(currentPage <1) {currentPage = 1;}
+				             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+
+				             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+				             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+				             List<RestBoardDTO> list = dao.selectBySearch(target,start, end);
+				             
+
+				             List<Integer> navi = dao.getPageNaviSearch(currentPage,target);
+				           
+
+				             int Fnum = 0;
+				             int NavCheck = navi.size();
+				             if(NavCheck==12){
+				            	 Fnum = navi.get(10);
+				             }else if(NavCheck>9) {
+					             Fnum = navi.get(9);	            	 
+				             }
+				             int Snum = 0;
+				             if(NavCheck>2) {
+					             Snum = navi.get(1);		            	 
+				             }
+				             //요기까지
+				             
+				             request.setAttribute("list", list);
+				           
+				             request.setAttribute("navi", navi);
+				             
+							 request.setAttribute("Fnum", Fnum);
+							 request.setAttribute("Snum", Snum);
+				            	 request.setAttribute("category", "all");		
+				            	 request.setAttribute("type", "category");
+				            	 request.setAttribute("target", target);
+			             
+		                 
+	                	 }
+	                	
+	                	 
+	                	 
+	                	
+			            	
+	              
+	                 }else{
+	                	 String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+		                 target =target.replaceAll(match, "");
+		                 System.out.println(target);
+		            	 int pageTotalCount = dao.getPageTotalCount(target);
+			             if(currentPage <1) {currentPage = 1;}
+			             if(currentPage > pageTotalCount) {currentPage = pageTotalCount;}
+
+			             int start = currentPage * Statics.REST_COUNT_PER_PAGE - (Statics.REST_COUNT_PER_PAGE-1);
+			             int end = currentPage * Statics.REST_COUNT_PER_PAGE;
+			             List<RestBoardDTO> list = dao.selectBySearch(target,start, end);
+			             
+
+			             List<Integer> navi = dao.getPageNaviSearch(currentPage,target);
+			           
+
+			             int Fnum = 0;
+			             int NavCheck = navi.size();
+			             if(NavCheck==12){
+			            	 Fnum = navi.get(10);
+			             }else if(NavCheck>9) {
+				             Fnum = navi.get(9);	            	 
+			             }
+			             int Snum = 0;
+			             if(NavCheck>2) {
+				             Snum = navi.get(1);		            	 
+			             }
+			             //요기까지
+			             
+			             request.setAttribute("list", list);
+			           
+			             request.setAttribute("navi", navi);
+			             
+						 request.setAttribute("Fnum", Fnum);
+						 request.setAttribute("Snum", Snum);
+			            	 request.setAttribute("category", "all");		
+			            	 request.setAttribute("type", "category");
+			            	 request.setAttribute("target", target);
 		             
-		             request.setAttribute("list", list);
-		             request.setAttribute("navi", navi);
-					 request.setAttribute("Fnum", Fnum);
-					 request.setAttribute("Snum", Snum);
-		            	 request.setAttribute("category", "all");		
-		            	 request.setAttribute("type", "category");
-		            	 request.setAttribute("target", target);
+	                 }
+	           
+	                 
+	            	 
+	            	 //여기부터
+				
+		            	 
 	             }
 
 	             request.setAttribute("carousel", carousel);

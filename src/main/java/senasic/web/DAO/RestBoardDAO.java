@@ -109,6 +109,24 @@ public class RestBoardDAO {
 			}
 		}
 	}
+	//세부검색
+	public int getRestCount1(String word,String word1) throws Exception{
+		String sql ="select count(*) from Rest_board where locate like ? and category like ?";			
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, "%"+word+"%");
+			pstat.setString(2, "%"+word1+"%");
+			
+			
+
+			try(ResultSet rs = pstat.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+
+			}
+		}
+	}
 	
 	public int getRestCount(String type, String target) throws Exception{
 		String sql = "";
@@ -127,6 +145,26 @@ public class RestBoardDAO {
 			}
 		}
 	}
+	//세부검색
+	public int getRestCount1(String type, String word,String word1) throws Exception{
+		String sql = "";
+		if(type.equals("category")) {
+			sql = "select count(*) from Rest_board where locate like ? and category like ?";			
+		}
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, word);
+			pstat.setString(1, word1);
+
+			try(ResultSet rs = pstat.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+
+			}
+		}
+	}
+	
 	//일반
 	public int getPageTotalCount() throws Exception{
 
@@ -171,6 +209,36 @@ public class RestBoardDAO {
 		
 		return pageTotalCount;
 	}
+	//세부검색
+		public int getPageTotalCount1(String word,String word1) throws Exception{
+
+			int restTotalCount = this.getRestCount1(word,word1); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+			int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
+
+			if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
+				pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE;
+			}else {
+				pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE + 1; //
+			}
+			
+			return pageTotalCount;
+		}
+		
+		public int getPageTotalCount1(String type, String word,String word1) throws Exception{
+
+			int restTotalCount = this.getRestCount1(type, word,word1); // �쁽�옱 珥� 寃뚯떆湲� 紐뉕컻�엳�뒗吏�
+			int pageTotalCount = 0; // 珥� 紐뉕컻�쓽 �럹�씠吏� 留뚮뱾�뼱吏� 寃껋씤吏�.
+
+			if(restTotalCount % Statics.REST_COUNT_PER_PAGE == 0) {
+				pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE;
+			}else {
+				pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE + 1; //
+			}
+			System.out.println(restTotalCount);
+			System.out.println(pageTotalCount);
+			
+			return pageTotalCount;
+		}
 
 	public List getPageNavi(int currentPage) throws Exception{
 
@@ -249,6 +317,80 @@ public class RestBoardDAO {
 	public List getPageNaviSearch(int currentPage, String target) throws Exception{
 
 		int restTotalCount = this.getRestCount(target); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
+
+		int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
+		if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
+			pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE ;
+		}else {
+			pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE +1 ;
+		}
+		int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
+		boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
+
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		List<Integer> pageNavi = new ArrayList<>();
+		if(needPrev) {pageNavi.add(startNavi-1) ;}
+		for(int i = startNavi; i<=endNavi; i++) {
+			pageNavi.add(i);
+		}
+		if(needNext) { pageNavi.add(endNavi+1);}
+		return pageNavi;
+	}
+	//세부검색
+	public List getPageNavi1(int currentPage,String type, String word,String word1) throws Exception{
+
+		int restTotalCount = this.getRestCount1(type, word,word1); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
+
+		int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
+		if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
+			pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE ;
+		}else {
+			pageTotalCount = restTotalCount / Statics.REST_COUNT_PER_PAGE +1 ;
+		}
+		int startNavi = (currentPage-1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		boolean needPrev = true; // needPrev => �쇊履� �솕�궡�몴
+		boolean needNext = true; // needNext => �삤瑜몄そ �솕�궡�몴
+
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		List<Integer> pageNavi = new ArrayList<>();
+		if(needPrev) {pageNavi.add(startNavi-1) ;}
+		for(int i = startNavi; i<=endNavi; i++) {
+			pageNavi.add(i);
+		}
+		if(needNext) { pageNavi.add(endNavi+1);}
+		return pageNavi;
+	}
+	
+	public List getPageNaviSearch1(int currentPage, String word,String word1) throws Exception{
+
+		int restTotalCount = this.getRestCount1(word,word1); // �쁽�옱 珥� 紐뉕컻�쓽 寃뚯떆湲� �엳�뒗吏�
 
 		int pageTotalCount =0; // �럹�씠吏� 珥� 媛��닔
 		if(restTotalCount % Statics.REST_COUNT_PER_PAGE ==0) {
@@ -364,6 +506,30 @@ public class RestBoardDAO {
 			pstat.setString(2, "%"+target+"%");
 			pstat.setString(3, "%"+target+"%");
 			pstat.setString(4, "%"+target+"%");
+			pstat.setInt(5, start);
+			pstat.setInt(6, end);
+			try(ResultSet rs = pstat.executeQuery()){
+				List<RestBoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					RestBoardDTO dto = new RestBoardDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+							,Math.round(rs.getDouble(7)*100)/100.0,rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14));
+					list.add(dto);
+				}
+				
+				return list;
+			}
+		}
+	}
+	//중복 검색 시 제목에 00 들어간거 없애고 싶으면 (title like ? or category like ?) or ->and
+	public List<RestBoardDTO> selectBySearch1(String word,String word1, int start, int end)throws Exception{
+		String sql = "select * from (select Rest_board.* , row_number() over(order by seq desc) rn "
+				+ "from Rest_board where (title like ? or category like ?) or (locate like ? and category like ?))where rn between ? and ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, "%"+word1+"%");
+			pstat.setString(2, "%"+word+"%");
+			pstat.setString(3, "%"+word+"%");
+			pstat.setString(4, "%"+word1+"%");
 			pstat.setInt(5, start);
 			pstat.setInt(6, end);
 			try(ResultSet rs = pstat.executeQuery()){

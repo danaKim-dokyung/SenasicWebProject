@@ -177,12 +177,10 @@
 			<!-- 전화번호 -->
           <div class="row">
            	<div class="col-md-4 mb-2">
-            	<select class="form-control" name="phone1" required>
-   			 	<option selected>선택</option>
-   			 	<option>010</option>
-    			<option >02</option> <!-- 강사님께 질문 1번 : 031 -->
-    			<option >031</option>
-				</select>
+            	<span class="form-control" name="phone1" required>
+   			 	
+   			 010
+				</span>
               <div class="invalid-feedback">
                 번호를 선택해주세요
               </div>
