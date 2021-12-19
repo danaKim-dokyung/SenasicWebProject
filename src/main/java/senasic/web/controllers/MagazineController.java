@@ -1,6 +1,8 @@
 package senasic.web.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,30 +10,63 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import senasic.web.DAO.MypageDAO;
+import senasic.web.DTO.RestBoardDTO;
+
 @WebServlet("*.mag")
 public class MagazineController extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String cmd = requestURI.substring(ctxPath.length());
-		
-		
-        try {
-        	
-        	
-    		if(cmd.equals("/list.mag")) {
-    			response.sendRedirect("/magazine/magazineList.jsp");
-    		}
-    		
-        }catch(Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("error.jsp");
-        }		
+		MypageDAO my_dao = MypageDAO.getInstance();
+
+		try {
+
+			if(cmd.equals("/magagine.mag")) {
+				
+//				int magagine_num = Integer.parseInt(request.getParameter("magagine_num"));
+				
+				
+				
+				int[] seq_arr = { 21, 22, 23, 16, 39, 40, 41, 42, 43, 44 };
+//				if(magagine_num == 1) {
+//					
+//				}
+//					ArrayList<Integer> seq_arr = new ArrayList<>(arr.length);
+//					
+//					for(int i : arr) {
+//						seq_arr.add(i);
+//					}
+
+				List<RestBoardDTO> list = my_dao.getRestInformation(seq_arr);
+
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/magazine/magazineDetail.jsp").forward(request, response);
+
+			}else if(cmd.equals("/magagineList.mag")) {
+				
+				response.sendRedirect("/magazine/magazineList.jsp");
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("error.jsp");
+		}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
