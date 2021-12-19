@@ -21,7 +21,7 @@
 	href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css"
 	rel="stylesheet" />
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -55,7 +55,7 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
 		width: 260px;
 		position: fixed;
@@ -346,6 +346,8 @@
 	</c:if>
 
 	<script>
+	
+	document.querySelector('body').classList.toggle('sidebar-mini');
 	
 	$("#btn").on("click", function() {
 		location.href = "/magagine.my";
