@@ -861,6 +861,19 @@ opacity
 	filter: brightness(50%);
 	
 }
+nav>ul{
+	padding-left: 28%;
+}
+nav>ul>li{
+	padding-right: 17%;
+}
+#carousel-font-1{
+	color: rgb(221, 221, 221);
+	padding:10px;
+}
+#carousel-font-2{
+	color: rgb(221, 221, 221);
+}
 </style>
 
 </head>
@@ -993,12 +1006,11 @@ opacity
 			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
 				<div
 					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-					style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+					style="background-image: url(/magazine/magagine_img/index1.jpg)">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">사루</div>
+						<div class="text-center"  id="carousel-font-2">서울시 용산구 이태원동</div>
 					</div>
 
 				</div>
@@ -1013,13 +1025,12 @@ opacity
 			<div class="carousel-item absolute opacity-0 bg-cover bg-right"
 				style="height: 50vh;">
 				<div
-					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-					style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjM0MTM2fQ&auto=format&fit=crop&w=1600&q=80');">
+					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right background-image:shadow-lg"
+					style="background-image: url(/magazine/magagine_img/index3.jpg);">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">뉴질랜드 스토리</div>
+						<div class="text-center"  id="carousel-font-2">서울시 송파구 송파동</div>
 					</div>
 
 				</div>
@@ -1035,12 +1046,11 @@ opacity
 			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
 				<div
 					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom"
-					style="background-image: url('https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+					style="background-image: url(/magazine/magagine_img/index2.jpg);">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">장화신은고양이</div>
+						<div class="text-center"  id="carousel-font-2">서울시 마포구 망원동</div>
 					</div>
 
 				</div>
