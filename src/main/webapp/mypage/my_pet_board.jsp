@@ -26,7 +26,7 @@
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
 <style>
-@media screen and (min-width:991px) {
+@media screen and (min-width:400px) {
 	.image-menu {
 		padding-left: .75rem;
 		padding-right: .75rem;
@@ -60,7 +60,7 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 400px) {
 	.sidebar {
 		width: 260px;
 		position: fixed;
@@ -113,7 +113,7 @@
 						class="transition ease-in duration-700 mt-3 bg-green-800">
 
 						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div
+							<div id="modify"
 								class="relative text-xs font-light menu-text text-gray-100 ml-4">
 								개인정보 변경</div>
 						</div>
@@ -335,6 +335,8 @@
 	</div>
 
 	<script>
+	
+	document.querySelector('body').classList.toggle('sidebar-mini');
 		
 		
 		// 리뷰 모아보기 이동
@@ -342,6 +344,10 @@
 			location.href = "/my_review.my?cpage=1";
 		})
 		
+		// 회원정보 수정 이동
+		$("#modify").on("click", function() {
+			location.href = "mypage.mem?cpage=1";
+		})
 	</script>
 </body>
 </html>
