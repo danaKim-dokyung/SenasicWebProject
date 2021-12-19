@@ -48,6 +48,7 @@ public class PetBoardDAO {
 			List<PetBoardDTO> list = new ArrayList();
 
 			while (rs.next()) {
+				String id = rs.getString("id");
 				String category = rs.getString("category");
 				int seq = rs.getInt("seq");
 				String writer = rs.getString("writer");
@@ -58,7 +59,7 @@ public class PetBoardDAO {
 				int good_count = rs.getInt("good_count");
 				int comment_count = rs.getInt("comment_count");
 
-				PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+				PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 						good_count, comment_count);
 				list.add(dto);
 			}
@@ -67,14 +68,15 @@ public class PetBoardDAO {
 	}
 
 	// 글쓰기. board 테이블에 insert
-	public int insert(String category, String writer, String title, String contents) throws Exception {
-		String sql = "insert into pet_board values(?,pet_board_seq.nextval,?,?,?,sysdate,default,default,default)";
+	public int insert(String longinID, String category, String writer, String title, String contents) throws Exception {
+		String sql = "insert into pet_board values(?,?,pet_board_seq.nextval,?,?,?,sysdate,default,default,default)";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, category);
-			pstat.setString(2, writer);
-			pstat.setString(3, title);
-			pstat.setString(4, contents);
+			pstat.setString(1, longinID);
+			pstat.setString(2, category);
+			pstat.setString(3, writer);
+			pstat.setString(4, title);
+			pstat.setString(5, contents);
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -83,7 +85,7 @@ public class PetBoardDAO {
 
 	// 게시글을 정해진 갯수만큼만 출력
 	public List<PetBoardDTO> selectByBound(int start, int end) throws Exception {
-		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board) where rn between ? and ?";
+		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board) where rn between ? and ? order by 1";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, start);
 			pstat.setInt(2, end);
@@ -92,6 +94,7 @@ public class PetBoardDAO {
 				List<PetBoardDTO> list = new ArrayList();
 
 				while (rs.next()) {
+					String id = rs.getString("id");
 					String category = rs.getString("category");
 					int seq = rs.getInt("seq");
 					String writer = rs.getString("writer");
@@ -102,7 +105,7 @@ public class PetBoardDAO {
 					int good_count = rs.getInt("good_count");
 					int comment_count = rs.getInt("comment_count");
 
-					PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+					PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 							good_count, comment_count);
 					list.add(dto);
 				}
@@ -134,6 +137,7 @@ public class PetBoardDAO {
 				List<PetBoardDTO> list = new ArrayList();
 
 				while (rs.next()) {
+					String id = rs.getString("id");
 					String category = rs.getString("category");
 					int seq = rs.getInt("seq");
 					String writer = rs.getString("writer");
@@ -144,7 +148,7 @@ public class PetBoardDAO {
 					int good_count = rs.getInt("good_count");
 					int comment_count = rs.getInt("comment_count");
 
-					PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+					PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 							good_count, comment_count);
 					list.add(dto);
 				}
@@ -207,8 +211,8 @@ public class PetBoardDAO {
 		}
 
 		// 시작 페이지 구하는 공식!!!!!!
-		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE_PETBOARD * Statics.NAVI_COUNT_PER_PAGE_PETBOARD + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE_PETBOARD - 1;
 
 		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
 		if (endNavi > pageTotalCount) {
@@ -228,16 +232,18 @@ public class PetBoardDAO {
 
 		String pageNavi_str = "";
 		if (needPrev) {
-			pageNavi_str += "<a href='/list.pet?cpage=" + (startNavi - 1) + "'><</a>,";
+			pageNavi_str += "<a href='/list.pet?cpage=" + (startNavi - 1) + "&check_num=2" + "'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi_str += "<a href='/list.pet?cpage=" + i + "'>" + i + "</a>,";
+			pageNavi_str += "<a href='/list.pet?cpage=" + i  + "&check_num=2" + "'>" + i + "</a>,";
 		}
 
 		if (needNext) {
-			pageNavi_str += "<a href='/list.pet?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi_str += "<a href='/list.pet?cpage=" + (endNavi + 1) + "&check_num=2" + "'>></a>";
 		}
+		
+		System.out.println(pageNavi_str);
 		
 //		List<String> pageNavi = new ArrayList<String>(Arrays.asList(pageNavi_str.split(",")));
 		
@@ -302,8 +308,8 @@ public class PetBoardDAO {
 		}
 
 		// 시작 페이지 구하는 공식!!!!!!
-		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE_PETBOARD * Statics.NAVI_COUNT_PER_PAGE_PETBOARD + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE_PETBOARD - 1;
 
 		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
 		if (endNavi > pageTotalCount) {
@@ -322,29 +328,30 @@ public class PetBoardDAO {
 		}
 		String pageNavi = "";
 		if (needPrev) {
-			pageNavi += "<a href='/category.pet?cpage=" + (startNavi - 1) + "&category=" + category + "'><</a>,";
+			pageNavi += "<a href='/category.pet?cpage=" + (startNavi - 1) + "&category=" + category + "&check_num=3" + "'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a href='/category.pet?cpage=" + i + "&category=" + category + "'>" + i + "</a>,";
+			pageNavi += "<a href='/category.pet?cpage=" + i + "&category=" + category + "&check_num=3" + "'>" + i + "</a>,";
 		}
 
 		if (needNext) {
-			pageNavi += "<a href='/category.pet?cpage=" + (endNavi + 1) + "&category=" + category + "'>></a>";
+			pageNavi += "<a href='/category.pet?cpage=" + (endNavi + 1) + "&category=" + category + "&check_num=3" + "'>></a>";
 		}
 		return pageNavi;
 		
 	}
 
-	public List<PetBoardDTO> information(int id) throws Exception {
+	public List<PetBoardDTO> information(int id_r) throws Exception {
 		String sql = "select * from pet_board where seq=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(1, id);
+			pstat.setInt(1, id_r);
 			try (ResultSet rs = pstat.executeQuery();) {
 
 				List<PetBoardDTO> list = new ArrayList();
 
 				while (rs.next()) {
+					String id = rs.getString("id");
 					String category = rs.getString("category");
 					int seq = rs.getInt("seq");
 					String writer = rs.getString("writer");
@@ -355,7 +362,7 @@ public class PetBoardDAO {
 					int good_count = rs.getInt("good_count");
 					int comment_count = rs.getInt("comment_count");
 
-					PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+					PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 							good_count, comment_count);
 					list.add(dto);
 				}
@@ -401,6 +408,7 @@ public class PetBoardDAO {
 				List<PetBoardDTO> list = new ArrayList();
 
 				while (rs.next()) {
+					String id = rs.getString("id");
 					String category = rs.getString("category");
 					int seq = rs.getInt("seq");
 					String writer = rs.getString("writer");
@@ -411,7 +419,7 @@ public class PetBoardDAO {
 					int good_count = rs.getInt("good_count");
 					int comment_count = rs.getInt("comment_count");
 
-					PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+					PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 							good_count, comment_count);
 					list.add(dto);
 				}
@@ -477,8 +485,8 @@ public class PetBoardDAO {
 		}
 
 		// 시작 페이지 구하는 공식
-		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE_PETBOARD * Statics.NAVI_COUNT_PER_PAGE_PETBOARD + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE_PETBOARD - 1;
 
 		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
 		if (endNavi > pageTotalCount) {
@@ -499,18 +507,19 @@ public class PetBoardDAO {
 		String pageNavi = "";
 		if (needPrev) {
 			pageNavi += "<a href='/search.pet?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord="
-					+ searchWord + "'><</a>,";
+					+ searchWord + "&check_num=4" + "&check_category=1" +"'><</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a href='/search.pet?cpage=" + i + "&keyword=" + keyword + "&searchWord=" + searchWord + "'>"
+			pageNavi += "<a href='/search.pet?cpage=" + i + "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=4" + "&check_category=1" + "'>"
 					+ i + "</a>,";
 		}
 
 		if (needNext) {
 			pageNavi += "<a href='/search.pet?cpage=" + (endNavi + 1) + "&keyword=" + keyword + "&searchWord="
-					+ searchWord + "'>></a>";
+					+ searchWord + "&check_num=4" + "&check_category=1" +"'>></a>";
 		}
+		System.out.println(pageNavi);
 		return pageNavi;
 
 	}

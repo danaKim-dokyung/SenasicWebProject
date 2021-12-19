@@ -21,6 +21,8 @@ td>a:hover {
 	text-decoration: underline;
 	/* hover시 밑줄표시 */
 }
+
+
 </style>
 </head>
 
@@ -84,7 +86,7 @@ td>a:hover {
                   mt-1
                 "
 					style="min-width: 12rem" id="dropdown-example-1">
-					<a href="/category.pet?cpage=1&category=병원"
+					<a href="/category.pet?cpage=1&category=병원&check_num=3"
 						class="
                     text-sm
                     py-2
@@ -97,7 +99,7 @@ td>a:hover {
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 병원 </a> <a href="/category.pet?cpage=1&category=산책로"
+						# 병원 </a> <a href="/category.pet?cpage=1&category=산책로&check_num=3"
 						class="
                     text-sm
                     py-2
@@ -110,7 +112,7 @@ td>a:hover {
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 산책로 </a> <a href="/category.pet?cpage=1&category=음식"
+						# 산책로 </a> <a href="/category.pet?cpage=1&category=음식&check_num=3"
 						class="
                     text-sm
                     py-2
@@ -123,7 +125,7 @@ td>a:hover {
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 음식 </a> <a href="/category.pet?cpage=1&category=기타"
+						# 음식 </a> <a href="/category.pet?cpage=1&category=기타&check_num=3"
 						class="
                     text-sm
                     py-2
@@ -144,7 +146,7 @@ td>a:hover {
                     border border-solid border-t-0 border-blueGray-800
                     opacity-25
                   "></div>
-					<a href="/list.pet?cpage=1"
+					<a href="/list.pet?cpage=1&check_num=2"
 						class="
                     text-sm
                     py-2
@@ -216,19 +218,42 @@ td>a:hover {
 								<tr
 									class="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0 text-sm">
 									<td class="px-4 py-4 text-center">${dto.seq }</td>
-									<td class="px-4 py-4"><a
-										href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }">${dto.title }
+									<%-- <td class="px-4 py-4"><a
+										href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">${dto.title }
 											<c:if test="${dto.comment_count ne 0 }">
 								&nbsp <i class="far fa-comment-dots"> </i>
 												<span style="color: red;">[${dto.comment_count }]</span>
 											</c:if>
-									</a></td>
+									</a></td> --%>
+									<!-- 검색창에 키워드랑 내용같이 전달 -->
+									<c:choose>
+										<c:when test="${check_num == 4 }">
+											<td class="px-4 py-4"><a
+												href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.title }
+													 <c:if test="${dto.comment_count ne 0 }">
+							&nbsp <i class="far fa-comment-dots"> </i>
+														<span style="color: red;">[${dto.comment_count }]</span>
+													</c:if>
+											</a></td>
+										</c:when>
+										<c:otherwise>
+											<td class="px-4 py-4"><a
+												href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">${dto.title }
+													<c:if test="${dto.comment_count ne 0 }">
+							&nbsp <i class="far fa-comment-dots"> </i>
+														<span style="color: red;">[${dto.comment_count }]</span>
+													</c:if>
+											</a></td>
+										</c:otherwise>
+									</c:choose>
 									<td class="px-4 py-4 text-center">${dto.writer }</td>
 									<td class="px-4 py-4 text-center">${dto.detailDate }</td>
 									<td class="px-4 py-4 text-center">${dto.view_count }</td>
 									<td class="px-4 py-4 text-center">${dto.good_count }</td>
 								</tr>
 							</c:forEach>
+
+
 
 							<!-- <tr
 								class="w-full font-light text-gray-700 whitespace-no-wrap border text-sm">
@@ -253,7 +278,7 @@ td>a:hover {
 			style="width: 70%; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
 
 			<!-- 게시판 페이징 -->
-			
+
 			<%-- <c:forEach var="dto" items="${navi }" varStatus="status">
 				<div class="text-center">
 					<button style="text-align: center; margin-top: 10px;"
@@ -281,7 +306,7 @@ td>a:hover {
 			</c:forEach> --%>
 
 
-					<div class="text-center">
+			<div class="text-center">
 				<c:forTokens var="item" items="${navi }" delims=",">
 					<button style="text-align: center; margin-top: 10px;"
 						class="
@@ -305,11 +330,12 @@ td>a:hover {
                   "
 						type="button">${item }</button>
 				</c:forTokens>
-				</div>
+			</div>
 
 
 			<!-- 검색 기능 -->
-			<form method="get" action="/search.pet?cpage=${cpage }">
+			<form method="post"
+				action="/search.pet?cpage=${cpage }&check_num=${check_num }&check_category=${check_category }">
 				<div>
 					<div class=""
 						style="text-align: center; height: 70px; margin-bottom: 100px;">
@@ -382,7 +408,7 @@ td>a:hover {
 
 	<script>
 		$("#writeBtn").on("click", function() {
-			location.href = "/write.pet";
+			location.href = "/write.pet?check_num=${check_num }";
 		})
 	</script>
 
