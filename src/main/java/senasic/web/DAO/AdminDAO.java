@@ -671,6 +671,7 @@ public class AdminDAO {
 							List<PetBoardDTO> list = new ArrayList();
 
 							while (rs.next()) {
+								String id = rs.getString("id");
 								String category = rs.getString("category");
 								int seq = rs.getInt("seq");
 								String writer = rs.getString("writer");
@@ -681,7 +682,7 @@ public class AdminDAO {
 								int good_count = rs.getInt("good_count");
 								int comment_count = rs.getInt("comment_count");
 
-								PetBoardDTO dto = new PetBoardDTO(category, seq, writer, title, contents, write_date, view_count,
+								PetBoardDTO dto = new PetBoardDTO(id,category, seq, writer, title, contents, write_date, view_count,
 										good_count, comment_count);
 								list.add(dto);
 							}
