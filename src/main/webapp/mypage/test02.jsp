@@ -25,8 +25,8 @@
     </div>
      
     
-    <div class="space-y-10">
-        <div class="flex space-x-10 justify-center">
+    <div class="space-y-20">
+        <div class="flex space-x-20 justify-center">
             <div style="width: 500px; height: 250px; border: 1px solid black;">
                 <div style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집 베스트 50곳</div>
                 <div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔 따뜻한 칼국수 호로로로로로로로로로록"</div>
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="flex space-x-10 justify-center">
+        <div class="flex space-x-20 justify-center">
             <div style="width: 500px; height: 250px; border: 1px solid black;">
                 <div style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집 베스트 50곳</div>
                 <div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔 따뜻한 칼국수 호로로로로로로로로로록"</div>
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="flex space-x-10 justify-center">
+        <div class="flex space-x-20 justify-center">
             <div style="width: 500px; height: 250px; border: 1px solid black;">
                 <div style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집 베스트 50곳</div>
                 <div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔 따뜻한 칼국수 호로로로로로로로로로록"</div>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="flex space-x-10 justify-center">
+        <div class="flex space-x-20 justify-center">
             <div style="width: 500px; height: 250px; border: 1px solid black;">
                 <div style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집 베스트 50곳</div>
                 <div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔 따뜻한 칼국수 호로로로로로로로로로록"</div>
