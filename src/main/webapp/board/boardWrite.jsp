@@ -344,7 +344,7 @@ nav>ul>li{
 	<script>
 		// '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
-			location.href = "/list.pet?cpage=1";
+			location.href = "/list.pet?cpage=1&check_num=${check_num }";
 		});
 
 		$("#input_board").on("click", function() {
