@@ -1131,7 +1131,7 @@ selectTab.addEventListener("change", function() { // select가 변화할 때
 </body>
 
 <!-- footer -->
-<footer class="text-center lg:text-left bg-gray-100 text-gray-600">
+<footer class="text-center lg:text-left bg-gray-100 text-gray-600 mt-40">
 	<div
 		class="flex justify-center items-center lg:justify-between p-6 border-b border-gray-300">
 		<div class="mr-12 hidden lg:block">
