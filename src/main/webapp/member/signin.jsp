@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -102,12 +102,19 @@
                             style="background:none;">
                     </div>
                 </div>
-                <a href="#" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Forgot Password?</a>
+            
+      
+            <a href="/findPw.mem" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">비밀번호 찾기</a>
+       		<a href="/findId.mem" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">아이디 찾기&nbsp;&nbsp;&nbsp;</a>
+                
                 <input type="submit" id="login" 
-                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="�α���">
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="Login">
             </form>
-        </div>
-    </div>
+            <br>
+					<a href="/member/signup.jsp"><input type=button 
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="회원가입"></a>
+       	 	</div>
+    	</div>
     <script>
         const inputs = document.querySelectorAll("input");
 
