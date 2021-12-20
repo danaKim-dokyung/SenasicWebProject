@@ -27,7 +27,7 @@
 	box-sizing: border-box;
 }
 
-.container {
+.con22 {
 	width: 800px;
 	height: 700px;
 	margin: auto;
@@ -206,7 +206,7 @@ nav>ul>li{
 		</div>
 	</header>
 	<div id="logo">
-		<img src="senasic_logo.png">
+		<img src="/senasic_logo.png">
 	</div>
 
 	<!----------------- 게시판 네비게이션 --------------->
@@ -290,7 +290,7 @@ nav>ul>li{
 	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')"
 		action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">
 		<!-- 글쓰기 Header -->
-		<div class="container">
+		<div class="container con22">
 			<div class="head"
 				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
 				<b># 게시판 수정하기</b>

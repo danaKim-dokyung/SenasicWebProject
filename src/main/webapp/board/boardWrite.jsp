@@ -27,7 +27,7 @@
 	box-sizing: border-box;
 }
 
-.container {
+.con22 {
 	width: 800px;
 	height: 700px;
 	margin: auto;
@@ -288,7 +288,7 @@ nav>ul>li{
 	<div>
 	<form id="frm" action="/input.pet?check_num=${check_num }" method="post">
 		<!-- 글쓰기 Header -->
-		<div class="container">
+		<div class="container con22">
 			<div class="head"
 				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
 				<b># 반려견 게시판 글쓰기</b>

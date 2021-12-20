@@ -198,7 +198,7 @@ nav>ul>li{
 		</div>
 	</header>
 	<div id="logo">
-		<img src="senasic_logo.png">
+		<img src="/senasic_logo.png">
 	</div>
 
 	<!----------------- 게시판 네비게이션 --------------->
