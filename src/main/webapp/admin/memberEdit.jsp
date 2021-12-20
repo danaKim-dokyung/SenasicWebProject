@@ -426,9 +426,9 @@ $(document).ready(function(){
         <form action="/modifyM.admin?seq=${dto.seq }" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
         <div class="mb-3 flex">
             <label for="image">프로필사진</label>
-            <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+            <label class="flex flex-col w-40 h-40 ml-8 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
-				                        <img src=${dto.img } id=profile>
+				                        <img src=${dto.img } id='profile' class='h-40 w-40'>
 				                    </div>
 				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
 				                </label>          
@@ -543,7 +543,7 @@ $("#dash").on("click",function(){
 $("#img").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 
