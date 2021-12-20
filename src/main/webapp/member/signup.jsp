@@ -63,7 +63,7 @@
         <form action="/signupProc.mem" method="post" enctype="multipart/form-data" class="validation-form" novalidate>
         <div class="mb-3">
             <label className="input-file-button" for="input-file">프로필 사진 선택</label><br>
-            <input type="file" id="input-file" style={{display:"none"}}/>
+            <input type="file" id="input-file" name="photo" style={{display:"none"}}/>
     
          
         </div> 
