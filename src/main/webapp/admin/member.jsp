@@ -552,7 +552,7 @@ $("#rbWrite").on("click",function(){
 })
 $("#pbEdit").on("click",function(){
 	location.href="/pet.admin";
-})
+}) 
 
 
 $("#member").on("click",function(){  
