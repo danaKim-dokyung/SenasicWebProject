@@ -31,17 +31,19 @@ public class MagazineController extends HttpServlet {
 				
 				
 				
-				int[] seq_arr = { 21, 22, 23, 16, 39, 40, 41, 42, 43, 44 };
+//				List<Integer> seq_list = new ArrayList();
+//				int[] seq_arr = new int[10];
+//				seq_list.add(21);
 //				if(magagine_num == 1) {
-//					
+					int[] arr = { 21, 22, 23, 16, 39, 40, 41, 42, 43, 44 };
+					
 //				}
-//					ArrayList<Integer> seq_arr = new ArrayList<>(arr.length);
-//					
-//					for(int i : arr) {
-//						seq_arr.add(i);
-//					}
-
-				List<RestBoardDTO> list = my_dao.getRestInformation(seq_arr);
+				
+//				int[] seq_arr = seq_list.stream().mapToInt(i->i).toArray();
+				
+//				System.out.println(seq_arr.toString());
+					
+				List<RestBoardDTO> list = my_dao.getRestInformation(arr);
 
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/magazine/magazineDetail.jsp").forward(request, response);
@@ -51,13 +53,6 @@ public class MagazineController extends HttpServlet {
 				response.sendRedirect("/magazine/magazineList.jsp");
 				
 			}
-			
-			
-			
-			
-			
-			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();

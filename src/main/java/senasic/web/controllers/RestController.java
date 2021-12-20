@@ -98,8 +98,8 @@ public class RestController extends HttpServlet {
 				int maxSize = 1024*1024*10; //10mb
 				//oracle 二쇱냼�뿉 �꽔�쓣 諛⑸쾿 李얘린
 				//二쇱냼 蹂�寃�
-//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/ReplyImg";
-				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+//				String savePath = request.getServletContext().getRealPath(savePath);
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}				
@@ -116,7 +116,7 @@ public class RestController extends HttpServlet {
 				int seq = Integer.parseInt(multi.getParameter("seq"));
 				String contents = multi.getParameter("contents");
 				double rate = Double.parseDouble(multi.getParameter("rating"));
-				String imgPath = "\\Restaurant\\ReplyImg\\";
+				String imgPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 				int result = dao.insertReview(seq, id, contents, imgPath+sysName, rate);
 				int update = dao.updateRate(seq);
 				response.sendRedirect("/load.rest?seq="+seq);

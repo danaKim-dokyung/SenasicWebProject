@@ -37,8 +37,8 @@ public class AdminController extends HttpServlet {
 			if(cmd.equals("rbUpload.admin")) { //식당게시판 글 업로드
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
-				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+//				String savePath = request.getServletContext().getRealPath("files");
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
@@ -155,8 +155,8 @@ public class AdminController extends HttpServlet {
 				
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
-				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+//				String savePath = request.getServletContext().getRealPath("files");
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
@@ -165,7 +165,7 @@ public class AdminController extends HttpServlet {
 				RestBoardDTO real = dao.getRestBoardInfo(Integer.parseInt(multi.getParameter("seq")));
 				
 				multi.getParameter(savePath);
-				String root = "\\Restaurant\\RestImg\\";
+				String root = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 
 				String oriName1 = multi.getOriginalFileName("photo[0]");
 				String sysName1 = multi.getFilesystemName("photo[0]");
@@ -300,8 +300,8 @@ public class AdminController extends HttpServlet {
 				
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\member/profileImg";
-				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+//				String savePath = request.getServletContext().getRealPath("files");
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
@@ -310,7 +310,7 @@ public class AdminController extends HttpServlet {
 		   		int seq = Integer.parseInt(multi.getParameter("seq"));
 				MemberDTO real = dao.getMember(seq); //멤버 수정후
      
-				String root = ""; //루트 수정
+				String root = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload"; //루트 수정
 				String oriName1 = multi.getOriginalFileName("photo");
 				String sysName1 = multi.getFilesystemName("photo");
 				if(sysName1 ==null) {
