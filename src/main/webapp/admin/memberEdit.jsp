@@ -428,7 +428,11 @@ $(document).ready(function(){
             <label for="image">프로필사진</label>
             <label class="flex flex-col w-40 h-40 ml-8 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
+<<<<<<< Upstream, based on branch 'feature/5' of https://github.com/danaKim-dokyung/senasic6.git
 				                        <img src=${dto.img } id='profile' class='h-40 w-40'>
+=======
+				                        <img src=${dto.img } id=profile>
+>>>>>>> 4bfd3cd admin 전체 수정.
 				                    </div>
 				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
 				                </label>          
@@ -543,7 +547,11 @@ $("#dash").on("click",function(){
 $("#img").on("change",function(){
 	let file = this.files[0];
 	if (file) {
+<<<<<<< Upstream, based on branch 'feature/5' of https://github.com/danaKim-dokyung/senasic6.git
 	    $("#ph").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+=======
+	    $("#ph").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+>>>>>>> 4bfd3cd admin 전체 수정.
 	  }
 	})
 

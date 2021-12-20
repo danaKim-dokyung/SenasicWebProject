@@ -471,7 +471,11 @@ $(document).ready(function(){
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph1">
+<<<<<<< Upstream, based on branch 'feature/5' of https://github.com/danaKim-dokyung/senasic6.git
                         <img src="${dto.photo1 }" class="h-40 w-40">
+=======
+                        <img src="${dto.photo1 }" class="h-20 w-full ">
+>>>>>>> 4bfd3cd admin 전체 수정.
                     </div>
                     <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
                 </label>
