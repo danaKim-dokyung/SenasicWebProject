@@ -170,6 +170,7 @@
 						style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 						"바깥바람 쐬는 걸 좋아하는 우리 강아지를 위해!"</div>
 				</div>
+				<!--  -->
 			</a>
 		</div>
 
