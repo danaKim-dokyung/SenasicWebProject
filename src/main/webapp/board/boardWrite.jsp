@@ -411,7 +411,7 @@ nav>ul>li{
 					console.log(sysName + "b")
 					
 					setTimeout(function () {
-						  $(editor).summernote('insertImage', '/board/img/' + sysName);
+						  $(editor).summernote('insertImage', '/upload/' + sysName);
 						}, 3500);
 				}
 			});

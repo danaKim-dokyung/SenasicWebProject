@@ -116,7 +116,7 @@ public class RestController extends HttpServlet {
 				int seq = Integer.parseInt(multi.getParameter("seq"));
 				String contents = multi.getParameter("contents");
 				double rate = Double.parseDouble(multi.getParameter("rating"));
-				String imgPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+				String imgPath = "/upload/";
 				int result = dao.insertReview(seq, id, contents, imgPath+sysName, rate);
 				int update = dao.updateRate(seq);
 				response.sendRedirect("/load.rest?seq="+seq);
