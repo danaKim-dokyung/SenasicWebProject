@@ -163,34 +163,7 @@
 
 
 
-			<div class="flex mx-4 mb-3">
-				<!--  사업자용  -->
-				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
-					@click="show=!show">
-					<div
-						class="w-full flex justify-between px-3 hover:bg-green-700 rounded py-3"
-						:class="{'bg-green-700':show}">
-						<div class="flex">
-							<i class="material-icons fill-current text-gray-100">textsms</i>
-							<div class="relative menu-text text-gray-100 ml-4">쪽지함</div>
-						</div>
-						<span
-							class="transition ease-in duration-150 text-gray-100 material-icons transform"
-							:class="{'rotate-180':show}"> arrow_drop_down </span>
-					</div>
-					<div x-show="show"
-						class="transition ease-in duration-700 mt-3 bg-green-800">
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div
-								class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								쪽지</div>
-						</div>
-					</div>
-				</a>
-			</div>
-			<!--  사업자용  -->
-
-
+			
 
 
 		</div>
@@ -204,23 +177,15 @@
 					<div>
 						<h2 class="text-gray-600 font-semibold">나의 리뷰 모아보기</h2>
 					</div>
-					<div class="flex items-center justify-between">
-						<div class="flex bg-gray-50 items-center p-2 rounded-md">
-							<svg xmlns="http://www.w3.org/2000/svg"
-								class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-								fill="currentColor">
-					<path fill-rule="evenodd"
-									d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-									clip-rule="evenodd" />
-				</svg>
-							<input class="bg-gray-50 outline-none ml-1 block " type="text"
-								name="" id="" placeholder="search...">
-						</div>
-						<div class="lg:ml-40 ml-10 space-x-8" id="create">
-							<button
-								class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Create</button>
-						</div>
+					
+					
+					<div
+						style="height: 60px; margin: auto; width: 800px; margin-top: 100px;">
+						<button type="button" id="main"
+							class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
+							style="float: right;">메인화면</button>
 					</div>
+					
 				</div>
 				<div>
 					<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -393,6 +358,12 @@
 		$("#modify").on("click", function() {
 			location.href = "mypage.mem?cpage=1";
 		})
+		
+		// 메인화면으로 돌아가기
+		$("#main").on("click",function(){
+			location.href ="/index.jsp";
+		})
+		
 	</script>
 
 	<c:if test="${result eq '1' }">
