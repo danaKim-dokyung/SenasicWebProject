@@ -555,7 +555,7 @@ $("#pbEdit").on("click",function(){
 })
 
 
-$("#member").on("click",function(){
+$("#member").on("click",function(){  
 	location.href="/member.admin";
 })
 
