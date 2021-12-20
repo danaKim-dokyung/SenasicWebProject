@@ -29,6 +29,7 @@
 	}
 	.sidebar-mini .sidebar {
 		width: 80px;
+		
 	}
 	.sidebar-mini .main-content {
 		width: calc(100% - 80px);
@@ -224,7 +225,6 @@ $(document).ready(function(){
 })
 </script>
 </head>
-<body>
 	<header
 		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
 		<div
@@ -271,7 +271,6 @@ $(document).ready(function(){
 					게시판 </a></li>
 		</ul>
 	</nav>
-<body>
 	<div class="forSearch">
 		<div class="container1">
 			<form action="/fboard.rest">
@@ -400,7 +399,7 @@ $(document).ready(function(){
 				</a>
 			</div>
 		</div>
-<div class="main-content w-full md:w-4/5 reltive float-right grid justify items-stretch">
+<div class="main-content w-full md:w-4/5 reltive float-right grid justify">
 	<div class="bg-white p-8 rounded-md w-full">
 	<div class=" flex items-center justify-between pb-6">
 		<div>
@@ -540,10 +539,9 @@ $(document).ready(function(){
 	</div>
 </div>
 	
-		
-		
-		
 	</div>
+	
+ 
 	
 <script>
 $("#rbEdit").on("click",function(){
@@ -554,10 +552,10 @@ $("#rbWrite").on("click",function(){
 })
 $("#pbEdit").on("click",function(){
 	location.href="/pet.admin";
-})
+}) 
 
 
-$("#member").on("click",function(){
+$("#member").on("click",function(){  
 	location.href="/member.admin";
 })
 
@@ -883,4 +881,6 @@ selectTab.addEventListener("change", function() { // select가 변화할 때
 });
 </script>
 </body>
+	<!-- footer -->
+
 </html>

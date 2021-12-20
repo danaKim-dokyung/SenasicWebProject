@@ -35,7 +35,7 @@ public class PetBoardController extends HttpServlet {
 		System.out.println(cmd);
 
 		PetBoardDAO dao = PetBoardDAO.getInstance();
-
+		
 
 		try {
 
@@ -402,7 +402,8 @@ public class PetBoardController extends HttpServlet {
 
 			} else if (cmd.equals("/imageUpload.pet")) {
 				int maxSize = 1024 * 1024 * 10;
-				String savePath = request.getServletContext().getRealPath("files");
+//				String savePath = request.getServletContext().getRealPath("files");
+				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 //				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\board\\img";
 				File filePath = new File(savePath);
 
