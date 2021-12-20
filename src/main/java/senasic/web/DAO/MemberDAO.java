@@ -60,25 +60,30 @@ public class MemberDAO {
 	   //�젙蹂� �엯�젰
 	   public int insert(MemberDTO dto)throws Exception {
 
-	    
+		    
 
-	      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
+		      String sql = "insert into member values(?,?,?,?,?,?,?,mem_seq.nextval,?)";
 
-	      try(Connection con = this.getConnection();
-	            PreparedStatement pstat = con.prepareStatement(sql);){
+		      try(Connection con = this.getConnection();
+		            PreparedStatement pstat = con.prepareStatement(sql);){
 
-	         pstat.setString(1,dto.getId());
-	         pstat.setString(2,dto.getPw());
-	         pstat.setString(3,dto.getNn());
-	         pstat.setString(4,dto.getM());
-	         pstat.setString(5,dto.getPh());
-	         pstat.setInt(6,dto.getAge());
-	         pstat.setString(7,dto.getGender());
-	         pstat.setString(8, dto.getImg());
-	         int result = pstat.executeUpdate();
-	         return result;
-	      }   
-	   }
+		         pstat.setString(1,dto.getId());
+		         pstat.setString(2,dto.getPw());
+		         pstat.setString(3,dto.getNn());
+		         pstat.setString(4,dto.getM());
+		         pstat.setString(5,dto.getPh());
+		         pstat.setInt(6,dto.getAge());
+		         pstat.setString(7,dto.getGender());
+			if(dto.getImg()==null){
+			   pstat.setString(8, "https://www.mountsinai.on.ca/wellbeing/our-team/team-images/person-placeholder/image_preview");
+			}else{
+			   pstat.setString(8, dto.getImg());
+			}
+		       
+		         int result = pstat.executeUpdate();
+		         return result;
+		      }   
+		   }
 	   //濡쒓렇�씤 �떆�룄 
 	   public boolean isLoginAllowed(String id, String pw) throws Exception{
 	      String sql = "select * from member where id = ? and pw = ?";

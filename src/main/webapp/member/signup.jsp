@@ -177,14 +177,12 @@
 			<!-- 전화번호 -->
           <div class="row">
            	<div class="col-md-4 mb-2">
-            	<span class="form-control" name="phone1" required>
-   			 	
-   			 010
-				</span>
+            	<input type="text" class="form-control" name="phone1" value="010" readonly required>
               <div class="invalid-feedback">
                 번호를 선택해주세요
               </div>
             </div>
+            
             <div class="col-md-4 mb-2">
              
               <input type="text" class="form-control" id="num2" placeholder="1234" value="" name="phone2"  pattern="^\d{4}$" required>

@@ -72,9 +72,9 @@
 	<form action="/changPw.mem">
 	
 <!-- 아아디 입력 -->
-          <div class="mb-3">
+         <div class="mb-3">
             <label for="id">아이디 입력</label>
-            <input type="text" class="form-control" id="id" name="id" placeholder="id를입력하세요"  required>
+            <input type="text" class="form-control" id="id" name="id" value=${id } readonly required>
             <div class="invalid-feedback">
              아이디를 입력해주세요.
             </div>

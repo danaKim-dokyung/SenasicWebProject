@@ -110,6 +110,9 @@
                 <input type="submit" id="login" 
                     class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="Login">
             </form>
+            <br>
+					<a href="/member/signup.jsp"><input type=button 
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none" value="회원가입"></a>
        	 	</div>
     	</div>
     <script>

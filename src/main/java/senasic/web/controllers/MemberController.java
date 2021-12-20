@@ -143,9 +143,10 @@ public class MemberController extends HttpServlet {
 
 				MemberDTO findPw = dao.selectByFindPw(id, m);
 				request.setAttribute("pw", findPw.getPw());
+				request.setAttribute("id", id);
 				System.out.println(findPw.getPw());
 				if (findPw != null) {
-					request.getRequestDispatcher("/WEB-INF/yourPw.jsp").forward(request, response);
+					request.getRequestDispatcher("/member/yourPw.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("/member/None.jsp");
 				}
