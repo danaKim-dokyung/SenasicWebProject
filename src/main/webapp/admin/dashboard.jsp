@@ -365,8 +365,7 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7 absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
+
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -440,7 +439,17 @@ $(document).ready(function(){
                             </div>
                             <div class="flex-1 text-left md:text-center">
                                 <h5 class="font-bold uppercase text-gray-500">유저 수</h5>
-                                <h3 class="font-bold text-2xl">${count[0].countU }(${count[0].countU-count[1].countU }) <span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></h3>
+                                <h3 class="font-bold text-2xl">${count[0].countU }(
+                                <c:if test="${count[0].countU-count[1].countU > 0 }">
+                                <span class="text-red-600">${count[0].countU-count[1].countU }</span>
+                                </c:if>
+                                <c:if test="${count[0].countU-count[1].countU < 0 }">
+                                <span class="text-blue-600">${count[0].countU-count[1].countU }</span>
+                                </c:if>
+                                <c:if test="${count[0].countU-count[1].countU eq 0 }">
+                                <span>${count[0].countU-count[1].countU }</span>
+                                </c:if>
+                                ) <span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></h3>
                             </div>
                         </div>
                     </div>
@@ -454,7 +463,17 @@ $(document).ready(function(){
 </svg>                                           </div>
                             <div class="flex-1 text-left md:text-center">
                                 <h5 class="font-bold uppercase text-gray-500">게시글 수</h5>
-                                <h3 class="font-bold text-2xl">${count[0].countC }(${count[0].countC-count[1].countC }) <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></h3>
+                                <h3 class="font-bold text-2xl">${count[0].countC }(
+                                <c:if test="${count[0].countC-count[1].countC > 0 }">
+                                <span class="text-red-600">${count[0].countC-count[1].countC }</span>
+                                </c:if>
+                                <c:if test="${count[0].countC-count[1].countC < 0 }">
+                                <span class="text-blue-600">${count[0].countC-count[1].countC }</span>
+                                </c:if>
+                                <c:if test="${count[0].countC-count[1].countC eq 0 }">
+                                <span>${count[0].countC-count[1].countC }</span>
+                                </c:if>
+                                ) <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></h3>
                             </div>
                         </div>
                     </div>
@@ -468,7 +487,17 @@ $(document).ready(function(){
 </svg>                           </div>
                             <div class="flex-1 text-left md:text-center">
                                 <h5 class="font-bold uppercase text-gray-500">리뷰 수</h5>
-                                <h3 class="font-bold text-2xl">${count[0].countR }(${count[0].countR-count[1].countR })</h3>
+                                <h3 class="font-bold text-2xl">${count[0].countR }(
+                               <c:if test="${count[0].countR-count[1].countR > 0 }">
+                                <span class="text-red-600">${count[0].countR-count[1].countR }</span>
+                                </c:if>
+                                <c:if test="${count[0].countR-count[1].countR < 0 }">
+                                <span class="text-blue-600">${count[0].countR-count[1].countR }</span>
+                                </c:if>
+                                <c:if test="${count[0].countR-count[1].countR eq 0 }">
+                                <span>${count[0].countR-count[1].countR }</span>
+                                </c:if>
+                                                                )</h3>
                             </div>
                         </div>
                     </div>

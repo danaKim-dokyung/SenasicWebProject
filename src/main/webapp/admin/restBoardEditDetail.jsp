@@ -346,8 +346,7 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7  absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
+
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -472,7 +471,7 @@ $(document).ready(function(){
             <div class="flex items-center justify-center w-full">
                 <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph1">
-                        <img src=${dto.photo1 }" class="h-20 w-full ">
+                        <img src="${dto.photo1 }" class="h-20 w-full ">
                     </div>
                     <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
                 </label>

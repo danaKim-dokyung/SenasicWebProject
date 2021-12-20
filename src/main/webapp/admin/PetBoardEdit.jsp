@@ -346,8 +346,7 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7  absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
+
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -459,7 +458,7 @@ $(document).ready(function(){
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<div class="flex items-center">
 											<div class="ml-3">
-											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1&check_num=1">
 												<p class="text-gray-900 whitespace-no-wrap">
 													${list.title }
 												</p>
@@ -468,12 +467,12 @@ $(document).ready(function(){
 										</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1&check_num=1">
 									<p class="text-gray-900 whitespace-no-wrap">${list.writer }</p>
 									</a>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">									
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1&check_num=1">									
 									<p class="text-gray-900 whitespace-no-wrap">
 										${list.category }
 									</p>
@@ -481,7 +480,7 @@ $(document).ready(function(){
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 
-											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1">									
+											<a href="/detail.pet?seq=${list.seq }&cpage=1&check_category=1&check_num=1">									
 									<p class="text-gray-900 whitespace-no-wrap">
 										${list.comment_count }
 									</p>
