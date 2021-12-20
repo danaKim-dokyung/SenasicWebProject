@@ -37,6 +37,16 @@
     #subtn{
     	text-align=center;
     }
+    #real-input{
+    	visibility:hidden;
+    }
+    .input-file-button{
+    	padding: 6px 25px;
+    	background-color:#FF6600;
+    	border-radius:4px;
+    	color:white;
+    	cursor:pointer;
+    }
   </style>
 <script>
 
@@ -50,13 +60,13 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">회원가입</h4>
-        <form action="/signupProc.mem" method="post" class="validation-form" novalidate>
-        <!-- <div class="mb-3">
-            <label for="image">프로필사진</label>
-            <input type="image" class="form-control" id="img">
-            
+        <form action="/signupProc.mem" method="post" enctype="multipart/form-data" class="validation-form" novalidate>
+        <div class="mb-3">
+            <label className="input-file-button" for="input-file">프로필 사진 선택</label><br>
+            <input type="file" id="input-file" style={{display:"none"}}/>
+    
          
-        </div> -->
+        </div> 
         
         
         <!-- 아이디 입력 -->
@@ -109,8 +119,8 @@
           </div>
           
 			<!-- 생년월일 -->
-          <div class="row">
-           <div class="col-md-4 mb-2">
+        <!--   <div class="row">
+          <div class="col-md-4 mb-2">
             	<select class="form-control"  required>
    			 	<option selected>년도</option>
    			 	<option>1997</option>
@@ -121,11 +131,11 @@
                 년도를 선택해주세요
               </div>
             </div>
-            <div class="col-md-4 mb-2">
+            <div class="col-md-4 mb-2">--> 
             
      
              
-              <input type="text" class="form-control" id="month"  placeholder="월" value="" pattern="^(0[1-9]|1[012])$" required>
+             <!--   <input type="text" class="form-control" id="month"  placeholder="월" value="" pattern="^(0[1-9]|1[012])$" required>
               <div class="invalid-feedback">
                 월을 입력해주세요.
               </div>
@@ -137,7 +147,7 @@
                 일을 입력해주세요.
               </div>
             </div>
-          </div>
+          </div>-->
           
           
           <!-- 나이 -->
@@ -154,11 +164,11 @@
            <label class="block text-gray-600 font-light mb-2">성별을 선택하세요</label>
 			<div class="flex">
    			 	<div class="flex items-center mb-2 mr-4">
-        			<input type="radio" id="radio-example-1" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
+        			<input type="radio" id="radio-example-1" name="gender" value="M" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
        		 		<label for="radio-example-1" class="text-gray-600">남성</label>
     			</div>
     			<div class="flex items-center mb-2">
-       				 <input type="radio" id="radio-example-2" name="gender" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
+       				 <input type="radio" id="radio-example-2" name="gender" value="W" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
        			 	 <label for="radio-example-2" class="text-gray-600">여성</label>
     			</div>
 			</div>
@@ -167,16 +177,12 @@
 			<!-- 전화번호 -->
           <div class="row">
            	<div class="col-md-4 mb-2">
-            	<select class="form-control" name="phone1" required>
-   			 	<option selected>선택</option>
-   			 	<option>010</option>
-    			<option >02</option> <!-- 강사님께 질문 1번 : 031 -->
-    			<option >031</option>
-				</select>
+            	<input type="text" class="form-control" name="phone1" value="010" readonly required>
               <div class="invalid-feedback">
                 번호를 선택해주세요
               </div>
             </div>
+            
             <div class="col-md-4 mb-2">
              
               <input type="text" class="form-control" id="num2" placeholder="1234" value="" name="phone2"  pattern="^\d{4}$" required>
@@ -226,9 +232,20 @@
         }, false);
       });
     }, false);
+ 
+
     //아이디 중복확인
     $(function(){
 		$("#id").on("input",function(){
+			  let id = document.getElementById("id").value;
+		        let idregex = /^([a-z0-9]){6,20}$/;
+		        let result = idregex.test(id);
+		        if(!result){
+		        	$("#checkResult").css("color","red");
+					$("#checkResult").text("잘못된 ID 입니다.");
+		        	
+		        	return false;
+		        }
 			$.ajax({
 				url:"/idCheck.mem",
 				data:{id:$("#id").val()}
@@ -247,6 +264,15 @@
     //닉네임 중복확인
     $(function(){
 		$("#nickname").on("input",function(){
+			 let nickname = document.getElementById("nickname").value;
+		        let nickregex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$/;
+		        let result = nickregex.test(nickname);
+		        if(!result){
+		        	$("#checkResultN").css("color","red");
+					$("#checkResultN").text("잘못된 닉네임 입니다.");
+		        	
+		        	return false;
+		        }
 			$.ajax({
 				url:"/nicknameCheck.mem",
 				data:{nn:$("#nickname").val()}
@@ -275,6 +301,7 @@
     		$("#checkpw").text("비밀번호가 틀립니다.");
     	}
     })
+   
     
   </script>
 </body>
