@@ -31,14 +31,14 @@ public class PetBoardDAO {
 	private PetBoardDAO() {
 	}
 
-	// Oracle DB 연결하기
+	// Oracle DB �뿰寃고븯湲�
 	private Connection getConnection() throws Exception {
 		Context ctx = new InitialContext();
 		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
 		return ds.getConnection();
 	}
 
-	// 테이블 전체 조회
+	// �뀒�씠釉� �쟾泥� 議고쉶
 	public List<PetBoardDTO> selectAll() throws Exception {
 		String sql = "select * from pet_board order by seq desc";
 		try (Connection con = this.getConnection();
@@ -66,22 +66,24 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 글쓰기. board 테이블에 insert
-	public int insert(String category, String writer, String title, String contents) throws Exception {
-		String sql = "insert into pet_board values(?,pet_board_seq.nextval,?,?,?,sysdate,default,default,default)";
+	//insert
+	  public int insert(String longinID, String category, String writer, String title, String contents) throws Exception {
+	        String sql = "insert into pet_board values(?,?,pet_board_seq.nextval,?,?,?,sysdate,default,default,default)";
 
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, category);
-			pstat.setString(2, writer);
-			pstat.setString(3, title);
-			pstat.setString(4, contents);
+	        try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+	            pstat.setString(1, longinID);
+	            pstat.setString(2, category);
+	            pstat.setString(3, writer);
+	            pstat.setString(4, title);
+	            pstat.setString(5, contents);
 
-			int result = pstat.executeUpdate();
-			return result;
-		}
-	}
+	            int result = pstat.executeUpdate();
+	            return result;
+	        }
+	    }
 
-	// 게시글을 정해진 갯수만큼만 출력
+
+	// 寃뚯떆湲��쓣 �젙�빐吏� 媛��닔留뚰겮留� 異쒕젰
 	public List<PetBoardDTO> selectByBound(int start, int end) throws Exception {
 		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board) where rn between ? and ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -122,7 +124,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 게시글 카테고리 기준으로 정해진만큼만 출력
+	// 寃뚯떆湲� 移댄뀒怨좊━ 湲곗��쑝濡� �젙�빐吏꾨쭔�겮留� 異쒕젰
 	public List<PetBoardDTO> selectByCategory(String category_c, int start, int end) throws Exception {
 		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board where category = ?) where rn between ? and ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -153,7 +155,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 페이징 전체보기.
+	// �럹�씠吏� �쟾泥대낫湲�.
 	private int getRecordCount() throws Exception {
 		String sql = "select count(*) from pet_board";
 		try (Connection con = this.getConnection();
@@ -167,50 +169,50 @@ public class PetBoardDAO {
 	public int getPageTotalCount() throws Exception {
 		int recordTotalCount = this.getRecordCount();
 
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 		return pageTotalCount;
 	}
 
-	// 페이지 네비게이터
+	// �럹�씠吏� �꽕鍮꾧쾶�씠�꽣
 	public String getPageNavi(int cpage) throws Exception {
-		// 총 몇개의 레코드(글)을 가지고 있는지
+		// 珥� 紐뉕컻�쓽 �젅肄붾뱶(湲�)�쓣 媛�吏�怨� �엳�뒗吏�
 		int recordTotalCount = this.getRecordCount();
 
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 
-		// 현재 페이지
+		// �쁽�옱 �럹�씠吏�
 		int currentPage = cpage;
 
-		// 혹시라도 현재페이지가 1페이지보다 작으면 1로 만들어라, 현재페이지가 토달 카운트 보다 크면 현재페이지는 토탈카운트 페이지로.
+		// �샊�떆�씪�룄 �쁽�옱�럹�씠吏�媛� 1�럹�씠吏�蹂대떎 �옉�쑝硫� 1濡� 留뚮뱾�뼱�씪, �쁽�옱�럹�씠吏�媛� �넗�떖 移댁슫�듃 蹂대떎 �겕硫� �쁽�옱�럹�씠吏��뒗 �넗�깉移댁슫�듃 �럹�씠吏�濡�.
 		if (currentPage < 1) {
 			currentPage = 1;
 		} else if (currentPage > pageTotalCount) {
 			currentPage = pageTotalCount;
 		}
 
-		// 시작 페이지 구하는 공식!!!!!!
+		// �떆�옉 �럹�씠吏� 援ы븯�뒗 怨듭떇!!!!!!
 		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
 		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
 
-		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
+		// 怨듭떇�뿉 �쓽�빐 諛쒖깮�븳 endnavi 媛믪씠 �떎�젣 �럹�씠吏� �쟾泥� 媛쒖닔蹂대떎 �겢寃쎌슦
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
@@ -245,7 +247,7 @@ public class PetBoardDAO {
 		return pageNavi_str;
 	}
 
-	// 페이징 카테고리별
+	// �럹�씠吏� 移댄뀒怨좊━蹂�
 	public int getRecordCountByCategory(String category) throws Exception {
 		String sql = "select count(*) from pet_board where category = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -259,53 +261,53 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 페이징 카테고리별
+	// �럹�씠吏� 移댄뀒怨좊━蹂�
 	public int getPageTotalCountByCategory(String category) throws Exception {
 		int recordTotalCount = this.getRecordCountByCategory(category);
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 		return pageTotalCount;
 	}
 
-	// 페이지 네비게이터 (카테고리별)
+	// �럹�씠吏� �꽕鍮꾧쾶�씠�꽣 (移댄뀒怨좊━蹂�)
 	public String getPageNaviByCategory(int cpage, String category) throws Exception {
-		// 총 몇개의 레코드(글)을 가지고 있는지
+		// 珥� 紐뉕컻�쓽 �젅肄붾뱶(湲�)�쓣 媛�吏�怨� �엳�뒗吏�
 		int recordTotalCount = this.getRecordCountByCategory(category);
 
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 
-		// 현재 페이지
+		// �쁽�옱 �럹�씠吏�
 		int currentPage = cpage;
 
-		// 혹시라도 현재페이지가 1페이지보다 작으면 1로 만들어라, 현재페이지가 토달 카운트 보다 크면 현재페이지는 토탈카운트 페이지로.
+		// �샊�떆�씪�룄 �쁽�옱�럹�씠吏�媛� 1�럹�씠吏�蹂대떎 �옉�쑝硫� 1濡� 留뚮뱾�뼱�씪, �쁽�옱�럹�씠吏�媛� �넗�떖 移댁슫�듃 蹂대떎 �겕硫� �쁽�옱�럹�씠吏��뒗 �넗�깉移댁슫�듃 �럹�씠吏�濡�.
 		if (currentPage < 1) {
 			currentPage = 1;
 		} else if (currentPage > pageTotalCount) {
 			currentPage = pageTotalCount;
 		}
 
-		// 시작 페이지 구하는 공식!!!!!!
+		// �떆�옉 �럹�씠吏� 援ы븯�뒗 怨듭떇!!!!!!
 		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
 		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
 
-		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
+		// 怨듭떇�뿉 �쓽�빐 諛쒖깮�븳 endnavi 媛믪씠 �떎�젣 �럹�씠吏� �쟾泥� 媛쒖닔蹂대떎 �겢寃쎌슦
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
@@ -364,7 +366,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 조회수 증가
+	// 議고쉶�닔 利앷�
 	public int addViewCount(int seq) throws Exception {
 		String sql = "update pet_board set view_count = view_count + 1 where seq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
@@ -374,7 +376,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 게시판 삭제
+	// 寃뚯떆�뙋 �궘�젣
 	public int delete(int seq) throws Exception {
 		String sql = "delete from pet_board where seq=?";
 
@@ -386,7 +388,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 게시판 검색
+	// 寃뚯떆�뙋 寃��깋
 	public List<PetBoardDTO> search(String keyword, String searchWord, int start, int end) throws Exception {
 
 //		String sql = "select * from pet_board where " + keyword + " like ? ";
@@ -420,7 +422,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 검색
+	// 寃��깋
 	public int getRecordCountBySearch(String keyword, String searchWord) throws Exception {
 		String sql = "select count(*) from pet_board where " + keyword + " like ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -434,53 +436,53 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 검색
+	// 寃��깋
 	public int getPageTotalCountBySearch(String keyword, String searchWord) throws Exception {
 		int recordTotalCount = this.getRecordCountBySearch(keyword, searchWord);
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 		return pageTotalCount;
 	}
 
-	// 검색 네비게이터
+	// 寃��깋 �꽕鍮꾧쾶�씠�꽣
 	public String getPageNaviBySearch(int cpage, String keyword, String searchWord) throws Exception {
-		// 총 몇개의 레코드(글)을 가지고 있는지
+		// 珥� 紐뉕컻�쓽 �젅肄붾뱶(湲�)�쓣 媛�吏�怨� �엳�뒗吏�
 		int recordTotalCount = this.getRecordCountBySearch(keyword, searchWord);
 
-		// 총 페이지의 개수
+		// 珥� �럹�씠吏��쓽 媛쒖닔
 		int pageTotalCount = 0;
 
-		// 페이지가 딱 떨어지면 페이지 추가할 필요 없음 ex)100개 글 나누기 10 = 10개의 페이지
+		// �럹�씠吏�媛� �뵳 �뼥�뼱吏�硫� �럹�씠吏� 異붽��븷 �븘�슂 �뾾�쓬 ex)100媛� 湲� �굹�늻湲� 10 = 10媛쒖쓽 �럹�씠吏�
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+			// �럹�씠吏�媛� �뵳 �뼥�뼱吏�吏� �븡�쑝硫� 1�쓣 �뜑�빐�꽌 �럹�씠吏�瑜� �븯�굹 �뜑 留뚮뱾�뼱�씪
 		} else {
 			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
 
-		// 현재 페이지
+		// �쁽�옱 �럹�씠吏�
 		int currentPage = cpage;
 
-		// 혹시라도 현재페이지가 1페이지보다 작으면 1로 만들어라, 현재페이지가 토달 카운트 보다 크면 현재페이지는 토탈카운트 페이지로.
+		// �샊�떆�씪�룄 �쁽�옱�럹�씠吏�媛� 1�럹�씠吏�蹂대떎 �옉�쑝硫� 1濡� 留뚮뱾�뼱�씪, �쁽�옱�럹�씠吏�媛� �넗�떖 移댁슫�듃 蹂대떎 �겕硫� �쁽�옱�럹�씠吏��뒗 �넗�깉移댁슫�듃 �럹�씠吏�濡�.
 		if (currentPage < 1) {
 			currentPage = 1;
 		} else if (currentPage > pageTotalCount) {
 			currentPage = pageTotalCount;
 		}
 
-		// 시작 페이지 구하는 공식
+		// �떆�옉 �럹�씠吏� 援ы븯�뒗 怨듭떇
 		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
 		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
 
-		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
+		// 怨듭떇�뿉 �쓽�빐 諛쒖깮�븳 endnavi 媛믪씠 �떎�젣 �럹�씠吏� �쟾泥� 媛쒖닔蹂대떎 �겢寃쎌슦
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
@@ -515,7 +517,7 @@ public class PetBoardDAO {
 
 	}
 
-	// 댓글 쓰기
+	// �뙎湲� �벐湲�
 	public int insertReply(int board_seq, String writer, String comments) throws Exception {
 		String sql = "insert into pet_board_reply values(pet_board_reply_seq.nextval,?,?,?,sysdate)";
 
@@ -529,7 +531,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 댓글 삭제하기
+	// �뙎湲� �궘�젣�븯湲�
 	public int deleteComment(int seq) throws Exception {
 		String sql = "delete from pet_board_reply where seq=?";
 
@@ -541,7 +543,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 댓글 불러오기
+	// �뙎湲� 遺덈윭�삤湲�
 	public List<PetBoard_RelpyDTO> selectAllReply(int boardSeq) throws Exception {
 		String sql = "select * from pet_board_reply where board_seq = ? order by 1";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -565,7 +567,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 해당게시물 댓글 수 조회
+	// �빐�떦寃뚯떆臾� �뙎湲� �닔 議고쉶
 	public int getCountComment(int seq) throws Exception {
 		String sql = "select count(*) from pet_board_reply where board_seq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -579,7 +581,7 @@ public class PetBoardDAO {
 		}
 	}
 	
-	// 게시물 댓글수 갱신
+	// 寃뚯떆臾� �뙎湲��닔 媛깆떊
 	public int updateComment(int seq) throws Exception {
 		String sql = "update pet_board set comment_count = (select count(*) from pet_board_reply where board_seq = ?) where seq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
@@ -592,7 +594,7 @@ public class PetBoardDAO {
 	}
 	
 
-	// 추천여부 확인
+	// 異붿쿇�뿬遺� �솗�씤
 	public int recCheck(int seq, String id) throws Exception {
 		String sql = "select count(board_no) from pet_board_ex_rec where board_no = ? and rec_id = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -606,7 +608,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 추천한 게시글와 id 저장
+	// 異붿쿇�븳 寃뚯떆湲��� id ���옣
 	public int recInsert(petBoard_recDTO dto) throws Exception {
 		String sql = "insert into pet_board_ex_rec values(?,?)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -619,7 +621,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 추천 취소
+	// 異붿쿇 痍⑥냼
 	public int recDelete(int seq, String id) throws Exception {
 		String sql = "delete from pet_board_ex_rec where board_no = ? and rec_id = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -630,7 +632,7 @@ public class PetBoardDAO {
 		}
 	}
 
-	// 추천수 갱신
+	// 異붿쿇�닔 媛깆떊
 	public int recUpdate(int seq) throws Exception {
 		String sql = "update pet_board set good_count = (select count(board_no) from pet_board_ex_rec where board_no = ?) where seq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
@@ -642,7 +644,7 @@ public class PetBoardDAO {
 		}
 	}
 	
-	// 추천수 가져오기.
+	// 異붿쿇�닔 媛��졇�삤湲�.
 	public int getRecNum(int seq) throws Exception {
 		String sql = "select good_count from pet_board where seq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -655,7 +657,7 @@ public class PetBoardDAO {
 		}
 	}
 	
-	//게시물 수정
+	//寃뚯떆臾� �닔�젙
 	public int Modify(String category, String title, String contents, int seq) throws Exception {
 		String sql = "update pet_board set category = ?, title = ?, contents =  ?, write_date = sysdate where seq = ?";
 

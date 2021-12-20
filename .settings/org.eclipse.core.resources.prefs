@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/senasic/web/DAO/MemberDAO.java=UTF-8
+encoding//src/main/java/senasic/web/DAO/PetBoardDAO.java=UTF-8
 encoding//src/main/java/senasic/web/DAO/RestBoardDAO.java=UTF-8
 encoding//src/main/java/senasic/web/controllers/MemberController.java=UTF-8
 encoding//src/main/java/senasic/web/controllers/RestController.java=UTF-8

@@ -36,6 +36,7 @@ public class PetBoardController extends HttpServlet {
 
 		PetBoardDAO dao = PetBoardDAO.getInstance();
 
+
 		try {
 
 			// 게시판 리스트 출력
@@ -43,10 +44,12 @@ public class PetBoardController extends HttpServlet {
 				List<PetBoardDTO> list;
 
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+
 				int pageTotalCount;
-				
+
 				int check_category = 1;
-				
+
 				pageTotalCount = dao.getPageTotalCount();
 
 				if (currentPage < 1) {
@@ -59,11 +62,12 @@ public class PetBoardController extends HttpServlet {
 				int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 				int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
 
+
 				list = dao.selectByBound(start, end);
 				String navi = dao.getPageNavi(currentPage);
-				
-//				System.out.println(navi);
-				
+
+
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("check_category", check_category);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
@@ -75,14 +79,24 @@ public class PetBoardController extends HttpServlet {
 
 				List<PetBoardDTO> list;
 
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");
 				
-				int check_category = 0;
-
-				System.out.println(currentPage);
+				if(category.equals("hospital")) {
+					category = "병원";
+				}else if (category.equals("walk")) {
+					category = "산책로";
+				}else if(category.equals("food")) {
+					category = "음식";
+				}else if(category.equals("etc")) {
+					category = "기타";
+				}
+				
 				System.out.println(category);
-
+				
+				int check_category = 0;
+				
 				int pageTotalCount = dao.getPageTotalCountByCategory(category);
 
 				if (currentPage < 1) {
@@ -98,6 +112,7 @@ public class PetBoardController extends HttpServlet {
 				list = dao.selectByCategory(category, start, end);
 				String navi = dao.getPageNaviByCategory(currentPage, category);
 
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("check_category", check_category);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
@@ -106,34 +121,48 @@ public class PetBoardController extends HttpServlet {
 
 				// 게시판 글쓰기로 이동
 			} else if (cmd.equals("/write.pet")) {
-				response.sendRedirect("board/boardWrite.jsp");
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+				
+				request.setAttribute("check_num", check_num);
+				request.getRequestDispatcher("board/boardWrite.jsp").forward(request, response);
 
 				// 게시판 글 작성 완료
 			} else if (cmd.equals("/input.pet")) {
+				String longinID = (String) request.getSession().getAttribute("loginID");
 				String category = request.getParameter("category");
 				String writer = (String) request.getSession().getAttribute("loginID");
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
-				
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+
 				System.out.println(category);
 				System.out.println(writer);
 				System.out.println(title);
 				System.out.println(contents);
-				
 
-				int result = dao.insert(category, writer, title, contents);
+				int result = dao.insert(longinID, category, writer, title, contents);
+
+				System.out.println(result);
+				
+				request.setAttribute("category", category);
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("board/boardWrite.jsp").forward(request, response);
 
-				
 				// 게시판 상세보기
 			} else if (cmd.equals("/detail.pet")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String longinID = (String) request.getSession().getAttribute("loginID");
-				
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
 				int check_category = Integer.parseInt(request.getParameter("check_category"));
 				
+				String keyword = request.getParameter("keyword");
+				String searchWord = request.getParameter("searchWord");
+
+				System.out.println(check_num);
+
+
 				int recCheck = dao.recCheck(seq, longinID); // 추천 여부
 				int user = 0;
 				if (recCheck == 1) {
@@ -148,6 +177,9 @@ public class PetBoardController extends HttpServlet {
 
 				int result = dao.addViewCount(seq);
 
+				request.setAttribute("keyword", keyword);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("check_category", check_category);
 				request.setAttribute("CountComment", CountComment);
 				request.setAttribute("cpage", cpage);
@@ -164,13 +196,15 @@ public class PetBoardController extends HttpServlet {
 				int board_seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int check_category = Integer.parseInt(request.getParameter("check_category"));
-				
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+
 				System.out.println(check_category);
 
 				int reply = dao.insertReply(board_seq, writer, comment);
 				dao.updateComment(board_seq);
 
-				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_category=" + check_category);
+				response.sendRedirect(
+						"/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_category=" + check_category + "&check_num=" + check_num);
 
 				// 댓글 삭제 기능
 			} else if (cmd.equals("/deleteComment.pet")) {
@@ -179,39 +213,61 @@ public class PetBoardController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int check_category = Integer.parseInt(request.getParameter("check_category"));
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
 
-				System.out.println(seq);
-				System.out.println(cpage);
 
 				int deleteComment = dao.deleteComment(seq);
 				dao.updateComment(board_seq);
 
-				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_category=" + check_category);
+				response.sendRedirect("/detail.pet?seq=" + board_seq + "&cpage=" + cpage + "&check_num=" + check_num + "&check_category=" + check_category);
 
-				
 				// 게시판 삭제기능
 			} else if (cmd.equals("/delete.pet")) {
 				int seq = Integer.parseInt(request.getParameter("seq"));
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				String category = request.getParameter("category");
+				
+				if(category.equals("병원")) {
+					category = "hospital";
+				}else if (category.equals("산책로")) {
+					category = "walk";
+				}else if(category.equals("음식")) {
+					category = "food";
+				}else if(category.equals("기타")) {
+					category = "etc";
+				}
+				
+
+				System.out.println(category);
 
 				int result = dao.delete(seq);
-				response.sendRedirect("/list.pet?cpage=1");
-
 				
+				if(check_num == 1) {
+					response.sendRedirect("/pet_board.my?cpage=1");
+				}else if(check_num == 2) {
+					response.sendRedirect("/list.pet?cpage=1&check_num=" + check_num);
+				}else if(check_num == 3) {
+					response.sendRedirect("/category.pet?cpage=" + cpage + "&category=" + category + "&check_num=" + check_num);
+				}
+
+
 				// 게시판 수정창으로 이동
 			} else if (cmd.equals("/modify.pet")) {
 
 				int seq = Integer.parseInt(request.getParameter("seq"));
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int check_category = Integer.parseInt(request.getParameter("check_category"));
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
 
 				List<PetBoardDTO> list = dao.information(seq);
 
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("check_category", check_category);
 				request.setAttribute("list", list);
 				request.setAttribute("cpage", cpage);
 				request.getRequestDispatcher("board/modify_boardWrite.jsp").forward(request, response);
 
-				
 				// 게시판 수정하기
 			} else if (cmd.equals("/modify_board.pet")) {
 				String category = request.getParameter("category");
@@ -221,17 +277,17 @@ public class PetBoardController extends HttpServlet {
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String longinID = (String) request.getSession().getAttribute("loginID");
 				int check_category = Integer.parseInt(request.getParameter("check_category"));
-				
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+
 				System.out.println(category);
 				System.out.println(title);
 				System.out.println(contents);
 				System.out.println(seq);
 				System.out.println(cpage);
 				System.out.println(longinID);
-				
-				
+
 				int result = dao.Modify(category, title, contents, seq);
-				
+
 				int recCheck = dao.recCheck(seq, longinID); // 추천 여부
 				int user = 0;
 				if (recCheck == 1) {
@@ -245,7 +301,8 @@ public class PetBoardController extends HttpServlet {
 				int CountComment = dao.getCountComment(seq);
 
 				dao.addViewCount(seq);
-
+				
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("check_category", check_category);
 				request.setAttribute("CountComment", CountComment);
 				request.setAttribute("cpage", cpage);
@@ -254,19 +311,40 @@ public class PetBoardController extends HttpServlet {
 				request.setAttribute("user", user);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("board/boardDetail.jsp").forward(request, response);
-				
-				
-				
+
 				// 게시판 검색기능
 			} else if (cmd.equals("/search.pet")) {
-
+				
+				
+				
 				String keyword = request.getParameter("keyword");
+				System.out.println(keyword);
 				String searchWord = request.getParameter("searchWord");
+				System.out.println(searchWord);
+				int check_num = Integer.parseInt(request.getParameter("check_num"));
+				System.out.println(check_num);
+				int check_category = Integer.parseInt(request.getParameter("check_category"));
+				System.out.println(check_category);
+				
+				System.out.println(check_num);
+				System.out.println(check_category);
+				check_num = 4;
+				
+				if (keyword.equals("title")) {
+					keyword = "제목";
+				} else if (keyword.equals("title")) {
+					keyword = "작성자";
+				}
+				
+				
 				if (keyword.equals("제목")) {
 					keyword = "title";
 				} else if (keyword.equals("작성자")) {
 					keyword = "writer";
 				}
+				
+				System.out.println(keyword);
+				System.out.println(searchWord);
 
 				List<PetBoardDTO> list;
 				int currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -287,6 +365,11 @@ public class PetBoardController extends HttpServlet {
 
 				list = dao.search(keyword, searchWord, start, end);
 				String navi = dao.getPageNaviBySearch(pageTotalCount, keyword, searchWord);
+				
+				request.setAttribute("keyword", keyword);
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("check_category", check_category);
+				request.setAttribute("check_num", check_num);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", navi);
@@ -317,7 +400,7 @@ public class PetBoardController extends HttpServlet {
 				String answer = g.toJson(arr);
 				response.getWriter().append(answer);
 
-			}else if (cmd.equals("/imageUpload.pet")) {
+			} else if (cmd.equals("/imageUpload.pet")) {
 				int maxSize = 1024 * 1024 * 10;
 //				String savePath = request.getServletContext().getRealPath("files");
 				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\board\\img";
@@ -333,11 +416,11 @@ public class PetBoardController extends HttpServlet {
 
 				String sysName = multi.getFilesystemName("file");
 				String oriName = multi.getOriginalFileName("file");
-				
+
 				System.out.println(sysName);
 				System.out.println(oriName);
 				response.getWriter().append(sysName);
-				
+
 			}
 
 		} catch (Exception e) {
