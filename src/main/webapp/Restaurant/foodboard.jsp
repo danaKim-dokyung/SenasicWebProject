@@ -755,8 +755,8 @@ nav>ul>li{
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
                     
-                      <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 ${ct.category }</h2>
-                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름 ${ct.title }</h1>
+                      <h2 class="text-sm title-font text-gray-500 tracking-widest"> ${ct.category }</h2>
+                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1"> ${ct.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
                           <div class="col-span-1 row-span-3 text-right">
@@ -892,8 +892,8 @@ nav>ul>li{
                    <img alt="ecommerce" class="pt2 lg:w-1/2 w-full lg:h-auto h-40 object-cover object-center rounded z-10" src="${ct1.photo1 }" >
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
-                      <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 ${ct1.category }</h2>
-                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름 ${ct1.title }</h1>
+                      <h2 class="text-sm title-font text-gray-500 tracking-widest"> ${ct1.category }</h2>
+                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1"> ${ct1.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
                           <div class="col-span-1 row-span-3 text-right">
@@ -1026,8 +1026,8 @@ nav>ul>li{
                     <img alt="ecommerce"class="pt3 lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded z-10" src="${ct2.photo1 }" >
                     
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"><!-- 이 위까지 캐러셀 예정-->
-                      <h2 class="text-sm title-font text-gray-500 tracking-widest">카테고리 3 ${ct2.category }</h2>
-                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">가게 이름3 ${ct2.title }</h1>
+                      <h2 class="text-sm title-font text-gray-500 tracking-widest"> ${ct2.category }</h2>
+                      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1"> ${ct2.title }</h1>
                       <div class="flex mb-4">
                         <span class="flex items-center">
                           <div class="col-span-1 row-span-3 text-right">
@@ -1231,7 +1231,7 @@ nav>ul>li{
                   mt-1
                 "
 					style="min-width: 12rem" id="dropdown-example-1">
-					<a href="/fboard.rest?cpage=1&category=한식"
+					<a href="/fboard.rest?cpage=1&category=이색"
 						class="
                     text-sm
                     py-2
@@ -1244,7 +1244,7 @@ nav>ul>li{
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 한식 </a> <a href="/fboard.rest?cpage=1&category=양식"
+						# 이색 </a> <a href="/fboard.rest?cpage=1&category=양식"
 						class="
                     text-sm
                     py-2
@@ -1284,7 +1284,7 @@ nav>ul>li{
                     hover:bg-gray-100
                   ">
 						# 카페 </a>
-						 <a href="/fboard.rest?cpage=1&category=패스트푸드"
+						 <a href="/fboard.rest?cpage=1&category=술집"
 						class="
                     text-sm
                     py-2
@@ -1297,7 +1297,7 @@ nav>ul>li{
                     text-gray-700
                     hover:bg-gray-100
                   ">
-						# 패스트푸드 </a>
+						# 술집 </a>
 					<div
 						class="
                     h-0
