@@ -67,8 +67,8 @@ header {
 	z-index: 100;
 }
 
-img {
-	width: 100px;
+#logo>img {
+	width: 200px;
 	display: block;
 	margin: auto;
 }
@@ -463,9 +463,17 @@ keyframes ani { 0% {
 
 
 
+
+
+
+
 %
 {
 transform
+
+
+
+
 
 
 
@@ -479,7 +487,15 @@ transform
 
 
 
+
+
+
+
 scale
+
+
+
+
 
 
 
@@ -491,7 +507,15 @@ scale
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -503,7 +527,15 @@ scale
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -516,6 +548,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -523,7 +559,15 @@ opacity
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -537,9 +581,17 @@ opacity
 
 
 
+
+
+
+
 %
 {
 transform
+
+
+
+
 
 
 
@@ -553,12 +605,24 @@ transform
 
 
 
+
+
+
+
 scale
 
 
 
 
+
+
+
+
 (
+
+
+
+
 
 
 
@@ -572,7 +636,15 @@ scale
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -585,6 +657,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -592,7 +668,15 @@ opacity
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -606,9 +690,17 @@ opacity
 
 
 
+
+
+
+
 %
 {
 transform
+
+
+
+
 
 
 
@@ -622,12 +714,24 @@ transform
 
 
 
+
+
+
+
 scale
 
 
 
 
+
+
+
+
 (
+
+
+
+
 
 
 
@@ -641,7 +745,15 @@ scale
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -654,6 +766,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -661,7 +777,15 @@ opacity
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -728,6 +852,28 @@ opacity
 .nametag {
 	
 }
+
+#list img {
+	filter: brightness(70%);
+}
+
+#list img:hover {
+	filter: brightness(50%);
+	
+}
+nav>ul{
+	padding-left: 28%;
+}
+nav>ul>li{
+	padding-right: 17%;
+}
+#carousel-font-1{
+	color: rgb(221, 221, 221);
+	padding:10px;
+}
+#carousel-font-2{
+	color: rgb(221, 221, 221);
+}
 </style>
 
 </head>
@@ -774,7 +920,7 @@ opacity
 	<nav>
 		<ul class="nav-container">
 			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/list.mag">맛집 매거진 </a></li>
+			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
 			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
@@ -860,62 +1006,11 @@ opacity
 			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
 				<div
 					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-					style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+					style="background-image: url(/magazine/magagine_img/index1.jpg)">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-							<p class="text-black text-2xl my-4">
-								<!-- 검색 시작부분 -->
-							<div class="relative flex w-full flex-wrap items-stretch ">
-								<span
-									class="
-									z-10
-									h-full
-									leading-normal
-									font-normal
-									absolute
-									text-center text-gray-400
-									absolute
-									bg-transparent
-									rounded
-									text-lg
-									items-center
-									justify-center
-									w-8
-									pl-3
-									py-4
-									">
-									<!-- 검색 바 --> <!-- 돋보기 아이콘 --> <svg
-										xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-										viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round"
-											stroke-width="2"
-											d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-								</span> <input type="text" placeholder="Search"
-									class="
-									px-3
-									py-4
-									placeholder-gray-400
-									text-gray-600
-									relative
-									bg-white bg-white
-									rounded
-									text-base
-									border border-gray-400
-									outline-none
-									focus:outline-none focus:ring
-									w-full
-									pl-10
-									"
-									id="searchBar" />
-							</div>
-							</p>
-							<a
-								class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-								href="#">view product</a>
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">사루</div>
+						<div class="text-center"  id="carousel-font-2">서울시 용산구 이태원동</div>
 					</div>
 
 				</div>
@@ -930,64 +1025,12 @@ opacity
 			<div class="carousel-item absolute opacity-0 bg-cover bg-right"
 				style="height: 50vh;">
 				<div
-					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-					style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjM0MTM2fQ&auto=format&fit=crop&w=1600&q=80');">
+					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right background-image:shadow-lg"
+					style="background-image: url(/magazine/magagine_img/index3.jpg);">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-							<p class="text-black text-2xl my-4">
-								<!-- 검색 시작부분 -->
-							<div class="relative flex w-full flex-wrap items-stretch ">
-								<span
-									class="
-									z-10
-									h-full
-									leading-normal
-									font-normal
-									absolute
-									text-center text-gray-400
-									absolute
-									bg-transparent
-									rounded
-									text-lg
-									items-center
-									justify-center
-									w-8
-									pl-3
-									py-4
-									">
-									<!-- 검색 바 --> <!-- 돋보기 아이콘 --> <svg
-										xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-										viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round"
-											stroke-width="2"
-											d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-								</span> <input type="text" placeholder="Search"
-									class="
-									px-3
-									py-4
-									placeholder-gray-400
-									text-gray-600
-									relative
-									bg-white bg-white
-									rounded
-									text-base
-									border border-gray-400
-									outline-none
-									focus:outline-none focus:ring
-									w-full
-									pl-10
-									" />
-							</div>
-
-
-							</p>
-							<a
-								class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-								href="#">view product</a>
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">뉴질랜드 스토리</div>
+						<div class="text-center"  id="carousel-font-2">서울시 송파구 송파동</div>
 					</div>
 
 				</div>
@@ -1003,61 +1046,11 @@ opacity
 			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
 				<div
 					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom"
-					style="background-image: url('https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+					style="background-image: url(/magazine/magagine_img/index2.jpg);">
 
 					<div class="container mx-auto">
-						<div
-							class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-							<p class="text-black text-2xl my-4">
-								<!-- 검색 시작부분 -->
-							<div class="relative flex w-full flex-wrap items-stretch ">
-								<span
-									class="
-									z-10
-									h-full
-									leading-normal
-									font-normal
-									absolute
-									text-center text-gray-400
-									absolute
-									bg-transparent
-									rounded
-									text-lg
-									items-center
-									justify-center
-									w-8
-									pl-3
-									py-4
-									">
-									<!-- 검색 바 --> <!-- 돋보기 아이콘 --> <svg
-										xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-										viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round"
-											stroke-width="2"
-											d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-								</span> <input type="text" placeholder="Search"
-									class="
-										px-3
-										py-4
-										placeholder-gray-400
-										text-gray-600
-										relative
-										bg-white bg-white
-										rounded
-										text-base
-										border border-gray-400
-										outline-none
-										focus:outline-none focus:ring
-										w-full
-										pl-10
-										" />
-							</div>
-							</p>
-							<a
-								class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-								href="#">view product</a>
-						</div>
+						<div class="text-center text-2xl" id="carousel-font-1">장화신은고양이</div>
+						<div class="text-center"  id="carousel-font-2">서울시 마포구 망원동</div>
 					</div>
 
 				</div>
@@ -1123,41 +1116,67 @@ opacity
 
 
 
-		<div class="space-y-24">
+		<div id="list" class="space-y-24">
 			<div class="flex space-x-40 justify-center">
-				<div style="width: 500px; height: 250px; border: 1px solid black;">
-					<div
-						style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집
-						베스트 50곳</div>
-					<div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔
-						따뜻한 칼국수 호로로로로로로로로로록"</div>
-				</div>
-
-				<div style="width: 500px; height: 250px; border: 1px solid black;">
-					<div
-						style="padding-top: 85px; font-size: 30px; text-align: center;">그린티라떼
-						베스트 20곳</div>
-					<div style="padding-top: 15px; text-align: center;">"라떼는
-						말이야~"</div>
-				</div>
+				<a href="/magagine.mag">
+					<div class="hover:grow hover:shadow-lg"
+						style="position: relative; width: 500px; height: 250px;">
+						<img id="pet_img" class="rounded-md shadow-lg"
+							style="width: 100%; height: 100%;"
+							src="/magazine/magagine_img/1.png" alt="">
+						<div
+							style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
+							맛칼국수집 베스트asd 500곳</div>
+						<div
+							style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+							"쌀쌀한 날씨엔 따뜻한 칼국수 호로로ddd로로로로로로로록"</div>
+					</div>
+				</a> <a href="/magagine.mag">
+					<div class="hover:grow hover:shadow-lg"
+						style="position: relative; width: 500px; height: 250px;">
+						<img class="rounded-md shadow-lg"
+							style="width: 100%; height: 100%;"
+							src="/magazine/magagine_img/2.jpg" alt="">
+						<div
+							style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
+							맛칼국수집 베스트asd 500곳</div>
+						<div
+							style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+							"쌀쌀한 날씨엔 따뜻한 칼국수 호로로ddd로로로로로로로록"</div>
+					</div>
+				</a>
 			</div>
 
 			<div style="width: 100%;" class="flex space-x-40 justify-center">
-				<div style="width: 500px; height: 250px; border: 1px solid black;">
-					<div
-						style="padding-top: 85px; font-size: 30px; text-align: center;">맛칼국수집
-						베스트 50곳</div>
-					<div style="padding-top: 15px; text-align: center;">"쌀쌀한 날씨엔
-						따뜻한 칼국수 호로로로로로로로로로록"</div>
-				</div>
-
-				<div style="width: 500px; height: 250px; border: 1px solid black;">
-					<div
-						style="padding-top: 85px; font-size: 30px; text-align: center;">그린티라떼
-						베스트 20곳</div>
-					<div style="padding-top: 15px; text-align: center;">"라떼는
-						말이야~"</div>
-				</div>
+				<a href="/magagine.mag">
+					<div class="hover:grow hover:shadow-lg"
+						
+						style="position: relative; width: 500px; height: 250px;">
+						<img class="rounded-md shadow-lg"
+							style="width: 100%; height: 100%;"
+							src="/magazine/magagine_img/33.jpg" alt="">
+						<div
+							style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
+							맛칼국수집 베스트asd 500곳</div>
+						<div
+							style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+							"쌀쌀한 날씨엔 따뜻한 칼국수 호로로ddd로로로로로로로록"</div>
+					</div>
+				</a> <a href="/magagine.mag">
+					<div class="hover:grow hover:shadow-lg"
+						
+						style="position: relative; width: 500px; height: 250px;">
+						<img class="rounded-md shadow-lg"
+							style="width: 100%; height: 100%;"
+							src="/magazine/magagine_img/4.jpg" alt="">
+						<div
+							style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
+							맛칼국수집 베스트asd 500곳</div>
+						<div
+							style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+							"쌀쌀한 날씨엔 따뜻한 칼국수 호로로ddd로로로로로로로록"</div>
+					</div>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -1166,37 +1185,7 @@ opacity
 
 		<div class="container py-8 px-6 mx-auto">
 
-			<a
-				class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl mb-8"
-				href="#"> About </a>
-
-			<p class="mt-8 mb-8">
-				This template is inspired by the stunning nordic minamalist design -
-				in particular: <br> <a
-					class="text-gray-800 underline hover:text-gray-900"
-					href="http://savoy.nordicmade.com/" target="_blank">Savoy Theme</a>
-				created by <a class="text-gray-800 underline hover:text-gray-900"
-					href="https://nordicmade.com/">https://nordicmade.com/</a> and <a
-					class="text-gray-800 underline hover:text-gray-900"
-					href="https://www.metricdesign.no/" target="_blank">https://www.metricdesign.no/</a>
-			</p>
-
-			<p class="mb-8">
-				Lorem ipsum dolor sit amet, consectetur <a href="#">random link</a>
-				adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-				dolore magna aliqua. Vel risus commodo viverra maecenas accumsan
-				lacus vel facilisis volutpat. Vitae aliquet nec ullamcorper sit.
-				Nullam eget felis eget nunc lobortis mattis aliquam. In est ante in
-				nibh mauris. Egestas congue quisque egestas diam in. Facilisi nullam
-				vehicula ipsum a arcu. Nec nam aliquam sem et tortor consequat. Eget
-				mi proin sed libero enim sed faucibus turpis in. Hac habitasse
-				platea dictumst quisque. In aliquam sem fringilla ut. Gravida rutrum
-				quisque non tellus orci ac auctor augue mauris. Accumsan lacus vel
-				facilisis volutpat est velit egestas dui id. At tempor commodo
-				ullamcorper a. Volutpat commodo sed egestas egestas fringilla. Vitae
-				congue eu consequat ac.
-			</p>
-
+			
 		</div>
 	</section>
 </body>
@@ -1327,7 +1316,7 @@ opacity
 					<a href="#!" class="text-gray-600">마이 페이지</a>
 				</p>
 				<p class="mb-4">
-					<a href="/list.mag" class="text-gray-600">맛집 매거진</a>
+					<a href="/magagineList.mag" class="text-gray-600">맛집 매거진</a>
 				</p>
 				<p>
 					<a href="/fboard.rest?cpage=1" class="text-gray-600">맛집 </a>, <a
