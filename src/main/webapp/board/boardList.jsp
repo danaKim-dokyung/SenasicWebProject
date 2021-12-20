@@ -621,7 +621,7 @@ nav>ul>li{
 
 	<c:choose>
 		<c:when test="${check_category == 1 }">
-				카테고리
+				
 		</c:when>
 		<c:otherwise>
 			<script>

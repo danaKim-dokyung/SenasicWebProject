@@ -85,7 +85,7 @@ public class PetBoardDAO {
 
 	// 게시글을 정해진 갯수만큼만 출력
 	public List<PetBoardDTO> selectByBound(int start, int end) throws Exception {
-		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board) where rn between ? and ? order by 1";
+		String sql = "select * from (select pet_board.*,row_number() over(order by seq desc) rn from pet_board) where rn between ? and ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, start);
 			pstat.setInt(2, end);

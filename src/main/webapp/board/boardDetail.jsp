@@ -400,7 +400,7 @@ nav>ul>li{
 						<input type="file" class="hidden">
 					</label>
 					<button id="commentBtn" class="summit float-right text-green-400"
-						type="submit">등록${keyword } ${searchWord }</button>
+						type="submit">등록</button>
 				</div>
 			</div>
 		</div>

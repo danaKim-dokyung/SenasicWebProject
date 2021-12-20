@@ -876,7 +876,7 @@ nav>ul>li{
 											<td
 												class="px-5 w-5/12 py-5 border-b border-gray-200 bg-white text-sm">
 												<p class="text-gray-900 whitespace-no-wrap">
-													<a href="/">${dto.contents} </a>
+													<a href="/load.rest?seq=${dto.par_seq }">${dto.contents} </a>
 												</p>
 											</td>
 											<td
@@ -950,18 +950,6 @@ nav>ul>li{
 	<script>
 	document.querySelector('body').classList.toggle('sidebar-mini');
 	
-		$("#rbEdit").on("click", function() {
-			location.href = "/rbEdit.admin";
-		})
-		$("#rbWrite").on("click", function() {
-			location.href = "/rbWrite.admin";
-		})
-		$("#create").on('click', function() {
-			location.href = "/rbWrite.admin";
-		})
-		$("#member").on("click", function() {
-			location.href = "/member.admin";
-		})
 		
 		
 		// 반려견 게시판으로 이동
@@ -1309,11 +1297,6 @@ nav>ul>li{
 		</script>
 	</c:if>
 	
-	
-
-
-
-
 
 </body>
 <!-- footer -->
