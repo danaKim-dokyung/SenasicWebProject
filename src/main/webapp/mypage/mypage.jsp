@@ -171,32 +171,7 @@
 
 
 
-			<div class="flex mx-4 mb-3">
-				<!--  사업자용  -->
-				<a href="#" x-data="{show:false}" class="w-full flex flex-col"
-					@click="show=!show">
-					<div
-						class="w-full flex justify-between px-3 hover:bg-green-700 rounded py-3"
-						:class="{'bg-green-700':show}">
-						<div class="flex">
-							<i class="material-icons fill-current text-gray-100">textsms</i>
-							<div class="relative menu-text text-gray-100 ml-4">쪽지함</div>
-						</div>
-						<span
-							class="transition ease-in duration-150 text-gray-100 material-icons transform"
-							:class="{'rotate-180':show}"> arrow_drop_down </span>
-					</div>
-					<div x-show="show"
-						class="transition ease-in duration-700 mt-3 bg-green-800">
-						<div class="w-full flex px-3 hover:bg-green-700 rounded py-3 mb-3">
-							<div
-								class="relative text-xs font-light menu-text text-gray-100 ml-4">
-								쪽지</div>
-						</div>
-					</div>
-				</a>
-			</div>
-			<!--  사업자용  -->
+			
 
 
 
@@ -204,12 +179,21 @@
 		</div>
 		<!-- 마무리 예상 div -->
 
-
+	
 
 
 		<div
 			class="main-content w-full md:w-4/5 reltive float-right grid justify items-stretch">
+			
 			<div class="bg-white p-8 rounded-md w-full">
+			
+					<div
+						style="height: 60px; margin: auto; width: 800px; margin-top: 100px;">
+						<button type="button" id="main"
+							class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
+							style="float: right;">메인화면</button>
+					</div>
+			
 				<div class="input-form-backgroud row">
 					<div class="input-form col-md-12 mx-auto">
 						<form action="/modify.mem?seq=${list[0].seq }" method="post">
@@ -288,25 +272,29 @@
 							<!-- 전화번호 -->
 							<div class="row flex mt-10">
 								<div class="col-md-4 mb-2 ">
-									<label for="phone">연락처</label> <select
+									<label for="phone">연락처</label>
+									
+							 		<input type="text" style="width: 50px" 
+										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2 text-center" 
+										id="phone1" value="010"
+										name="phone1"  required> 
+									
+							 <!-- 		 <select
 										class="ml-10 form-control" name="phone1" id="phone1" required>
 										<option>선택</option>
 										<option value="010"
 											<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
-										<option value="02"
-											<c:if test="${phoneFirst eq 02}"> selected</c:if>>02</option>
-										<option value="031"
-											<c:if test="${phoneFirst eq 031}"> selected</c:if>>031</option>
-									</select>
+									</select>   -->
+									
 								</div>
 								<div class="col-md-4 mb-2">
-									<input type="text"
-										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2"
+									<input type="text" style="width:100px"
+										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2 " 
 										id="num2" placeholder="1234" value="${phoneMiddle }"
 										name="phone2" pattern="^\d{4}$" required>
 								</div>
 								<div class="col-md-4 mb-2">
-									<input type="text"
+									<input type="text" style="width:100px"
 										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2"
 										id="num3" placeholder="5678" value="${phoneLast }"
 										name="phone3" pattern="^\d{4}$" required>
@@ -329,7 +317,7 @@
 					</div>
 				</div>
 			</div>
-			<button id="btn">click!</button>
+			
 			
 		</div>
 
@@ -386,7 +374,10 @@
 			location.href = "/my_review.my?cpage=${cpage }";
 		})
 		
-		
+		// 메인화면으로 돌아가기
+		$("#main").on("click",function(){
+			location.href ="/index.jsp";
+		})
 		
 		
 	</script>
