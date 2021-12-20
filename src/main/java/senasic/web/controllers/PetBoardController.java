@@ -402,8 +402,8 @@ public class PetBoardController extends HttpServlet {
 
 			} else if (cmd.equals("/imageUpload.pet")) {
 				int maxSize = 1024 * 1024 * 10;
-//				String savePath = request.getServletContext().getRealPath("files");
-				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\board\\img";
+				String savePath = request.getServletContext().getRealPath("files");
+//				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\board\\img";
 				File filePath = new File(savePath);
 
 				if (!filePath.exists()) {

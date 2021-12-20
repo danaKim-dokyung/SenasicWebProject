@@ -37,7 +37,9 @@ public class AdminController extends HttpServlet {
 			if(cmd.equals("rbUpload.admin")) { //식당게시판 글 업로드
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
+//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
+				String savePath = request.getServletContext().getRealPath("files");
+
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
 				System.out.println(savePath);
@@ -153,7 +155,9 @@ public class AdminController extends HttpServlet {
 				
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
+//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/RestImg";
+				String savePath = request.getServletContext().getRealPath("files");
+
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
 				System.out.println(savePath);
@@ -296,7 +300,9 @@ public class AdminController extends HttpServlet {
 				
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
-				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\member/profileImg";
+//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\member/profileImg";
+				String savePath = request.getServletContext().getRealPath("files");
+
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
 				System.out.println(savePath);

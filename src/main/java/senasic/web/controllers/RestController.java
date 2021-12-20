@@ -98,7 +98,9 @@ public class RestController extends HttpServlet {
 				int maxSize = 1024*1024*10; //10mb
 				//oracle 二쇱냼�뿉 �꽔�쓣 諛⑸쾿 李얘린
 				//二쇱냼 蹂�寃�
-				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/ReplyImg";
+//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp\\Restaurant/ReplyImg";
+				String savePath = request.getServletContext().getRealPath("files");
+
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}				
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
