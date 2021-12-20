@@ -869,15 +869,17 @@ nav>ul>li{
 		
 <!-- 리뷰 보기 -->
 <c:set var="rvStar" value="1" />
+<c:set var="rvStar1" value="0" />
 <c:forEach var="reply" items="${reply }">
+
 		<div class="box-border  h-max p-4 border-4 flex grid grid-col-12 gird-rows-7 gap-2 flex">
 			<div class="rows-span-3 col-span-12 flex justify-between">
 				<div class="col-start-1 col-end-2 row-span-3 flex">
 					<div class="px-3 row-span-2 col-span-1">
 					<!-- 프로필사진 자리 -->
-						<img src="https://mdbootstrap.com/img/new/avatars/15.jpg"
-							class="rounded-full max-w-20 h-20 item-left border-none" />
-					
+						<img src="${str.get(rvStar1) }"
+	class="rounded-full max-w-20 h-20 item-left border-none" />
+					<c:set var="rvStar1" value="${rvStar1+1}" />
 					
 					</div>
 					
@@ -909,6 +911,7 @@ nav>ul>li{
 					<ul class="justify-end items-center flex">
 					<c:set var="rprt" value="${reply.rate }"/>
 					<c:forEach var='cn' begin='1' end='5'>
+					
 				        <c:set var="rvStar" value="${rvStar+1}" />    	
 						<li>
 						  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">

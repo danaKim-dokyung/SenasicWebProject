@@ -2,6 +2,7 @@ package senasic.web.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,15 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import senasic.web.DAO.AdminDAO;
 import senasic.web.DAO.RecDAO;
 import senasic.web.DAO.RestBoardDAO;
+import senasic.web.DTO.MemberDTO;
 import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RcmdDTO;
 import senasic.web.DTO.RestBoardDTO;
@@ -80,8 +80,20 @@ public class RestController extends HttpServlet {
 		             if(NavCheck>2) {
 			             Snum = navi.get(1);		            	 
 		             }
-	             
-	             
+		             //writer가 들어가야함 
+		           
+		            List<String> str= new ArrayList<String>(); 
+		            for(RestReplyDTO a: reply) {
+		            	
+		            	 String writer = a.getWriter();
+		            	 
+		            	 str.add(dao.selectprofile(writer));
+		        
+		            }
+		           
+		            
+		             
+		           
 	             request.setAttribute("Fnum", Fnum);
 	             request.setAttribute("Snum", Snum);
 	             request.setAttribute("navi", navi);
@@ -90,6 +102,7 @@ public class RestController extends HttpServlet {
 				request.setAttribute("menu", menu);
 				request.setAttribute("reply", reply);
 				request.setAttribute("user", user);
+				request.setAttribute("str", str);
 				request.getRequestDispatcher("/Restaurant/detail.jsp").forward(request, response);
 				
 				//댓글달기
@@ -99,7 +112,8 @@ public class RestController extends HttpServlet {
 				//oracle 二쇱냼�뿉 �꽔�쓣 諛⑸쾿 李얘린
 				//二쇱냼 蹂�寃�
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-//				String savePath = request.getServletContext().getRealPath(savePath);
+				//String savePath = "C:\\";
+			//String savePath = request.getServletContext().getRealPath(savePath);
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}				

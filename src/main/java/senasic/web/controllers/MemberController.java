@@ -47,7 +47,7 @@ public class MemberController extends HttpServlet {
 				}
 			} else if (cmd.equals("/nicknameCheck.mem")) { // �땳�꽕�엫 以묐났 泥댄겕 湲곕뒫
 				String nickname = request.getParameter("nn");
-				System.out.println(nickname);
+				
 
 				try {
 					boolean result = dao.isNicknameExist(nickname);
@@ -60,6 +60,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/signupProc.mem")) {
 
 				int maxSize = 1024 * 1024 * 10;
+				//String savePath = "C:\\"; // 경로 문제
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload"; // 경로 문제
 				File filePath = new File(savePath);
 				if (!filePath.exists()) {
@@ -72,8 +73,8 @@ public class MemberController extends HttpServlet {
 
 				// String root = "\Restaurant\RestImg\";
 				String root = "/upload/";
-				String oriName1 = multi.getOriginalFileName("Pimage");
-				String sysName1 = multi.getFilesystemName("Pimage");
+				String oriName1 = multi.getOriginalFileName("photo");
+				String sysName1 = multi.getFilesystemName("photo");
 
 				String id = multi.getParameter("id");
 				String pw = passwordUtils.getSHA512(multi.getParameter("pw"));
@@ -84,11 +85,12 @@ public class MemberController extends HttpServlet {
 				String p3 = multi.getParameter("phone3");
 				int age = Integer.parseInt(multi.getParameter("age"));
 				String gender = multi.getParameter("gender");
-				String img = multi.getFilesystemName("img");
+				//String img = multi.getFilesystemName("photo");
+				System.out.println(sysName1);
 
 				String ph = (p1 + p2 + p3);
 
-				System.out.println("수정 예정");
+				
 				dao.insert(new MemberDTO(id, pw, nn, m, ph, age, gender, 0, sysName1));
 				response.sendRedirect("/index.jsp");
 

@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import senasic.web.DTO.MemberDTO;
 import senasic.web.DTO.MenuDTO;
 import senasic.web.DTO.RestBoardDTO;
 import senasic.web.DTO.RestReplyDTO;
@@ -453,6 +454,33 @@ public class RestBoardDAO {
 
 			}
 			return list;
+		}      
+	}
+	//profile찾기
+	
+	public String selectprofile(String writer) throws Exception{
+		String sql = "select b.photo from member b ,(select id from rest_reply where writer=? ) a where b.id= a.id";
+		System.out.println("dao시작부분");
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);)
+				
+				
+				{
+			System.out.println("dao중간부분");
+			pstat.setString(1, writer);
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				//MemberDTO dto1 = new MemberDTO();
+			//	dto1.setImg(rs.getString("img"));
+				String result = rs.getString(1);
+				System.out.println("dao잘됩니다");
+				
+
+			
+			return result;
+			}
+			
+			
 		}      
 	}
 
