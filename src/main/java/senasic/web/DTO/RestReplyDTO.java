@@ -1,6 +1,7 @@
 package senasic.web.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class RestReplyDTO {
 	private int seq;
@@ -11,8 +12,17 @@ public class RestReplyDTO {
 	private double rate;
 	private int recommand;
 	private Timestamp time;
+	private String id;
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public RestReplyDTO(int seq, int par_seq, String writer, String contents, String photo, double rate,
-			int recommand, Timestamp time) {
+			int recommand, Timestamp time, String id) {
 		this.seq = seq;
 		this.par_seq = par_seq;
 		this.writer = writer;
@@ -21,6 +31,7 @@ public class RestReplyDTO {
 		this.rate = rate;
 		this.recommand = recommand;
 		this.time = time;
+		this.id = id;
 	}
 	public Timestamp getTime() {
 		return time;
@@ -70,8 +81,36 @@ public class RestReplyDTO {
 	public void setRecommand(int recommand) {
 		this.recommand = recommand;
 	}
+	
+	
 	public RestReplyDTO() {
 	}
 	
+	
+	
+	
+	public String getFormdDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+		return sdf.format(this.time.getTime());
+	}
+	
+	public String getDetailDate() {
+		long current_time = System.currentTimeMillis(); // 현재의 타임 스탬
+		long write_time = this.time.getTime(); // 글이 작성된 시청의 Timestamp
+		
+		long time_gap = current_time - write_time;
+		
+		if(time_gap < 6000) {
+			return "1분 이내";
+		}else if(time_gap < 300000) {
+			return "5분 이내";
+		}else if(time_gap < 3600000) {
+			return "1시간 이내";
+		}else if (time_gap < 7200000) {
+			return "2시간 이내";
+		}else {
+			return getFormdDate();
+		}
+	}
 	
 }
