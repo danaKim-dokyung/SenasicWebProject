@@ -511,42 +511,21 @@ nav>ul{
 nav>ul>li{
 	padding-right: 17%;
 }
-#carousel-font-1{
-	color: rgb(221, 221, 221);
-	padding:10px;
-}
-#carousel-font-2{
-	color: rgb(221, 221, 221);
-}
-#search_bar>span{
-background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
-}
-#koreanfood>span{
-background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
-}
 
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+#header{
+	padding:0px;
+	margin-left:200px;
+	margin-right:200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	border:1px solid blue;
 }
-* {font-family: GmarketSansMedium;}
-
-#github>a{
-padding:10px;
-}
-
-#shbtn:hover{background-color: #d7e9d433;}
-
 </style>
 </head>
-	
-	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+		<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+
 	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5"id="header">
 		<div
 			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 
@@ -557,7 +536,7 @@ padding:10px;
 			</a>
 			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
 			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
+				class="z-50 md:ml-auto  flex flex-wrap items-center text-base justify-center">
 				<c:choose>
 					<c:when test="${loginID != null}">
 				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;

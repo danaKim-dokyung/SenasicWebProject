@@ -111,8 +111,8 @@ public class RestController extends HttpServlet {
 				int maxSize = 1024*1024*10; //10mb
 				//oracle 二쇱냼�뿉 �꽔�쓣 諛⑸쾿 李얘린
 				//二쇱냼 蹂�寃�
-				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-				//String savePath = "C:\\";
+				//String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+				String savePath = "C:";
 			//String savePath = request.getServletContext().getRealPath(savePath);
 
 				File filePath = new File(savePath);
