@@ -13,17 +13,7 @@
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 
 <style>
-* {
-	box-sizing: border-box;
-}
-
-td>a:hover {
-	text-decoration: underline;
-	/* hover시 밑줄표시 */
-}
-
-
- .nav-container {
+.nav-container {
 	display: flex;
 	text-align: center;
 }
@@ -47,7 +37,7 @@ header {
 }
 
 #logo>img {
-	width: 100px;
+	width: 200px;
 	display: block;
 	margin: auto;
 }
@@ -67,6 +57,41 @@ header {
 
 .hover\:grow:hover {
 	transform: scale(1.02);
+}
+
+.carousel-open:checked+.carousel-item {
+	position: static;
+	opacity: 100;
+}
+
+.carousel-item {
+	-webkit-transition: opacity 0.6s ease-out;
+	transition: opacity 0.6s ease-out;
+}
+
+#carousel-1:checked ~ .control-1, #carousel-2:checked ~ .control-2,
+	#carousel-3:checked ~ .control-3 {
+	display: block;
+}
+
+.carousel-indicators {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	bottom: 2%;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 10;
+}
+
+#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+	#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+	#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet
+	{
+	color: #000;
+	/*Set to match the Tailwind colour you want the active one to be */
 }
 
 @import url("https://fonts.googleapis.com/css?family=Raleway");
@@ -124,6 +149,338 @@ header {
 	transform: rotate(-45deg);
 }
 
+.microphone {
+	position: absolute;
+	height: 24px;
+	width: 24px;
+	background: #FF5252;
+	right: 12px;
+	top: 6px;
+	border-radius: 100%;
+	box-shadow: 0px 1px 2px 0px #555;
+}
+
+.microphone:after {
+	content: "";
+	position: absolute;
+	background: #c70000;
+	height: 12px;
+	width: 8px;
+	border-radius: 10px;
+	left: 8px;
+	top: 3px;
+}
+
+.microphone:before {
+	content: "";
+	position: absolute;
+	border-bottom: 2px solid #c70000;
+	height: 10px;
+	width: 10px;
+	border-radius: 100%;
+	top: 6px;
+	left: 7px;
+}
+
+.mic-stand {
+	position: absolute;
+	height: 4px;
+	width: 2px;
+	background: #c70000;
+	bottom: 3px;
+	left: 11px;
+}
+
+.icon-holder {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+
+.icon {
+	position: relative;
+	height: 35px;
+	width: 80px;
+	background: #064e3b;
+	border-radius: 100%;
+	box-shadow: 0px 1px 2px 0px #555;
+	cursor: pointer;
+	opacity: 100;
+	transition: 0.4s;
+}
+
+.icon:hover {
+	background: #70c5ed;
+	animation-play-state: paused;
+}
+
+#parking:after {
+	content: "P";
+	font-weight: bold;
+	position: absolute;
+	font-size: 13px;
+	color: #43b3e7;
+	background: white;
+	padding: 1px 3px 1px 4px;
+	border-radius: 100%;
+	left: 10px;
+	top: 9px;
+}
+
+#gas:after {
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 12px;
+	background: white;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	top: 9px;
+	left: 11px;
+}
+
+#gas:before {
+	content: "";
+	position: absolute;
+	height: 6px;
+	width: 8px;
+	background: #43b3e7;
+	left: 13px;
+	top: 11px;
+	z-index: 1;
+}
+
+.base {
+	position: absolute;
+	background: white;
+	width: 16px;
+	height: 4px;
+	top: 23px;
+	left: 9px;
+	border-radius: 2px;
+}
+
+.base:after {
+	content: "";
+	position: absolute;
+	height: 10px;
+	width: 10px;
+	border-radius: 100%;
+	border-left: 2px solid white;
+	bottom: 4px;
+	left: -1px;
+}
+
+#eat:after {
+	content: "";
+	position: absolute;
+	height: 13px;
+	width: 4px;
+	background: white;
+	border-radius: 3px;
+	top: 15px;
+	left: 11px;
+}
+
+#eat:before {
+	content: "";
+	position: absolute;
+	height: 5px;
+	width: 8px;
+	border-bottom-left-radius: 100%;
+	border-bottom-right-radius: 100%;
+	background: white;
+	top: 12px;
+	left: 9px;
+}
+
+.fork {
+	position: absolute;
+	height: 5px;
+	width: 2px;
+	background: white;
+	top: 7px;
+	left: 9px;
+}
+
+.fork:after {
+	content: "";
+	position: absolute;
+	height: 5px;
+	width: 2px;
+	background: white;
+	top: 0px;
+	left: 3px;
+}
+
+.fork:before {
+	content: "";
+	position: absolute;
+	height: 5px;
+	width: 2px;
+	background: white;
+	top: 0px;
+	left: 6px;
+}
+
+.knife {
+	position: absolute;
+	height: 9px;
+	width: 4px;
+	background: white;
+	right: 11px;
+	bottom: 7px;
+	border-radius: 2px;
+}
+
+.knife:after {
+	content: "";
+	position: absolute;
+	height: 13px;
+	width: 6px;
+	background: white;
+	bottom: 8px;
+	border-top-right-radius: 100%;
+}
+
+.cup {
+	position: absolute;
+	height: 14px;
+	width: 17px;
+	background: white;
+	top: 15px;
+	left: 8px;
+	border-bottom-left-radius: 100%;
+	border-bottom-right-radius: 100%;
+}
+
+.cup:after {
+	content: "";
+	position: absolute;
+	height: 10px;
+	width: 15px;
+	border-radius: 100%;
+	right: -4px;
+	border-right: 2px solid white;
+}
+
+#coffee:after {
+	content: "S";
+	position: absolute;
+	font-style: italic;
+	font-size: 5px;
+	transform: skewY(-40deg);
+	color: white;
+	top: 6px;
+	left: 12px;
+}
+
+#coffee:before {
+	content: "S";
+	position: absolute;
+	font-style: italic;
+	font-size: 5px;
+	transform: skewY(-40deg);
+	color: white;
+	top: 6px;
+	left: 18px;
+}
+
+.dots {
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	background: white;
+	border-radius: 100%;
+	left: 15px;
+	top: 15px;
+}
+
+.dots:after {
+	content: "";
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	background: white;
+	border-radius: 100%;
+	left: 9px;
+}
+
+.dots:before {
+	content: "";
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	background: white;
+	border-radius: 100%;
+	left: -9px;
+}
+
+input:focus ~ .icon-holder>.icon {
+	animation: ani 2.2s ease-out infinite;
+}
+
+@keyframes ani { 0% {
+	opacity: 1;
+}
+10%
+{
+transform:scale
+(1.2);
+opacity:1;}
+20%
+{
+transform:
+scale
+(1);
+opacity:1;}100%
+{transform:
+scale(1);
+opacity:1;}}
+#gas {
+	animation-delay: 0.1s;
+}
+
+#eat {
+	animation-delay: 0.2s;
+}
+
+#coffee {
+	animation-delay: 0.3s;
+}
+
+#misc {
+	animation-delay: 0.4s;
+}
+
+.tooltip {
+	opacity: 0;
+	position: absolute;
+	font-size: 12px;
+	color: white;
+	background: #555;
+	padding: 8px;
+	top: 15px;
+	border-radius: 15%;
+	top: 45px;
+}
+
+.tooltip:after {
+	content: "";
+	position: absolute;
+	background: #555;
+	clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+	height: 18px;
+	width: 18px;
+	top: -10px;
+	left: 7px;
+}
+
+.icon:hover>.tooltip {
+	animation: ani 0.4s ease-out forwards;
+	animation-delay: 0.3s;
+}
+
 .con_cmn {
 	display: none
 }
@@ -154,8 +511,40 @@ nav>ul{
 nav>ul>li{
 	padding-right: 17%;
 }
+#carousel-font-1{
+	color: rgb(221, 221, 221);
+	padding:10px;
+}
+#carousel-font-2{
+	color: rgb(221, 221, 221);
+}
+#search_bar>span{
+background-color: rgba(5, 88, 5, 0.582);
+padding-top:10px
+}
+#koreanfood>span{
+background-color: rgba(5, 88, 5, 0.582);
+padding-top:10px
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family: GmarketSansMedium;}
+
+#github>a{
+padding:10px;
+}
+
+#shbtn:hover{background-color: #d7e9d433;}
+
 </style>
 </head>
+	
+	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
 	<header
 		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
 		<div
@@ -164,15 +553,15 @@ nav>ul>li{
 			<!------ 왼쪽 상단 세나식 로고 ----->
 			<a href="/index.jsp"
 				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">Senasic</span>
+				<span class="ml-3 text-xl">SENASIC</span>
 			</a>
 			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
 			<nav
 				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
 				<c:choose>
 					<c:when test="${loginID != null}">
-				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 						<!-- 강사님께 질문 3 -->
 						<c:if test="${seqID < 0 }">
 							<a href="dash.admin">관리자페이지</a>
@@ -189,9 +578,10 @@ nav>ul>li{
 			</nav>
 		</div>
 	</header>
+	<a href="/index.jsp">
 	<div id="logo">
-		<img src="/senasic_logo.png">
-	</div>
+		<img src="senasic_logo.png">
+	</div></a>
 
 	<!----------------- 게시판 네비게이션 --------------->
 	<nav>
@@ -203,15 +593,29 @@ nav>ul>li{
 		</ul>
 	</nav>
 <body>
-	<div class="forSearch">
+	<!------------- 캐러셀 시작 ---------------->
+	<div class="carousel relative container mx-auto"
+		style="max-width: 100%;">
+		<div class="carousel-inner relative overflow-hidden w-full">
+			<!--Slide 1-->
+			<input class="carousel-open" type="radio" id="carousel-1"
+				name="carousel" aria-hidden="true" hidden="" checked="checked">
+			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
+				<div
+					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+					style="background-image: url(/magazine/magagine_img/index1.jpg)">
+
+					<div class="container mx-auto">
+		<!-- 검색바 시작 -->
+		<div class="forSearch">
 		<div class="container1">
 			<form action="/fboard.rest">
-				<input type="hidden" name="cpage" value="1"> <input
-					type="hidden" name="category" value="all"> <input
-					class="main" type="text" name="target" id="searching"> <a
-					id="searchbytagName">
+				<input type="hidden" name="cpage" value="1"> 
+				<input type="hidden" name="category" value="all"> 
+				<input class="main" type="text" name="target" id="searching"> 
+				<a id="searchbytagName">
 					<button
-						class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
 						id="shbtn">검색</button>
 				</a>
 			</form>
@@ -226,15 +630,17 @@ nav>ul>li{
 
 
 
-				<div class="con_cmn con1">
-
+				<div class="con_cmn con1" id="search_bar" class="text-white">
 					<span class=" mt-2" id="gangnam">
 						<button>#강남구</button>
-					</span>&nbsp;&nbsp; <span class=" mt-2" id="sungbuk">
+					</span>&nbsp;&nbsp; 
+					<span class=" mt-2" id="sungbuk">
 						<button>#성북구</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" id="jongro">
+					</span> &nbsp;&nbsp; 
+					<span class=" mt-2" id="jongro">
 						<button>#종로구</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" id="mapo">
+					</span> &nbsp;&nbsp; 
+					<span class=" mt-2" id="mapo">
 						<button>#마포구</button>
 					</span> &nbsp;&nbsp; <span class=" mt-2" id="gangdong">
 						<button>#송파구</button>
@@ -245,8 +651,6 @@ nav>ul>li{
 
 
 				<div class="con_cmn con2">
-
-
 					<span class=" mt-2" class="food" id="koreanfood">
 						<button>#양식</button>
 					</span>&nbsp;&nbsp; <span class=" mt-2" class="food" id="boonsik">
@@ -260,23 +664,104 @@ nav>ul>li{
 					</span>
 
 				</div>
-
-
-
-
-
-
-
-
 			</div>
 
 		</div>
 	</div>
+					</div>
+
+				</div>
+			</div>
+			<label for="carousel-3"
+				class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+			<label for="carousel-2"
+				class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+			<!--Slide 2-->
+			<input class="carousel-open" type="radio" id="carousel-2"
+				name="carousel" aria-hidden="true" hidden="">
+			<div class="carousel-item absolute opacity-0 bg-cover bg-right"
+				style="height: 50vh;">
+							<div class="forSearch">
+		<div class="container1">
+			<form action="/fboard.rest">
+				<input type="hidden" name="cpage" value="1"> 
+				<input type="hidden" name="category" value="all"> 
+				<input class="main" type="text" name="target" id="searching"> 
+				<a id="searchbytagName">
+					<button
+						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
+						id="shbtn">검색</button>
+				</a>
+			</form>
+
+			<div class="flex justify-center" id="hashtag">
+				<span class="searchicon"></span> <select id="selectTab"
+					class="select_tab" title="세부검색">
+					<option value="x">-검색</option>
+					<option value="0" id="tab1">지역</option>
+					<option value="1">음식종류</option>
+				</select> &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+				<div class="con_cmn con1" id="search_bar" class="text-white">
+					<span class=" mt-2" id="gangnam">
+						<button>#강남구</button>
+					</span>&nbsp;&nbsp; 
+					<span class=" mt-2" id="sungbuk">
+						<button>#성북구</button>
+					</span> &nbsp;&nbsp; 
+					<span class=" mt-2" id="jongro">
+						<button>#종로구</button>
+					</span> &nbsp;&nbsp; 
+					<span class=" mt-2" id="mapo">
+						<button>#마포구</button>
+					</span> &nbsp;&nbsp; <span class=" mt-2" id="gangdong">
+						<button>#송파구</button>
+					</span>
+
+				</div>
+
+
+
+				<div class="con_cmn con2">
+					<span class=" mt-2" class="food" id="koreanfood">
+						<button>#양식</button>
+					</span>&nbsp;&nbsp; <span class=" mt-2" class="food" id="boonsik">
+						<button>#이색</button>
+					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="japaneesefood">
+						<button>#일식</button>
+					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="cafe">
+						<button>#카페</button>
+					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="fastfood">
+						<button>#술집</button>
+					</span>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+					</div>
+
+				</div>
+			</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="md:container md:mx-auto">
 
 		<div>
 			<h1
-				class="text-6xl font-normal leading-normal h-48 mt-0 mb-2 text-green-800 text-center">
+				class="text-6xl font-normal leading-normal py-4 h-20 mt-0 mb-2 text-green-800 text-center">
 				반려견 게시판</h1>
 		</div>
 
