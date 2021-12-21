@@ -559,11 +559,8 @@ $("#dash").on("click",function(){
 $("#img").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-<<<<<<< Upstream, based on branch 'feature/5' of https://github.com/danaKim-dokyung/senasic6.git
 	    $("#ph").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
-=======
-	    $("#ph").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
->>>>>>> 4bfd3cd admin 전체 수정.
+.
 	  }
 	})
 
