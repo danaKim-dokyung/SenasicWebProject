@@ -161,9 +161,9 @@
           
           
           <!-- 나이 -->
-            <div class="mb-3">
+                <div class="mb-3">
             <label for="age">나이</label>
-            <input type="text" class="form-control" id="age" name="age" placeholder="나이를 입력하세요"  required>
+            <input type="text" class="form-control" id="age" name="age" placeholder="나이를 입력하세요"pattern="^[1-9]{1,1}[0-9]{0,1}$"  required>
             <div class="invalid-feedback">
               나이를 입력해주세요.
             </div>
@@ -214,6 +214,9 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement" >개인정보 수집 및 이용에 동의합니다.</label>
+           <div class="invalid-feedback" id="agree">
+                개인정보 동의는 필수사항 입니다
+              </div>
           </div>
           <div class="mb-4"></div>
           <div class="col text-center">
