@@ -971,18 +971,18 @@ nav>ul>li {
 										<option value="010"
 											<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
 									</select>   -->
-												
+
 								</div>
 								<div class="col-md-4 mb-2">
 									<input type="text" style="width: 100px; padding-left: 10px;"
 										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2 "
-										id="num2"  value="${phone2 }"
+										id="num2" placeholder="1234" value="${phoneMiddle }"
 										name="phone2" pattern="^\d{4}$" required>
 								</div>
 								<div class="col-md-4 mb-2">
 									<input type="text" style="width: 100px; padding-left: 10px;"
 										class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2"
-										id="num3"  value="${phone3 }"
+										id="num3" placeholder="5678" value="${phoneLast }"
 										name="phone3" pattern="^\d{4}$" required>
 								</div>
 							</div>
