@@ -560,7 +560,7 @@ $("#img").on("change",function(){
 	let file = this.files[0];
 	if (file) {
 	    $("#ph").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
-.
+
 	  }
 	})
 
