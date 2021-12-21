@@ -154,25 +154,34 @@ nav>ul{
 nav>ul>li{
 	padding-right: 17%;
 }
+#header{
+	padding:0px;
+	margin-left:200px;
+	margin-right:200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	border:1px solid blue;
+}
 </style>
 </head>
+		<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
 	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5"id="header">
 		<div
 			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 
 			<!------ 왼쪽 상단 세나식 로고 ----->
 			<a href="/index.jsp"
 				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">Senasic</span>
+				<span class="ml-3 text-xl">SENASIC</span>
 			</a>
 			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
 			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
+				class="z-50 md:ml-auto  flex flex-wrap items-center text-base justify-center">
 				<c:choose>
 					<c:when test="${loginID != null}">
-				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 						<!-- 강사님께 질문 3 -->
 						<c:if test="${seqID < 0 }">
 							<a href="dash.admin">관리자페이지</a>

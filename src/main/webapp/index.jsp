@@ -527,11 +527,14 @@ nav>ul>li{
 }
 #search_bar>span{
 background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
+padding-top:10px;
+border-radius:30px;
 }
-#koreanfood>span{
+
+#search_bar2>span{
 background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
+padding-top:10px;
+border-radius:30px;
 }
 
 @font-face {
@@ -545,16 +548,34 @@ padding-top:10px
 #github>a{
 padding:10px;
 }
+#header{
+	padding:0px;
+	margin-left:200px;
+	margin-right:200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
 
 #shbtn:hover{background-color: #d7e9d433;}
-
+#list{
+	margin-left:200px;
+	margin-right:200px;
+}
+#hashtag{
+padding-top:25px;
+font-size: 20px;
+	}
+.con_cmn con2{
+	padding-top:25px;
+font-size: 20px;
+	}
 </style>
 
 </head>
 <body>
 	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
 	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5"id="header">
 		<div
 			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 
@@ -565,7 +586,7 @@ padding:10px;
 			</a>
 			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
 			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
+				class="z-50 md:ml-auto  flex flex-wrap items-center text-base justify-center">
 				<c:choose>
 					<c:when test="${loginID != null}">
 				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
@@ -629,6 +650,7 @@ padding:10px;
 			</form>
 
 			<div class="flex justify-center" id="hashtag">
+			
 				<span class="searchicon"></span> <select id="selectTab"
 					class="select_tab" title="세부검색">
 					<option value="x">-검색</option>
@@ -636,9 +658,9 @@ padding:10px;
 					<option value="1">음식종류</option>
 				</select> &nbsp;&nbsp;&nbsp;&nbsp;
 
+					
 
-
-				<div class="con_cmn con1" id="search_bar" class="text-white">
+				<div class="con_cmn con1" id="search_bar">
 					<span class=" mt-2" id="gangnam">
 						<button>#강남구</button>
 					</span>&nbsp;&nbsp; 
@@ -658,7 +680,7 @@ padding:10px;
 
 
 
-				<div class="con_cmn con2">
+				<div class="con_cmn con2" id="search_bar2">
 					<span class=" mt-2" class="food" id="koreanfood">
 						<button>#양식</button>
 					</span>&nbsp;&nbsp; <span class=" mt-2" class="food" id="boonsik">
@@ -707,7 +729,7 @@ padding:10px;
 				</a>
 			</form>
 
-			<div class="flex justify-center" id="hashtag">
+			<div class="flex justify-center " id="hashtag">
 				<span class="searchicon"></span> <select id="selectTab"
 					class="select_tab" title="세부검색">
 					<option value="x">-검색</option>
@@ -825,8 +847,8 @@ padding:10px;
 
 
 
-		<div id="list" class="space-y-24">
-			<div class="flex space-x-40 justify-center">
+		<div id="list" class="space-y-24 ">
+			<div class="flex space-x-48 justify-center">
 				<a href="/magagine.mag">
 					<div class="hover:grow hover:shadow-lg"
 						style="position: relative; width: 500px; height: 250px;">
@@ -856,7 +878,7 @@ padding:10px;
 				</a>
 			</div>
 
-			<div style="width: 100%;" class="flex space-x-40 justify-center">
+			<div style="width: 100%;" class="flex space-x-48 justify-center">
 				<a href="/magagine.mag">
 					<div class="hover:grow hover:shadow-lg"
 						
