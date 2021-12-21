@@ -85,7 +85,7 @@ public class RestController extends HttpServlet {
 		            List<String> str= new ArrayList<String>(); 
 		            for(RestReplyDTO a: reply) {
 		            	
-		            	 String writer = a.getWriter();
+		            	 String writer = a.getId();
 		            	 
 		            	 str.add(dao.selectprofile(writer));
 		        

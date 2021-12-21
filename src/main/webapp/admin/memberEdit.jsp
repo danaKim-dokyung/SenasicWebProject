@@ -225,6 +225,20 @@ nav>ul{
 nav>ul>li{
 	padding-right: 17%;
 }
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family: GmarketSansMedium;}
+
+#github>a{
+padding:10px;
+}
+
+#shbtn:hover{background-color: #d7e9d433;}
 </style>
 <script>
 $(document).ready(function(){
@@ -240,6 +254,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+		<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
 	<header
 		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
 		<div
@@ -248,34 +263,35 @@ $(document).ready(function(){
 			<!------ 왼쪽 상단 세나식 로고 ----->
 			<a href="/index.jsp"
 				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">Senasic</span>
+				<span class="ml-3 text-xl">SENASIC</span>
 			</a>
 			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
 			<nav
 				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
 				<c:choose>
 					<c:when test="${loginID != null}">
-				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+						<a href="/logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 						<!-- 강사님께 질문 3 -->
 						<c:if test="${seqID < 0 }">
-							<a href="dash.admin">관리자페이지</a>
+							<a href="/dash.admin">관리자페이지</a>
 						</c:if>
 						<c:if test="${seqID > 0 }">
-							<a href="mypage.mem?cpage=1">마이페이지</a>
+							<a href="/mypage.mem?cpage=1">마이페이지</a>
 						</c:if>
 					</c:when>
 					<c:otherwise>
-						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="signup.mem">회원가입</a>
+						<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+						<a href="/signup.mem">회원가입</a>
 					</c:otherwise>
 				</c:choose>
 			</nav>
 		</div>
 	</header>
+	<a href="/index.jsp">
 	<div id="logo">
-		<img src="senasic_logo.png">
-	</div>
+		<img src="/senasic_logo.png">
+	</div></a>
 
 	<!----------------- 게시판 네비게이션 --------------->
 	<nav>
@@ -295,7 +311,7 @@ $(document).ready(function(){
 					class="main" type="text" name="target" id="searching"> <a
 					id="searchbytagName">
 					<button
-						class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
 						id="shbtn">검색</button>
 				</a>
 			</form>
@@ -428,11 +444,7 @@ $(document).ready(function(){
             <label for="image">프로필사진</label>
             <label class="flex flex-col w-40 h-40 ml-8 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
-<<<<<<< Upstream, based on branch 'feature/5' of https://github.com/danaKim-dokyung/senasic6.git
 				                        <img src=${dto.img } id='profile' class='h-40 w-40'>
-=======
-				                        <img src=${dto.img } id=profile>
->>>>>>> 4bfd3cd admin 전체 수정.
 				                    </div>
 				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
 				                </label>          

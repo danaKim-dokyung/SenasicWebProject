@@ -459,21 +459,18 @@ public class RestBoardDAO {
 	//profile찾기
 	
 	public String selectprofile(String writer) throws Exception{
-		String sql = "select b.photo from member b ,(select id from rest_reply where writer=? ) a where b.id= a.id";
-		System.out.println("dao시작부분");
+		String sql = "select b.photo from member b ,(select id from rest_reply where id=? ) a where b.id= a.id";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);)
 				
 				
 				{
-			System.out.println("dao중간부분");
 			pstat.setString(1, writer);
 			try(ResultSet rs = pstat.executeQuery()){
 				rs.next();
 				//MemberDTO dto1 = new MemberDTO();
 			//	dto1.setImg(rs.getString("img"));
 				String result = rs.getString(1);
-				System.out.println("dao잘됩니다");
 				
 
 			
