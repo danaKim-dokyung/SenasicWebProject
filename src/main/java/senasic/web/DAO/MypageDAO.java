@@ -371,19 +371,5 @@ public class MypageDAO {
 			}
 		}
 	}
-	
-	// 게시판 삭제
-		public int delete_board(int seq) throws Exception {
-			String sql = "delete from pet_board where seq=?";
-
-			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-				pstat.setInt(1, seq);
-
-				int result = pstat.executeUpdate();
-				return result;
-			}
-		}
-	
-	
 
 }
