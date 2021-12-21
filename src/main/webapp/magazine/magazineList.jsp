@@ -689,7 +689,7 @@ nav>ul>li{
 
 	<div id="list" class="space-y-20">
 		<div class="flex space-x-20 justify-center">
-			<a href="/magagine.mag">
+			<a href="/magagine.mag?check_num=1">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -702,7 +702,7 @@ nav>ul>li{
 						style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 						"우리 강아지도 한가로이 카페 즐길 줄 안답니다"</div>
 				</div>
-			</a> <a href="/magagine.mag">
+			</a> <a href="/magagine.mag?check_num=2">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -719,7 +719,7 @@ nav>ul>li{
 		</div>
 
 		<div class="flex space-x-20 justify-center">
-			<a href="/magagine.mag">
+			<a href="/magagine.mag?check_num=3">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -732,7 +732,7 @@ nav>ul>li{
 						style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 						"지하철역 주변, 걸어가도 좋아요!"</div>
 				</div>
-			</a> <a href="/magagine.mag">
+			</a> <a href="/magagine.mag?check_num=4">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -749,7 +749,7 @@ nav>ul>li{
 		</div>
 
 		<div class="flex space-x-20 justify-center">
-			<a href="/magagine.mag">
+			<a href="/magagine.mag?check_num=5">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -762,7 +762,7 @@ nav>ul>li{
 						style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 						"여행은 못가도 우리 기분만은 베트남, 중국, 인도!"</div>
 				</div>
-			</a> <a href="/magagine.mag">
+			</a> <a href="/magagine.mag?check_num=6">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -779,7 +779,7 @@ nav>ul>li{
 		</div>
 
 		<div class="flex space-x-20 justify-center">
-			<a href="/magagine.mag">
+			<a href="/magagine.mag?check_num=7">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
@@ -792,7 +792,7 @@ nav>ul>li{
 						style="color: white; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
 						"우리끼리 먹어서 미안했다면?"</div>
 				</div>
-			</a> <a href="/magagine.mag">
+			</a> <a href="/magagine.mag?check_num=8">
 				<div class="hover:grow hover:shadow-lg"
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"

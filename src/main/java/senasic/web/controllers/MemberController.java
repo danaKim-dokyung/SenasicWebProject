@@ -148,7 +148,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("id", id);
 				System.out.println(findPw.getPw());
 				if (findPw != null) {
-					request.getRequestDispatcher("/member/yourPw.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/yourPw.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("/member/None.jsp");
 				}
