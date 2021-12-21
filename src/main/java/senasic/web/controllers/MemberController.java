@@ -60,7 +60,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/signupProc.mem")) {
 
 				int maxSize = 1024 * 1024 * 10;
-				//String savePath = "C:\\"; // 경로 문제
+				//String savePath = "C:"; // 경로 문제
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload"; // 경로 문제
 				File filePath = new File(savePath);
 				if (!filePath.exists()) {
@@ -172,7 +172,15 @@ public class MemberController extends HttpServlet {
 
 //				System.out.println(loginID);
 				System.out.println(list.get(0).getId());
-
+				
+				
+				String all = list.get(0).getPh();
+				String phone2 = all.substring(all.length()-8,all.length()-4);				
+				String phone3 = all.substring(all.length()-4,all.length());
+				
+				
+				request.setAttribute("phone2", phone2);
+				request.setAttribute("phone3", phone3);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mypage/mypage.jsp").forward(request, response);

@@ -377,7 +377,8 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7  absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-
+				<img class="menu-icon border-2 w-10 h-10 rounded-full"
+					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -442,9 +443,13 @@ $(document).ready(function(){
         <form action="/modifyM.admin?seq=${dto.seq }" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
         <div class="mb-3 flex">
             <label for="image">프로필사진</label>
-            <label class="flex flex-col w-40 h-40 ml-8 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+            <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
-				                        <img src=${dto.img } id='profile' class='h-40 w-40'>
+				                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+				                            fill="currentColor">
+				                            <path fill-rule="evenodd"  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+				                                clip-rule="evenodd" />
+				                        </svg>
 				                    </div>
 				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
 				                </label>          
@@ -498,16 +503,20 @@ $(document).ready(function(){
 			
 			<!-- 전화번호 -->
           <div class="row flex mt-10">
-                     	<label for="phone">연락처</label>
-          
            	<div class="col-md-4 mb-2 ">
-   			 	<input type = "text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="phone1" name="phone1" value="${phoneFirst }" readonly>
+           	<label for="phone">연락처</label>
+            	<select class="ml-10 form-control" name="phone1" id="phone1" required>
+   			 	<option>선택</option>
+   			 	<option value="010"<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
+    			<option value="02"<c:if test="${phoneFirst eq 02}"> selected</c:if>>02</option>
+    			<option value="031"<c:if test="${phoneFirst eq 031}"> selected</c:if>>031</option>
+				</select>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
             </div>
           </div>
 			
@@ -555,6 +564,7 @@ $("#pbEdit").on("click",function(){
 $("#dash").on("click",function(){
 	location.href="/dash.admin";
 })
+
 
 $("#img").on("change",function(){
 	let file = this.files[0];
