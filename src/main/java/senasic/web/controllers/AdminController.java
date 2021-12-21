@@ -328,7 +328,7 @@ public class AdminController extends HttpServlet {
         		
         		String ph = (p1+p2+p3);
         		
-    			dao.modifyM(id,nn,m,age,gender,ph);
+    			dao.modifyM(id,nn,m,age,gender,ph,sysName1);
     			response.sendRedirect("/mEdit.admin?num="+seq);
         	   
 			}else if(cmd.equals("deleteM.admin")){
