@@ -423,9 +423,21 @@ keyframes ani { 0% {
 
 
 
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
 
 
 
@@ -455,7 +467,19 @@ transform
 
 
 
+
+
+
+
+
+
 scale
+
+
+
+
+
+
 
 
 
@@ -485,7 +509,19 @@ scale
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -519,7 +555,19 @@ scale
 
 
 
+
+
+
+
+
+
 )
+
+
+
+
+
+
 
 
 
@@ -550,6 +598,12 @@ opacity
 
 
 
+
+
+
+
+
+
 :
 
 
@@ -566,7 +620,19 @@ opacity
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -598,6 +664,12 @@ opacity
 
 
 
+
+
+
+
+
+
 %
 {
 transform
@@ -616,7 +688,19 @@ transform
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -648,6 +732,12 @@ scale
 
 
 
+
+
+
+
+
+
 (
 
 
@@ -663,7 +753,19 @@ scale
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -694,8 +796,20 @@ scale
 
 
 
+
+
+
+
+
+
 ;
 opacity
+
+
+
+
+
+
 
 
 
@@ -725,7 +839,19 @@ opacity
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -757,9 +883,21 @@ opacity
 
 
 
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
 
 
 
@@ -789,7 +927,19 @@ transform
 
 
 
+
+
+
+
+
+
 scale
+
+
+
+
+
+
 
 
 
@@ -820,7 +970,19 @@ scale
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -849,8 +1011,20 @@ scale
 
 
 
+
+
+
+
+
+
 ;
 opacity
+
+
+
+
+
+
 
 
 
@@ -876,7 +1050,19 @@ opacity
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -1102,19 +1288,104 @@ nav>ul>li {
 
 			<div class="date">
 				<!-- 작성 날짜 및 조회수-->
-				<div style="padding-top: 30px;">2021.12.17</div>
+				<div style="padding-top: 30px;">2021.12.22</div>
 			</div>
 
 
-			<!-- 매거진 제목 -->
-			<div
-				style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
-				id="big-title">수프 맛집 베스트 10곳</div>
+			<c:choose>
+				<c:when test="${magagine_num eq 1 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">여유로운 휴일을 위한 카페 10곳</div>
 
 
-			<!-- 매거진 부제목 -->
-			<div id="small-title" style="color: grey; font-size: 18px;">“몸
-				녹일 땐 스프가 진리!”</div>
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“우리 강아지도 한가로이 카페 즐길 줄 안답니다.”</div>
+				</c:when>
+
+				<c:when test="${magagine_num eq 2 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">분위기 내기 좋은 레스토랑 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“기분내고 싶은 날에는 꼭 강아지와 함께.”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 3 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">뚜벅이로도 방문 가능한 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“지하철역 주변, 걸어가도 좋아요!”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 4 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">강아지와 함께 할 수 있는 pub!</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“우리 강아지의 불금을 책임지는!”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 5 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">여행 온 듯한 이색풍 레스토랑 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“여행은 못가도 우리 기분만은 베트남, 중국, 인도!”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 6 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">연말 분위기 내기 좋은 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“올해도 수고했어, 우리강아지, 내년에도 잘 부탁해~”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 7 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">강아지 음식이 함께 있는 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“우리끼리 먹어서 미안했다면”</div>
+				</c:when>
+				
+				<c:when test="${magagine_num eq 8 }">
+					<!-- 매거진 제목 -->
+					<div
+						style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+						id="big-title">강아지 음식이 함께 있는 10곳</div>
+
+
+					<!-- 매거진 부제목 -->
+					<div id="small-title" style="color: grey; font-size: 18px;">“바깥바람 쐬는 걸 좋아하는 우리 강아지를 위해!”</div>
+				</c:when>
+
+				<c:otherwise>
+                저는 모두 해당이 안됩니다.
+            </c:otherwise>
+			</c:choose>
+
 		</div>
 	</header>
 <body>
@@ -1150,7 +1421,7 @@ nav>ul>li {
 					${dto.locate_detail }</div>
 				<div style="height: 90px; padding-top: 15px">맛이가 아주없습니다.</div>
 				<div class="more" style="text-align: right; color: gray;">
-					<a href="/load.rest?seq=${dto.seq }">${dto.title } 더보기  ></a>
+					<a href="/load.rest?seq=${dto.seq }">${dto.title } 더보기 ></a>
 				</div>
 			</div>
 		</div>
@@ -1185,22 +1456,21 @@ nav>ul>li {
 							
 						}
 					});
-			},1500);
+			},500);
 		
 		</script>
 	</c:forEach>
 
 
 	<div class="box-border p-4 border-4  col-span-12 md:col-span-3">
-	
-	<div class="text-center">리스트 지도</div>
+
+		<div style="font-size: 25px;" class="text-center text-green-500">리스트
+			지도</div>
 		<!-- 지도 API -->
 		<div class="flex justify-center">
 			<div style="width: 45%; margin-top: 50px; margin-bottom: 50px;"
 				id="map" class="items-center h-48 md:h-96"></div>
 		</div>
-		<!--  주소 DB -->
-		<%-- <div class="text-center">${dto.locate }${dto.locate_detail }</div> --%>
 	</div>
 
 
