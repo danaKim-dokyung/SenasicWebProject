@@ -346,8 +346,7 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7  absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
+
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -414,8 +413,8 @@ $(document).ready(function(){
       <option value="카페" <c:if test="${dto.category eq '카페'}">selected</c:if>>카페</option>
       <option value="양식" <c:if test="${dto.category eq '양식'}">selected</c:if>>양식</option>
       <option value="일식" <c:if test="${dto.category eq '일식'}">selected</c:if>>일식</option>
-      <option value="한식" <c:if test="${dto.category eq '한식'}">selected</c:if>>한식</option>
-      <option value="패스트푸드" <c:if test="${dto.category eq '패스트푸드'}">selected</c:if>>패스트푸드</option>
+      <option value="한식" <c:if test="${dto.category eq '이색'}">selected</c:if>>이색</option>
+      <option value="패스트푸드" <c:if test="${dto.category eq '술집'}">selected</c:if>>술집</option>
     </select>
   </label>
   
@@ -470,9 +469,9 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph1">
-                        <img src=${dto.photo1 }" class="h-20 w-full ">
+                        <img src="${dto.photo1 }" class="h-40 w-40">
                     </div>
                     <input accept="image/*" id="img1" type="file" class="opacity-0" name="photo[0]"/>
                 </label>
@@ -484,9 +483,9 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph2">
-                        <img src="${dto.photo2 }" class="h-20 w-full">
+                        <img src="${dto.photo2 }" class="h-40 w-40">
                     </div>
                     <input accept="image/*" id="img2" type="file" class="opacity-0" name="photo[1]"/>
                 </label>
@@ -498,9 +497,9 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50 ">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph3">
-                        <img src="${dto.photo3 }" class="h-20 w-full">
+                        <img src="${dto.photo3 }" class="h-40 w-40">
                     </div>
                     <input accept="image/*" id="img3" type="file" class="opacity-0" name="photo[2]"/>
                 </label>

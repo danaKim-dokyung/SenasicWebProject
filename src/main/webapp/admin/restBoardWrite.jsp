@@ -345,8 +345,7 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7 fixed  absolute h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
+
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -413,8 +412,8 @@ $(document).ready(function(){
       <option>카페</option>
       <option>양식</option>
       <option>일식</option>
-      <option>한식</option>
-      <option>패스트푸드</option>
+      <option>이색</option>
+      <option>술집</option>
     </select>
   </label>
   
@@ -469,10 +468,10 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph1">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+                            class="w-40 h-20 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
@@ -491,10 +490,10 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph2">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+                            class="w-40 h-20 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
@@ -513,9 +512,9 @@ $(document).ready(function(){
     <div class="rounded-lg shadow-xl bg-gray-50 ">
         <div class="m-4">
             <div class="flex items-center justify-center w-full">
-                <label class="flex flex-col w-full h-20 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <label class="flex flex-col w-40 h-40 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7" id="ph3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-40 h-20 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                         </svg>
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
@@ -544,20 +543,20 @@ $(document).ready(function(){
 $("#img1").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph1").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph1").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 
 $("#img2").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph2").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph2").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 $("#img3").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph3").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 	

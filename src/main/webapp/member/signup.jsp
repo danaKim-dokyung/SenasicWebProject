@@ -16,7 +16,7 @@
     body {
       min-height: 100vh;
 
-      background: #047857
+      background: #ffffff
      
     }
 
@@ -35,7 +35,8 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
     #subtn{
-    	text-align=center;
+    	text-align:center;
+    	background-color:green;
     }
     #real-input{
     	visibility:hidden;
@@ -47,6 +48,14 @@
     	color:white;
     	cursor:pointer;
     }
+    @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family: GmarketSansMedium;}
+    
   </style>
 <script>
 
@@ -56,6 +65,7 @@
 </head>
 
 <body>
+
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
