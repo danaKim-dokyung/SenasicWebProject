@@ -146,7 +146,7 @@ public class MypageController extends HttpServlet {
 				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
 				
 				
-			// 댓글 삭제하기
+			// 게시판 삭제하기
 			}else if(cmd.equals("/delete_board.my")){
 				
 				int seq = Integer.parseInt(request.getParameter("seq"));
