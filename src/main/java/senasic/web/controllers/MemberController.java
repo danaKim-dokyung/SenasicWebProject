@@ -166,12 +166,9 @@ public class MemberController extends HttpServlet {
 				String loginID = (String) request.getSession().getAttribute("loginID");
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 
-				System.out.println("a");
 
 				List<MemberDTO> list = dao.selectById_list(loginID);
 
-//				System.out.println(loginID);
-				System.out.println(list.get(0).getId());
 				
 				
 				String all = list.get(0).getPh();
@@ -204,6 +201,7 @@ public class MemberController extends HttpServlet {
 				List<MemberDTO> list_f = dao.selectById_list(loginID);
 				
 		   		int seq = Integer.parseInt(multi.getParameter("seq"));
+		   		int cpage = Integer.parseInt(multi.getParameter("cpage"));
 		   		
      
 				String root = "/upload/"; //루트 수정
@@ -232,21 +230,24 @@ public class MemberController extends HttpServlet {
         		
         		
         		int result = dao.modify(pw,nn,m,ph,loginID,img);
-        		List<MemberDTO> list = dao.selectById_list(loginID);
+				/*
+				 * List<MemberDTO> list = dao.selectById_list(loginID);
+				 * 
+				 * String all = list.get(0).getPh(); String phone2 =
+				 * all.substring(all.length()-8,all.length()-4); String phone3 =
+				 * all.substring(all.length()-4,all.length());
+				 * 
+				 * 
+				 * 
+				 * 
+				 * System.out.println(list.get(0).getImg());
+				 * 
+				 * request.setAttribute("phone2", phone2); request.setAttribute("phone3",
+				 * phone3);
+				 */
         		
-        		String all = list.get(0).getPh();
-				String phone2 = all.substring(all.length()-8,all.length()-4);				
-				String phone3 = all.substring(all.length()-4,all.length());
-				
-				
-				
-        		
-        		System.out.println(list.get(0).getImg());
-        		
-        		request.setAttribute("phone2", phone2);
-				request.setAttribute("phone3", phone3);
+        		request.setAttribute("cpage", cpage);
         		request.setAttribute("result", result);
-        		request.setAttribute("list", list);
 				request.getRequestDispatcher("mypage/mypage.jsp").forward(request, response);
         		
 			}
@@ -266,4 +267,3 @@ public class MemberController extends HttpServlet {
 	}
 
 }
-mmember C

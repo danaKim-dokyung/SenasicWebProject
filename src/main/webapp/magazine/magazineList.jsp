@@ -694,7 +694,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/1.png" alt="">
+						src="/magazine/magagine_img/6.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						여유로운 휴일을 위한 카페 10선</div>
@@ -707,7 +707,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/2.jpg" alt="">
+						src="/magazine/magagine_img/7.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						분위기 내기 좋은 레스토랑 10선</div>
@@ -724,7 +724,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/33.jpg" alt="">
+						src="/magazine/magagine_img/5.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						뚜벅이로도 방문 가능한 10곳</div>
@@ -737,7 +737,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/4.jpg" alt="">
+						src="/magazine/magagine_img/2.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						강아지와 함께 할 수 있는 pub!</div>
@@ -754,7 +754,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/5.jpg" alt="">
+						src="/magazine/magagine_img/4.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						여행 온 듯한 이색풍 레스토랑 10선</div>
@@ -767,7 +767,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/6.jpg" alt="">
+						src="/magazine/magagine_img/1.png" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						연말 분위기 내기 좋은 10곳</div>
@@ -784,7 +784,7 @@ nav>ul>li{
 					style="position: relative; width: 500px; height: 250px;">
 					<img class="rounded-md shadow-lg"
 						style="width: 100%; height: 100%;"
-						src="/magazine/magagine_img/7.jpg" alt="">
+						src="/magazine/magagine_img/33.jpg" alt="">
 					<div
 						style="color: white; font-weight: 500; width: 500px; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; text-align: center; margin: auto;">
 						강아지 음식이 함께 있는 10곳</div>

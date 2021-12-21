@@ -884,7 +884,7 @@ nav>ul>li {
 
 				<div class="input-form-backgroud row">
 					<div class="input-form col-md-12 mx-auto">
-						<form action="/modify.mem?seq=${list[0].seq }" method="post" enctype="multipart/form-data">
+						<form action="/modify.mem?seq=${list[0].seq }&cpage=${cpage }" method="post" enctype="multipart/form-data">
 							<div class="mb-3 flex">
 								<label for="image">프로필사진</label> <label
 									class="flex flex-col w-1/4 ml-8 px-3 border-4 hover:bg-gray-100 hover:border-gray-300">
@@ -1019,7 +1019,7 @@ nav>ul>li {
 	<c:if test="${result eq '1' }">
 		<script>
 			alert("정보 변경에 성공하였습니다");
-			/* location.href = "/mypage.mem"; */
+			location.href = "/mypage.mem?cpage=${cpage }";
 		</script>
 	</c:if>
 
