@@ -73,10 +73,30 @@
         <form action="/signupProc.mem" method="post" enctype="multipart/form-data" class="validation-form" novalidate>
         <div class="mb-3">
             <label className="input-file-button" for="input-file">프로필 사진 선택</label><br>
-            <input type="file" id="input-file" name="photo" style={{display:"none"}}/>
-    
-         
-        </div> 
+             </div>
+<div class="flex justify-left mt-2">
+    <div class="rounded-xl shadow-xl bg-gray-50 ">
+        <div class="m-4">
+            <div class="flex items-center justify-center w-full">
+                <label class="flex flex-col w-20 h-20  hover:bg-gray-100 hover:border-gray-300"id="pholabel">
+                    <div class="flex flex-col items-center justify-center pt-0" id="pho">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="rgb(203 213 225)">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+
+                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                             사진</p>
+                    </div>
+                    <input accept="image/*" id="input-file" type="file" class="opacity-0" name="photo"/>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+        
+       
         
         
         <!-- 아이디 입력 -->
@@ -231,6 +251,12 @@
     </footer>
   </div>
   <script>
+  $("#input-file").on("change",function(){
+		let file = this.files[0];
+		if (file) {
+		    $("#pho").html("<img class='w-20 h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+		  }
+		})
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
 
