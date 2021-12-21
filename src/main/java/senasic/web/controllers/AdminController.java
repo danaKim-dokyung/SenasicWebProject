@@ -301,7 +301,7 @@ public class AdminController extends HttpServlet {
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-//				String savePath = request.getServletContext().getRealPath("files");
+//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp//upload";
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
