@@ -288,7 +288,7 @@ nav>ul>li{
 		</div>
 	</div>
 	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')"
-		action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">
+		action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 글쓰기 Header -->
 		<div class="container con22">
 			<div class="head"

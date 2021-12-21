@@ -296,7 +296,7 @@ nav>ul>li{
 	</div>
 
 	<form method="post"
-		action="/comment.pet?check_category=${check_category }&check_num=${check_num }">
+		action="/comment.pet?check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -354,8 +354,6 @@ nav>ul>li{
 					<table
 						style="border-bottom: 1px solid rgb(202, 202, 202); width: 100%; margin-top: 15px;">
 						<tr>
-							<td rowspan="3"
-								style="width: 15px; height: 15px; padding-right: 10px;">image</td>
 							<td style="padding-top: 10px; font-weight: 600;">${replyList.writer }</td>
 						</tr>
 
@@ -394,11 +392,7 @@ nav>ul>li{
 					<!-- textarea 자동 높이조절-->
 				</div>
 
-				<div>
-					<!-- label 태그로 사진 img에 file 버튼 태그 적용시키기 -->
-					<label style="font-size: 22px;"> <i class="far fa-image"></i>
-						<input type="file" class="hidden">
-					</label>
+				<div style="height: 20px;">
 					<button id="commentBtn" class="summit float-right text-green-400"
 						type="submit">등록</button>
 				</div>
@@ -631,7 +625,7 @@ nav>ul>li{
 		$(".delComment").on("click", function() {
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq + "&check_category=${check_category }&check_num=${check_num }" ;
+				location.href = "/deleteComment.pet?cpage=${cpage }&board_seq=${replyList[0].board_seq }&seq=" + replySeq + "&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
 			} 
 		})
 
@@ -678,7 +672,7 @@ nav>ul>li{
 		
 		// 게시글 수정하기
 		$("#modify").on("click", function() {
-				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }";
+				location.href = "/modify.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
 				
 		}) 
 

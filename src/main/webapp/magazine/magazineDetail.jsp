@@ -9,6 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 	rel="stylesheet">
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43b19f59c0f83232d0344714fa6823a9&libraries=services,clusterer,drawing"></script>
+
 </head>
 
 <style>
@@ -26,7 +29,6 @@
 }
 
 /* index에서 가져온 style */
-
 .nav-container {
 	display: flex;
 	text-align: center;
@@ -407,57 +409,488 @@ keyframes ani { 0% {
 10
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 scale
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;
 opacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;
 }
 20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %
 {
 transform
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 scale
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;
 opacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;
 }
 100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 scale
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 1
 
-);
-opacity:1;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+;
+opacity
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+
+
+
+
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+;
+}
 }
 #gas {
 	animation-delay: 0.1s;
@@ -525,66 +958,66 @@ opacity:1;}
 
 #list img:hover {
 	filter: brightness(50%);
-	
 }
-nav>ul{
+
+nav>ul {
 	padding-left: 28%;
 }
-nav>ul>li{
+
+nav>ul>li {
 	padding-right: 17%;
 }
 
 /* index 스타일 끝부분 */
-
 </style>
 
 <!--  head 시작 -->
 <header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
-		<div
-			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+	class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+	<div
+		class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 
-			<!------ 왼쪽 상단 세나식 로고 ----->
-			<a href="/index.jsp"
-				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">Senasic</span>
-			</a>
-			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
-				<c:choose>
-					<c:when test="${loginID != null}">
+		<!------ 왼쪽 상단 세나식 로고 ----->
+		<a href="/index.jsp"
+			class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+			<span class="ml-3 text-xl">Senasic</span>
+		</a>
+		<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+		<nav
+			class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
+			<c:choose>
+				<c:when test="${loginID != null}">
 				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
-						<!-- 강사님께 질문 3 -->
-						<c:if test="${seqID < 0 }">
-							<a href="dash.admin">관리자페이지</a>
-						</c:if>
-						<c:if test="${seqID > 0 }">
-							<a href="mypage.mem?cpage=1">마이페이지</a>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="signup.mem">회원가입</a>
-					</c:otherwise>
-				</c:choose>
-			</nav>
-		</div>
-	</header>
-	<div id="logo">
-		<img src="/senasic_logo.png">
+					<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+					<!-- 강사님께 질문 3 -->
+					<c:if test="${seqID < 0 }">
+						<a href="dash.admin">관리자페이지</a>
+					</c:if>
+					<c:if test="${seqID > 0 }">
+						<a href="mypage.mem?cpage=1">마이페이지</a>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+					<a href="signup.mem">회원가입</a>
+				</c:otherwise>
+			</c:choose>
+		</nav>
 	</div>
+</header>
+<div id="logo">
+	<img src="/senasic_logo.png">
+</div>
 
-	<!----------------- 게시판 네비게이션 --------------->
-	<nav>
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
-					게시판 </a></li>
-		</ul>
-	</nav>
+<!----------------- 게시판 네비게이션 --------------->
+<nav>
+	<ul class="nav-container">
+		<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+		<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
+		<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+				게시판 </a></li>
+	</ul>
+</nav>
 <body>
 	<div class="forSearch">
 		<div class="container1">
@@ -658,38 +1091,47 @@ nav>ul>li{
 
 
 
-<!--  head 끝 -->
+	<!--  head 끝 -->
 	<!------------- 맛집 매거진 주제, 글 생성 날짜, 조회수 -------------->
-    <header>
+	<header>
 
-        <div style="border: 1px solid black; width: 100%; height: 100px;"></div>
+		<div style="border: 1px solid black; width: 100%; height: 100px;"></div>
 
-        <div class="shadow-t-lg" style="text-align: center; border-bottom: 1px solid rgb(172, 168, 168);  background-color:rgba(211, 211, 211, 0.445); height: 180px;">
+		<div class="shadow-t-lg"
+			style="text-align: center; border-bottom: 1px solid rgb(172, 168, 168); background-color: rgba(211, 211, 211, 0.445); height: 180px;">
 
-            <div class="date">
-                <!-- 작성 날짜 및 조회수-->
-                <div style="padding-top: 30px;">
-                    2021.12.17
-                </div>
-            </div>
-            
-
-            <!-- 매거진 제목 -->
-            <div style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;" id="big-title">
-                수프 맛집 베스트 10곳
-            </div>
+			<div class="date">
+				<!-- 작성 날짜 및 조회수-->
+				<div style="padding-top: 30px;">2021.12.17</div>
+			</div>
 
 
-            <!-- 매거진 부제목 -->
-            <div id="small-title" style="color: grey; font-size: 18px;">
-                “몸 녹일 땐 스프가 진리!”
-            </div>
-        </div>
-    </header>
+			<!-- 매거진 제목 -->
+			<div
+				style="font-size: 35px; font-weight: 500; padding-top: 10px; padding-bottom: 10px;"
+				id="big-title">수프 맛집 베스트 10곳</div>
 
+
+			<!-- 매거진 부제목 -->
+			<div id="small-title" style="color: grey; font-size: 18px;">“몸
+				녹일 땐 스프가 진리!”</div>
+		</div>
+	</header>
 <body>
 
-    <!------------- 맛집 디테일 시작 부분 -------------->
+	<!------------- 맛집 디테일 시작 부분 -------------->
+	<script>
+		var position = [];
+		let geocoder = new kakao.maps.services.Geocoder();
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+		// 마커 이미지의 이미지 크기 입니다
+	    var imageSize = new kakao.maps.Size(24, 35); 
+	    
+	    // 마커 이미지를 생성합니다    
+	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+	    
+	    
+	</script>
 
 	<c:forEach var="dto" items="${list }" varStatus="status">
 		<div class="shop bg-white shadow-lg"
@@ -706,332 +1148,415 @@ nav>ul>li{
 				</div>
 				<div style="font-size: 16px; color: rgb(154, 156, 158);">${dto.locate }
 					${dto.locate_detail }</div>
-				<div style="height: 90px; padding-top : 15px">
-					맛이가 아주없습니다.
-				</div>
-				<div class="more" style="text-align: right; color: gray; ">
-					<a href="/load.rest?seq=${dto.seq }">${dto.title } 더보기 ></a>
+				<div style="height: 90px; padding-top: 15px">맛이가 아주없습니다.</div>
+				<div class="more" style="text-align: right; color: gray;">
+					<a href="/load.rest?seq=${dto.seq }">${dto.title } 더보기  ></a>
 				</div>
 			</div>
 		</div>
+		<script>
+		
+		setTimeout(function () {
+			//주소로 좌표를 검색합니다
+			geocoder.addressSearch('${dto.locate},${dto.locate_detail}',
+					function(result, status) {
+				
+				var coords${status.count } = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+						// 정상적으로 검색이 완료됐으면 
+						if (status === kakao.maps.services.Status.OK) {
+
+							position.push({
+								title : '${dto.title }',
+								latlng : new kakao.maps.LatLng(result[0].y,
+										result[0].x)
+							});
+							
+							/* console.log(position[${status.index}].title);
+							console.log(position[${status.index}].latlng); */
+							
+							
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position[${status.index}].latlng, // 마커를 표시할 위치
+						        title : position[${status.index}].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+							
+						}
+					});
+			},1500);
+		
+		</script>
 	</c:forEach>
 
 
-<script>
-//검색 태그 보이게 하기 
-$("#searching").on("click", function() {
-	$("#hashtag").css("visibility", "visible");
+	<div class="box-border p-4 border-4  col-span-12 md:col-span-3">
+	
+	<div class="text-center">리스트 지도</div>
+		<!-- 지도 API -->
+		<div class="flex justify-center">
+			<div style="width: 45%; margin-top: 50px; margin-bottom: 50px;"
+				id="map" class="items-center h-48 md:h-96"></div>
+		</div>
+		<!--  주소 DB -->
+		<%-- <div class="text-center">${dto.locate }${dto.locate_detail }</div> --%>
+	</div>
 
-})
-// 클릭시 검색창에 #xx 보이게 하기
-$("#koreanfood").on(
-		"click",
-		function() {
-			//같은 종류의 카테고리안에서는 새로 갱신
-			if ($("#searching").val() == ""
-					|| $("#searching").val() == "#양식"
-					|| $("#searching").val() == "#일식"
-					|| $("#searching").val() == "#이색"
-					|| $("#searching").val() == "#카페"
-					|| $("#searching").val() == "#술집") {
 
-				$("#searching").val("#양식");
-				document.getElementById("searchbytagName").setAttribute(
-						"href",
-						"/fboard.rest?cpage=1&category=all&target=양식");
-				//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
-			} else if ($("#searching").val() != ""
-					|| $("#searching").val() != "#양식"
-					|| $("#searching").val() != "#일식"
-					|| $("#searching").val() != "#이색"
-					|| $("#searching").val() != "#카페"
-					|| $("#searching").val() != "#술집") {
-				let elem = $("#searching").val();
-				let newtext = "#양식";
 
-				let korean = elem.substring(elem.length - 3, elem.length)
 
-				if (korean == (newtext)) {
+	<script>
+	
+		//지도 API
+		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(37.542424, 127.002685), // 지도의 중심좌표
+			level : 9
+		// 지도의 확대 레벨
+		};
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		
 
-				} else if (korean == "#일식" || korean == "#카페"
-						|| korean == "#이색" || korean == "#술집") {
-					let first = elem.substring(elem.length - 8,
-							elem.length - 4);
-					let seconed = elem.substring(elem.length - 3,
-							elem.length);
-					let result = first + " " + newtext;
-					$("#searching").val(result);
+	</script>
 
-				} else {
-					let result = elem + " " + newtext;
-					$("#searching").val(result);
+
+
+	<script>
+		//검색 태그 보이게 하기 
+		$("#searching").on("click", function() {
+			$("#hashtag").css("visibility", "visible");
+
+		})
+		// 클릭시 검색창에 #xx 보이게 하기
+		$("#koreanfood")
+				.on(
+						"click",
+						function() {
+							//같은 종류의 카테고리안에서는 새로 갱신
+							if ($("#searching").val() == ""
+									|| $("#searching").val() == "#양식"
+									|| $("#searching").val() == "#일식"
+									|| $("#searching").val() == "#이색"
+									|| $("#searching").val() == "#카페"
+									|| $("#searching").val() == "#술집") {
+
+								$("#searching").val("#양식");
+								document
+										.getElementById("searchbytagName")
+										.setAttribute("href",
+												"/fboard.rest?cpage=1&category=all&target=양식");
+								//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
+							} else if ($("#searching").val() != ""
+									|| $("#searching").val() != "#양식"
+									|| $("#searching").val() != "#일식"
+									|| $("#searching").val() != "#이색"
+									|| $("#searching").val() != "#카페"
+									|| $("#searching").val() != "#술집") {
+								let elem = $("#searching").val();
+								let newtext = "#양식";
+
+								let korean = elem.substring(elem.length - 3,
+										elem.length)
+
+								if (korean == (newtext)) {
+
+								} else if (korean == "#일식" || korean == "#카페"
+										|| korean == "#이색" || korean == "#술집") {
+									let first = elem.substring(elem.length - 8,
+											elem.length - 4);
+									let seconed = elem.substring(
+											elem.length - 3, elem.length);
+									let result = first + " " + newtext;
+									$("#searching").val(result);
+
+								} else {
+									let result = elem + " " + newtext;
+									$("#searching").val(result);
+								}
+
+							}
+
+						})
+		//일식
+		$("#japaneesefood")
+				.on(
+						"click",
+						function() {
+
+							//같은 종류의 카테고리안에서는 새로 갱신
+							if ($("#searching").val() == ""
+									|| $("#searching").val() == "#양식"
+									|| $("#searching").val() == "#일식"
+									|| $("#searching").val() == "#이색"
+									|| $("#searching").val() == "#카페"
+									|| $("#searching").val() == "#술집") {
+
+								$("#searching").val("#일식");
+								document
+										.getElementById("searchbytagName")
+										.setAttribute("href",
+												"/fboard.rest?cpage=1&category=all&target=일식");
+								//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
+							} else if ($("#searching").val() != ""
+									|| $("#searching").val() != "#양식"
+									|| $("#searching").val() != "#일식"
+									|| $("#searching").val() != "#이색"
+									|| $("#searching").val() != "#카페"
+									|| $("#searching").val() != "#술집") {
+								let elem = $("#searching").val();
+								let newtext = "#일식";
+
+								//#강남구#일식			3			6
+								let japan = elem.substring(elem.length - 3,
+										elem.length)
+								//일식			일식
+								if (japan == (newtext)) {
+
+								} //일식	양식
+								else if (japan == "#양식" || japan == "#카페"
+										|| japan == "#이색" || japan == "#술집") {
+									let first = elem.substring(elem.length - 8,
+											elem.length - 4);
+									let seconed = elem.substring(
+											elem.length - 3, elem.length);
+									let result = first + " " + newtext;
+									$("#searching").val(result);
+
+								} else {
+									let result = elem + " " + newtext;
+									$("#searching").val(result);
+								}
+
+							}
+						})
+		//이색
+		$("#boonsik")
+				.on(
+						"click",
+						function() {
+							//같은 종류의 카테고리안에서는 새로 갱신
+							if ($("#searching").val() == ""
+									|| $("#searching").val() == "#양식"
+									|| $("#searching").val() == "#일식"
+									|| $("#searching").val() == "#이색"
+									|| $("#searching").val() == "#카페"
+									|| $("#searching").val() == "#술집") {
+
+								$("#searching").val("#이색");
+								document
+										.getElementById("searchbytagName")
+										.setAttribute("href",
+												"/fboard.rest?cpage=1&category=all&target=이색");
+								//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
+							} else if ($("#searching").val() != ""
+									|| $("#searching").val() != "#양식"
+									|| $("#searching").val() != "#일식"
+									|| $("#searching").val() != "#이색"
+									|| $("#searching").val() != "#카페"
+									|| $("#searching").val() != "#술집") {
+								let elem = $("#searching").val();
+								let newtext = "#이색";
+
+								let boonsik = elem.substring(elem.length - 3,
+										elem.length)
+
+								if (boonsik == (newtext)) {
+
+								} else if (boonsik == "#양식" || boonsik == "#카페"
+										|| boonsik == "#일식" || boonsik == "#술집") {
+									let first = elem.substring(elem.length - 8,
+											elem.length - 4);
+									let seconed = elem.substring(
+											elem.length - 3, elem.length);
+									let result = first + " " + newtext;
+									$("#searching").val(result);
+
+								} else {
+									let result = elem + " " + newtext;
+									$("#searching").val(result);
+								}
+
+							}
+						})
+		//카페
+		$("#cafe")
+				.on(
+						"click",
+						function() {
+
+							//같은 종류의 카테고리안에서는 새로 갱신
+							if ($("#searching").val() == ""
+									|| $("#searching").val() == "#양식"
+									|| $("#searching").val() == "#일식"
+									|| $("#searching").val() == "#이색"
+									|| $("#searching").val() == "#카페"
+									|| $("#searching").val() == "#술집") {
+
+								$("#searching").val("#카페");
+								document
+										.getElementById("searchbytagName")
+										.setAttribute("href",
+												"/fboard.rest?cpage=1&category=all&target=카페");
+								//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
+							} else if ($("#searching").val() != ""
+									|| $("#searching").val() != "#양식"
+									|| $("#searching").val() != "#일식"
+									|| $("#searching").val() != "#이색"
+									|| $("#searching").val() != "#카페"
+									|| $("#searching").val() != "#술집") {
+								let elem = $("#searching").val();
+								let newtext = "#카페";
+
+								//#강남구 #카페
+								let cafe = elem.substring(elem.length - 3,
+										elem.length);
+
+								if (cafe == (newtext)) {
+
+								} else if (cafe == "#양식" || cafe == "#일식"
+										|| cafe == "#이색" || cafe == "#술집") {
+									let first = elem.substring(elem.length - 8,
+											elem.length - 4);
+									let seconed = elem.substring(
+											elem.length - 3, elem.length);
+									let result = first + " " + newtext;
+									$("#searching").val(result);
+
+								} else {
+									let result = elem + " " + newtext;
+									$("#searching").val(result);
+								}
+
+							}
+						})
+		//술집
+		$("#fastfood")
+				.on(
+						"click",
+						function() {
+
+							//같은 종류의 카테고리안에서는 새로 갱신
+							if ($("#searching").val() == ""
+									|| $("#searching").val() == "#양식"
+									|| $("#searching").val() == "#일식"
+									|| $("#searching").val() == "#이색"
+									|| $("#searching").val() == "#카페"
+									|| $("#searching").val() == "#술집") {
+
+								$("#searching").val("#술집");
+								document
+										.getElementById("searchbytagName")
+										.setAttribute("href",
+												"/fboard.rest?cpage=1&category=all&target=술집");
+								//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
+							} else if ($("#searching").val() != ""
+									|| $("#searching").val() != "#양식"
+									|| $("#searching").val() != "#일식"
+									|| $("#searching").val() != "#이색"
+									|| $("#searching").val() != "#카페"
+									|| $("#searching").val() != "#술집") {
+								let elem = $("#searching").val();
+								let newtext = "#술집";
+
+								//#강남구#일식			3			6
+								let fastfood = elem.substring(elem.length - 3,
+										elem.length)
+								//일식			일식
+								if (fastfood == (newtext)) {
+
+								} //일식	양식
+								else if (fastfood == "#양식" || fastfood == "#카페"
+										|| fastfood == "#이색"
+										|| fastfood == "#일식") {
+									let first = elem.substring(elem.length - 8,
+											elem.length - 4);
+									let seconed = elem.substring(
+											elem.length - 3, elem.length);
+									let result = first + " " + newtext;
+									$("#searching").val(result);
+
+								} else {
+									let result = elem + " " + newtext;
+									$("#searching").val(result);
+								}
+
+							}
+						})
+
+		$("#gangnam").on(
+				"click",
+				function() {
+
+					$("#searching").val("#강남구");
+					document.getElementById("searchbytagName").setAttribute(
+							"href",
+							"/fboard.rest?cpage=1&category=all&target=강남구");
+
+				})
+		$("#sungbuk").on(
+				"click",
+				function() {
+
+					$("#searching").val("#성북구");
+					document.getElementById("searchbytagName").setAttribute(
+							"href",
+							"/fboard.rest?cpage=1&category=all&target=성북구");
+				})
+		$("#jongro").on(
+				"click",
+				function() {
+
+					$("#searching").val("#종로구");
+					document.getElementById("searchbytagName").setAttribute(
+							"href",
+							"/fboard.rest?cpage=1&category=all&target=종로구");
+				})
+		$("#mapo").on(
+				"click",
+				function() {
+
+					$("#searching").val("#마포구");
+					document.getElementById("searchbytagName").setAttribute(
+							"href",
+							"/fboard.rest?cpage=1&category=all&target=마포구");
+				})
+		$("#gangdong").on(
+				"click",
+				function() {
+
+					$("#searching").val("#송파구");
+					document.getElementById("searchbytagName").setAttribute(
+							"href",
+							"/fboard.rest?cpage=1&category=all&target=송파구");
+				})
+
+		let selectTab = document.getElementById("selectTab"); // select 저장
+
+		let con = document.getElementsByClassName("con_cmn"); // select 에 대응하는 콘텐츠 요소들 저장
+
+		selectTab.addEventListener("change", function() { // select가 변화할 때 
+
+			let val = selectTab.options[selectTab.selectedIndex].value; // option value값
+
+			for (var i = 0; i < selectTab.length - 1; i++) { // select가 4개, 콘텐츠가 3개이기때문에 length-1 
+
+				con[i].style.display = "none"; // 콘텐츠 모두 숨김
+
+				if (val == i) { // select에 해당하는 콘텐츠가 보여짐
+
+					con[i].style.display = "block";
+
+				} else if (val == "x") { // value값이 x인 첫번째 option을 선택 했을 때
+
+					con[0].style.display = "block"; // 1번째 콘텐츠 보여주고
+
+					document.getElementById("tab1").selected = true; // select는 첫번째를 선택
+
 				}
-
 			}
-
-		})
-//일식
-$("#japaneesefood").on(
-		"click",
-		function() {
-
-			//같은 종류의 카테고리안에서는 새로 갱신
-			if ($("#searching").val() == ""
-					|| $("#searching").val() == "#양식"
-					|| $("#searching").val() == "#일식"
-					|| $("#searching").val() == "#이색"
-					|| $("#searching").val() == "#카페"
-					|| $("#searching").val() == "#술집") {
-
-				$("#searching").val("#일식");
-				document.getElementById("searchbytagName").setAttribute(
-						"href",
-						"/fboard.rest?cpage=1&category=all&target=일식");
-				//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
-			} else if ($("#searching").val() != ""
-					|| $("#searching").val() != "#양식"
-					|| $("#searching").val() != "#일식"
-					|| $("#searching").val() != "#이색"
-					|| $("#searching").val() != "#카페"
-					|| $("#searching").val() != "#술집") {
-				let elem = $("#searching").val();
-				let newtext = "#일식";
-
-				//#강남구#일식			3			6
-				let japan = elem.substring(elem.length - 3, elem.length)
-				//일식			일식
-				if (japan == (newtext)) {
-
-				} //일식	양식
-				else if (japan == "#양식" || japan == "#카페" || japan == "#이색"
-						|| japan == "#술집") {
-					let first = elem.substring(elem.length - 8,
-							elem.length - 4);
-					let seconed = elem.substring(elem.length - 3,
-							elem.length);
-					let result = first + " " + newtext;
-					$("#searching").val(result);
-
-				} else {
-					let result = elem + " " + newtext;
-					$("#searching").val(result);
-				}
-
-			}
-		})
-//이색
-$("#boonsik").on(
-		"click",
-		function() {
-			//같은 종류의 카테고리안에서는 새로 갱신
-			if ($("#searching").val() == ""
-					|| $("#searching").val() == "#양식"
-					|| $("#searching").val() == "#일식"
-					|| $("#searching").val() == "#이색"
-					|| $("#searching").val() == "#카페"
-					|| $("#searching").val() == "#술집") {
-
-				$("#searching").val("#이색");
-				document.getElementById("searchbytagName").setAttribute(
-						"href",
-						"/fboard.rest?cpage=1&category=all&target=이색");
-				//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
-			} else if ($("#searching").val() != ""
-					|| $("#searching").val() != "#양식"
-					|| $("#searching").val() != "#일식"
-					|| $("#searching").val() != "#이색"
-					|| $("#searching").val() != "#카페"
-					|| $("#searching").val() != "#술집") {
-				let elem = $("#searching").val();
-				let newtext = "#이색";
-
-				let boonsik = elem.substring(elem.length - 3, elem.length)
-
-				if (boonsik == (newtext)) {
-
-				} else if (boonsik == "#양식" || boonsik == "#카페"
-						|| boonsik == "#일식" || boonsik == "#술집") {
-					let first = elem.substring(elem.length - 8,
-							elem.length - 4);
-					let seconed = elem.substring(elem.length - 3,
-							elem.length);
-					let result = first + " " + newtext;
-					$("#searching").val(result);
-
-				} else {
-					let result = elem + " " + newtext;
-					$("#searching").val(result);
-				}
-
-			}
-		})
-//카페
-$("#cafe").on(
-		"click",
-		function() {
-
-			//같은 종류의 카테고리안에서는 새로 갱신
-			if ($("#searching").val() == ""
-					|| $("#searching").val() == "#양식"
-					|| $("#searching").val() == "#일식"
-					|| $("#searching").val() == "#이색"
-					|| $("#searching").val() == "#카페"
-					|| $("#searching").val() == "#술집") {
-
-				$("#searching").val("#카페");
-				document.getElementById("searchbytagName").setAttribute(
-						"href",
-						"/fboard.rest?cpage=1&category=all&target=카페");
-				//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
-			} else if ($("#searching").val() != ""
-					|| $("#searching").val() != "#양식"
-					|| $("#searching").val() != "#일식"
-					|| $("#searching").val() != "#이색"
-					|| $("#searching").val() != "#카페"
-					|| $("#searching").val() != "#술집") {
-				let elem = $("#searching").val();
-				let newtext = "#카페";
-
-				//#강남구 #카페
-				let cafe = elem.substring(elem.length - 3, elem.length);
-
-				if (cafe == (newtext)) {
-
-				} else if (cafe == "#양식" || cafe == "#일식" || cafe == "#이색"
-						|| cafe == "#술집") {
-					let first = elem.substring(elem.length - 8,
-							elem.length - 4);
-					let seconed = elem.substring(elem.length - 3,
-							elem.length);
-					let result = first + " " + newtext;
-					$("#searching").val(result);
-
-				} else {
-					let result = elem + " " + newtext;
-					$("#searching").val(result);
-				}
-
-			}
-		})
-//술집
-$("#fastfood").on(
-		"click",
-		function() {
-
-			//같은 종류의 카테고리안에서는 새로 갱신
-			if ($("#searching").val() == ""
-					|| $("#searching").val() == "#양식"
-					|| $("#searching").val() == "#일식"
-					|| $("#searching").val() == "#이색"
-					|| $("#searching").val() == "#카페"
-					|| $("#searching").val() == "#술집") {
-
-				$("#searching").val("#술집");
-				document.getElementById("searchbytagName").setAttribute(
-						"href",
-						"/fboard.rest?cpage=1&category=all&target=술집");
-				//다른 카테고리가 이미 있으면 그 뒤에 값을 + 해준다
-			} else if ($("#searching").val() != ""
-					|| $("#searching").val() != "#양식"
-					|| $("#searching").val() != "#일식"
-					|| $("#searching").val() != "#이색"
-					|| $("#searching").val() != "#카페"
-					|| $("#searching").val() != "#술집") {
-				let elem = $("#searching").val();
-				let newtext = "#술집";
-
-				//#강남구#일식			3			6
-				let fastfood = elem.substring(elem.length - 3, elem.length)
-				//일식			일식
-				if (fastfood == (newtext)) {
-
-				} //일식	양식
-				else if (fastfood == "#양식" || fastfood == "#카페"
-						|| fastfood == "#이색" || fastfood == "#일식") {
-					let first = elem.substring(elem.length - 8,
-							elem.length - 4);
-					let seconed = elem.substring(elem.length - 3,
-							elem.length);
-					let result = first + " " + newtext;
-					$("#searching").val(result);
-
-				} else {
-					let result = elem + " " + newtext;
-					$("#searching").val(result);
-				}
-
-			}
-		})
-
-$("#gangnam").on(
-		"click",
-		function() {
-
-			$("#searching").val("#강남구");
-			document.getElementById("searchbytagName").setAttribute("href",
-					"/fboard.rest?cpage=1&category=all&target=강남구");
-
-		})
-$("#sungbuk").on(
-		"click",
-		function() {
-
-			$("#searching").val("#성북구");
-			document.getElementById("searchbytagName").setAttribute("href",
-					"/fboard.rest?cpage=1&category=all&target=성북구");
-		})
-$("#jongro").on(
-		"click",
-		function() {
-
-			$("#searching").val("#종로구");
-			document.getElementById("searchbytagName").setAttribute("href",
-					"/fboard.rest?cpage=1&category=all&target=종로구");
-		})
-$("#mapo").on(
-		"click",
-		function() {
-
-			$("#searching").val("#마포구");
-			document.getElementById("searchbytagName").setAttribute("href",
-					"/fboard.rest?cpage=1&category=all&target=마포구");
-		})
-$("#gangdong").on(
-		"click",
-		function() {
-
-			$("#searching").val("#송파구");
-			document.getElementById("searchbytagName").setAttribute("href",
-					"/fboard.rest?cpage=1&category=all&target=송파구");
-		})
-
-let selectTab = document.getElementById("selectTab"); // select 저장
-
-let con = document.getElementsByClassName("con_cmn"); // select 에 대응하는 콘텐츠 요소들 저장
-
-selectTab.addEventListener("change", function() { // select가 변화할 때 
-
-	let val = selectTab.options[selectTab.selectedIndex].value; // option value값
-
-	for (var i = 0; i < selectTab.length - 1; i++) { // select가 4개, 콘텐츠가 3개이기때문에 length-1 
-
-		con[i].style.display = "none"; // 콘텐츠 모두 숨김
-
-		if (val == i) { // select에 해당하는 콘텐츠가 보여짐
-
-			con[i].style.display = "block";
-
-		} else if (val == "x") { // value값이 x인 첫번째 option을 선택 했을 때
-
-			con[0].style.display = "block"; // 1번째 콘텐츠 보여주고
-
-			document.getElementById("tab1").selected = true; // select는 첫번째를 선택
-
-		}
-	}
-});
-
-</script>
+		});
+	</script>
 
 
 </body>
