@@ -172,7 +172,15 @@ public class MemberController extends HttpServlet {
 
 //				System.out.println(loginID);
 				System.out.println(list.get(0).getId());
-
+				
+				
+				String all = list.get(0).getPh();
+				String phone2 = all.substring(all.length()-8,all.length()-4);				
+				String phone3 = all.substring(all.length()-4,all.length());
+				
+				
+				request.setAttribute("phone2", phone2);
+				request.setAttribute("phone3", phone3);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mypage/mypage.jsp").forward(request, response);
