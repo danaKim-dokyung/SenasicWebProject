@@ -60,7 +60,7 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/signupProc.mem")) {
 
 				int maxSize = 1024 * 1024 * 10;
-				//String savePath = "C:\\"; // 경로 문제
+				//String savePath = "C:"; // 경로 문제
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload"; // 경로 문제
 				File filePath = new File(savePath);
 				if (!filePath.exists()) {
