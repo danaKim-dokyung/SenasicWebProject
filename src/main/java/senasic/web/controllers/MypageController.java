@@ -132,15 +132,37 @@ public class MypageController extends HttpServlet {
 				
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/mypage/test.jsp").forward(request, response);
+					
+			//회원 탈퇴
+			}else if(cmd.equals("/delete_member.my")){
 				
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				
+				int result = dao.deleteMember(seq);
+				
+				request.getSession().removeAttribute("loginID");
+    	    	request.getSession().removeAttribute("seqID");
+				request.setAttribute("delete_result", result);
+				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
+				
+				
+			// 게시판 삭제하기
+			}else if(cmd.equals("/delete_board.my")){
+				
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				
+				System.out.println(seq);
+				System.out.println(cpage);
+				
+				int result = my_dao.delete_board(seq);
+				
+				request.setAttribute("cpage", cpage);
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("/mypage/my_pet_board.jsp").forward(request, response);
 				
 			}
 
-			
-			
-			
-			
-			
 			
 			
 			

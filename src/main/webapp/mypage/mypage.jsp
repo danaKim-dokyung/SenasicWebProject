@@ -884,19 +884,13 @@ nav>ul>li {
 
 				<div class="input-form-backgroud row">
 					<div class="input-form col-md-12 mx-auto">
-						<form action="/modify.mem?seq=${list[0].seq }" method="post">
+						<form action="/modify.mem?seq=${list[0].seq }&cpage=${cpage }" method="post" enctype="multipart/form-data">
 							<div class="mb-3 flex">
 								<label for="image">프로필사진</label> <label
-									class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+									class="flex flex-col w-1/4 ml-8 px-3 border-4 hover:bg-gray-100 hover:border-gray-300">
 									<div class="flex flex-col items-center justify-center pt-7"
 										id="ph">
-										<svg xmlns="http://www.w3.org/2000/svg"
-											class="w-6 h-6 text-gray-400 group-hover:text-gray-600"
-											viewBox="0 0 20 20" fill="currentColor">
-				                            <path fill-rule="evenodd"
-												d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-												clip-rule="evenodd" />
-				                        </svg>
+										<img src="${list[0].img }" alt="">
 									</div> <input accept="image/*" id="img" type="file" class="opacity-0"
 									name="photo" />
 								</label>
@@ -1025,11 +1019,23 @@ nav>ul>li {
 	<c:if test="${result eq '1' }">
 		<script>
 			alert("정보 변경에 성공하였습니다");
-			/* location.href = "/mypage.mem"; */
+			location.href = "/mypage.mem?cpage=${cpage }";
 		</script>
 	</c:if>
 
+
+
 	<script>
+	
+	$("#img").on("change",function(){
+		let file = this.files[0];
+		if (file) {
+		    $("#ph").html("<img class='w-28 h-28' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+		  }
+		})
+	
+	
+	
 		document.querySelector('body').classList.toggle('sidebar-mini');
 
 		$("#btn").on("click", function() {
@@ -1591,3 +1597,5 @@ nav>ul>li {
 	</div>
 </footer>
 </html>
+
+my
