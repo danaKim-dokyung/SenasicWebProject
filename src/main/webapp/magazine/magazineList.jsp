@@ -597,19 +597,18 @@ text-align:center;
          </a>
  
          <!----------------- 게시판 네비게이션 --------------->
-    <nav class=" justify-between">
-        <ul class="nav-container justify-between">
-            <li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-            <li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
-            <li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
-                    게시판 </a></li>
-        </ul>
-    </nav>
 
+	<nav class=" justify-between">
+		<ul class="nav-container justify-between">
+			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
+					게시판 </a></li>
+		</ul>
+	</nav>
+       
 
-
-
-
+         
          <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
          <nav
             class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
