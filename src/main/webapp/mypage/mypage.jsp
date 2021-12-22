@@ -90,6 +90,24 @@
 }
 
 /* index에서 가져온 style */
+@font-face {
+	font-family: 'Hahmlet-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Bold.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Hahmlet-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Bold.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .nav-container {
 	display: flex;
 	text-align: center;
@@ -99,12 +117,12 @@
 	text-align: center;
 }
 
-li>.nav-itme {
+li {
 	float: left;
 	padding: 30px;
 }
 
-li>.nav-itme:hover { /* 클래스이름 */
+li:hover {
 	color: green;
 }
 
@@ -114,13 +132,13 @@ header {
 }
 
 #logo>img {
-	width: 100px;
+	width: 200px;
 	display: block;
 	margin: auto;
 }
 
 .work-sans {
-	font-family: 'Work Sans', sans-serif;
+	font-family: "Work Sans", sans-serif;
 }
 
 #menu-toggle:checked+#menu {
@@ -136,6 +154,41 @@ header {
 	transform: scale(1.02);
 }
 
+.carousel-open:checked+.carousel-item {
+	position: static;
+	opacity: 100;
+}
+
+.carousel-item {
+	-webkit-transition: opacity 0.6s ease-out;
+	transition: opacity 0.6s ease-out;
+}
+
+#carousel-1:checked ~ .control-1, #carousel-2:checked ~ .control-2,
+	#carousel-3:checked ~ .control-3 {
+	display: block;
+}
+
+.carousel-indicators {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	bottom: 2%;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 10;
+}
+
+#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+	#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+	#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet
+	{
+	color: #000;
+	/*Set to match the Tailwind colour you want the active one to be */
+}
+
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 
 .forSearch {
@@ -149,6 +202,8 @@ header {
 
 .container1 {
 	position: relative;
+	height: 50px;
+	text-align: center;
 }
 
 .main {
@@ -470,8 +525,6 @@ keyframes ani { 0% {
 10
 
 
-
-
 %
 {
 transform
@@ -487,30 +540,23 @@ scale
 
 
 1
-
-
-
 .2
 
 
-
-
-
 )
-
-
 ;
+
+
 opacity
 
 
 :
 
 
-
 1
-
-
 ;
+
+
 }
 20
 
@@ -520,13 +566,10 @@ opacity
 transform
 
 
-
 :
 
 
-
 scale
-
 
 
 (
@@ -535,11 +578,10 @@ scale
 1
 
 
-
 )
-
-
 ;
+
+
 opacity
 
 
@@ -547,9 +589,9 @@ opacity
 
 
 1
-
-
 ;
+
+
 }
 100
 
@@ -563,14 +605,10 @@ transform
 
 
 scale
-
-
 (
 
 
-
 1
-
 
 
 )
@@ -578,9 +616,15 @@ scale
 
 
 opacity
+
+
 :
+
+
 1
 ;
+
+
 }
 }
 #gas {
@@ -628,11 +672,11 @@ opacity
 }
 
 .con_cmn {
-	display: none
+	
 }
 
 .con1 {
-	display: block;
+	
 }
 
 #hashtag {
@@ -651,38 +695,119 @@ opacity
 	filter: brightness(50%);
 }
 
-#footer{
-font-size:6px;
+nav>ul {
+	
 }
 
-#header{
-	padding:0px;
-	margin-left:200px;
-	margin-right:200px;
-	border-bottom-left-radius: 30px;
-	border-bottom-right-radius: 30px;
-
- box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+nav>ul>li {
+	
 }
 
-li:hover {
-   color: green;
+#carousel-font-1 {
+	color: rgb(221, 221, 221);
+	padding: 10px;
 }
 
-li>a {}
+#carousel-font-2 {
+	color: rgb(221, 221, 221);
+}
 
-ul{
-text-align:center;
+#search_bar>span {
+	background-color: rgba(5, 88, 5, 0.400);
+	padding-top: 10px;
+	border-radius: 30px;
+	border: 8px solid rgba(5, 88, 5, 0.582);
+	box-sizing: context-box;
+}
+
+#search_bar2>span {
+	background-color: rgba(5, 88, 5, 0.582);
+	padding-top: 10px;
+	border-radius: 30px;
+	border: 8px solid rgba(5, 88, 5, 0.582);
+	box-sizing: context-box;
 }
 
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: "GmarketSansMedium";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
 }
-* {font-family: GmarketSansMedium;}
-#shbtn:hover{background-color: #d7e9d433;}
+
+* {
+	font-family: GmarketSansMedium;
+}
+
+#github>a {
+	padding: 10px;
+}
+
+#footer {
+	font-size: 6px;
+}
+
+#header {
+	padding: 0px;
+	margin-left: 200px;
+	margin-right: 200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+
+#shbtn:hover {
+	background-color: #d7e9d433;
+}
+
+#list {
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+#hashtag {
+	padding-top: 25px;
+	font-size: 27px;
+	color: white;
+}
+
+.con_cmn con2 {
+	padding-top: 25px;
+	font-size: 20px;
+}
+
+#selectTab {
+	border-radius: 20px;
+	background-color: rgba(236, 234, 234, 0.411);
+	text-align: center;
+	height: 65px;
+	margin-top: 0px;
+	color: white;
+}
+
+option {
+	background-color: white;
+	border-radius: 20px;
+}
+
+#search_bar {
+	font-size: 27px;
+}
+
+#search_bar2 {
+	font-size: 27px;
+}
+
+#search_bar>span {
+	
+}
+
+#senasic {
+	font-family: Hahmlet-Bold;
+}
+
 
 /* index 스타일 끝부분 */
 </style>
