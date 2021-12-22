@@ -568,12 +568,6 @@ opacity:1;}
 	filter: brightness(50%);
 	
 }
-nav>ul{
-	padding-left: 28%;
-}
-nav>ul>li{
-	padding-right: 17%;
-}
 
 @font-face {
     font-family: 'GmarketSansMedium';
