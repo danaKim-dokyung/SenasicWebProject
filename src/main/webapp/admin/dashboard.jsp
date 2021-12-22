@@ -23,6 +23,9 @@
 />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+            />
 <style>
 @media screen and (min-width:400px) {
 	.image-menu {
@@ -104,10 +107,6 @@
 	text-align: center;
 }
 
-li {
-	float: left;
-	padding: 30px;
-}
 
 li:hover {
 	color: green;
@@ -220,12 +219,6 @@ header {
 	filter: brightness(50%);
 	
 }
-nav>ul{
-	padding-left: 28%;
-}
-nav>ul>li{
-	padding-right: 17%;
-}
 
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -239,8 +232,39 @@ nav>ul>li{
 padding:10px;
 }
 
-#shbtn:hover{background-color: #d7e9d433;}
+li:hover {
+   color: green;
+}
 
+#shbtn:hover{background-color: #d7e9d433;}
+/* index 스타일 끝부분 */
+      
+
+#header{
+	padding:0px;
+	margin-left:200px;
+	margin-right:200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+.forSearch{
+position:relative;
+}      
+
+
+body{
+letter-spacing :1.5px; 
+}
+
+li>.nav-itme {
+	float: left;
+	padding: 30px;
+}
+
+li>.nav-itme:hover { /* 클래스이름 */
+	color: green;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -258,54 +282,57 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
-	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
-		<div
-			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-
-			<!------ 왼쪽 상단 세나식 로고 ----->
-			<a href="/index.jsp"
-				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">SENASIC</span>
-			</a>
-			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
-				<c:choose>
-					<c:when test="${loginID != null}">
-				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-						<a href="/logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-						<!-- 강사님께 질문 3 -->
-						<c:if test="${seqID < 0 }">
-							<a href="/dash.admin">관리자페이지</a>
-						</c:if>
-						<c:if test="${seqID > 0 }">
-							<a href="/mypage.mem?cpage=1">마이페이지</a>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="/signup.mem">회원가입</a>
-					</c:otherwise>
-				</c:choose>
-			</nav>
-		</div>
-	</header>
-	<a href="/index.jsp">
-	<div id="logo">
-		<img src="/senasic_logo.png">
-	</div></a>
-
-	<!----------------- 게시판 네비게이션 --------------->
-	<nav>
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+   <header
+      class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
+      <div
+         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+       
+               <!------ 왼쪽 상단 세나식 로고 ----->
+         <a href="/index.jsp"
+            class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <span class="ml-3 text-xl">SENASIC
+</span>
+         </a>
+ 
+         <!----------------- 게시판 네비게이션 --------------->
+	<nav class=" justify-between">
+		<ul class="nav-container justify-between">
+			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme" style="margin-left:70px;margin-right:70px;"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
 	</nav>
+       
+
+         
+       
+         
+         <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+         <nav
+            class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
+ <c:choose>
+               <c:when test="${loginID != null}">
+            ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <!-- 강사님께 질문 3 -->
+                  <c:if test="${seqID < 0 }">
+                     <a href="/dash.admin">관리자페이지</a>
+                  </c:if>
+                  <c:if test="${seqID > 0 }">
+                     <a href="/mypage.mem?cpage=1">마이페이지</a>
+                  </c:if>
+               </c:when>
+               <c:otherwise>
+                  <a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+                  <a href="/signup.mem">회원가입</a>
+               </c:otherwise>
+            </c:choose>
+         </nav>
+      </div>
+   </header>
+ 
 <body>
 	<div class="forSearch">
 		<div class="container1">

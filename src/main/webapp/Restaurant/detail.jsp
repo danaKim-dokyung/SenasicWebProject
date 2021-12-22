@@ -586,30 +586,7 @@ padding:10px;
 /* index 스타일 끝부분 */
 
 
-.radio-btns:hover .radio-btns__btn:not(:hover) {
-    filter: grayscale(100%);
 
-    &::after {
-      background-color: rgba(#000, 0.5);
-    }
-  }
-  
-  @media (min-width: 30rem) {
-    grid-template-columns: repeat(3, 150px);
-  }
-}
-
-.radio-btns__btn {
-  position: relative;
-  cursor: pointer;
-  transition: .3s;
-
-  &::after {
-    content: '';
-    position: absolute;
-    background-color: rgba(#000, 0);
-    transition: .3s;
-  }
 
   .mImg {
   }
@@ -619,11 +596,10 @@ li:hover {
    color: green;
 }
 
-li>a {padding-left:200px; text-style:bold}
+li>a { text-style:bold}
 
 ul{
 text-align:center;
-padding-left:125px
 }
 
 @font-face {
@@ -664,12 +640,11 @@ color:gray;
 
  
 <body>
-	
-	   <!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
    <header
       class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
       <div
-         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
        
                <!------ 왼쪽 상단 세나식 로고 ----->
          <a href="/index.jsp"
@@ -679,11 +654,11 @@ color:gray;
          </a>
  
          <!----------------- 게시판 네비게이션 --------------->
-	<nav>
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+	<nav class=" justify-between">
+		<ul class="nav-container justify-between">
+			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
 	</nav>
@@ -694,22 +669,22 @@ color:gray;
          
          <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
          <nav
-            class="z-50 md:ml-auto  flex flex-wrap items-center text-base justify-center">
+            class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
  <c:choose>
                <c:when test="${loginID != null}">
             ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-                  <a href="logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <!-- 강사님께 질문 3 -->
                   <c:if test="${seqID < 0 }">
-                     <a href="dash.admin">관리자페이지</a>
+                     <a href="/dash.admin">관리자페이지</a>
                   </c:if>
                   <c:if test="${seqID > 0 }">
-                     <a href="mypage.mem?cpage=1">마이페이지</a>
+                     <a href="/mypage.mem?cpage=1">마이페이지</a>
                   </c:if>
                </c:when>
                <c:otherwise>
-                  <a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-                  <a href="signup.mem">회원가입</a>
+                  <a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+                  <a href="/signup.mem">회원가입</a>
                </c:otherwise>
             </c:choose>
          </nav>
