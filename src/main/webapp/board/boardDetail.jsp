@@ -611,31 +611,12 @@ nav>ul>li{
 		};
 		
 		// 비회원시 댓글 쓰기 막기
-		 $("#commentBtn").on("click",function() {
+		$("#commentBtn").on("click",function() {
 			if(${loginID == null}){
 				alert("로그인 후 이용해주세요.");
 			return false;
-			}else{
-				let regex = /([\s\S]){1,2000}/;
-			       let contents = $("#message").val();
-			       let result = regex.test(contents);
-			       if(!result){
-			           alert("한글자 이상 입력해주세요.");
-			           return false;
-			       }
 			}
 		})
-		
-		
-		/* $("#commentBtn").on("click",function(){
-       let regex = /([\s\S]){1,2000}/;
-       let contents = $("#message").val();
-       let result = regex.test(contents);
-       if(!result){
-           alert("한글자 이상 입력해주세요.");
-           return false;
-       }
-   }) */
 		
 		
 		

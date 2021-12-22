@@ -34,7 +34,7 @@
 	margin-top: 100px;
 }
 
-.nav-container {
+ .nav-container {
 	display: flex;
 	text-align: center;
 }
@@ -157,65 +157,64 @@ header {
 
 #list img:hover {
 	filter: brightness(50%);
+	
 }
-
-nav>ul {
+nav>ul{
 	padding-left: 28%;
 }
-
-nav>ul>li {
+nav>ul>li{
 	padding-right: 17%;
 }
 </style>
 
 
 </head>
-<header
-	class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
-	<div
-		class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+	<header
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		<div
+			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 
-		<!------ 왼쪽 상단 세나식 로고 ----->
-		<a href="/index.jsp"
-			class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-			<span class="ml-3 text-xl">Senasic</span>
-		</a>
-		<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-		<nav
-			class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
-			<c:choose>
-				<c:when test="${loginID != null}">
+			<!------ 왼쪽 상단 세나식 로고 ----->
+			<a href="/index.jsp"
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-xl">Senasic</span>
+			</a>
+			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+			<nav
+				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
+				<c:choose>
+					<c:when test="${loginID != null}">
 				${loginID}님 안녕하세요 <!-- 강사님께 질문 2-2 -->
-					<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
-					<!-- 강사님께 질문 3 -->
-					<c:if test="${seqID < 0 }">
-						<a href="dash.admin">관리자페이지</a>
-					</c:if>
-					<c:if test="${seqID > 0 }">
-						<a href="mypage.mem?cpage=1">마이페이지</a>
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-					<a href="signup.mem">회원가입</a>
-				</c:otherwise>
-			</c:choose>
-		</nav>
+						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+						<!-- 강사님께 질문 3 -->
+						<c:if test="${seqID < 0 }">
+							<a href="dash.admin">관리자페이지</a>
+						</c:if>
+						<c:if test="${seqID > 0 }">
+							<a href="mypage.mem?cpage=1">마이페이지</a>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+						<a href="signup.mem">회원가입</a>
+					</c:otherwise>
+				</c:choose>
+			</nav>
+		</div>
+	</header>
+	<div id="logo">
+		<img src="/senasic_logo.png">
 	</div>
-</header>
-<div id="logo">
-	<img src="/senasic_logo.png">
-</div>
 
-<!----------------- 게시판 네비게이션 --------------->
-<nav>
-	<ul class="nav-container">
-		<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-		<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-		<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
-				게시판 </a></li>
-	</ul>
-</nav>
+	<!----------------- 게시판 네비게이션 --------------->
+	<nav>
+		<ul class="nav-container">
+			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+					게시판 </a></li>
+		</ul>
+	</nav>
 <body>
 	<div class="forSearch">
 		<div class="container1">
@@ -282,21 +281,20 @@ nav>ul>li {
 		</div>
 	</div>
 	<div>
-		<form id="frm" action="/input.pet?check_num=${check_num }"
-			method="post">
-			<!-- 글쓰기 Header -->
-			<div class="container con22">
-				<div class="head"
-					style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
-					<b># 반려견 게시판 글쓰기</b>
-				</div>
+	<form id="frm" action="/input.pet?check_num=${check_num }" method="post">
+		<!-- 글쓰기 Header -->
+		<div class="container con22">
+			<div class="head"
+				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
+				<b># 반려견 게시판 글쓰기</b>
+			</div>
 
-				<!-- 제목 입력 -->
-				<div>
-					<input name="title" id="title"
-						style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
-						type="text" placeholder="제목을 입력해 주세요."
-						class="
+			<!-- 제목 입력 -->
+			<div>
+				<input name="title"
+					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
+					type="text" placeholder="제목을 입력해 주세요."
+					class="
                     placeholder-gray-400
                     text-gray-600 
                     relative
@@ -309,53 +307,41 @@ nav>ul>li {
                     w-10/12
                     h-14
                   " />
-					<!-- 어떤 카테고리에 쓸지 선택 -->
-					<select name="category" id="category"
-						class="rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-5 pr-5 w-auto h-14"
-						style="font-size: 12px; margin-left: 10px;">
-						<option>카테고리</option>
-						<option>병원</option>
-						<option>산책로</option>
-						<option>음식</option>
-						<option>기타</option>
-					</select>
+				<!-- 어떤 카테고리에 쓸지 선택 -->
+				<select name="category" id="category"
+					class="rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-5 pr-5 w-auto h-14"
+					style="font-size: 12px; margin-left: 10px;">
+					<option>카테고리</option>
+					<option>병원</option>
+					<option>산책로</option>
+					<option>음식</option>
+					<option>기타</option>
+				</select>
 
-					<!-- textarea 태그에 작성 -->
-					<div>
-						<textarea name="contents" id="summernote"></textarea>
-					</div>
+				<!-- textarea 태그에 작성 -->
+				<div>
+					<textarea name="contents" id="summernote"></textarea>
+				</div>
+
+				
+
+				<!-- 목록, 등록 버튼 생성 -->
+
+				<div style="text-align: right;">
+					<button type="button" id="list"
+						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
+						style="margin-right: 5px; height: 65%;">목록</button>
 
 
-
-					<!-- 목록, 등록 버튼 생성 -->
-
-					<div style="text-align: right;">
-						<button type="button" id="list"
-							class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
-							style="margin-right: 5px; height: 65%;">목록</button>
-
-
-						<button id="input_board"
-							class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
-							style="height: 65%;">등록</button>
-					</div>
+					<button id="input_board"
+						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
+						style="height: 65%;">등록</button>
 				</div>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
+</div>
 	<script>
-	
-	// 제목 입력 안할시 에러
-	 $("#input_board").on("click",function(){
-    let regex = /([\s\S]){1,2000}/;
-    let contents = $("#title").val();
-    let result = regex.test(contents);
-    if(!result){
-        alert("한글자 이상 입력해주세요.");
-        return false;
-    }
-	}) 
-	
 		// '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
 			location.href = "/list.pet?cpage=1&check_num=${check_num }";
@@ -388,9 +374,9 @@ nav>ul>li {
 				}
 		</script>
 	</c:if>
-
+	
 	<!-- textarea에 summernote 적용 -->
-	<script>
+				<script>
 					$('#summernote').summernote({
 						placeholder : 'input',
 						tabsize : 2,
@@ -426,7 +412,7 @@ nav>ul>li {
 					
 					setTimeout(function () {
 						  $(editor).summernote('insertImage', '/upload/' + sysName);
-						}, 500);
+						}, 3500);
 				}
 			});
 		}

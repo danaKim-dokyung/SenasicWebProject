@@ -220,8 +220,8 @@ public class MemberDAO {
 	}
 		
 		//회원 정보 수정
-		public int modify(String pw, String nickname, String email, String phone, String id, String photo) throws Exception{
-	    	String sql = "update member set pw=?,nn=?,m=?,ph=?, photo=? where id = ?";
+		public int modify(String pw, String nickname, String email, String phone, String id) throws Exception{
+	    	String sql = "update member set pw=?,nn=?,m=?,ph=? where id = ?";
 	    	try(Connection con = this.getConnection();
 		    		PreparedStatement pstat = con.prepareStatement(sql);
 	    			){
@@ -229,25 +229,11 @@ public class MemberDAO {
 	    		pstat.setString(2, nickname);
 	    		pstat.setString(3, email);
 	    		pstat.setString(4, phone);
-	    		pstat.setString(5, photo);
-	    		pstat.setString(6, id);
+	    		pstat.setString(5, id);
 	    		int result = pstat.executeUpdate();
 	    		return result;
 	    	}
 	    }
-		
-		
-		// 회원탈퇴
-		public int deleteMember(int seq) throws Exception{
-	    	String sql = "delete from member where seq = ?";
-	    	try(Connection con = this.getConnection();
-	    		PreparedStatement pstat = con.prepareStatement(sql);
-	    			){
-	    		pstat.setInt(1, seq);
-	    		int result = pstat.executeUpdate();
-	    		return result;
-	    	}
-	    }
-		
-		
 	}
+
+

@@ -60,10 +60,8 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/signupProc.mem")) {
 
 				int maxSize = 1024 * 1024 * 10;
-
 				//String savePath = "C:"; // 경로 문제
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload"; // 경로 문제
-
 				File filePath = new File(savePath);
 				if (!filePath.exists()) {
 					filePath.mkdir();
@@ -150,7 +148,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("id", id);
 				System.out.println(findPw.getPw());
 				if (findPw != null) {
-					request.getRequestDispatcher("/WEB-INF/yourPw.jsp").forward(request, response);
+					request.getRequestDispatcher("/member/yourPw.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("/member/None.jsp");
 				}
@@ -168,9 +166,12 @@ public class MemberController extends HttpServlet {
 				String loginID = (String) request.getSession().getAttribute("loginID");
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 
+				System.out.println("a");
 
 				List<MemberDTO> list = dao.selectById_list(loginID);
 
+//				System.out.println(loginID);
+				System.out.println(list.get(0).getId());
 				
 				
 				String all = list.get(0).getPh();
@@ -189,69 +190,33 @@ public class MemberController extends HttpServlet {
 				// 회원 정보 수정
 			}else if(cmd.equals("/modify.mem")) {
 				
-				int maxSize = 1024*1024*10; //10m
-				//savepath 경로 변경
-//				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-				String savePath = "C:\\Users\\my\\Desktop\\2021_09_Java\\workspace_semi_project\\senasic6\\src\\main\\webapp\\upload";
-
-				File filePath = new File(savePath);
-				if(!filePath.exists()) {filePath.mkdir();}
-				System.out.println(savePath);
-				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());
-				
 				String loginID = (String) request.getSession().getAttribute("loginID");
-				List<MemberDTO> list_f = dao.selectById_list(loginID);
-				
-		   		int seq = Integer.parseInt(multi.getParameter("seq"));
-		   		int cpage = Integer.parseInt(multi.getParameter("cpage"));
-		   		
+		   		int seq = Integer.parseInt(request.getParameter("seq"));
      
-				String root = "/upload/"; //루트 수정
-				String oriName1 = multi.getOriginalFileName("photo");
-				String sysName1 = multi.getFilesystemName("photo");
-				
-				
-				
-				if(sysName1 ==null) {
-					sysName1=list_f.get(0).getImg().substring(root.length());
-				}
-				
-				multi.getParameter(savePath);
-				
-			    String img = root + sysName1;
-			    
-			    
-			    
-				String pw = passwordUtils.getSHA512(multi.getParameter("pw")); 
-        		String nn = multi.getParameter("nn");
-        		String m = multi.getParameter("m");
-        		String p1 = multi.getParameter("phone1");
-        		String p2 = multi.getParameter("phone2");
-        		String p3 = multi.getParameter("phone3");
+				String pw = passwordUtils.getSHA512(request.getParameter("pw")); 
+        		String nn = request.getParameter("nn");
+        		String m = request.getParameter("m");
+        		String p1 = request.getParameter("phone1");
+        		String p2 = request.getParameter("phone2");
+        		String p3 = request.getParameter("phone3");
         		String ph = (p1+p2+p3);
         		
+
+        		System.out.println(pw);
+        		System.out.println(nn);
+        		System.out.println(m);
+        		System.out.println(ph);
+        		System.out.println(seq);
         		
-        		int result = dao.modify(pw,nn,m,ph,loginID,img);
-				/*
-				 * List<MemberDTO> list = dao.selectById_list(loginID);
-				 * 
-				 * String all = list.get(0).getPh(); String phone2 =
-				 * all.substring(all.length()-8,all.length()-4); String phone3 =
-				 * all.substring(all.length()-4,all.length());
-				 * 
-				 * 
-				 * 
-				 * 
-				 * System.out.println(list.get(0).getImg());
-				 * 
-				 * request.setAttribute("phone2", phone2); request.setAttribute("phone3",
-				 * phone3);
-				 */
+        		int result = dao.modify(pw,nn,m,ph,loginID);
+        		List<MemberDTO> list = dao.selectById_list(loginID);
         		
-        		request.setAttribute("cpage", cpage);
+        		System.out.println(list.size());
+        		
         		request.setAttribute("result", result);
+    			request.setAttribute("list", list);
 				request.getRequestDispatcher("mypage/mypage.jsp").forward(request, response);
-        		
+				
 			}
 		
         

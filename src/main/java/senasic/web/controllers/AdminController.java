@@ -301,7 +301,7 @@ public class AdminController extends HttpServlet {
 				int maxSize = 1024*1024*10; //10m
 				//savepath 경로 변경
 				String savePath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-//				String savePath = "C:\\Users\\limdo\\git\\senasic6\\src\\main\\webapp//upload";
+//				String savePath = request.getServletContext().getRealPath("files");
 
 				File filePath = new File(savePath);
 				if(!filePath.exists()) {filePath.mkdir();}
@@ -314,7 +314,7 @@ public class AdminController extends HttpServlet {
 				String oriName1 = multi.getOriginalFileName("photo");
 				String sysName1 = multi.getFilesystemName("photo");
 				if(sysName1 ==null) {
-					sysName1=real.getImg().substring(root.length());
+					//sysName1=real.getImg().substring(root.length());
 				}
 				multi.getParameter(savePath);
 				String id= multi.getParameter("id");
@@ -325,10 +325,10 @@ public class AdminController extends HttpServlet {
         		String p3 = multi.getParameter("phone3");
         		int age = Integer.parseInt(multi.getParameter("age"));
         		String gender = multi.getParameter("gender");
-        		String img = root+sysName1;
+        		
         		String ph = (p1+p2+p3);
         		
-    			dao.modifyM(id,nn,m,age,gender,ph,img);
+    			dao.modifyM(id,nn,m,age,gender,ph,sysName1);
     			response.sendRedirect("/mEdit.admin?num="+seq);
         	   
 			}else if(cmd.equals("deleteM.admin")){

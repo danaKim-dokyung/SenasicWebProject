@@ -298,7 +298,7 @@ nav>ul>li{
 
 			<!-- 제목 입력 -->
 			<div>
-				<input name="title" id="title"
+				<input name="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 					type="text" value="${list[0].title }"
 					class="
@@ -348,19 +348,6 @@ nav>ul>li{
 	</form>
 
 	<script>
-	// 제목 입력 안할시 에러
-	 $("#modify_board").on("click",function(){
-   let regex = /([\s\S]){1,2000}/;
-   let contents = $("#title").val();
-   let result = regex.test(contents);
-   if(!result){
-       alert("한글자 이상 입력해주세요.");
-       return false;
-   }
-	}) 
-	
-	
-	
 	<!-- '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
 			history.go(-1);

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맛집 매거진</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 
@@ -576,19 +576,19 @@ text-align:center;
     font-style: normal;
 }
 * {font-family: GmarketSansMedium;}
+#shbtn:hover{background-color: #d7e9d433;}
+
 </style>
 </head>
 
-
-
-
 <body>
+
 <!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
    <header
       class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
       <div
          class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
-       
+
                <!------ 왼쪽 상단 세나식 로고 ----->
          <a href="/index.jsp"
             class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -597,6 +597,7 @@ text-align:center;
          </a>
  
          <!----------------- 게시판 네비게이션 --------------->
+
 	<nav class=" justify-between">
 		<ul class="nav-container justify-between">
 			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
@@ -607,8 +608,6 @@ text-align:center;
 	</nav>
        
 
-         
-       
          
          <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
          <nav
@@ -642,7 +641,7 @@ text-align:center;
 					class="main" type="text" name="target" id="searching"> <a
 					id="searchbytagName">
 					<button
-						class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
 						id="shbtn">검색</button>
 				</a>
 			</form>

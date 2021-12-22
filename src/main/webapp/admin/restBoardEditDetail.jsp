@@ -560,20 +560,20 @@ $(document).ready(function(){
 $("#img1").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph1").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph1").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 
 $("#img2").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph2").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph2").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 $("#img3").on("change",function(){
 	let file = this.files[0];
 	if (file) {
-	    $("#ph3").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
+	    $("#ph3").html("<img class='w-full h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
 	  }
 	})
 	
