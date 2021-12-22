@@ -551,8 +551,6 @@ font-size:6px;
 
 #header{
 	padding:0px;
-	margin-left:200px;
-	margin-right:200px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
 
@@ -601,7 +599,7 @@ text-align:center;
 	<nav class=" justify-between">
 		<ul class="nav-container justify-between">
 			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
 			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
@@ -1157,7 +1155,7 @@ selectTab.addEventListener("change", function() { // select가 변화할 때
 
 <!-- footer -->
 <!-- footer -->
-<footer class="text-center lg:text-left bg-gray-100 text-gray-600">
+<footer class="text-center lg:text-left bg-gray-100 text-gray-600 mt-20">
 	<div
 		class="flex justify-center items-center lg:justify-between p-6 border-b border-gray-300">
 		<div class="mr-12 hidden lg:block">

@@ -242,8 +242,6 @@ li:hover {
 
 #header{
 	padding:0px;
-	margin-left:200px;
-	margin-right:200px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -492,7 +490,7 @@ $(document).ready(function(){
                                 <c:if test="${count[0].countU-count[1].countU eq 0 }">
                                 <span>${count[0].countU-count[1].countU }</span>
                                 </c:if>
-                                ) <span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></h3>
+                                ) <span class="text-pink-500"></span></h3>
                             </div>
                         </div>
                     </div>
@@ -516,7 +514,7 @@ $(document).ready(function(){
                                 <c:if test="${count[0].countC-count[1].countC eq 0 }">
                                 <span>${count[0].countC-count[1].countC }</span>
                                 </c:if>
-                                ) <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></h3>
+                                ) <span class="text-yellow-600"></span></h3>
                             </div>
                         </div>
                     </div>

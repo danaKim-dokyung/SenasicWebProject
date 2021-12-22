@@ -14,7 +14,9 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import senasic.web.DAO.MemberDAO;
 import senasic.web.DAO.PetBoardDAO;
+import senasic.web.DTO.MemberDTO;
 import senasic.web.DTO.PetBoardDTO;
 import senasic.web.DTO.PetBoard_RelpyDTO;
 import senasic.web.DTO.petBoard_recDTO;
@@ -35,6 +37,7 @@ public class PetBoardController extends HttpServlet {
 		System.out.println(cmd);
 
 		PetBoardDAO dao = PetBoardDAO.getInstance();
+		MemberDAO dao_m = MemberDAO.getInstance();
 
 		try {
 
@@ -166,13 +169,16 @@ public class PetBoardController extends HttpServlet {
 				} else if (recCheck == 0) {
 					user = 1;
 				}
-
+				
+				List<MemberDTO> list_mem = dao_m.selectById_list(longinID);
 				List<PetBoardDTO> list = dao.information(seq);
 				List<PetBoard_RelpyDTO> replyList = dao.selectAllReply(seq);
 				int CountComment = dao.getCountComment(seq);
 
 				int result = dao.addViewCount(seq);
+				
 
+				request.setAttribute("list_mem", list_mem);
 				request.setAttribute("keyword", keyword);
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("check_num", check_num);

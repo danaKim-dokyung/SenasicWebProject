@@ -123,22 +123,33 @@ public class MypageController extends HttpServlet {
 			
 				
 				
-			// 테스트
-			}else if(cmd.equals("/magagine.my")) {
-				
-				int[] seq_arr = {21,22,23,16,39,40,41,42,43,44};
-				
-				List<RestBoardDTO> list = my_dao.getRestInformation(seq_arr);
-				
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("/mypage/test.jsp").forward(request, response);
-				
-				
-			}
+			}else if(cmd.equals("/delete_board.my")){
 
-			
-			
-			
+                int seq = Integer.parseInt(request.getParameter("seq"));
+                int cpage = Integer.parseInt(request.getParameter("cpage"));
+
+                System.out.println(seq);
+                System.out.println(cpage);
+
+                int result = my_dao.delete_board(seq);
+
+                request.setAttribute("cpage", cpage);
+                request.setAttribute("result", result);
+                request.getRequestDispatcher("/mypage/my_pet_board.jsp").forward(request, response);
+                
+                
+                //회원 탈퇴
+            }else if(cmd.equals("/delete_member.my")){
+
+                int seq = Integer.parseInt(request.getParameter("seq"));
+
+                int result = dao.deleteMember(seq);
+
+                request.getSession().removeAttribute("loginID");
+                request.getSession().removeAttribute("seqID");
+                request.setAttribute("delete_result", result);
+                request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
+            }
 			
 			
 			

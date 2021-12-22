@@ -16,7 +16,7 @@
     body {
       min-height: 100vh;
 
-      background: #047857
+      background: white;
      
     }
 
@@ -36,6 +36,8 @@
     }
     #btn1{
     	text-align=center;
+    	margin-bottom : 20px;
+    	
     }
     #btn2{
     	text-align=center;

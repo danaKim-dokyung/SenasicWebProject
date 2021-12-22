@@ -224,8 +224,6 @@ padding:10px;
 
 #header{
 	padding:0px;
-	margin-left:200px;
-	margin-right:200px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -275,7 +273,7 @@ $(document).ready(function(){
 	<nav class=" justify-between">
 		<ul class="nav-container justify-between">
 			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
 			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>

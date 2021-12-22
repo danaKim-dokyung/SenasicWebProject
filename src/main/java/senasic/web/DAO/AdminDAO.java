@@ -493,7 +493,7 @@ public class AdminDAO {
 		    
 
 		    public int modifyM(String id, String nickname, String email, int age, String gender, String phone,String img) throws Exception{
-		    	String sql = "update member set nn=?,m=?,age=?,gender=?,ph=? photo=? where id = ?";
+		    	String sql = "update member set nn=?,m=?,age=?,gender=?,ph=?, photo=? where id = ?";
 
 		    	try(Connection con = this.getConnection();
 		    		PreparedStatement pstat = con.prepareStatement(sql);
@@ -503,7 +503,8 @@ public class AdminDAO {
 		    		pstat.setInt(3, age);
 		    		pstat.setString(4, gender);
 		    		pstat.setString(5, phone);
-		    		pstat.setString(6, id);
+		    		pstat.setString(6, img);
+		    		pstat.setString(7, id);
 		    		int result = pstat.executeUpdate();
 		    		return result;
 		    	}

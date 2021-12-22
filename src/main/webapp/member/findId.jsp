@@ -16,7 +16,7 @@
     body {
       min-height: 100vh;
 
-      background: #047857
+      background: white;
      
     }
 
@@ -47,6 +47,22 @@
     	color:white;
     	cursor:pointer;
     }
+        
+    @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family: GmarketSansMedium;}
+
+#header{
+   padding:0px;
+   border-bottom-left-radius: 30px;
+   border-bottom-right-radius: 30px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+    
   </style>
 <script>
 
@@ -56,6 +72,20 @@
 </head>
 
 <body>
+	<header
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		<div
+			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+
+			<!------ 왼쪽 상단 세나식 로고 ----->
+			<a href="/index.jsp"
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-xl">SENASIC</span>
+			</a>
+			
+		</div>
+	</header>
+
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -78,9 +108,8 @@
 			<!-- 전화번호 -->
           <div class="row">
            	<div class="col-md-4 mb-2">
-            	<span class="form-control" name="phone1" required>
+            	<span class="form-control" name="phone1" value="010" required>
    			 	010
-   			 	
 				</span>
               <div class="invalid-feedback">
                 번호를 선택해주세요
@@ -103,10 +132,13 @@
           </div>
 			
         
-          <hr class="mb-4">
+         <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement" >개인정보 수집 및 이용에 동의합니다.</label>
+             <div class="invalid-feedback">
+                개인정보 동의는 필수입니다.
+              </div>
           </div>
           <div class="mb-4"></div>
           <div class="col text-center">

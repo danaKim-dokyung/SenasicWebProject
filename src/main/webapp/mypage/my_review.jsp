@@ -736,8 +736,6 @@ nav>ul>li {
 
 #header {
 	padding: 0px;
-	margin-left: 200px;
-	margin-right: 200px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -813,7 +811,7 @@ option {
     <nav class=" justify-between">
         <ul class="nav-container justify-between">
             <li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-            <li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+            <li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
             <li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
                     게시판 </a></li>
         </ul>
@@ -925,8 +923,6 @@ option {
 		<div class="sidebar w-1/7 fixed h-screen bg-green-600 z-10 absolute">
 			<div
 				class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-				<img class="menu-icon border-2 w-10 h-10 rounded-full"
-					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
 				<div class="menu-text text-gray-100 ml-4">${loginID }님페이지</div>
 			</div>
 
