@@ -19,6 +19,18 @@
 	
 	
 <style>
+
+#review{
+border-radius:10px;
+pidding:30px
+}
+#contents{
+border:1px solid gray;
+border-radius:10px
+}
+
+
+
 .carousel-open:checked+.carousel-item {
 	position: static;
 	opacity: 100;
@@ -612,8 +624,6 @@ text-align:center;
 
 #header{
    padding:0px;
-   margin-left:200px;
-   margin-right:200px;
    border-bottom-left-radius: 30px;
    border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -657,7 +667,7 @@ color:gray;
 	<nav class=" justify-between">
 		<ul class="nav-container justify-between">
 			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
 			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
@@ -880,7 +890,7 @@ color:gray;
 				<form action="/reply.rest" method="post" enctype="multipart/form-data">
 			<input type="hidden" value=${dto.seq } id="seq" name="seq">		
 			<div class="grid grid-col-12 gap-2 box-border p-4 h-max text-center mt-8">
-				<div class="bg-green-600 col-span-12 text-white">리뷰 등록</div>				
+				<div class="bg-green-900 col-span-12 text-white" id="review">리뷰 등록</div>			
 					<div class="justify-between flex col-span-2 w-44 ml-12 mt-4">
 				                <label class="flex flex-col w-full px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">

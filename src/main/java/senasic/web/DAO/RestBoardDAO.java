@@ -548,7 +548,7 @@ public class RestBoardDAO {
 	//중복 검색 시 제목에 00 들어간거 없애고 싶으면 (title like ? or category like ?) or ->and
 	public List<RestBoardDTO> selectBySearch1(String word,String word1, int start, int end)throws Exception{
 		String sql = "select * from (select Rest_board.* , row_number() over(order by seq desc) rn "
-				+ "from Rest_board where (title like ? or category like ?) or (locate like ? and category like ?))where rn between ? and ?";
+				+ "from Rest_board where (title like ? and category like ?) or (locate like ? and category like ?))where rn between ? and ?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, "%"+word1+"%");

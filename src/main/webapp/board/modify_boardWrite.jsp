@@ -46,8 +46,9 @@
 }
 
 li {
-   float: left;
-   padding: 30px;
+	float: left;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 li:hover {
@@ -573,8 +574,6 @@ font-size:6px;
 }
 #header{
    padding:0px;
-   margin-left:200px;
-   margin-right:200px;
    border-bottom-left-radius: 30px;
    border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -646,7 +645,7 @@ font-size: 20px;
 			<ul class="nav-container justify-between">
 				<li class="nav-itme"><a style="color: black;" href="/fboard.rest?cpage=1">맛집 리스트
 				</a></li>
-				<li class="nav-itme ml-36 mr-36"><a style="color: black;" href="/magagineList.mag">맛집
+				<li class="nav-itme md:ml-36 md:mr-36"><a style="color: black;" href="/magagineList.mag">맛집
 						매거진 </a></li>
 				<li class="nav-itme "><a style="color: black;" href="/list.pet?cpage=1&check_num=2">반려견
 						게시판 </a></li>
@@ -692,7 +691,7 @@ font-size: 20px;
 
 			<!-- 제목 입력 -->
 			<div>
-				<input name="title"
+				<input name="title" id="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 					type="text" value="${list[0].title }"
 					class="
@@ -742,6 +741,20 @@ font-size: 20px;
 	</form>
 
 	<script>
+		
+	// 제목 입력 안할시 에러
+	 $("#modify_board").on("click",function(){
+   let regex = /([\s\S]){1,2000}/;
+   let contents = $("#title").val();
+   let result = regex.test(contents);
+   if(!result){
+       alert("한글자 이상 입력해주세요.");
+       return false;
+   }
+	})
+	
+	
+	
 	<!-- '목록' 클릭시 게시판리스트로 돌아가기 -->
 		$("#list").on("click", function() {
 			history.go(-1);

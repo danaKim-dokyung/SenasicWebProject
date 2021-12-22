@@ -26,7 +26,7 @@
         height: 45px;
     }
 
-    .input-div>div>h5 {
+    .input-div>div>h5 {g
         position: absolute;
         left: 10px;
         top: 50%;
@@ -108,8 +108,8 @@
 						</c:if>
 					</c:when>
 					<c:otherwise>
-						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="signup.mem">회원가입</a>
+						<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+						<a href="/signup.mem">회원가입</a>
 					</c:otherwise>
 				</c:choose>
 			</nav>

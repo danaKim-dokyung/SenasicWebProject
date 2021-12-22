@@ -610,8 +610,6 @@ li:hover {
 
 #header{
 	padding:0px;
-	margin-left:200px;
-	margin-right:200px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
@@ -647,7 +645,7 @@ letter-spacing :1.5px;
 	<nav class=" justify-between">
 		<ul class="nav-container justify-between">
 			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
 			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
@@ -790,7 +788,7 @@ letter-spacing :1.5px;
           <div>
             <section class="text-gray-600 body-font overflow-hidden" > <!-- 요부분-->
                 <div class="container px-5 py-24 mx-auto">
-                  <div class="lg:w-4/5 mx-auto flex flex-wrap"><!-- 이 아래부터 캐러셀 예정 -->
+                  <div class="lg:w-4/5 mx-auto flex lg:flex-wrap justify-between"><!-- 이 아래부터 캐러셀 예정 -->
                     
                    <img alt="ecommerce" class="pt1 x-80 h-80 object-cover object-center rounded z-10" src="${ct.photo1 }">
                     
@@ -834,7 +832,7 @@ letter-spacing :1.5px;
                           ${reviewN1 } Review
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct.locate } <br> 상세주소 : ${ct.locate_detail } <br> 영업시간 : ${ct.open_hour } <br> 주차여부 : ${ct.garage } <br> 추천 수 : <span id=rcN>${ct.recommend }</span> <br></p>
+                      <p class="leading-relaxed invisible md:visible">지역 : ${ct.locate } <br> 상세주소 : ${ct.locate_detail } <br> 영업시간 : ${ct.open_hour } <br> 주차여부 : ${ct.garage } <br> 추천 수 : <span id=rcN>${ct.recommend }</span> <br></p>
                       
         
                       <div class="flex">
@@ -928,7 +926,7 @@ letter-spacing :1.5px;
           <div>
             <section class="text-gray-600 body-font overflow-hidden"> <!-- 요부분-->
                 <div class="container px-5 py-24 mx-auto">
-                  <div class="lg:w-4/5 mx-auto flex flex-wrap"><!-- 이 아래부터 캐러셀 예정 -->
+                  <div class="lg:w-4/5 mx-auto flex lg:flex-wrap justify-between"><!-- 이 아래부터 캐러셀 예정 -->
                     
                    <img alt="ecommerce" class="pt2  x-80 h-80 object-cover object-center rounded z-10" src="${ct1.photo1 }" >
                     
@@ -973,7 +971,7 @@ letter-spacing :1.5px;
                           </a>
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct1.locate } <br> 상세주소 : ${ct1.locate_detail } <br> 영업시간 : ${ct1.open_hour } <br> 주차여부 : ${ct1.garage } <br> 추천 수 : <span id=rcN1>${ct1.recommend }</span> <br></p>
+                      <p class="leading-relaxed invisible md:visible">지역 : ${ct1.locate } <br> 상세주소 : ${ct1.locate_detail } <br> 영업시간 : ${ct1.open_hour } <br> 주차여부 : ${ct1.garage } <br> 추천 수 : <span id=rcN1>${ct1.recommend }</span> <br></p>
                       
         
                       <div class="flex">
@@ -1062,7 +1060,7 @@ letter-spacing :1.5px;
           <div>
             <section class="text-gray-600 body-font overflow-hidden"> <!-- 요부분-->
                 <div class="container px-5 py-24 mx-auto">
-                  <div class="lg:w-4/5 mx-auto flex flex-wrap justify-between"><!-- 이 아래부터 캐러셀 예정 -->
+                  <div class="lg:w-4/5 mx-auto flex lg:flex-wrap justify-between"><!-- 이 아래부터 캐러셀 예정 -->
                     
                     <img alt="ecommerce"class="pt3 x-80 h-80 object-cover object-center rounded z-10" src="${ct2.photo1 }" >
                     
@@ -1107,7 +1105,7 @@ letter-spacing :1.5px;
                           </a>
                         </span>
                       </div>
-                      <p class="leading-relaxed">지역 : ${ct2.locate } <br> 상세주소 : ${ct2.locate_detail } <br> 영업시간 : ${ct2.open_hour } <br> 주차여부 : ${ct2.garage } <br> 추천 수 : <span id=rcN2>${ct2.recommend }</span> <br></p>
+                      <p class="leading-relaxed invisible md:visible">지역 : ${ct2.locate } <br> 상세주소 : ${ct2.locate_detail } <br> 영업시간 : ${ct2.open_hour } <br> 주차여부 : ${ct2.garage } <br> 추천 수 : <span id=rcN2>${ct2.recommend }</span> <br></p>
                       
         
                       <div class="flex">

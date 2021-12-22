@@ -60,8 +60,6 @@
 
 #header{
    padding:0px;
-   margin-left:200px;
-   margin-right:200px;
    border-bottom-left-radius: 30px;
    border-bottom-right-radius: 30px;
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
