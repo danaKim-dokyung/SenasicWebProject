@@ -5,14 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>반려견 게시판 목록</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 
+<!-- 스타일 태그 -->
 <style>
+@font-face {
+	font-family: 'Hahmlet-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Bold.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .nav-container {
 	display: flex;
 	text-align: center;
@@ -43,7 +53,7 @@ header {
 }
 
 .work-sans {
-	font-family: 'Work Sans', sans-serif;
+	font-family: "Work Sans", sans-serif;
 }
 
 #menu-toggle:checked+#menu {
@@ -107,6 +117,8 @@ header {
 
 .container1 {
 	position: relative;
+	height: 50px;
+	text-align: center;
 }
 
 .main {
@@ -420,23 +432,116 @@ input:focus ~ .icon-holder>.icon {
 	animation: ani 2.2s ease-out infinite;
 }
 
-@keyframes ani { 0% {
+@
+keyframes ani { 0% {
 	opacity: 1;
 }
-10%
+
+10
+
+
+%
 {
-transform:scale
-(1.2);
-opacity:1;}
-20%
-{
-transform:
+transform
+
+
+:
+
+
 scale
-(1);
-opacity:1;}100%
-{transform:
-scale(1);
-opacity:1;}}
+
+
+(
+
+
+1
+.2
+
+
+)
+;
+
+
+opacity
+
+
+:
+
+
+1
+;
+
+
+}
+20
+
+
+%
+{
+transform
+
+
+:
+
+
+scale
+
+
+(
+
+
+1
+
+
+)
+;
+
+
+opacity
+
+
+:
+
+
+1
+;
+
+
+}
+100
+
+
+%
+{
+transform
+
+
+:
+
+
+scale
+(
+
+
+1
+
+
+)
+;
+
+
+opacity
+
+
+:
+
+
+1
+;
+
+
+}
+}
 #gas {
 	animation-delay: 0.1s;
 }
@@ -482,11 +587,11 @@ opacity:1;}}
 }
 
 .con_cmn {
-	display: none
+	
 }
 
 .con1 {
-	display: block;
+	
 }
 
 #hashtag {
@@ -503,117 +608,184 @@ opacity:1;}}
 
 #list img:hover {
 	filter: brightness(50%);
+}
+
+nav>ul {
 	
 }
-nav>ul{
-	padding-left: 28%;
+
+nav>ul>li {
+	
 }
-nav>ul>li{
-	padding-right: 17%;
-}
-#carousel-font-1{
+
+#carousel-font-1 {
 	color: rgb(221, 221, 221);
-	padding:10px;
+	padding: 10px;
 }
-#carousel-font-2{
+
+#carousel-font-2 {
 	color: rgb(221, 221, 221);
 }
-#search_bar>span{
-background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
+
+#search_bar>span {
+	background-color: rgba(5, 88, 5, 0.400);
+	padding-top: 10px;
+	border-radius: 30px;
+	border: 8px solid rgba(5, 88, 5, 0.582);
+	box-sizing: context-box;
 }
-#koreanfood>span{
-background-color: rgba(5, 88, 5, 0.582);
-padding-top:10px
+
+#search_bar2>span {
+	background-color: rgba(5, 88, 5, 0.582);
+	padding-top: 10px;
+	border-radius: 30px;
+	border: 8px solid rgba(5, 88, 5, 0.582);
+	box-sizing: context-box;
 }
 
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-* {font-family: GmarketSansMedium;}
-
-#github>a{
-padding:10px;
+	font-family: "GmarketSansMedium";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
 }
 
-#shbtn:hover{background-color: #d7e9d433;}
+* {
+	font-family: GmarketSansMedium;
+}
 
+#github>a {
+	padding: 10px;
+}
+
+#footer {
+	font-size: 6px;
+}
+
+#header {
+	padding: 0px;
+	margin-left: 200px;
+	margin-right: 200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+
+#shbtn:hover {
+	background-color: #d7e9d433;
+}
+
+#list {
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+#hashtag {
+	padding-top: 25px;
+	font-size: 27px;
+	color: white;
+}
+
+.con_cmn con2 {
+	padding-top: 25px;
+	font-size: 20px;
+}
+
+#selectTab {
+	border-radius: 20px;
+	background-color: rgba(236, 234, 234, 0.411);
+	text-align: center;
+	height: 65px;
+	margin-top: 0px;
+	color: white;
+}
+
+option {
+	background-color: white;
+	border-radius: 20px;
+}
+
+#search_bar {
+	font-size: 27px;
+}
+
+#search_bar2 {
+	font-size: 27px;
+}
+
+#search_bar>span {
+	
+}
+
+#senasic {
+	font-family: Hahmlet-Bold;
+}
 </style>
+
+
 </head>
-	
-	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
-	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
-		<div
-			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+<header
+	class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5"
+	id="header">
+	<div
+		class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
 
-			<!------ 왼쪽 상단 세나식 로고 ----->
-			<a href="/index.jsp"
-				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">SENASIC</span>
-			</a>
-			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
-				<c:choose>
-					<c:when test="${loginID != null}">
-				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-						<a href="logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-						<!-- 강사님께 질문 3 -->
-						<c:if test="${seqID < 0 }">
-							<a href="dash.admin">관리자페이지</a>
-						</c:if>
-						<c:if test="${seqID > 0 }">
-							<a href="mypage.mem?cpage=1">마이페이지</a>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="signup.mem">회원가입</a>
-					</c:otherwise>
-				</c:choose>
-			</nav>
-		</div>
-	</header>
-	<a href="/index.jsp">
-	<div id="logo">
-		<img src="senasic_logo.png">
-	</div></a>
+		<!------ 왼쪽 상단 세나식 로고 ----->
+		<a href="/index.jsp"
+			class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+			<span class="ml-3 text-xl">SENASIC </span>
+		</a>
 
-	<!----------------- 게시판 네비게이션 --------------->
-	<nav>
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
-					게시판 </a></li>
-		</ul>
-	</nav>
+		<!----------------- 게시판 네비게이션 --------------->
+		<nav class=" justify-between">
+			<ul class="nav-container justify-between">
+				<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트
+				</a></li>
+				<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집
+						매거진 </a></li>
+				<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
+						게시판 </a></li>
+			</ul>
+		</nav>
+
+
+
+
+
+		<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+		<nav
+			class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
+			<c:choose>
+				<c:when test="${loginID != null}">
+            ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm("정말로그아웃하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <!-- 강사님께 질문 3 -->
+					<c:if test="${seqID < 0 }">
+						<a href="/dash.admin">관리자페이지</a>
+					</c:if>
+					<c:if test="${seqID > 0 }">
+						<a href="/mypage.mem?cpage=1">마이페이지</a>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+					<a href="/signup.mem">회원가입</a>
+				</c:otherwise>
+			</c:choose>
+		</nav>
+	</div>
+</header>
 <body>
-	<!------------- 캐러셀 시작 ---------------->
-	<div class="carousel relative container mx-auto"
-		style="max-width: 100%;">
-		<div class="carousel-inner relative overflow-hidden w-full">
-			<!--Slide 1-->
-			<input class="carousel-open" type="radio" id="carousel-1"
-				name="carousel" aria-hidden="true" hidden="" checked="checked">
-			<div class="carousel-item absolute opacity-0" style="height: 50vh;">
-				<div
-					class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-					style="background-image: url(/magazine/magagine_img/index1.jpg)">
-
-					<div class="container mx-auto">
-		<!-- 검색바 시작 -->
-		<div class="forSearch">
+	<div class="forSearch">
 		<div class="container1">
 			<form action="/fboard.rest">
-				<input type="hidden" name="cpage" value="1"> 
-				<input type="hidden" name="category" value="all"> 
-				<input class="main" type="text" name="target" id="searching"> 
-				<a id="searchbytagName">
+				<input type="hidden" name="cpage" value="1"> <input
+					type="hidden" name="category" value="all"> <input
+					class="main" type="text" name="target" id="searching"> <a
+					id="searchbytagName">
 					<button
 						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
 						id="shbtn">검색</button>
@@ -630,17 +802,15 @@ padding:10px;
 
 
 
-				<div class="con_cmn con1" id="search_bar" class="text-white">
+				<div class="con_cmn con1">
+
 					<span class=" mt-2" id="gangnam">
 						<button>#강남구</button>
-					</span>&nbsp;&nbsp; 
-					<span class=" mt-2" id="sungbuk">
+					</span>&nbsp;&nbsp; <span class=" mt-2" id="sungbuk">
 						<button>#성북구</button>
-					</span> &nbsp;&nbsp; 
-					<span class=" mt-2" id="jongro">
+					</span> &nbsp;&nbsp; <span class=" mt-2" id="jongro">
 						<button>#종로구</button>
-					</span> &nbsp;&nbsp; 
-					<span class=" mt-2" id="mapo">
+					</span> &nbsp;&nbsp; <span class=" mt-2" id="mapo">
 						<button>#마포구</button>
 					</span> &nbsp;&nbsp; <span class=" mt-2" id="gangdong">
 						<button>#송파구</button>
@@ -651,6 +821,8 @@ padding:10px;
 
 
 				<div class="con_cmn con2">
+
+
 					<span class=" mt-2" class="food" id="koreanfood">
 						<button>#양식</button>
 					</span>&nbsp;&nbsp; <span class=" mt-2" class="food" id="boonsik">
@@ -665,103 +837,19 @@ padding:10px;
 
 				</div>
 			</div>
-
 		</div>
 	</div>
-					</div>
-
-				</div>
-			</div>
-			<label for="carousel-3"
-				class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
-			<label for="carousel-2"
-				class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
-			<!--Slide 2-->
-			<input class="carousel-open" type="radio" id="carousel-2"
-				name="carousel" aria-hidden="true" hidden="">
-			<div class="carousel-item absolute opacity-0 bg-cover bg-right"
-				style="height: 50vh;">
-							<div class="forSearch">
-		<div class="container1">
-			<form action="/fboard.rest">
-				<input type="hidden" name="cpage" value="1"> 
-				<input type="hidden" name="category" value="all"> 
-				<input class="main" type="text" name="target" id="searching"> 
-				<a id="searchbytagName">
-					<button
-						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
-						id="shbtn">검색</button>
-				</a>
-			</form>
-
-			<div class="flex justify-center" id="hashtag">
-				<span class="searchicon"></span> <select id="selectTab"
-					class="select_tab" title="세부검색">
-					<option value="x">-검색</option>
-					<option value="0" id="tab1">지역</option>
-					<option value="1">음식종류</option>
-				</select> &nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
-				<div class="con_cmn con1" id="search_bar" class="text-white">
-					<span class=" mt-2" id="gangnam">
-						<button>#강남구</button>
-					</span>&nbsp;&nbsp; 
-					<span class=" mt-2" id="sungbuk">
-						<button>#성북구</button>
-					</span> &nbsp;&nbsp; 
-					<span class=" mt-2" id="jongro">
-						<button>#종로구</button>
-					</span> &nbsp;&nbsp; 
-					<span class=" mt-2" id="mapo">
-						<button>#마포구</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" id="gangdong">
-						<button>#송파구</button>
-					</span>
-
-				</div>
 
 
 
-				<div class="con_cmn con2">
-					<span class=" mt-2" class="food" id="koreanfood">
-						<button>#양식</button>
-					</span>&nbsp;&nbsp; <span class=" mt-2" class="food" id="boonsik">
-						<button>#이색</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="japaneesefood">
-						<button>#일식</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="cafe">
-						<button>#카페</button>
-					</span> &nbsp;&nbsp; <span class=" mt-2" class="food" id="fastfood">
-						<button>#술집</button>
-					</span>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
-					</div>
-
-				</div>
-			</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<div class="md:container md:mx-auto">
 
 		<div>
 			<h1
-				class="text-6xl font-normal leading-normal py-4 h-20 mt-0 mb-2 text-green-800 text-center">
+				class="text-4xl font-normal leading-normal py-4 h-12 mt-0 mb-2 text-green-800 text-center">
 				반려견 게시판</h1>
 		</div>
 
@@ -959,7 +1047,7 @@ padding:10px;
 										<c:when test="${check_num == 4 }">
 											<td class="px-4 py-4"><a
 												href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.title }
-													 <c:if test="${dto.comment_count ne 0 }">
+													<c:if test="${dto.comment_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
 														<span style="color: red;">[${dto.comment_count }]</span>
 													</c:if>
@@ -1077,7 +1165,7 @@ padding:10px;
 						</select> <input type="hidden" name="cpage" value="${cpage }">
 
 						<!-- 검색 하기 -->
-						<input name="searchWord" type="text" placeholder="Search"
+						<input id="searchWord" name="searchWord" type="text" placeholder="Search"
 							class="
                     px-2
                     py-1
@@ -1106,7 +1194,7 @@ padding:10px;
 
 	<c:choose>
 		<c:when test="${check_category == 1 }">
-				
+
 		</c:when>
 		<c:otherwise>
 			<script>
@@ -1136,6 +1224,18 @@ padding:10px;
 	</script>
 
 	<script>
+	// 검색부분 입력 안할시 에러
+	 $("#search").on("click",function(){
+   let regex = /([\s\S]){1,2000}/;
+   let contents = $("#searchWord").val();
+   let result = regex.test(contents);
+   if(!result){
+       alert("검색할 내용을 입력해주세요.");
+       return false;
+   }
+	})
+	
+	
 		$("#writeBtn").on("click", function() {
 			location.href = "/write.pet?check_num=${check_num }";
 		})
@@ -1458,12 +1558,11 @@ padding:10px;
 
 </body>
 <!-- footer -->
+<!-- footer -->
 <footer class="text-center lg:text-left bg-gray-100 text-gray-600">
 	<div
 		class="flex justify-center items-center lg:justify-between p-6 border-b border-gray-300">
-		<div class="mr-12 hidden lg:block">
-			<span>Get connected with us on social networks:</span>
-		</div>
+		<div class="mr-12 hidden lg:block"></div>
 		<div class="flex justify-center">
 			<a href="#!" class="mr-6 text-gray-600"> <svg aria-hidden="true"
 					focusable="false" data-prefix="fab" data-icon="facebook-f"
@@ -1516,7 +1615,7 @@ padding:10px;
 			</a>
 		</div>
 	</div>
-	<div class="mx-6 py-10 text-center md:text-left">
+	<div class="mx-6 py-10 text-center md:text-left" id="footer">
 		<div class="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 			<div class="">
 				<h6
@@ -1550,21 +1649,31 @@ padding:10px;
 			<div class="">
 				<h6
 					class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
-					조원</h6>
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="github" class="svg-inline--fa fa-github w-4" role="img"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                <path fill="currentColor"
+							d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                </path>
+                 </svg>
+					&nbsp;Hotsix's Github
+				</h6>
 				<p class="mb-4">
-					<a href="#!" class="text-gray-600">임도혁</a>
+					<a href="#!" class="text-gray-600">임도혁"s Github</a>
 				</p>
 				<p class="mb-4">
-					<a href="#!" class="text-gray-600">김도경</a>
+					<a href="https://github.com/danaKim-dokyung" class="text-gray-600">김도경"s
+						Github</a>
 				</p>
 				<p class="mb-4">
-					<a href="#!" class="text-gray-600">곽서호</a>
+					<a href="https://github.com/KwakSeoHo" class="text-gray-600">곽서호"s
+						Github</a>
 				</p>
 				<p class="mb-4">
-					<a href="#!" class="text-gray-600">서호현</a>
+					<a href="#!" class="text-gray-600">서호현"s Github</a>
 				</p>
 				<p>
-					<a href="#!" class="text-gray-600">장건희</a>
+					<a href="#!" class="text-gray-600">장건희"s Github</a>
 				</p>
 			</div>
 			<div class="">
@@ -1586,63 +1695,11 @@ padding:10px;
 				</p>
 				<p>
 					<a href="/fboard.rest?cpage=1" class="text-gray-600">맛집 </a>, <a
-						href="/list.board" class="text-gray-600"> 애견 게시판</a>
+						href="/list.board" class="text-gray-600"> 반려견 게시판</a>
 				</p>
-			</div>
-			<div class="">
-				<h6
-					class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
-					개발환경</h6>
-				<p class="flex items-center justify-center md:justify-start mb-4">
-					<svg aria-hidden="true" focusable="false" data-prefix="fas"
-						data-icon="home" class="svg-inline--fa fa-home w-4 mr-4"
-						role="img" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 576 512">
-            <path fill="currentColor"
-							d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
-            </path>
-          </svg>
-					Java , Eclipse
-				</p>
-				<p class="flex items-center justify-center md:justify-start mb-4">
-					<svg aria-hidden="true" focusable="false" data-prefix="fas"
-						data-icon="envelope" class="svg-inline--fa fa-envelope w-4 mr-4"
-						role="img" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 512 512">
-            <path fill="currentColor"
-							d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z">
-            </path>
-          </svg>
-					JSP , ApacheTomcat
-				</p>
-				<p class="flex items-center justify-center md:justify-start mb-4">
-					<svg aria-hidden="true" focusable="false" data-prefix="fas"
-						data-icon="phone" class="svg-inline--fa fa-phone w-4 mr-4"
-						role="img" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 512 512">
-            <path fill="currentColor"
-							d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z">
-            </path>
-          </svg>
-					GitHub , Tailwind
-				</p>
-				<p class="flex items-center justify-center md:justify-start">
-					<svg aria-hidden="true" focusable="false" data-prefix="fas"
-						data-icon="print" class="svg-inline--fa fa-print w-4 mr-4"
-						role="img" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 512 512">
-            <path fill="currentColor"
-							d="M448 192V77.25c0-8.49-3.37-16.62-9.37-22.63L393.37 9.37c-6-6-14.14-9.37-22.63-9.37H96C78.33 0 64 14.33 64 32v160c-35.35 0-64 28.65-64 64v112c0 8.84 7.16 16 16 16h48v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h48c8.84 0 16-7.16 16-16V256c0-35.35-28.65-64-64-64zm-64 256H128v-96h256v96zm0-224H128V64h192v48c0 8.84 7.16 16 16 16h48v96zm48 72c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z">
-            </path>
-          </svg>
-					+ 01 234 567 89
-				</p>
+
 			</div>
 		</div>
-	</div>
-	<div class="text-center p-6 bg-gray-200">
-		<span>© 2021 Copyright:</span> <a class="text-gray-600 font-semibold"
-			href="https://mdbootstrap.com/">Tailwind Elements</a>
 	</div>
 </footer>
 </html>
