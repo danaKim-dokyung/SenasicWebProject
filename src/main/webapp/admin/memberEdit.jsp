@@ -105,7 +105,8 @@
 
 li {
 	float: left;
-	padding: 30px;
+	padding-left:30px;
+	padding-right:30px;
 }
 
 li:hover {
@@ -219,12 +220,6 @@ header {
 	filter: brightness(50%);
 	
 }
-nav>ul{
-	padding-left: 28%;
-}
-nav>ul>li{
-	padding-right: 17%;
-}
 
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -239,6 +234,29 @@ padding:10px;
 }
 
 #shbtn:hover{background-color: #d7e9d433;}
+
+
+#header{
+	padding:0px;
+	margin-left:200px;
+	margin-right:200px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+.forSearch{
+position:relative;
+}      
+
+li>a { text-style:bold}
+
+ul{
+text-align:center;
+}
+
+body{
+letter-spacing :1.5px; 
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -254,54 +272,56 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-		<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
-	<header
-		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
-		<div
-			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-
-			<!------ 왼쪽 상단 세나식 로고 ----->
-			<a href="/index.jsp"
-				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-				<span class="ml-3 text-xl">SENASIC</span>
-			</a>
-			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-			<nav
-				class="z-50 md:ml-auto flex flex-wrap items-center text-base justify-center">
-				<c:choose>
-					<c:when test="${loginID != null}">
-				${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-						<a href="/logout.mem" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-						<!-- 강사님께 질문 3 -->
-						<c:if test="${seqID < 0 }">
-							<a href="/dash.admin">관리자페이지</a>
-						</c:if>
-						<c:if test="${seqID > 0 }">
-							<a href="/mypage.mem?cpage=1">마이페이지</a>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-						<a href="/signup.mem">회원가입</a>
-					</c:otherwise>
-				</c:choose>
-			</nav>
-		</div>
-	</header>
-	<a href="/index.jsp">
-	<div id="logo">
-		<img src="/senasic_logo.png">
-	</div></a>
-
-	<!----------------- 게시판 네비게이션 --------------->
-	<nav>
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
+   <header
+      class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
+      <div
+         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+       
+               <!------ 왼쪽 상단 세나식 로고 ----->
+         <a href="/index.jsp"
+            class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <span class="ml-3 text-xl">SENASIC
+</span>
+         </a>
+ 
+         <!----------------- 게시판 네비게이션 --------------->
+	<nav class=" justify-between">
+		<ul class="nav-container justify-between">
+			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
 	</nav>
+       
+
+         
+       
+         
+         <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+         <nav
+            class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
+ <c:choose>
+               <c:when test="${loginID != null}">
+            ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <!-- 강사님께 질문 3 -->
+                  <c:if test="${seqID < 0 }">
+                     <a href="/dash.admin">관리자페이지</a>
+                  </c:if>
+                  <c:if test="${seqID > 0 }">
+                     <a href="/mypage.mem?cpage=1">마이페이지</a>
+                  </c:if>
+               </c:when>
+               <c:otherwise>
+                  <a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+                  <a href="/signup.mem">회원가입</a>
+               </c:otherwise>
+            </c:choose>
+         </nav>
+      </div>
+   </header>
 <body>
 	<div class="forSearch">
 		<div class="container1">
@@ -377,7 +397,8 @@ $(document).ready(function(){
 	<div id="app" class="relative h-screen">
 		<div class="sidebar w-1/7  absolute fixed h-screen bg-green-600 z-10">
 			<div class="image-menu flex items-center mx-2 py-6 overflow-hidden z-10 border-b border-green-700">
-
+				<img class="menu-icon border-2 w-10 h-10 rounded-full"
+					src="http://web2tailwind.com/assets/docs/master/image-01.jpg">
 				<div class="menu-text text-gray-100 ml-4">관리자 ${loginID }</div>
 			</div>
 			
@@ -442,9 +463,13 @@ $(document).ready(function(){
         <form action="/modifyM.admin?seq=${dto.seq }" method="post" enctype="multipart/form-data"  class="validation-form" novalidate>
         <div class="mb-3 flex">
             <label for="image">프로필사진</label>
-            <label class="flex flex-col w-40 h-40 ml-8 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+            <label class="flex flex-col w-1/4 ml-8 px-3 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
 				                    <div class="flex flex-col items-center justify-center pt-7" id="ph">
-				                        <img src=${dto.img } id='profile' class='h-40 w-40'>
+				                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+				                            fill="currentColor">
+				                            <path fill-rule="evenodd"  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+				                                clip-rule="evenodd" />
+				                        </svg>
 				                    </div>
 				                    <input accept="image/*" id="img" type="file" class="opacity-0" name="photo" />
 				                </label>          
@@ -498,16 +523,20 @@ $(document).ready(function(){
 			
 			<!-- 전화번호 -->
           <div class="row flex mt-10">
-                     	<label for="phone">연락처</label>
-          
            	<div class="col-md-4 mb-2 ">
-   			 	<input type = "text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="phone1" name="phone1" value="${phoneFirst }" readonly>
+           	<label for="phone">연락처</label>
+            	<select class="ml-10 form-control" name="phone1" id="phone1" required>
+   			 	<option>선택</option>
+   			 	<option value="010"<c:if test="${phoneFirst eq 010}"> selected</c:if>>010</option>
+    			<option value="02"<c:if test="${phoneFirst eq 02}"> selected</c:if>>02</option>
+    			<option value="031"<c:if test="${phoneFirst eq 031}"> selected</c:if>>031</option>
+				</select>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num2" placeholder="1234" value="${phoneMiddle }" name="phone2"  pattern="^\d{4}$" required>
             </div>
             <div class="col-md-4 mb-2">
-              <input type="text" class="w-12 ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
+              <input type="text" class="ml-10 form-control bg-gray-100 rounded-lg focus:outline-none border-2" id="num3" placeholder="5678" value="${phoneLast }" name="phone3"  pattern="^\d{4}$" required>
             </div>
           </div>
 			
@@ -556,11 +585,12 @@ $("#dash").on("click",function(){
 	location.href="/dash.admin";
 })
 
+
 $("#img").on("change",function(){
 	let file = this.files[0];
 	if (file) {
 	    $("#ph").html("<img class='w-40 h-40' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
-
+.
 	  }
 	})
 

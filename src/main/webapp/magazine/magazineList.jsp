@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맛집 매거진</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 
@@ -576,19 +576,19 @@ text-align:center;
     font-style: normal;
 }
 * {font-family: GmarketSansMedium;}
+#shbtn:hover{background-color: #d7e9d433;}
+
 </style>
 </head>
 
-
-
-
 <body>
+
 <!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
    <header
       class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
       <div
-         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-       
+         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+
                <!------ 왼쪽 상단 세나식 로고 ----->
          <a href="/index.jsp"
             class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -597,37 +597,36 @@ text-align:center;
          </a>
  
          <!----------------- 게시판 네비게이션 --------------->
+
 	<nav class=" justify-between">
-		<ul class="nav-container">
-			<li class="nav-itme"><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-			<li class="nav-itme"><a href="/magagineList.mag">맛집 매거진 </a></li>
-			<li class="nav-itme"><a href="/list.pet?cpage=1&check_num=2">반려견
+		<ul class="nav-container justify-between">
+			<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
+			<li class="nav-itme ml-36 mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
+			<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 					게시판 </a></li>
 		</ul>
 	</nav>
        
 
          
-       
-         
          <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
          <nav
-            class="z-50 md:ml-auto  flex flex-wrap items-center text-base justify-center">
+            class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
  <c:choose>
                <c:when test="${loginID != null}">
             ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-                  <a href="logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <!-- 강사님께 질문 3 -->
                   <c:if test="${seqID < 0 }">
-                     <a href="dash.admin">관리자페이지</a>
+                     <a href="/dash.admin">관리자페이지</a>
                   </c:if>
                   <c:if test="${seqID > 0 }">
-                     <a href="mypage.mem?cpage=1">마이페이지</a>
+                     <a href="/mypage.mem?cpage=1">마이페이지</a>
                   </c:if>
                </c:when>
                <c:otherwise>
-                  <a href="signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-                  <a href="signup.mem">회원가입</a>
+                  <a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+                  <a href="/signup.mem">회원가입</a>
                </c:otherwise>
             </c:choose>
          </nav>
@@ -642,7 +641,7 @@ text-align:center;
 					class="main" type="text" name="target" id="searching"> <a
 					id="searchbytagName">
 					<button
-						class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						class=" bg-transparent  text-green-900 font-semibold hover:text-green-800 py-2 px-4 border border-gray-200 hover:border-transparent rounded"
 						id="shbtn">검색</button>
 				</a>
 			</form>
