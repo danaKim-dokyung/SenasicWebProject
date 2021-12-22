@@ -55,6 +55,8 @@
     font-style: normal;
 }
 * {font-family: GmarketSansMedium;}
+
+
     
   </style>
 <script>
@@ -65,6 +67,19 @@
 </head>
 
 <body>
+	<header
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		<div
+			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+
+			<!------ 왼쪽 상단 세나식 로고 ----->
+			<a href="/index.jsp"
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-xl">SENASIC</span>
+			</a>
+			
+		</div>
+	</header>
 
   <div class="container">
     <div class="input-form-backgroud row">

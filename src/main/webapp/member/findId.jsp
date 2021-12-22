@@ -16,7 +16,7 @@
     body {
       min-height: 100vh;
 
-      background: #047857
+      background: white;
      
     }
 
@@ -47,6 +47,24 @@
     	color:white;
     	cursor:pointer;
     }
+        
+    @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family: GmarketSansMedium;}
+
+#header{
+   padding:0px;
+   margin-left:200px;
+   margin-right:200px;
+   border-bottom-left-radius: 30px;
+   border-bottom-right-radius: 30px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+    
   </style>
 <script>
 
@@ -56,6 +74,20 @@
 </head>
 
 <body>
+	<header
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5">
+		<div
+			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+
+			<!------ 왼쪽 상단 세나식 로고 ----->
+			<a href="/index.jsp"
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-xl">SENASIC</span>
+			</a>
+			
+		</div>
+	</header>
+
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
