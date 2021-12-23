@@ -170,15 +170,17 @@ public class PetBoardController extends HttpServlet {
 					user = 1;
 				}
 				
-				List<MemberDTO> list_mem = dao_m.selectById_list(longinID);
 				List<PetBoardDTO> list = dao.information(seq);
 				List<PetBoard_RelpyDTO> replyList = dao.selectAllReply(seq);
-				int CountComment = dao.getCountComment(seq);
+				List<String> list_profile = dao.profileInformation(seq);
 
+				
+				
+				int CountComment = dao.getCountComment(seq);
 				int result = dao.addViewCount(seq);
 				
 
-				request.setAttribute("list_mem", list_mem);
+				request.setAttribute("list_profile", list_profile);
 				request.setAttribute("keyword", keyword);
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("check_num", check_num);

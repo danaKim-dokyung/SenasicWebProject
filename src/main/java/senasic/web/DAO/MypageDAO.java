@@ -146,15 +146,15 @@ public class MypageDAO {
 
 		String pageNavi = "";
 		if (needPrev) {
-			pageNavi += "<a href='pet_board.my?cpage=" + (startNavi - 1) + "'><</a>,";
+			pageNavi += "<a href='pet_board.my?cpage=" + (startNavi - 1) + "<button class='page'>" + "<"+ "</button>" + "</a>,";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a href='pet_board.my?cpage=" + i + "'>" + i + "</a>,";
+			pageNavi += "<a href='pet_board.my?cpage=" + i + "'>" + "<button class='page'>"+ i + "</button>" + "</a>,";
 		}
 
 		if (needNext) {
-			pageNavi += "<a href='pet_board.my?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi += "<a href='pet_board.my?cpage=" + (endNavi + 1) + "<button class='page'>" + ">"+ "</button>" + "</a>,";
 		}
 		return pageNavi;
 

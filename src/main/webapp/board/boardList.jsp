@@ -441,106 +441,156 @@ keyframes ani { 0% {
 10
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
+
+
 
 
 scale
 
 
+
+
 (
 
 
+
+
 1
+
+
 .2
 
 
+
+
 )
+
+
 ;
-
-
 opacity
+
+
 
 
 :
 
 
+
+
 1
+
+
 ;
-
-
 }
 20
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
+
+
 
 
 scale
 
 
+
+
 (
+
+
 
 
 1
 
 
+
+
 )
+
+
 ;
-
-
 opacity
+
+
 
 
 :
 
 
+
+
 1
+
+
 ;
-
-
 }
 100
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
+
+
 
 
 scale
+
+
 (
+
+
 
 
 1
 
 
+
+
 )
+
+
 ;
-
-
 opacity
+
+
 
 
 :
 
 
+
+
 1
+
+
 ;
-
-
 }
 }
 #gas {
@@ -743,8 +793,8 @@ option {
 			<ul class="nav-container justify-between">
 				<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트
 				</a></li>
-				<li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집
-						매거진 </a></li>
+				<li class="nav-itme md:ml-36 md:mr-36"><a
+					href="/magagineList.mag">맛집 매거진 </a></li>
 				<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
 						게시판 </a></li>
 			</ul>
@@ -1124,29 +1174,17 @@ option {
 
 			<div class="text-center">
 				<c:forTokens var="item" items="${navi }" delims=",">
-					<button style="text-align: center; margin-top: 10px;"
-						class="
-                    text-green-500
-                    bg-transparent
-                    border border-green-500
-                    hover:bg-green-500 hover:text-white
-                    active:bg-green-600
-                    font-bold
-                    uppercase
-                    text-xs
-                    px-4
-                    py-2
-                    rounded
-                    outline-none
-                    focus:outline-none
-                    mb-1
-                    ease-linear
-                    transition-all
-                    duration-150
-                  "
-						type="button">${item }</button>
+						${item }
 				</c:forTokens>
 			</div>
+
+			<script>
+				$(".page").addClass("text-green-500 bg-transparent border border-green-500  hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none  focus:outline-none mb-1 ease-linear transition-all duration-150");
+				$( ".page" ).css( "text-align", "center" ).css( "margin-top", "10px" );
+				
+				console.log($(".page").text());
+				
+			</script>
 
 
 			<!-- 검색 기능 -->
@@ -1164,7 +1202,8 @@ option {
 						</select> <input type="hidden" name="cpage" value="${cpage }">
 
 						<!-- 검색 하기 -->
-						<input id="searchWord" name="searchWord" type="text" placeholder="Search"
+						<input id="searchWord" name="searchWord" type="text"
+							placeholder="Search"
 							class="
                     px-2
                     py-1
