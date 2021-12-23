@@ -237,21 +237,6 @@ public class MemberController extends HttpServlet {
 	              
 	              
 	              int result = dao.modify(pw,nn,m,ph,loginID,img);
-	            /*
-	             * List<MemberDTO> list = dao.selectById_list(loginID);
-	             * 
-	             * String all = list.get(0).getPh(); String phone2 =
-	             * all.substring(all.length()-8,all.length()-4); String phone3 =
-	             * all.substring(all.length()-4,all.length());
-	             * 
-	             * 
-	             * 
-	             * 
-	             * System.out.println(list.get(0).getImg());
-	             * 
-	             * request.setAttribute("phone2", phone2); request.setAttribute("phone3",
-	             * phone3);
-	             */
 	              
 	              request.setAttribute("cpage", cpage);
 	              request.setAttribute("result", result);

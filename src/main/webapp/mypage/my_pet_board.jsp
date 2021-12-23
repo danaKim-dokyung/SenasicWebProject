@@ -530,106 +530,218 @@ keyframes ani { 0% {
 10
 
 
+
+
+
+
 %
 {
 transform
 
 
+
+
+
+
 :
+
+
+
+
 
 
 scale
 
 
+
+
+
+
 (
 
 
+
+
+
+
 1
+
+
+
+
 .2
 
 
+
+
+
+
 )
+
+
+
+
 ;
-
-
 opacity
+
+
+
+
 
 
 :
 
 
+
+
+
+
 1
+
+
+
+
 ;
-
-
 }
 20
 
 
+
+
+
+
 %
 {
 transform
 
 
+
+
+
+
 :
+
+
+
+
 
 
 scale
 
 
+
+
+
+
 (
+
+
+
+
 
 
 1
 
 
+
+
+
+
 )
+
+
+
+
 ;
-
-
 opacity
+
+
+
+
 
 
 :
 
 
+
+
+
+
 1
+
+
+
+
 ;
-
-
 }
 100
 
 
+
+
+
+
 %
 {
 transform
 
 
+
+
+
+
 :
+
+
+
+
 
 
 scale
+
+
+
+
 (
+
+
+
+
 
 
 1
 
 
+
+
+
+
 )
+
+
+
+
 ;
-
-
 opacity
+
+
+
+
 
 
 :
 
 
+
+
+
+
 1
+
+
+
+
 ;
-
-
 }
 }
 #gas {
@@ -811,61 +923,62 @@ option {
 	font-family: Hahmlet-Bold;
 }
 
-
 /* index 스타일 끝부분 */
 </style>
 </head>
 <body>
 	<!------ header : 상단 네브바, 세나식 로고, 게시판 링크 ------>
-   <header
-      class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5" id="header">
-      <div
-         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+	<header
+		class="text-gray-600 body-font sticky inset-x-0 top-0 left-0  py-5"
+		id="header">
+		<div
+			class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
 
-               <!------ 왼쪽 상단 세나식 로고 ----->
-         <a href="/index.jsp"
-            class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <span class="ml-3 text-xl">SENASIC
-</span>
-         </a>
- 
-         <!----------------- 게시판 네비게이션 --------------->
-    <nav class=" justify-between">
-        <ul class="nav-container justify-between">
-            <li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집 리스트 </a></li>
-            <li class="nav-itme md:ml-36 md:mr-36"><a href="/magagineList.mag">맛집 매거진 </a></li>
-            <li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
-                    게시판 </a></li>
-        </ul>
-    </nav>
+			<!------ 왼쪽 상단 세나식 로고 ----->
+			<a href="/index.jsp"
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-xl">SENASIC </span>
+			</a>
+
+			<!----------------- 게시판 네비게이션 --------------->
+			<nav class=" justify-between">
+				<ul class="nav-container justify-between">
+					<li class="nav-itme "><a href="/fboard.rest?cpage=1">맛집
+							리스트 </a></li>
+					<li class="nav-itme md:ml-36 md:mr-36"><a
+						href="/magagineList.mag">맛집 매거진 </a></li>
+					<li class="nav-itme "><a href="/list.pet?cpage=1&check_num=2">반려견
+							게시판 </a></li>
+				</ul>
+			</nav>
 
 
 
 
 
-         <!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
-         <nav
-            class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
- <c:choose>
-               <c:when test="${loginID != null}">
+			<!-- top에 붙어있는 nav bar, 로그인 회원가입, 마이페이지, 로그아웃-->
+			<nav
+				class="z-50   flex flex-wrap items-right text-base text-right justify-right ">
+				<c:choose>
+					<c:when test="${loginID != null}">
             ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-                  <a href="/logout.mem" onclick="return confirm("정말 로그아웃 하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/logout.mem" onclick="return confirm(" 정말로그아웃하시겠습니까?");">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <!-- 강사님께 질문 3 -->
-                  <c:if test="${seqID < 0 }">
-                     <a href="/dash.admin">관리자페이지</a>
-                  </c:if>
-                  <c:if test="${seqID > 0 }">
-                     <a href="/mypage.mem?cpage=1">마이페이지</a>
-                  </c:if>
-               </c:when>
-               <c:otherwise>
-                  <a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
-                  <a href="/signup.mem">회원가입</a>
-               </c:otherwise>
-            </c:choose>
-         </nav>
-      </div>
-   </header>
+						<c:if test="${seqID < 0 }">
+							<a href="/dash.admin">관리자페이지</a>
+						</c:if>
+						<c:if test="${seqID > 0 }">
+							<a href="/mypage.mem?cpage=1">마이페이지</a>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="/signin.mem" class="mr-5 hover:text-gray-900">로그인 </a>
+						<a href="/signup.mem">회원가입</a>
+					</c:otherwise>
+				</c:choose>
+			</nav>
+		</div>
+	</header>
 <body>
 	<div class="forSearch">
 		<div class="container1">
@@ -1113,8 +1226,9 @@ option {
 												class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
 												<p class="text-gray-900 whitespace-no-wrap">
 													<button
-														class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-														>삭제<input type="hidden" class="seq_h"  value="${dto.seq }"></button>
+														class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+														삭제<input type="hidden" class="seq_h" value="${dto.seq }">
+													</button>
 												</p>
 											</td>
 										</tr>
@@ -1123,29 +1237,14 @@ option {
 							</table>
 							<div class="text-center">
 								<c:forTokens var="item" items="${navi }" delims=",">
-									<button style="text-align: center; margin-top: 10px;"
-										class="
-                    text-green-500
-                    bg-transparent
-                    border border-green-500
-                    hover:bg-green-500 hover:text-white
-                    active:bg-green-600
-                    font-bold
-                    uppercase
-                    text-xs
-                    px-4
-                    py-2
-                    rounded
-                    outline-none
-                    focus:outline-none
-                    mb-1
-                    ease-linear
-                    transition-all
-                    duration-150
-                  "
-										type="button">${item }</button>
+									${item }
 								</c:forTokens>
 							</div>
+
+							<script>
+								$(".page").addClass("text-green-500 bg-transparent border border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mb-1 ease-linear transition-all duration-150");
+								$( ".page").css( "text-align", "center" ).css( "margin-top", "10px" );
+							</script>
 						</div>
 					</div>
 				</div>
@@ -1156,14 +1255,14 @@ option {
 
 
 	</div>
-	
+
 	<c:if test="${result eq '1' }">
 		<script>
 			alert("게시글이 삭제되었습니다.");
 			location.href = "/pet_board.my?cpage=${cpage }";
 		</script>
 	</c:if>
-	
+
 
 	<script>
 	
@@ -1533,8 +1632,7 @@ option {
 <footer class="text-center lg:text-left bg-gray-100 text-gray-600">
 	<div
 		class="flex justify-center items-center lg:justify-between p-6 border-b border-gray-300">
-		<div class="mr-12 hidden lg:block">
-		</div>
+		<div class="mr-12 hidden lg:block"></div>
 		<div class="flex justify-center">
 			<a href="#!" class="mr-6 text-gray-600"> <svg aria-hidden="true"
 					focusable="false" data-prefix="fab" data-icon="facebook-f"
@@ -1619,53 +1717,56 @@ option {
 				</p>
 			</div>
 			<div class="">
-				 <h6
-               class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
-                  <svg aria-hidden="true"
-               focusable="false" data-prefix="fab" data-icon="github"
-               class="svg-inline--fa fa-github w-4" role="img"
-               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                <path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+				<h6
+					class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="github" class="svg-inline--fa fa-github w-4" role="img"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                <path fill="currentColor"
+							d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
                 </path>
                  </svg>
-               &nbsp;Hotsix's Github</h6>
-            <p class="mb-4">
-               <a href="#!" class="text-gray-600">임도혁"s Github</a>
-            </p>
-            <p class="mb-4">
-               <a href="https://github.com/danaKim-dokyung" class="text-gray-600">김도경"s Github</a>
-            </p>
-            <p class="mb-4">
-               <a href="https://github.com/KwakSeoHo" class="text-gray-600">곽서호"s Github</a>
-            </p>
-            <p class="mb-4">
-               <a href="#!" class="text-gray-600">서호현"s Github</a>
-            </p>
-            <p>
-               <a href="#!" class="text-gray-600">장건희"s Github</a>
-            </p>
-         </div>
-         <div class="">
-            <h6
-               class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
-               구현 페이지</h6>
-            <p class="mb-4">
-               <a href="signin.mem" class="text-gray-600"> 로그인 </a>, <a
-                  href="signup.mem" class="text-gray-600">회원가입</a>
-            </p>
-            <p class="mb-4">
-               <a href="#!" class="text-gray-600">메인 페이지</a>
-            </p>
-            <p class="mb-4">
-               <a href="#!" class="text-gray-600">마이 페이지</a>
-            </p>
-            <p class="mb-4">
-               <a href="/magagineList.mag" class="text-gray-600">맛집 매거진</a>
-            </p>
-            <p>
-               <a href="/fboard.rest?cpage=1" class="text-gray-600">맛집 </a>, <a
-                  href="/list.board" class="text-gray-600"> 반려견 게시판</a>
-            </p>         
+					&nbsp;Hotsix's Github
+				</h6>
+				<p class="mb-4">
+					<a href="#!" class="text-gray-600">임도혁"s Github</a>
+				</p>
+				<p class="mb-4">
+					<a href="https://github.com/danaKim-dokyung" class="text-gray-600">김도경"s
+						Github</a>
+				</p>
+				<p class="mb-4">
+					<a href="https://github.com/KwakSeoHo" class="text-gray-600">곽서호"s
+						Github</a>
+				</p>
+				<p class="mb-4">
+					<a href="#!" class="text-gray-600">서호현"s Github</a>
+				</p>
+				<p>
+					<a href="#!" class="text-gray-600">장건희"s Github</a>
+				</p>
+			</div>
+			<div class="">
+				<h6
+					class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+					구현 페이지</h6>
+				<p class="mb-4">
+					<a href="signin.mem" class="text-gray-600"> 로그인 </a>, <a
+						href="signup.mem" class="text-gray-600">회원가입</a>
+				</p>
+				<p class="mb-4">
+					<a href="#!" class="text-gray-600">메인 페이지</a>
+				</p>
+				<p class="mb-4">
+					<a href="#!" class="text-gray-600">마이 페이지</a>
+				</p>
+				<p class="mb-4">
+					<a href="/magagineList.mag" class="text-gray-600">맛집 매거진</a>
+				</p>
+				<p>
+					<a href="/fboard.rest?cpage=1" class="text-gray-600">맛집 </a>, <a
+						href="/list.board" class="text-gray-600"> 반려견 게시판</a>
+				</p>
 
 			</div>
 		</div>
